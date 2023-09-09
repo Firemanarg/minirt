@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tuple.c                                            :+:      :+:    :+:   */
+/*   tuple_mul_div.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/01 01:37:49 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/01 04:46:50 by gmachado         ###   ########.fr       */
+/*   Created: 2023/09/02 05:48:50 by gmachado          #+#    #+#             */
+/*   Updated: 2023/09/08 23:54:50 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-t_tuple	*new_tuple(double x, double y, double z, double w)
+t_tuple	*multiply(double s, t_tuple *a)
 {
-	t_tuple	*result;
-
-	result = malloc(sizeof(*result));
-	result->x = x;
-	result->y = y;
-	result->z = z;
-	result->w = w;
-	return (result);
+	return (new_tuple(s * a->x, s * a->y, s * a->z, a->w));
 }
 
-t_bool	is_vector(t_tuple *t)
+t_tuple	*divide(t_tuple *a, double s)
 {
-	return (dbl_abs(t->w, 0.0) < EPSILON);
-}
-
-t_bool	is_point(t_tuple *t)
-{
-	return (dbl_abs(t->w, 1.0) < EPSILON);
+	return (new_tuple(a->x / s, a->y / s, a->z / s, a->w));
 }

@@ -1,0 +1,49 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   graphics.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/06 15:24:32 by gmachado          #+#    #+#             */
+/*   Updated: 2023/09/06 16:30:57 by gmachado         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef GRAPHICS_H
+# define GRAPHICS_H
+
+# include <mlx.h>
+# include <stdio.h>
+# include <stdlib.h>
+
+typedef struct s_args
+{
+	void	*mlx;
+	void	*mlx_win;
+}	t_args;
+
+enum {
+	ON_KEYDOWN = 2,
+	ON_KEYUP = 3,
+	ON_MOUSEDOWN = 4,
+	ON_MOUSEUP = 5,
+	ON_MOUSEMOVE = 6,
+	ON_EXPOSE = 12,
+	ON_DESTROY = 17
+};
+
+enum {
+	KEY_ESCAPE = 65307,
+	X_BUTTON = 17
+};
+
+enum {
+	MASK_KEY_PRESS = 1L<<0,
+	MASK_KEY_RELEASE = 1L<<1,
+	MASK_STRUCTURE_NOTIFY = 1L<<17
+};
+
+int	create_window(t_args *args);
+
+#endif
