@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:24:32 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/06 16:30:57 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/09 15:45:39 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,19 @@
 # include <stdio.h>
 # include <stdlib.h>
 
+typedef struct s_mlx_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_mlx_data;
+
 typedef struct s_args
 {
-	void	*mlx;
-	void	*mlx_win;
+	void		*mlx;
+	void		*mlx_win;
+	t_mlx_data	mlx_data;
 }	t_args;
 
 enum {
@@ -44,6 +53,14 @@ enum {
 	MASK_STRUCTURE_NOTIFY = 1L<<17
 };
 
-int	create_window(t_args *args);
+// mlx_utils.c
+void	init_args(t_args *args, int width, int height);
+void	ft_pixel_put(t_mlx_data *mlx_data, int x, int y, int color);
+
+// window.c
+int		create_window(t_args *args);
+int		close_graphics(t_args *data);
+int		on_destroy(t_args *data);
+int		on_key_press(int keycode, t_args *data);
 
 #endif

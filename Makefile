@@ -12,7 +12,7 @@ INC_FILES = ${addprefix ${INC_DIR}/, minirt.h graphics.h}
 
 SRC_DIR = ${MANDATORY_DIR}/src
 SRC_FILES = ${addprefix ${SRC_DIR}/, minirt.c}
-SRC_FILES += ${addprefix ${SRC_DIR}/graphics/, graphics.c}
+SRC_FILES += ${addprefix ${SRC_DIR}/graphics/, mlx_utils.c window.c}
 SRC_FILES += ${addprefix ${SRC_DIR}/math_utils/, double_ops.c point.c tuple.c vector.c}
 SRC_FILES += ${addprefix ${SRC_DIR}/math_utils/, tuple_misc_ops.c tuple_mul_div.c tuple_products.c}
 
