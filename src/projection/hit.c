@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   hit.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/01 01:20:29 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/16 21:34:48 by gmachado         ###   ########.fr       */
+/*   Created: 2023/09/15 02:59:40 by gmachado          #+#    #+#             */
+/*   Updated: 2023/09/16 22:05:22 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include <projection.h>
+#include <v_array.h>
 
-# include <stdlib.h>
-# include <math.h>
-
-typedef enum e_bool
+t_isect	*hit(t_varray *r)
 {
-	FALSE,
-	TRUE
-}	t_bool;
+	int	idx;
 
-#endif
+	idx = first_positive(r);
+	if (idx < 0)
+		return (NULL);
+	return (&r->arr[idx]);
+}

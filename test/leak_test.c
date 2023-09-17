@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tuple_misc_ops.c                                   :+:      :+:    :+:   */
+/*   leak_test.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/02 05:48:50 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/08 23:55:00 by gmachado         ###   ########.fr       */
+/*   Created: 2023/09/16 19:56:28 by gmachado          #+#    #+#             */
+/*   Updated: 2023/09/16 20:00:24 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_test.h>
 
-t_tuple	*negate(t_tuple *a)
-{
-	return (new_tuple(-(a->x), -(a->y), -(a->z), a->w));
-}
+Test(leaks, simple_test) {
+	int	a = 1;
+	int	b = 2;
 
-double	length(t_tuple *t)
-{
-	return (sqrt(t->x * t->x
-			+ t->y * t->y
-			+ t->z * t->z));
-}
-
-t_tuple	*normalize(t_tuple *t)
-{
-	const double	len = length(t);
-
-	if (len != 0)
-		return (new_tuple(t->x / len, t->y / len, t->z / len, t->w));
-	return (new_tuple(0.0, 0.0, 0.0, t->w));
+	cr_expect(eq(int,a + b, 3));
 }

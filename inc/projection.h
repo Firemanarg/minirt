@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tuple_products.c                                   :+:      :+:    :+:   */
+/*   projection.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/02 05:48:50 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/08 23:54:06 by gmachado         ###   ########.fr       */
+/*   Created: 2023/09/16 20:32:58 by gmachado          #+#    #+#             */
+/*   Updated: 2023/09/16 21:28:24 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#ifndef PROJECTION_H
+# define PROJECTION_H
 
-double	dot(t_tuple *a, t_tuple *b)
-{
-	return (a->x * b->x + a->y * b->y + a->z * b->z);
-}
+# include <vec3.h>
+# include <objects.h>
+# include <v_array.h>
 
-t_tuple	*cross(t_tuple *a, t_tuple *b)
+typedef struct s_isect
 {
-	return (new_tuple(a->y * b->z - a->z * b->y,
-			a->z * b->x - a->x * b->z,
-			a->x * b->y - a->y * b->x, 0.0));
-}
+	double	t;
+	t_obj	*obj;
+}	t_isect;
 
-t_tuple	*hadamard(t_tuple *a, t_tuple *b)
+typedef struct s_ray
 {
-	return (new_tuple(a->x * b->x,
-			a->y * b->y,
-			a->z * b->z,
-			0.0));
-}
+	t_vec3	*start;
+	t_vec3	*direction;
+}	t_ray;
+
+t_err	insert_into_array(t_varray *r, double t, t_obj *obj);
+
+#endif

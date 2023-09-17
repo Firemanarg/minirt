@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tuple_add_sub.c                                    :+:      :+:    :+:   */
+/*   vec3_misc_ops.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 05:48:50 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/03 03:45:42 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/16 21:39:17 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <vec3.h>
 
-t_tuple	*add(t_tuple *a, t_tuple *b)
+void	negate(t_vec3 *a, t_vec3 *minus_a)
 {
-	return (new_tuple(a->x + b->x, a->y + b->y, a->z + b->z, a->w + b->w));
+	minus_a->x = -(a->x);
+	minus_a->y = -(a->y);
+	minus_a->z = -(a->z);
 }
 
-t_tuple	*subtract(t_tuple *a, t_tuple *b)
+double	length(t_vec3 *t)
 {
-	return (new_tuple(a->x - b->x, a->y - b->y, a->z - b->z, a->w - b->w));
+	return (sqrt(t->x * t->x
+			+ t->y * t->y
+			+ t->z * t->z));
 }
+
+void	normalize(t_vec3 *t, t_vec3 *norm_t)
+{
+	const double	len = length(t);
+
+	if (dbl_abs(len, 0.0) > EPSILON)
+		divide(t, len, norm_t);
+	else
+		set_vec3(0.0, 0.0, 0.0, norm_t);
+}
+

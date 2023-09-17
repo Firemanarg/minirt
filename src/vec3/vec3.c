@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   point.c                                            :+:      :+:    :+:   */
+/*   vec3.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/01 05:13:49 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/08 23:56:00 by gmachado         ###   ########.fr       */
+/*   Created: 2023/09/01 01:37:49 by gmachado          #+#    #+#             */
+/*   Updated: 2023/09/16 21:47:12 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <vec3.h>
 
-t_tuple	*new_point(double x, double y, double z)
+void	set_vec3(double x, double y, double z, t_vec3 *t)
 {
-	return (new_tuple(x, y, z, 1.0));
+	t->x = x;
+	t->y = y;
+	t->z = z;
 }
 
-t_bool	is_point(t_tuple *t)
-{
-	return (dbl_abs(t->w, 1.0) < EPSILON);
-}

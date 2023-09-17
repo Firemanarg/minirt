@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tuple.c                                            :+:      :+:    :+:   */
+/*   vec3_mul_div.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/01 01:37:49 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/08 23:55:52 by gmachado         ###   ########.fr       */
+/*   Created: 2023/09/02 05:48:50 by gmachado          #+#    #+#             */
+/*   Updated: 2023/09/16 21:36:48 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <vec3.h>
 
-t_tuple	*new_tuple(double x, double y, double z, double w)
+void	multiply(t_vec3 *a, double s, t_vec3 *b)
 {
-	t_tuple	*result;
+	b->x = s * a->x;
+	b->y = s * a->y;
+	b->z = s * a->z;
+}
 
-	result = malloc(sizeof(*result));
-	result->x = x;
-	result->y = y;
-	result->z = z;
-	result->w = w;
-	return (result);
+void	divide(t_vec3 *a, double s, t_vec3 *b)
+{
+	b->x = a->x / s;
+	b->y = a->y / s;
+	b->z = a->z / s;
 }

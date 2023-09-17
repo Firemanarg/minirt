@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector.c                                           :+:      :+:    :+:   */
+/*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/01 05:13:49 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/08 23:55:38 by gmachado         ###   ########.fr       */
+/*   Created: 2023/09/09 18:59:19 by gmachado          #+#    #+#             */
+/*   Updated: 2023/09/16 21:53:47 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <vec3.h>
+#include <projection.h>
 
-t_tuple	*new_vector(double x, double y, double z)
+void	new_ray(t_vec3 *start, t_vec3 *direction, t_ray *ray)
 {
-	return (new_tuple(x, y, z, 0.0));
+	ray->start = start;
+	ray->direction = direction;
 }
 
-t_bool	is_vector(t_tuple *t)
+void	position(t_ray *ray, double t, t_vec3 *position)
 {
-	return (dbl_abs(t->w, 0.0) < EPSILON);
+	t_vec3	tmp;
+
+	multiply(ray->direction, t, &tmp);
+	add(ray->start, &tmp, position);
 }
