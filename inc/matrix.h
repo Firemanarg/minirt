@@ -17,8 +17,6 @@
 # include <math.h>
 # include <vec3.h>
 
-# define DEBUG_ON 0																// DEBUG
-
 /**
  * @brief Matrix structure
  *
