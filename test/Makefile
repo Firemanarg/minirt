@@ -1,33 +1,69 @@
 CC = cc
-CFLAGS = -Wall -Wextra -g
-LIBFLAGS = -lcriterion
 RM = rm -rf
+CFLAGS = -Wall -Wextra -g
+LIBFLAGS = -lcriterion -lm
+CRFLAGS = --verbose=1
 
 MINIRT_DIR = ..
 MINIRT_INC_DIR = ${MINIRT_DIR}/inc
 MINIRT_OBJ_DIR = ${MINIRT_DIR}/build/obj
 
+MLX_DIR	= ../lib/minilibx-linux
+
 TEST_DIR = .
 TEST_INC_DIR = ${TEST_DIR}/inc
-TEST_INC_FILES = ${addprefix ${TEST_INC_DIR}/, minirt.h}
+TEST_INC_FILES = ${addprefix ${TEST_INC_DIR}/, minirt_test.h}
 TEST_SRC_DIR = ${TEST_DIR}/src
 TEST_BUILD_DIR = ${TEST_DIR}/build
 TEST_OBJ_DIR = ${TEST_DIR}/build/obj
 
-all: tuple
+all: bin_search hit_sphere vec3_ops quicksort
 
 minirt:
-	make -C ${MINIRT_DIR}
+	@make -s -C ${MINIRT_DIR}
 
-tuple: minirt ${TEST_OBJ_DIR}/tuple_test.o
-	${CC} ${CFLAGS} ${TEST_OBJ_DIR}/tuple_test.o ${addprefix ${MINIRT_OBJ_DIR}/, double_ops.o point.o tuple.o vector.o} ${LIBFLAGS} -o ${TEST_BUILD_DIR}/tuple_test
-	${TEST_BUILD_DIR}/tuple_test --verbose || true
+vec3_ops: minirt ${TEST_OBJ_DIR}/vec3_ops_test.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/vec3_ops_test.o ${MINIRT_OBJ_DIR}/vec3/*.o\
+		${LIBFLAGS} -o ${TEST_BUILD_DIR}/vec3_ops_test
+	@${TEST_BUILD_DIR}/vec3_ops_test ${CRFLAGS} || true
+
+var_array: minirt ${TEST_OBJ_DIR}/var_array_test.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/var_array_test.o ${MINIRT_OBJ_DIR}/varray/*.o
+		${MINIRT_OBJ_DIR}/vec3/*.o ${LIBFLAGS}\
+		-o ${TEST_BUILD_DIR}/var_array_test
+	@${TEST_BUILD_DIR}/var_array_test ${CRFLAGS} || true
+
+quicksort: minirt ${TEST_OBJ_DIR}/quicksort_test.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/quicksort_test.o ${MINIRT_OBJ_DIR}/varray/*.o\
+		${MINIRT_OBJ_DIR}/vec3/*.o ${LIBFLAGS}\
+		-o ${TEST_BUILD_DIR}/quicksort_test
+	@${TEST_BUILD_DIR}/quicksort_test ${CRFLAGS} || true
+
+bin_search: minirt ${TEST_OBJ_DIR}/bin_search_test.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/bin_search_test.o ${MINIRT_OBJ_DIR}/varray/*.o\
+		${MINIRT_OBJ_DIR}/vec3/*.o ${LIBFLAGS}\
+		-o ${TEST_BUILD_DIR}/bin_search_test
+	@${TEST_BUILD_DIR}/bin_search_test ${CRFLAGS} || true
+
+intersect_sphere: minirt ${TEST_OBJ_DIR}/intersect_sphere_test.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/intersect_sphere_test.o ${MINIRT_OBJ_DIR}/varray/*.o\
+		${MINIRT_OBJ_DIR}/projection/*.o ${MINIRT_OBJ_DIR}/objects/*.o\
+		${MINIRT_OBJ_DIR}/vec3/*.o ${LIBFLAGS}\
+		-o ${TEST_BUILD_DIR}/intersect_sphere_test
+	@${TEST_BUILD_DIR}/intersect_sphere_test ${CRFLAGS} || true
+
+hit_sphere: minirt ${TEST_OBJ_DIR}/hit_sphere_test.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/hit_sphere_test.o ${MINIRT_OBJ_DIR}/varray/*.o\
+		${MINIRT_OBJ_DIR}/projection/*.o ${MINIRT_OBJ_DIR}/objects/*.o\
+		${MINIRT_OBJ_DIR}/vec3/*.o ${LIBFLAGS}\
+		-o ${TEST_BUILD_DIR}/hit_sphere_test
+	@${TEST_BUILD_DIR}/hit_sphere_test ${CRFLAGS} || true
 
 ${TEST_OBJ_DIR}:
-	mkdir -p ${TEST_OBJ_DIR}
+	@mkdir -p ${TEST_OBJ_DIR}
 
 ${TEST_OBJ_DIR}/%.o: ${TEST_SRC_DIR}/%.c | ${TEST_OBJ_DIR}
-	${CC} ${CFLAGS} -I${TEST_INC_DIR} -I${MINIRT_INC_DIR} -c $< -o $@
+	@${CC} ${CFLAGS} -I${TEST_INC_DIR} -I${MINIRT_INC_DIR} -I${MLX_DIR} -c $< -o $@
 
 clean:
 	${RM} ${TEST_OBJ_DIR}
@@ -39,4 +75,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean minirt re tuple
+.PHONY: all bin_search clean fclean hit_sphere minirt quicksort re vec3_ops var_array
