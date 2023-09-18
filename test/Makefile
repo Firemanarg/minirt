@@ -17,33 +17,30 @@ TEST_SRC_DIR = ${TEST_DIR}/src
 TEST_BUILD_DIR = ${TEST_DIR}/build
 TEST_OBJ_DIR = ${TEST_DIR}/build/obj
 
-all: bin_search hit_sphere vec3_ops quicksort
+all: apply_matrix_ops bin_search hit_sphere intersect_sphere quicksort var_array vec3_ops
 
 minirt:
 	@make -s -C ${MINIRT_DIR}
 
-vec3_ops: minirt ${TEST_OBJ_DIR}/vec3_ops_test.o
-	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/vec3_ops_test.o ${MINIRT_OBJ_DIR}/vec3/*.o\
-		${LIBFLAGS} -o ${TEST_BUILD_DIR}/vec3_ops_test
-	@${TEST_BUILD_DIR}/vec3_ops_test ${CRFLAGS} || true
-
-var_array: minirt ${TEST_OBJ_DIR}/var_array_test.o
-	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/var_array_test.o ${MINIRT_OBJ_DIR}/varray/*.o
+apply_matrix_ops: minirt ${TEST_OBJ_DIR}/apply_matrix_ops_test.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/apply_matrix_ops_test.o ${MINIRT_OBJ_DIR}/varray/*.o\
+		${MINIRT_OBJ_DIR}/matrix/*.o\
 		${MINIRT_OBJ_DIR}/vec3/*.o ${LIBFLAGS}\
-		-o ${TEST_BUILD_DIR}/var_array_test
-	@${TEST_BUILD_DIR}/var_array_test ${CRFLAGS} || true
-
-quicksort: minirt ${TEST_OBJ_DIR}/quicksort_test.o
-	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/quicksort_test.o ${MINIRT_OBJ_DIR}/varray/*.o\
-		${MINIRT_OBJ_DIR}/vec3/*.o ${LIBFLAGS}\
-		-o ${TEST_BUILD_DIR}/quicksort_test
-	@${TEST_BUILD_DIR}/quicksort_test ${CRFLAGS} || true
+		-o ${TEST_BUILD_DIR}/apply_matrix_ops_test
+	@${TEST_BUILD_DIR}/apply_matrix_ops_test ${CRFLAGS} || true
 
 bin_search: minirt ${TEST_OBJ_DIR}/bin_search_test.o
 	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/bin_search_test.o ${MINIRT_OBJ_DIR}/varray/*.o\
 		${MINIRT_OBJ_DIR}/vec3/*.o ${LIBFLAGS}\
 		-o ${TEST_BUILD_DIR}/bin_search_test
 	@${TEST_BUILD_DIR}/bin_search_test ${CRFLAGS} || true
+
+hit_sphere: minirt ${TEST_OBJ_DIR}/hit_sphere_test.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/hit_sphere_test.o ${MINIRT_OBJ_DIR}/varray/*.o\
+		${MINIRT_OBJ_DIR}/projection/*.o ${MINIRT_OBJ_DIR}/objects/*.o\
+		${MINIRT_OBJ_DIR}/vec3/*.o ${LIBFLAGS}\
+		-o ${TEST_BUILD_DIR}/hit_sphere_test
+	@${TEST_BUILD_DIR}/hit_sphere_test ${CRFLAGS} || true
 
 intersect_sphere: minirt ${TEST_OBJ_DIR}/intersect_sphere_test.o
 	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/intersect_sphere_test.o ${MINIRT_OBJ_DIR}/varray/*.o\
@@ -52,12 +49,22 @@ intersect_sphere: minirt ${TEST_OBJ_DIR}/intersect_sphere_test.o
 		-o ${TEST_BUILD_DIR}/intersect_sphere_test
 	@${TEST_BUILD_DIR}/intersect_sphere_test ${CRFLAGS} || true
 
-hit_sphere: minirt ${TEST_OBJ_DIR}/hit_sphere_test.o
-	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/hit_sphere_test.o ${MINIRT_OBJ_DIR}/varray/*.o\
-		${MINIRT_OBJ_DIR}/projection/*.o ${MINIRT_OBJ_DIR}/objects/*.o\
+quicksort: minirt ${TEST_OBJ_DIR}/quicksort_test.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/quicksort_test.o ${MINIRT_OBJ_DIR}/varray/*.o\
 		${MINIRT_OBJ_DIR}/vec3/*.o ${LIBFLAGS}\
-		-o ${TEST_BUILD_DIR}/hit_sphere_test
-	@${TEST_BUILD_DIR}/hit_sphere_test ${CRFLAGS} || true
+		-o ${TEST_BUILD_DIR}/quicksort_test
+	@${TEST_BUILD_DIR}/quicksort_test ${CRFLAGS} || true
+
+var_array: minirt ${TEST_OBJ_DIR}/var_array_test.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/var_array_test.o ${MINIRT_OBJ_DIR}/varray/*.o\
+		${MINIRT_OBJ_DIR}/vec3/*.o ${LIBFLAGS}\
+		-o ${TEST_BUILD_DIR}/var_array_test
+	@${TEST_BUILD_DIR}/var_array_test ${CRFLAGS} || true
+
+vec3_ops: minirt ${TEST_OBJ_DIR}/vec3_ops_test.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/vec3_ops_test.o ${MINIRT_OBJ_DIR}/vec3/*.o\
+		${LIBFLAGS} -o ${TEST_BUILD_DIR}/vec3_ops_test
+	@${TEST_BUILD_DIR}/vec3_ops_test ${CRFLAGS} || true
 
 ${TEST_OBJ_DIR}:
 	@mkdir -p ${TEST_OBJ_DIR}
@@ -75,4 +82,5 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all bin_search clean fclean hit_sphere minirt quicksort re vec3_ops var_array
+.PHONY: all apply_matrix_ops bin_search clean fclean hit_sphere minirt quicksort\
+		re var_array vec3_ops

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 12:33:50 by marvin            #+#    #+#             */
-/*   Updated: 2023/09/08 12:33:50 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/18 14:50:31 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,28 @@ typedef struct s_matrix
 	double	**data;
 }			t_matrix;
 
+typedef enum e_matrix_opcode
+{
+	NOP,
+	INVERSE,
+	TRANSPOSE,
+	ROTATE_X,
+	ROTATE_Y,
+	ROTATE_Z,
+	TRANSLATE,
+	SCALE
+}	t_matrix_opcode;
+
+typedef struct s_matrix_op
+{
+	t_matrix_opcode	op;
+	union
+	{
+		t_vec3	params;
+		double	param;
+	};
+}	t_matrix_op;
+
 t_matrix	*matrix_multiply(t_matrix *m, t_matrix *b);
 t_matrix	*matrix_new(int rows, int cols);
 t_matrix	*matrix_new_identity(int size);
@@ -48,6 +70,7 @@ double		matrix_determinant(t_matrix *m);
 double		matrix_determinant_2x2(t_matrix *m);
 double		matrix_minor(t_matrix *m, int row, int col);
 double		matrix_cofactor(t_matrix *m, int row, int col);
+t_matrix	*matrix_apply(t_matrix *m, t_matrix_op *operations);
 // t_matrix	*mtx_shear(t_matrix *m, t_vec3 x, t_vec3 y);
 
 #endif
