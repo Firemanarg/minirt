@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:19:22 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/18 12:17:14 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/18 16:48:56 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	bin_search_gt(t_varray *r, double target, int left, int right)
 	while (left <= right)
 	{
 		mid = (left + right) / 2;
-		if ((((t_isect *)r->arr)[mid]).t <= target) // Ajustar para função de comparação
+		if ((((t_isect *)r->arr)[mid]).t <= target)
 			left = mid + 1;
 		else
 			right = mid - 1;

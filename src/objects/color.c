@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 21:41:31 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/16 21:43:34 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/18 16:50:35 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,5 @@ t_color	color(double red, double green, double blue)
 	c.r = red;
 	c.g = green;
 	c.b = blue;
-
 	return (c);
 }
