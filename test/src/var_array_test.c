@@ -6,12 +6,11 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 03:21:20 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/18 02:12:30 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:11:27 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_test.h>
-#include <threads.h>
 
 Test(var_array, test_new_array) {
 	t_varray	*r;
@@ -19,8 +18,7 @@ Test(var_array, test_new_array) {
 	r = new_array(8);
 	cr_expect(eq(int, r->capacity, 8));
 	cr_expect(eq(int, r->length, 0));
-	free(r->arr);
-	free(r);
+	free_array(r);
 }
 
 Test(var_array, test_insert_into_array) {
@@ -30,8 +28,7 @@ Test(var_array, test_insert_into_array) {
 	insert_into_array(r, 1.0, NULL);
 	cr_expect(eq(int, r->capacity, 8));
 	cr_expect(eq(int, r->length, 1));
-	free(r->arr);
-	free(r);
+	free_array(r);
 }
 
 Test(var_array, test_auto_resize_array) {

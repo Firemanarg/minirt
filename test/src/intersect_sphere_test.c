@@ -6,11 +6,10 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 03:47:33 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/18 09:38:19 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:37:35 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "v_array.h"
 #include <minirt_test.h>
 
 static void	get_sphere(t_obj *sphere)

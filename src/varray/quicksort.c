@@ -6,12 +6,12 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 03:01:33 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/16 22:06:51 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:17:19 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <projection.h>
-#include <v_array.h>
+#include <varray.h>
 
 static void	swap(t_isect *arr, int left, int right)
 {

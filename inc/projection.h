@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:32:58 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/18 01:23:27 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:16:12 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <vec3.h>
 # include <objects.h>
-# include <v_array.h>
+# include <varray.h>
 
 typedef struct s_isect
 {

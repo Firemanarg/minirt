@@ -6,11 +6,10 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 03:52:45 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/17 03:33:50 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:36:57 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "v_array.h"
 #include <minirt_test.h>
 
 Test(quicksort, sort_five_elements) {

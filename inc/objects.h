@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:44:47 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/18 01:06:40 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:14:46 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define OBJECTS_H
 # include <vec3.h>
 # include <error.h>
-# include <v_array.h>
+# include <varray.h>
 
 typedef t_vec3			t_color;
 typedef struct s_obj	t_obj;

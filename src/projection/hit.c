@@ -6,12 +6,13 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 02:59:40 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/18 02:02:51 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:17:01 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <minirt.h>
 #include <projection.h>
-#include <v_array.h>
+#include <varray.h>
 
 t_isect	*hit(t_varray *r)
 {

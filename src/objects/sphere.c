@@ -6,12 +6,12 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 19:11:05 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/18 11:28:11 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:15:02 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <objects.h>
-#include <v_array.h>
+#include <varray.h>
 #include <projection.h>
 
 t_err	sphere_intersect(t_obj *sphere, t_ray *ray, t_varray *r)

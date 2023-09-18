@@ -6,12 +6,10 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 05:34:36 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/17 03:37:04 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:37:06 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec3.h"
-#include <endian.h>
 #include <minirt_test.h>
 
 Test(tuple_ops, test_add_tuples) {

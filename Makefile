@@ -17,7 +17,7 @@ INC_FILES = ${addprefix ${INC_DIR}/,\
 INC_FILES += ${addprefix ${INC_DIR}/,\
 				objects.h\
 				projection.h\
-				v_array.h\
+				varray.h\
 				vec3.h}
 
 SRC_DIR = ${MANDATORY_DIR}/src

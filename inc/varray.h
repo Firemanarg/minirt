@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   v_array.h                                          :+:      :+:    :+:   */
+/*   varray.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 02:25:17 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/16 21:47:09 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/18 16:35:34 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef V_ARRAY_H
-# define V_ARRAY_H
+#ifndef VARRAY_H
+# define VARRAY_H
 
 # include <error.h>
-# include <graphics.h>
 
 typedef struct s_varray
 {
