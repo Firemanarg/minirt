@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_scaling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 22:10:57 by marvin            #+#    #+#             */
-/*   Updated: 2023/09/09 22:10:57 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/18 02:00:34 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "matrix.h"
+#include <matrix.h>
 
-t_matrix	*matrix_scaling(t_vector *v)
+t_matrix	*matrix_scaling(t_vec3 *v)
 {
 	t_matrix	*res;
 

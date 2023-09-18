@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_determinant.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:34:32 by marvin            #+#    #+#             */
-/*   Updated: 2023/09/11 10:34:32 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/18 02:00:34 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "matrix.h"
+#include <matrix.h>
 
 double	matrix_determinant(t_matrix *m)
 {
 	int			col;
 	double		det;
-	t_matrix	*sub;
 
 	det = 0;
 	if (m->rows == 2 && m->cols == 2)

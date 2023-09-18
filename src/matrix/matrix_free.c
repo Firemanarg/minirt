@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 20:56:18 by marvin            #+#    #+#             */
-/*   Updated: 2023/09/09 20:56:18 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/18 01:59:16 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "matrix.h"
+#include <minirt.h>
+#include <matrix.h>
 
 void	matrix_free(t_matrix *m)
 {

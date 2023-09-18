@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_new.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 20:41:35 by marvin            #+#    #+#             */
-/*   Updated: 2023/09/09 20:41:35 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/18 02:01:00 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "matrix.h"
+#include <minirt.h>
+#include <matrix.h>
 
 t_matrix	*matrix_new(int rows, int cols)
 {
@@ -40,8 +41,6 @@ t_matrix	*matrix_new(int rows, int cols)
 t_matrix	*matrix_new_identity(int size)
 {
 	t_matrix	*matrix;
-	int			i;
-	int			j;
 
 	matrix = matrix_new(size, size);
 	matrix->data[0][0] = 1;

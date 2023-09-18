@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_transpose.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 21:38:46 by marvin            #+#    #+#             */
-/*   Updated: 2023/09/09 21:38:46 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/18 02:00:34 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "matrix.h"
+#include <matrix.h>
 
 t_matrix	*matrix_transpose(t_matrix *m)
 {
