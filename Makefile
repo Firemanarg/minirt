@@ -5,9 +5,13 @@ LIBFLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
 RM = rm -rf
 
 MANDATORY_DIR = .
+SRC_DIR = ${MANDATORY_DIR}/src
+INC_DIR = ${MANDATORY_DIR}/inc
+BUILD_DIR = ${MANDATORY_DIR}/build
+OBJ_DIR = ${BUILD_DIR}/obj
+
 NAME = ${MANDATORY_DIR}/build/minirt
 
-INC_DIR = ${MANDATORY_DIR}/inc
 INC_FILES = ${addprefix ${INC_DIR}/,\
 				error.h\
 				graphics.h\
@@ -20,7 +24,6 @@ INC_FILES += ${addprefix ${INC_DIR}/,\
 				varray.h\
 				vec3.h}
 
-SRC_DIR = ${MANDATORY_DIR}/src
 SRC_FILES = ${addprefix ${SRC_DIR}/, minirt.c}
 SRC_FILES += ${addprefix ${SRC_DIR}/graphics/,\
 				mlx_utils.c\
@@ -39,7 +42,8 @@ SRC_FILES += ${addprefix ${SRC_DIR}/matrix/,\
 				matrix_new.c\
 				matrix_rotation.c\
 				matrix_submatrix.c\
-				matrix_transpose.c}
+				matrix_transpose.c\
+				matrix_vec3_multiply.c}
 SRC_FILES += ${addprefix ${SRC_DIR}/objects/,\
 				color.c\
 				sphere.c}
@@ -58,8 +62,6 @@ SRC_FILES += ${addprefix ${SRC_DIR}/vec3/,\
 				vec3_mul_div.c\
 				vec3_products.c}
 
-BUILD_DIR = ${MANDATORY_DIR}/build
-OBJ_DIR = ${BUILD_DIR}/obj
 OBJ_FILES = ${patsubst ${SRC_DIR}/%.c, ${OBJ_DIR}/%.o, ${SRC_FILES}}
 OBJ_SUBDIRS = ${sort ${dir ${OBJ_FILES}}}
 
