@@ -2,7 +2,8 @@ CC = cc
 RM = rm -rf
 CFLAGS = -Wall -Wextra -g
 LIBFLAGS = -lcriterion -lm
-CRFLAGS = --verbose=1
+# CRFLAGS = --verbose=1
+CRFLAGS =
 
 MINIRT_DIR = ..
 MINIRT_INC_DIR = ${MINIRT_DIR}/inc
