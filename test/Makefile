@@ -17,7 +17,8 @@ TEST_SRC_DIR = ${TEST_DIR}/src
 TEST_BUILD_DIR = ${TEST_DIR}/build
 TEST_OBJ_DIR = ${TEST_DIR}/build/obj
 
-all: apply_matrix_ops bin_search hit_sphere intersect_sphere quicksort var_array vec3_ops
+all: apply_matrix_ops bin_search hit_sphere intersect_sphere\
+	matrix_vec3_multiply quicksort var_array vec3_ops
 
 minirt:
 	@make -s -C ${MINIRT_DIR}
@@ -48,6 +49,12 @@ intersect_sphere: minirt ${TEST_OBJ_DIR}/intersect_sphere_test.o
 		${MINIRT_OBJ_DIR}/vec3/*.o ${LIBFLAGS}\
 		-o ${TEST_BUILD_DIR}/intersect_sphere_test
 	@${TEST_BUILD_DIR}/intersect_sphere_test ${CRFLAGS} || true
+
+matrix_vec3_multiply: minirt ${TEST_OBJ_DIR}/matrix_vec3_multiply_test.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/matrix_vec3_multiply_test.o ${MINIRT_OBJ_DIR}/matrix/*.o\
+		${MINIRT_OBJ_DIR}/vec3/*.o ${LIBFLAGS}\
+		-o ${TEST_BUILD_DIR}/matrix_vec3_multiply_test
+	@${TEST_BUILD_DIR}/matrix_vec3_multiply_test ${CRFLAGS} || true
 
 quicksort: minirt ${TEST_OBJ_DIR}/quicksort_test.o
 	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/quicksort_test.o ${MINIRT_OBJ_DIR}/varray/*.o\
@@ -82,5 +89,5 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all apply_matrix_ops bin_search clean fclean hit_sphere minirt quicksort\
-		re var_array vec3_ops
+.PHONY: all apply_matrix_ops bin_search clean fclean hit_sphere\
+		matrix_vec3_multiply minirt quicksort re var_array vec3_ops

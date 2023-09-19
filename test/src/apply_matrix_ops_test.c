@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:46:31 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/18 16:34:36 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/19 02:29:53 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ Test(matrix_ops, apply_one_scaling)
 	cr_expect(epsilon_eq(dbl, m->data[3][1], 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, m->data[3][2], 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, m->data[3][3], 1.0, EPSILON));
+	matrix_free(m);
 }
 
 Test(matrix_ops, apply_one_rotate_x)
@@ -74,6 +75,7 @@ Test(matrix_ops, apply_one_rotate_x)
 	cr_expect(epsilon_eq(dbl, m->data[3][1], 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, m->data[3][2], 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, m->data[3][3], 1.0, EPSILON));
+	matrix_free(m);
 }
 
 Test(matrix_ops, apply_one_rotate_y)
@@ -105,6 +107,7 @@ Test(matrix_ops, apply_one_rotate_y)
 	cr_expect(epsilon_eq(dbl, m->data[3][1], 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, m->data[3][2], 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, m->data[3][3], 1.0, EPSILON));
+	matrix_free(m);
 }
 
 Test(matrix_ops, apply_one_rotate_z)
@@ -136,6 +139,7 @@ Test(matrix_ops, apply_one_rotate_z)
 	cr_expect(epsilon_eq(dbl, m->data[3][1], 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, m->data[3][2], 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, m->data[3][3], 1.0, EPSILON));
+	matrix_free(m);
 }
 
 Test(matrix_ops, apply_one_translate)
@@ -167,6 +171,7 @@ Test(matrix_ops, apply_one_translate)
 	cr_expect(epsilon_eq(dbl, m->data[3][1], 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, m->data[3][2], 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, m->data[3][3], 1.0, EPSILON));
+	matrix_free(m);
 }
 
 Test(matrix_ops, apply_one_transpose)
@@ -202,6 +207,7 @@ Test(matrix_ops, apply_one_transpose)
 	cr_expect(epsilon_eq(dbl, m->data[3][1], 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, m->data[3][2], 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, m->data[3][3], 0.0, EPSILON));
+	matrix_free(m);
 }
 
 Test(matrix_ops, apply_one_inverse)
@@ -244,6 +250,7 @@ Test(matrix_ops, apply_one_inverse)
 	cr_expect(epsilon_eq(dbl, m->data[3][1], 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, m->data[3][2], 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, m->data[3][3], 1.0, EPSILON));
+	matrix_free(m);
 }
 
 Test(matrix_ops, apply_scaling_rotates_inverse)
@@ -280,4 +287,5 @@ Test(matrix_ops, apply_scaling_rotates_inverse)
 	cr_expect(epsilon_eq(dbl, m->data[3][1], 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, m->data[3][2], 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, m->data[3][3], 1.0, EPSILON));
+	matrix_free(m);
 }

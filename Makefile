@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/26 17:29:19 by lsilva-q          #+#    #+#              #
-#    Updated: 2023/09/26 17:29:19 by lsilva-q         ###   ########.fr        #
+#    Updated: 2023/10/03 03:26:12 by gmachado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,11 @@ LFTX			:= $(LFTX_DIR)/libft_x.a
 
 # Mandatory
 MANDATORY_DIR	:= .
+SRC_DIR = ${MANDATORY_DIR}/src
+INC_DIR = ${MANDATORY_DIR}/inc
+BUILD_DIR = ${MANDATORY_DIR}/build
+OBJ_DIR = ${BUILD_DIR}/obj
+
 NAME			:= ${MANDATORY_DIR}/build/minirt
 
 # Header files
