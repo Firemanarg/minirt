@@ -6,12 +6,16 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:44:47 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/18 12:14:46 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/03 03:29:30 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECTS_H
 # define OBJECTS_H
+# include <vec3.h>
+# include <error.h>
+# include <varray.h>
+# include <matrix.h>
 
 # include "matrix.h"
 # include "vec3.h"
@@ -113,8 +117,9 @@ typedef struct s_sphere
 typedef struct s_cylinder
 {
 	struct			s_geom_obj;
-	double			diameter;
-	double			height;
+	t_shape			type;
+	t_matrix		*transform;
+	t_matrix		*inv_transform;
 }	t_cylinder;
 
 typedef struct s_plane
@@ -129,6 +134,16 @@ typedef struct s_scene
 	t_geom_obj		**geometries;
 	t_point_light	**lights;
 }	t_scene;
+
+typedef struct s_sphere_eq_pars
+{
+	double	a;
+	double	b;
+	double	c;
+	double	sqrt_disc;
+	t_vec3	origin;
+	t_vec3	tmp;
+}	t_sphere_eq_pars;
 
 // color.c
 t_color	color(double red, double green, double blue);

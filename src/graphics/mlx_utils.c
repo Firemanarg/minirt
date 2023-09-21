@@ -6,11 +6,12 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 15:18:55 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/18 16:49:19 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/21 04:06:40 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <graphics.h>
+#include <objects.h>
 
 void	init_args(t_args *args, int width, int height)
 {
@@ -30,4 +31,15 @@ void	ft_pixel_put(t_mlx_data *mlx_data, int x, int y, int color)
 	dst = mlx_data->addr + (y * mlx_data->line_length
 			+ x * (mlx_data->bits_per_pixel >> 3));
 	*(unsigned int *)dst = color;
+}
+
+int	convert_color(t_color *minirt_color)
+{
+	int	t;
+
+	t = 0;
+	return ((t << 24)
+		+ ((int)(minirt_color->r * 255.0) << 16)
+		+ ((int)(minirt_color->g * 255.0) << 8)
+		+ (int)(minirt_color->b * 255.0));
 }

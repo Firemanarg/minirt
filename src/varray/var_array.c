@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 03:47:13 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/18 12:17:24 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/21 03:38:59 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,9 @@ void	free_array(t_varray *r)
 {
 	free(r->arr);
 	free(r);
+}
+
+void	reset_array(t_varray *r)
+{
+	r->length = 0;
 }
