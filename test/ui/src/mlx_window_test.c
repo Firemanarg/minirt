@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   leak_test.c                                        :+:      :+:    :+:   */
+/*   mlx_window_test.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/16 19:56:28 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/16 20:00:24 by gmachado         ###   ########.fr       */
+/*   Created: 2023/09/01 00:55:06 by gmachado          #+#    #+#             */
+/*   Updated: 2023/09/20 17:11:20 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt_test.h>
+#include <ui.h>
 
-Test(leaks, simple_test) {
-	int	a = 1;
-	int	b = 2;
+// From https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html
 
-	cr_expect(eq(int,a + b, 3));
+int	main(void)
+{
+	t_args	args;
+
+	create_window(&args);
+	return (0);
 }
+

@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:44:21 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/09 15:51:06 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/21 10:55:40 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	close_graphics(t_args *data)
 	printf("Bye bye :D\n");
 	mlx_clear_window(data->mlx, data->mlx_win);
 	mlx_loop_end(data->mlx);
+	mlx_destroy_image(data->mlx, data->mlx_data.img);
 	mlx_destroy_window(data->mlx, data->mlx_win);
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);

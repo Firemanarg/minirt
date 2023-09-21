@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_test.c                                         :+:      :+:    :+:   */
+/*   ui.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/01 00:55:06 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/01 00:55:58 by gmachado         ###   ########.fr       */
+/*   Created: 2023/09/20 16:41:33 by gmachado          #+#    #+#             */
+/*   Updated: 2023/09/21 03:43:01 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
+#include <minirt.h>
+#include <graphics.h>
+#include <varray.h>
+#include <projection.h>
+#include <objects.h>
+#include <matrix.h>
+#include <error.h>
+#include <vec3.h>
 
-// From https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html
-int	main(void)
+typedef struct s_trace_args
 {
-	void	*mlx;
-	void	*mlx_win;
-
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
-	mlx_loop(mlx);
-}
+	double		wall_z;
+	double		wall_size;
+	double		pixel_size;
+	int			canvas_pixels;
+	t_vec3		ray_origin;
+	t_varray	*intersections;
+	t_ray		ray;
+	t_obj		obj;
+}	t_trace_args;

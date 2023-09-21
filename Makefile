@@ -1,7 +1,7 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 MLX_DIR	= lib/minilibx-linux
-LIBFLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
+LIBFLAGS = -L${MLX_DIR} -lmlx -lXext -lX11 -lm -lz
 RM = rm -rf
 
 MANDATORY_DIR = .
