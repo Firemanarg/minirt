@@ -6,7 +6,7 @@
 #    By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/26 17:29:19 by lsilva-q          #+#    #+#              #
-#    Updated: 2023/10/03 03:31:07 by gmachado         ###   ########.fr        #
+#    Updated: 2023/10/03 03:34:04 by gmachado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,27 +51,27 @@ SRC_FILES		= ${addprefix ${SRC_DIR}/, minirt.c}
 SRC_FILES		+= ${addprefix ${SRC_DIR}/graphics/,\
 				mlx_utils.c\
 				window.c}
-
-# Matrix files
-SRC_FILES		+= ${addprefix ${SRC_DIR}/matrix/,\
-				matrix_apply.c\
-				matrix_determinant.c\
-				matrix_inverse.c\
-				matrix_multiply.c\
-				matrix_print.c\
-				matrix_scaling.c\
-				matrix_translation.c\
-				matrix_cofactor.c\
-				matrix_free.c\
-				matrix_minor.c\
-				matrix_new.c\
-				matrix_rotation.c\
-				matrix_submatrix.c\
-				matrix_transpose.c}
-
-# Objects files
-SRC_FILES		+= ${addprefix ${SRC_DIR}/objects/,\
-				color.c\
+SRC_FILES += ${addprefix ${SRC_DIR}/matrix/, \
+				matrix_apply.c \
+				matrix_determinant.c \
+				matrix_inverse.c \
+				matrix_multiply.c \
+				matrix_print.c \
+				matrix_scaling.c \
+				matrix_translation.c \
+				matrix_cofactor.c \
+				matrix_free.c \
+				matrix_minor.c \
+				matrix_new.c \
+				matrix_rotation.c \
+				matrix_submatrix.c \
+				matrix_transpose.c \
+				matrix_vec3_multiply.c}
+SRC_FILES += ${addprefix ${SRC_DIR}/objects/, \
+				cleanup.c \
+				color.c \
+				object.c \
+				plane.c \
 				sphere.c}
 
 # Projection files

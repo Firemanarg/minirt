@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:44:47 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/03 03:32:43 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/03 03:35:04 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,10 +151,18 @@ void	free_obj(t_obj *obj);
 t_color	color(double red, double green, double blue);
 
 void	set_color(double red, double green, double blue, t_color *c);
+int		convert_color(t_color *minirt_color);
 
-void	set_material_shininess(t_material *material, double shininess);
-void	set_material_color(t_material *material, double r, double g, double b);
-void	set_material_coefficients(t_material *material, double ambient,
-			double diffuse, double specular);
+//object.c
+t_err	set_object(t_obj *object, t_matrix *transform, t_material *material);
+t_err	set_object_transform(t_obj *object, t_matrix *transform);
+
+// plane.c
+void	plane_normal_at(t_obj *s, t_vec3 *world_point, t_vec3 *world_normal);
+t_err	set_plane(t_obj *plane, t_matrix *transform, t_material *material);
+
+// sphere.c
+void	sphere_normal_at(t_obj *s, t_vec3 *world_point, t_vec3 *world_normal);
+t_err	set_sphere(t_obj *sphere, t_matrix *transform, t_material *material);
 
 #endif
