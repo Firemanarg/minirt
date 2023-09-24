@@ -1,35 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ui.h                                               :+:      :+:    :+:   */
+/*   reflect.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 16:41:33 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/23 23:57:36 by gmachado         ###   ########.fr       */
+/*   Created: 2023/09/22 02:34:22 by gmachado          #+#    #+#             */
+/*   Updated: 2023/09/22 02:50:28 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
-#include <minirt.h>
-#include <graphics.h>
-#include <varray.h>
-#include <projection.h>
-#include <objects.h>
-#include <matrix.h>
-#include <error.h>
-#include <shading.h>
 #include <vec3.h>
 
-typedef struct s_trace_args
+void	reflect(t_vec3 *incident, t_vec3 *normal, t_vec3 *reflected)
 {
-	double			wall_z;
-	double			wall_size;
-	double			pixel_size;
-	int				canvas_pixels;
-	t_vec3			ray_origin;
-	t_varray		*intersections;
-	t_ray			ray;
-	t_obj			obj;
-	t_phong_params	phong;
-}	t_trace_args;
+	t_vec3	tmp;
+
+	multiply(normal, 2.0 * dot(incident, normal), &tmp);
+	subtract(incident, &tmp, reflected);
+}

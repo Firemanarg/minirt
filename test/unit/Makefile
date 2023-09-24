@@ -1,9 +1,9 @@
 CC = cc
 RM = rm -rf
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -Wall -Wextra -g -O3
 LIBFLAGS = -lcriterion -lm
-# CRFLAGS = --verbose=1
-CRFLAGS =
+CRFLAGS = --verbose=1
+# CRFLAGS =
 
 MINIRT_DIR = ../..
 MINIRT_INC_DIR = ${MINIRT_DIR}/inc
@@ -18,9 +18,9 @@ TEST_SRC_DIR = ${TEST_DIR}/src
 TEST_BUILD_DIR = ${TEST_DIR}/build
 TEST_OBJ_DIR = ${TEST_DIR}/build/obj
 
-all: apply_matrix_ops bin_search hit_sphere intersect_sphere \
-	matrix_vec3_multiply quicksort transform_ray transform_matrix \
-	var_array vec3_ops
+all: apply_matrix_ops bin_search hit_sphere intersect_sphere lighting\
+	matrix_vec3_multiply quicksort sphere_normal transform_ray \
+	transform_sphere var_array vec3_ops
 
 minirt:
 	@make -s -C ${MINIRT_DIR}
@@ -52,6 +52,13 @@ intersect_sphere: minirt ${TEST_OBJ_DIR}/intersect_sphere_test.o
 		-o ${TEST_BUILD_DIR}/intersect_sphere_test
 	@${TEST_BUILD_DIR}/intersect_sphere_test ${CRFLAGS} || true
 
+lighting: ${TEST_OBJ_DIR}/lighting_test.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/lighting_test.o ${MINIRT_OBJ_DIR}/vec3/*.o \
+		 ${MINIRT_OBJ_DIR}/projection/*.o ${MINIRT_OBJ_DIR}/shading/*.o \
+		 ${MINIRT_OBJ_DIR}/varray/*.o ${MINIRT_OBJ_DIR}/matrix/*.o ${LIBFLAGS} \
+		-o ${TEST_BUILD_DIR}/lighting_test
+	@${TEST_BUILD_DIR}/lighting_test ${CRFLAGS} || true
+
 matrix_vec3_multiply: minirt ${TEST_OBJ_DIR}/matrix_vec3_multiply_test.o
 	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/matrix_vec3_multiply_test.o ${MINIRT_OBJ_DIR}/matrix/*.o \
 		${MINIRT_OBJ_DIR}/vec3/*.o ${LIBFLAGS} \
@@ -63,6 +70,21 @@ quicksort: minirt ${TEST_OBJ_DIR}/quicksort_test.o
 		${MINIRT_OBJ_DIR}/vec3/*.o ${LIBFLAGS} \
 		-o ${TEST_BUILD_DIR}/quicksort_test
 	@${TEST_BUILD_DIR}/quicksort_test ${CRFLAGS} || true
+
+reflect: minirt ${TEST_OBJ_DIR}/reflect_test.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/reflect_test.o ${MINIRT_OBJ_DIR}/vec3/*.o \
+		 ${MINIRT_OBJ_DIR}/projection/*.o ${MINIRT_OBJ_DIR}/shading/*.o \
+		 ${MINIRT_OBJ_DIR}/varray/*.o ${MINIRT_OBJ_DIR}/matrix/*.o ${LIBFLAGS} \
+		-o ${TEST_BUILD_DIR}/reflect_test
+	@${TEST_BUILD_DIR}/reflect_test ${CRFLAGS} || true
+
+sphere_normal: minirt ${TEST_OBJ_DIR}/sphere_normal_test.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/sphere_normal_test.o ${MINIRT_OBJ_DIR}/matrix/*.o \
+		${MINIRT_OBJ_DIR}/vec3/*.o ${MINIRT_OBJ_DIR}/projection/*.o \
+		${MINIRT_OBJ_DIR}/shading/*.o ${MINIRT_OBJ_DIR}/varray/*.o \
+		${MINIRT_OBJ_DIR}/objects/*.o ${LIBFLAGS} \
+		-o ${TEST_BUILD_DIR}/sphere_normal_test
+	@${TEST_BUILD_DIR}/sphere_normal_test ${CRFLAGS} || true
 
 transform_ray: minirt ${TEST_OBJ_DIR}/transform_ray_test.o
 	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/transform_ray_test.o ${MINIRT_OBJ_DIR}/matrix/*.o \

@@ -6,17 +6,29 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 02:49:25 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/20 11:09:42 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/23 14:44:43 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_test.h>
 
+static t_err	get_sphere(t_obj *sphere, t_matrix *transform)
+{
+	t_material	material;
+
+	material.color = (t_color){.r = 1.0, .g = 0.0, .b = 0.0};
+	material.ambient = 1.0;
+	material.diffuse = 0.0;
+	material.specular = 0.0;
+	material.shininess = 0.5;
+
+	return (set_sphere(sphere, transform, &material));
+}
+
 Test(sphere_transform, sphere_transform_identity)
 {
 	t_obj	sphere;
-	t_err	err = set_sphere(&sphere, matrix_new_identity(4),
-				&(t_color){.r= 255, .g = 0, .b =0});
+	t_err	err = get_sphere(&sphere, matrix_new_identity(4));
 
 	cr_assert(eq(int, err, OK));
 
@@ -47,8 +59,7 @@ Test(sphere_transform, sphere_transform_identity)
 Test(sphere_transform, sphere_transform_change)
 {
 	t_obj	sphere;
-	t_err	err = set_sphere(&sphere, matrix_new_identity(4),
-				&(t_color){.r= 255, .g = 0, .b =0});
+	t_err	err = get_sphere(&sphere, matrix_new_identity(4));
 
 	cr_assert(eq(int, err, OK));
 	err = set_sphere_transform(&sphere,
@@ -88,8 +99,7 @@ Test(sphere_transform, intersect_scaled_ray)
 
 	new_ray(&(t_vec3){.x = 0, .y = 0, .z = -5},
 					&(t_vec3){.x = 0, .y = 0, .z = 1}, &r);
-	t_err	err = set_sphere(&sphere, matrix_new_identity(4),
-				&(t_color){.r= 255, .g = 0, .b =0});
+	t_err	err = get_sphere(&sphere, matrix_new_identity(4));
 
 	cr_assert(eq(int, err, OK));
 	intersections = new_array(2);
