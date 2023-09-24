@@ -1,6 +1,6 @@
 CC = cc
 RM = rm -rf
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -Wall -Wextra -g -O2
 MINIRT_DIR = ../..
 MLX_DIR	= ${MINIRT_DIR}/lib/minilibx-linux
 LIBFLAGS = -L${MLX_DIR} -lmlx -lXext -lX11 -lm -lz
@@ -29,11 +29,25 @@ project_on_wall: minirt ${TEST_OBJ_DIR}/project_on_wall.o
 		${MINIRT_OBJ_DIR}/matrix/*.o \
 		${MINIRT_OBJ_DIR}/objects/*.o \
 		${MINIRT_OBJ_DIR}/projection/*.o \
+		${MINIRT_OBJ_DIR}/shading/*.o \
 		${MINIRT_OBJ_DIR}/varray/*.o \
 		${MINIRT_OBJ_DIR}/vec3/*.o \
 		${LIBFLAGS} \
 		-o ${TEST_BUILD_DIR}/project_on_wall
 	${TEST_BUILD_DIR}/project_on_wall ${CRFLAGS} || true
+
+project_on_wall_with_light: minirt ${TEST_OBJ_DIR}/project_on_wall_with_light.o
+	${CC} ${CFLAGS} ${TEST_OBJ_DIR}/project_on_wall_with_light.o \
+		${MINIRT_OBJ_DIR}/graphics/*.o \
+		${MINIRT_OBJ_DIR}/matrix/*.o \
+		${MINIRT_OBJ_DIR}/objects/*.o \
+		${MINIRT_OBJ_DIR}/projection/*.o \
+		${MINIRT_OBJ_DIR}/shading/*.o \
+		${MINIRT_OBJ_DIR}/varray/*.o \
+		${MINIRT_OBJ_DIR}/vec3/*.o \
+		${LIBFLAGS} \
+		-o ${TEST_BUILD_DIR}/project_on_wall_with_light
+	${TEST_BUILD_DIR}/project_on_wall_with_light ${CRFLAGS} || true
 
 ${TEST_OBJ_DIR}:
 	@mkdir -p ${TEST_OBJ_DIR}
@@ -51,4 +65,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean minirt mlx_window project_from_behind re
+.PHONY: all clean fclean minirt mlx_window project_on_wall project_on_wall_with_light re

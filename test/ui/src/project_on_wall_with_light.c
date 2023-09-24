@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   project_on_wall.c                                  :+:      :+:    :+:   */
+/*   project_on_wall_with_light.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 17:15:20 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/23 23:36:47 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/24 00:48:52 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ static void	get_default_material(t_material *material)
 	set_material_shininess(material, 200.0);
 }
 
+static void	get_point_light(t_point_light *light, t_vec3 *pos, t_color *color)
+{
+	light->intensity = *color;
+	light->position = *pos;
+}
+
 void	init_trace_args(int canvas_pixels, double wall_size, double z,
 			t_trace_args *t)
 {
@@ -26,15 +32,29 @@ void	init_trace_args(int canvas_pixels, double wall_size, double z,
 	t->wall_size = wall_size;
 	t->pixel_size = wall_size / canvas_pixels;
 	t->canvas_pixels = canvas_pixels;
+	get_default_material(&t->phong.material);
+	get_point_light(&t->phong.light, &(t_vec3){.x = -10, .y = 10, .z = -10},
+		&(t_color){.r = 1, .g = 1, .b = 1});
 	set_vec3(0.0, 0.0, -5.0, &t->ray_origin);
 }
 
 void	trace_pixel(t_args *args, t_trace_args *t, int x, int y)
 {
-	if (hit(t->intersections))
+	t_color	final_color;
+	t_obj	*obj;
+	t_isect	*hit_isect;
+
+	hit_isect = hit(t->intersections);
+	if (hit_isect)
 	{
+		obj = hit_isect->obj;
+		position(&t->ray, hit_isect->t, &t->phong.point);
+		obj->normal_at(obj, &t->phong.point, &t->phong.normal);
+		set_vec3(0.0, 0.0, 0.0, &t->phong.eye);
+		subtract(&t->phong.eye, &t->ray.direction, &t->phong.eye);
+		lighting(&t->phong, &final_color);
 		ft_pixel_put(&args->mlx_data, x, y,
-			convert_color(&(t->obj.material.color)));
+			convert_color(&final_color));
 	}
 	else
 		ft_pixel_put(&args->mlx_data, x, y, 0);
@@ -43,49 +63,47 @@ void	trace_pixel(t_args *args, t_trace_args *t, int x, int y)
 void	get_ray_direction(t_trace_args *t, t_vec3 *position, t_ray *ray)
 {
 	t_vec3	direction;
-	t_vec3	normalized_direction;
 
 	subtract(position, &t->ray_origin, &direction);
-	normalize(&direction, &normalized_direction);
-	new_ray(&t->ray_origin, &normalized_direction, ray);
+	normalize(&direction, &direction);
+	new_ray(&t->ray_origin, &direction, ray);
 }
 
-void	get_ray(t_trace_args *trace_args, int x, int y)
+void	get_ray(t_trace_args *t, int x, int y)
 {
 	double	world_x;
 	double	world_y;
 	double	half_wall_size;
 	t_vec3	position;
 
-	half_wall_size = trace_args->wall_size / 2;
-	world_x = half_wall_size - trace_args->pixel_size * x;
-	world_y = half_wall_size - trace_args->pixel_size * y;
-	set_vec3(world_x, world_y, trace_args->wall_z, &position);
-	get_ray_direction(trace_args, &position, &trace_args->ray);
+	half_wall_size = t->wall_size / 2;
+	world_x = -half_wall_size + t->pixel_size * x;
+	world_y = half_wall_size - t->pixel_size * y;
+	set_vec3(world_x, world_y, t->wall_z, &position);
+	get_ray_direction(t, &position, &t->ray);
 }
 
-void	trace_all(t_args *args, t_trace_args *trace_args)
+void	trace_all(t_args *args, t_trace_args *t)
 {
-	t_material	material;
 	int			x;
 	int			y;
 
-	trace_args->intersections = new_array(2);
-	get_default_material(&material);
-	set_sphere(&trace_args->obj, matrix_new_identity(4), &material);
+	t->intersections = new_array(2);
+	set_sphere(&t->obj, matrix_new_identity(4), &t->phong.material);
 	y = 0;
-	while (y < trace_args->canvas_pixels - 1)
+	while (y < t->canvas_pixels - 1)
 	{
 		x = 0;
-		while (x < trace_args->canvas_pixels - 1)
+		while (x < t->canvas_pixels - 1)
 		{
-			get_ray(trace_args, x++, y);
-			reset_array(trace_args->intersections);
-			trace_args->obj.intersects(&trace_args->obj, &trace_args->ray,
-				trace_args->intersections);
-			trace_pixel(args, trace_args, x, y);
+			get_ray(t, x, y);
+			reset_array(t->intersections);
+			t->obj.intersects(&t->obj, &t->ray,
+				t->intersections);
+			trace_pixel(args, t, x, y);
 			// mlx_put_image_to_window(args->mlx, args->mlx_win,
-			// 	args->mlx_data.img, 0, 0);
+			//	args->mlx_data.img, 0, 0);
+			++x;
 		}
 		++y;
 	}
@@ -93,13 +111,13 @@ void	trace_all(t_args *args, t_trace_args *trace_args)
 
 int	create_projection_window(t_args *args, t_trace_args *trace_args)
 {
-	const int	window_size = 400;
+	const int	window_size = 800;
 
 	init_args(args, window_size, window_size);
 	init_trace_args(window_size, 7, 10, trace_args);
 	trace_all(args, trace_args);
 	mlx_put_image_to_window(args->mlx, args->mlx_win,
-				args->mlx_data.img, 0, 0);
+			args->mlx_data.img, 0, 0);
 	matrix_free(trace_args->obj.transform);
 	matrix_free(trace_args->obj.inv_transform);
 	free_array(trace_args->intersections);

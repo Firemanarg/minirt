@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:44:47 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/03 03:29:30 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/03 03:32:43 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct s_obj	t_obj;
 
 typedef t_err			(*t_isect_func)(struct s_obj *obj, void *ray,
 							t_varray * r);
-
 typedef void			(*t_normal_func)(t_obj *s, t_vec3 *world_point,
 							t_vec3 *world_normal);
 
@@ -144,6 +143,9 @@ typedef struct s_sphere_eq_pars
 	t_vec3	origin;
 	t_vec3	tmp;
 }	t_sphere_eq_pars;
+
+// cleanup.c
+void	free_obj(t_obj *obj);
 
 // color.c
 t_color	color(double red, double green, double blue);

@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 15:18:55 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/21 04:06:40 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/23 21:26:13 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,18 @@ void	ft_pixel_put(t_mlx_data *mlx_data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+int	get_clamped_color(double color)
+{
+	if (color >= 1.0)
+		return (255);
+	if (color <= 0.0)
+		return (0);
+	return ((int)(color * 255.0));
+}
+
 int	convert_color(t_color *minirt_color)
 {
-	int	t;
-
-	t = 0;
-	return ((t << 24)
-		+ ((int)(minirt_color->r * 255.0) << 16)
-		+ ((int)(minirt_color->g * 255.0) << 8)
-		+ (int)(minirt_color->b * 255.0));
+	return ((get_clamped_color(minirt_color->r) << 16)
+		+ (get_clamped_color(minirt_color->g) << 8)
+		+ get_clamped_color(minirt_color->b));
 }
