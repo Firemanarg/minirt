@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:17:40 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/16 21:39:09 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/24 06:56:08 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ void	multiply(t_vec3 *a, double s, t_vec3 *b);
 void	divide(t_vec3 *a, double s, t_vec3 *b);
 
 // double_ops.c
-double	dbl_abs(double a, double b);
+double	dbl_abs(double a);
 
 #endif

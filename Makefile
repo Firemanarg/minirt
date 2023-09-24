@@ -46,6 +46,8 @@ SRC_FILES += ${addprefix ${SRC_DIR}/matrix/, \
 SRC_FILES += ${addprefix ${SRC_DIR}/objects/, \
 				cleanup.c \
 				color.c \
+				object.c \
+				plane.c \
 				sphere.c}
 SRC_FILES += ${addprefix ${SRC_DIR}/projection/, \
 				hit.c \

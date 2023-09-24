@@ -18,12 +18,23 @@ TEST_SRC_DIR = ${TEST_DIR}/src
 TEST_BUILD_DIR = ${TEST_DIR}/build
 TEST_OBJ_DIR = ${TEST_DIR}/build/obj
 
-all: apply_matrix_ops bin_search hit_sphere intersect_sphere lighting\
-	matrix_vec3_multiply quicksort sphere_normal transform_ray \
-	transform_sphere var_array vec3_ops
+all: apply_matrix_ops bin_search lighting matrix_vec3_multiply quicksort \
+	plane ray_transform reflect \
+	sphere_hit sphere_intersect sphere_normal sphere_transform \
+	var_array vec3_ops
 
 minirt:
 	@make -s -C ${MINIRT_DIR}
+
+clean:
+	${RM} ${TEST_OBJ_DIR}
+	make -C ${MINIRT_DIR} clean
+
+fclean: clean
+	${RM} ${TEST_BUILD_DIR}
+	make -C ${MINIRT_DIR} fclean
+
+re: fclean all
 
 apply_matrix_ops: minirt ${TEST_OBJ_DIR}/apply_matrix_ops_test.o
 	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/apply_matrix_ops_test.o ${MINIRT_OBJ_DIR}/varray/*.o \
@@ -37,20 +48,6 @@ bin_search: minirt ${TEST_OBJ_DIR}/bin_search_test.o
 		${MINIRT_OBJ_DIR}/vec3/*.o ${LIBFLAGS} \
 		-o ${TEST_BUILD_DIR}/bin_search_test
 	@${TEST_BUILD_DIR}/bin_search_test ${CRFLAGS} || true
-
-hit_sphere: minirt ${TEST_OBJ_DIR}/hit_sphere_test.o
-	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/hit_sphere_test.o ${MINIRT_OBJ_DIR}/varray/*.o \
-		${MINIRT_OBJ_DIR}/projection/*.o ${MINIRT_OBJ_DIR}/objects/*.o \
-		${MINIRT_OBJ_DIR}/vec3/*.o ${MINIRT_OBJ_DIR}/matrix/*.o ${LIBFLAGS} \
-		-o ${TEST_BUILD_DIR}/hit_sphere_test
-	@${TEST_BUILD_DIR}/hit_sphere_test ${CRFLAGS} || true
-
-intersect_sphere: minirt ${TEST_OBJ_DIR}/intersect_sphere_test.o
-	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/intersect_sphere_test.o ${MINIRT_OBJ_DIR}/varray/*.o \
-		${MINIRT_OBJ_DIR}/projection/*.o ${MINIRT_OBJ_DIR}/objects/*.o \
-		${MINIRT_OBJ_DIR}/vec3/*.o ${MINIRT_OBJ_DIR}/matrix/*.o ${LIBFLAGS} \
-		-o ${TEST_BUILD_DIR}/intersect_sphere_test
-	@${TEST_BUILD_DIR}/intersect_sphere_test ${CRFLAGS} || true
 
 lighting: ${TEST_OBJ_DIR}/lighting_test.o
 	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/lighting_test.o ${MINIRT_OBJ_DIR}/vec3/*.o \
@@ -71,12 +68,41 @@ quicksort: minirt ${TEST_OBJ_DIR}/quicksort_test.o
 		-o ${TEST_BUILD_DIR}/quicksort_test
 	@${TEST_BUILD_DIR}/quicksort_test ${CRFLAGS} || true
 
+plane: minirt ${TEST_OBJ_DIR}/plane_test.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/plane_test.o ${MINIRT_OBJ_DIR}/matrix/*.o \
+		${MINIRT_OBJ_DIR}/vec3/*.o ${MINIRT_OBJ_DIR}/projection/*.o \
+		${MINIRT_OBJ_DIR}/shading/*.o ${MINIRT_OBJ_DIR}/varray/*.o \
+		${MINIRT_OBJ_DIR}/objects/*.o ${LIBFLAGS} \
+		-o ${TEST_BUILD_DIR}/plane_test
+	@${TEST_BUILD_DIR}/plane_test ${CRFLAGS} || true
+
+ray_transform: minirt ${TEST_OBJ_DIR}/ray_transform_test.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/ray_transform_test.o ${MINIRT_OBJ_DIR}/matrix/*.o \
+		${MINIRT_OBJ_DIR}/vec3/*.o ${MINIRT_OBJ_DIR}/projection/*.o \
+		${MINIRT_OBJ_DIR}/varray/*.o ${LIBFLAGS} \
+		-o ${TEST_BUILD_DIR}/ray_transform_test
+	@${TEST_BUILD_DIR}/ray_transform_test ${CRFLAGS} || true
+
 reflect: minirt ${TEST_OBJ_DIR}/reflect_test.o
 	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/reflect_test.o ${MINIRT_OBJ_DIR}/vec3/*.o \
 		 ${MINIRT_OBJ_DIR}/projection/*.o ${MINIRT_OBJ_DIR}/shading/*.o \
 		 ${MINIRT_OBJ_DIR}/varray/*.o ${MINIRT_OBJ_DIR}/matrix/*.o ${LIBFLAGS} \
 		-o ${TEST_BUILD_DIR}/reflect_test
 	@${TEST_BUILD_DIR}/reflect_test ${CRFLAGS} || true
+
+sphere_hit: minirt ${TEST_OBJ_DIR}/sphere_hit_test.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/sphere_hit_test.o ${MINIRT_OBJ_DIR}/varray/*.o \
+		${MINIRT_OBJ_DIR}/projection/*.o ${MINIRT_OBJ_DIR}/objects/*.o \
+		${MINIRT_OBJ_DIR}/vec3/*.o ${MINIRT_OBJ_DIR}/matrix/*.o ${LIBFLAGS} \
+		-o ${TEST_BUILD_DIR}/sphere_hit_test
+	@${TEST_BUILD_DIR}/sphere_hit_test ${CRFLAGS} || true
+
+sphere_intersect: minirt ${TEST_OBJ_DIR}/sphere_intersect_test.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/sphere_intersect_test.o ${MINIRT_OBJ_DIR}/varray/*.o \
+		${MINIRT_OBJ_DIR}/projection/*.o ${MINIRT_OBJ_DIR}/objects/*.o \
+		${MINIRT_OBJ_DIR}/vec3/*.o ${MINIRT_OBJ_DIR}/matrix/*.o ${LIBFLAGS} \
+		-o ${TEST_BUILD_DIR}/sphere_intersect_test
+	@${TEST_BUILD_DIR}/sphere_intersect_test ${CRFLAGS} || true
 
 sphere_normal: minirt ${TEST_OBJ_DIR}/sphere_normal_test.o
 	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/sphere_normal_test.o ${MINIRT_OBJ_DIR}/matrix/*.o \
@@ -86,19 +112,12 @@ sphere_normal: minirt ${TEST_OBJ_DIR}/sphere_normal_test.o
 		-o ${TEST_BUILD_DIR}/sphere_normal_test
 	@${TEST_BUILD_DIR}/sphere_normal_test ${CRFLAGS} || true
 
-transform_ray: minirt ${TEST_OBJ_DIR}/transform_ray_test.o
-	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/transform_ray_test.o ${MINIRT_OBJ_DIR}/matrix/*.o \
-		${MINIRT_OBJ_DIR}/vec3/*.o ${MINIRT_OBJ_DIR}/projection/*.o \
-		${MINIRT_OBJ_DIR}/varray/*.o ${LIBFLAGS} \
-		-o ${TEST_BUILD_DIR}/transform_ray_test
-	@${TEST_BUILD_DIR}/transform_ray_test ${CRFLAGS} || true
-
-transform_sphere: minirt ${TEST_OBJ_DIR}/transform_sphere_test.o
-	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/transform_sphere_test.o ${MINIRT_OBJ_DIR}/matrix/*.o \
+sphere_transform: minirt ${TEST_OBJ_DIR}/sphere_transform_test.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/sphere_transform_test.o ${MINIRT_OBJ_DIR}/matrix/*.o \
 		${MINIRT_OBJ_DIR}/vec3/*.o ${MINIRT_OBJ_DIR}/projection/*.o \
 		${MINIRT_OBJ_DIR}/varray/*.o ${MINIRT_OBJ_DIR}/objects/*.o ${LIBFLAGS} \
-		-o ${TEST_BUILD_DIR}/transform_sphere_test
-	@${TEST_BUILD_DIR}/transform_sphere_test ${CRFLAGS} || true
+		-o ${TEST_BUILD_DIR}/sphere_transform_test
+	@${TEST_BUILD_DIR}/sphere_transform_test ${CRFLAGS} || true
 
 var_array: minirt ${TEST_OBJ_DIR}/var_array_test.o
 	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/var_array_test.o ${MINIRT_OBJ_DIR}/varray/*.o \
@@ -117,16 +136,8 @@ ${TEST_OBJ_DIR}:
 ${TEST_OBJ_DIR}/%.o: ${TEST_SRC_DIR}/%.c | ${TEST_OBJ_DIR}
 	@${CC} ${CFLAGS} -I${TEST_INC_DIR} -I${MINIRT_INC_DIR} -I${MLX_DIR} -c $< -o $@
 
-clean:
-	${RM} ${TEST_OBJ_DIR}
-	make -C ${MINIRT_DIR} clean
-
-fclean: clean
-	${RM} ${TEST_BUILD_DIR}
-	make -C ${MINIRT_DIR} fclean
-
-re: fclean all
-
-.PHONY: all apply_matrix_ops bin_search clean fclean hit_sphere\
-		matrix_vec3_multiply minirt quicksort re transform_ray\
-		transform_matrix var_array vec3_ops
+.PHONY: all minirt clean fclean re \
+		apply_matrix_ops bin_search lighting matrix_vec3_multiply quicksort \
+		plane ray_transform reflect \
+		sphere_hit sphere_intersect sphere_normal sphere_transform \
+		var_array vec3_ops

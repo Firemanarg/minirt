@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 05:48:50 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/18 16:50:00 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/24 06:56:57 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	normalize(t_vec3 *t, t_vec3 *norm_t)
 {
 	const double	len = length(t);
 
-	if (dbl_abs(len, 0.0) > EPSILON)
+	if (dbl_abs(len) > EPSILON)
 		divide(t, len, norm_t);
 	else
 		set_vec3(0.0, 0.0, 0.0, norm_t);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transform_sphere_test.c                            :+:      :+:    :+:   */
+/*   sphere_transform_test.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 02:49:25 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/23 14:44:43 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/24 07:19:34 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ Test(sphere_transform, sphere_transform_change)
 	t_err	err = get_sphere(&sphere, matrix_new_identity(4));
 
 	cr_assert(eq(int, err, OK));
-	err = set_sphere_transform(&sphere,
+	err = set_object_transform(&sphere,
 			matrix_translation(&(t_vec3){.x = 2, .y = 3, .z = 4}));
 
 	cr_assert(eq(int, err, OK));
@@ -104,7 +104,7 @@ Test(sphere_transform, intersect_scaled_ray)
 	cr_assert(eq(int, err, OK));
 	intersections = new_array(2);
 	cr_assert(ne(ptr, intersections, NULL));
-	err = set_sphere_transform(&sphere,
+	err = set_object_transform(&sphere,
 			matrix_scaling(&(t_vec3){.x = 2, .y = 2, .z = 2}));
 	cr_assert(eq(int, err, OK));
 
