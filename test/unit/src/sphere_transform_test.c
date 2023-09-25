@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 02:49:25 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/24 07:19:34 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/24 16:32:05 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ Test(sphere_transform, intersect_scaled_ray)
 			matrix_scaling(&(t_vec3){.x = 2, .y = 2, .z = 2}));
 	cr_assert(eq(int, err, OK));
 
-	sphere_intersect(&sphere, &r, intersections);
+	obj_intersect(&sphere, &r, intersections);
 	quicksort(intersections);
 	cr_expect(eq(int, intersections->length, 2));
 	cr_expect(epsilon_eq(dbl, ((t_isect *)intersections->arr)[0].t, 3.0, EPSILON));

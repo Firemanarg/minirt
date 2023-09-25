@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 06:38:35 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/24 07:50:55 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/24 16:27:38 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,12 @@ t_err	set_object_transform(t_obj *object, t_matrix *transform)
 	if (object->t_inv_transform == NULL)
 		return (ERR_ALLOC);
 	return (OK);
+}
+
+t_err	obj_intersect(t_obj *obj, t_ray *ray, t_varray *r)
+{
+	t_ray	transformed;
+
+	transform_ray(obj->inv_transform, ray, &transformed);
+	return (obj->intersects(obj, &transformed, r));
 }

@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:59:19 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/20 10:15:48 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/24 19:37:48 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void	new_ray(t_vec3 *start, t_vec3 *direction, t_ray *ray)
 {
 	ray->start = *start;
-	ray->direction = *direction;
+	normalize(direction, &ray->direction);
 }
 
 void	position(t_ray *ray, double t, t_vec3 *position)

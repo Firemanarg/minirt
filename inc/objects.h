@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:44:47 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/03 03:35:04 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/03 03:36:19 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,13 @@ t_color	color(double red, double green, double blue);
 
 void	set_color(double red, double green, double blue, t_color *c);
 int		convert_color(t_color *minirt_color);
+
+// cylinder.c
+void	cylinder_normal_at(t_obj *s, t_vec3 *world_point, t_vec3 *world_normal);
+t_err	set_cylinder(t_obj *cylinder, t_matrix *transform,
+			t_material *material);
+void	set_cylinder_limits(t_obj *cylinder, double minimum, double maximum,
+			t_bool closed);
 
 //object.c
 t_err	set_object(t_obj *object, t_matrix *transform, t_material *material);

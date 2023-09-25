@@ -6,7 +6,7 @@
 #    By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/26 17:29:19 by lsilva-q          #+#    #+#              #
-#    Updated: 2023/10/03 03:34:04 by gmachado         ###   ########.fr        #
+#    Updated: 2023/10/03 03:35:25 by gmachado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,8 +68,10 @@ SRC_FILES += ${addprefix ${SRC_DIR}/matrix/, \
 				matrix_transpose.c \
 				matrix_vec3_multiply.c}
 SRC_FILES += ${addprefix ${SRC_DIR}/objects/, \
+				caps.c \
 				cleanup.c \
 				color.c \
+				cylinder.c \
 				object.c \
 				plane.c \
 				sphere.c}
