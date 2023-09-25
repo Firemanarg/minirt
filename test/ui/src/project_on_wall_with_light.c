@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 17:15:20 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/24 06:24:28 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/24 08:54:27 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	init_trace_args(int canvas_pixels, double wall_size, double z,
 	t->canvas_pixels = canvas_pixels;
 	get_default_material(&t->phong.material);
 	get_point_light(&t->phong.light, &(t_vec3){.x = -10, .y = 10, .z = -10},
-		&(t_color){.r = 1, .g = 1, .b = 1});
+		&(t_color){.r = 1.0, .g = 1.0, .b = 1.0});
 	set_vec3(0.0, 0.0, -5.0, &t->ray_origin);
 }
 

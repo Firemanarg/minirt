@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersect_sphere_test.c                            :+:      :+:    :+:   */
+/*   sphere_intersect_test.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 03:47:33 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/23 14:40:55 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/24 16:29:57 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ Test(intersect, intersect_sphere_two_points) {
 	intersections = new_array(8);
 	new_ray(&(t_vec3){.x = 0, .y = 0, .z =-5},
 		&(t_vec3){.x = 0, .y = 0, .z =1}, &ray);
-	t_err err = sphere.intersects(&sphere, &ray, intersections);
+	t_err err = obj_intersect(&sphere, &ray, intersections);
 	cr_expect(eq(int, err, OK));
 	quicksort(intersections);
 	cr_expect(eq(int, intersections->length, 2));
@@ -56,7 +56,7 @@ Test(intersect, intersect_sphere_one_point) {
 	intersections = new_array(8);
 	new_ray(&(t_vec3){.x = 0, .y = 1, .z =-5},
 		&(t_vec3){.x = 0, .y = 0, .z =1}, &ray);
-	t_err err = sphere.intersects(&sphere, &ray, intersections);
+	t_err err = obj_intersect(&sphere, &ray, intersections);
 	cr_expect(eq(int, err, OK));
 	quicksort(intersections);
 	cr_expect(eq(int, intersections->length, 2));
@@ -78,7 +78,7 @@ Test(intersect, intersect_sphere_miss) {
 	intersections = new_array(8);
 	new_ray(&(t_vec3){.x = 0, .y = 2, .z =-5},
 		&(t_vec3){.x = 0, .y = 0, .z =1}, &ray);
-	t_err err = sphere.intersects(&sphere, &ray, intersections);
+	t_err err = obj_intersect(&sphere, &ray, intersections);
 	cr_expect(eq(int, err, OK));
 	quicksort(intersections);
 	cr_expect(eq(int, intersections->length, 0));
@@ -96,7 +96,7 @@ Test(intersect, intersect_sphere_ray_inside) {
 	intersections = new_array(8);
 	new_ray(&(t_vec3){.x = 0, .y = 0, .z =0},
 		&(t_vec3){.x = 0, .y = 0, .z =1}, &ray);
-	t_err err = sphere.intersects(&sphere, &ray, intersections);
+	t_err err = obj_intersect(&sphere, &ray, intersections);
 	cr_expect(eq(int, err, OK));
 	quicksort(intersections);
 	cr_expect(eq(int, intersections->length, 2));
@@ -118,7 +118,7 @@ Test(intersect, intersect_sphere_behind_ray) {
 	intersections = new_array(8);
 	new_ray(&(t_vec3){.x = 0, .y = 0, .z = 5},
 		&(t_vec3){.x = 0, .y = 0, .z =1}, &ray);
-	t_err err = sphere.intersects(&sphere, &ray, intersections);
+	t_err err = obj_intersect(&sphere, &ray, intersections);
 	cr_expect(eq(int, err, OK));
 	quicksort(intersections);
 	cr_expect(eq(int, intersections->length, 2));

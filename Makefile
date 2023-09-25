@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -O3
+CFLAGS = -Wall -Wextra -Werror -g
 MLX_DIR	= lib/minilibx-linux
 LIBFLAGS = -L${MLX_DIR} -lmlx -lXext -lX11 -lm -lz
 RM = rm -rf
@@ -44,8 +44,10 @@ SRC_FILES += ${addprefix ${SRC_DIR}/matrix/, \
 				matrix_transpose.c \
 				matrix_vec3_multiply.c}
 SRC_FILES += ${addprefix ${SRC_DIR}/objects/, \
+				caps.c \
 				cleanup.c \
 				color.c \
+				cylinder.c \
 				object.c \
 				plane.c \
 				sphere.c}

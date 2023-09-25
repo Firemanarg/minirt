@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:44:47 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/24 07:09:29 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/24 19:23:16 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <error.h>
 # include <varray.h>
 # include <matrix.h>
+# include <minirt.h>
 # include <shading.h>
 
 typedef struct s_obj	t_obj;
@@ -41,17 +42,10 @@ struct s_obj
 	t_matrix		*t_inv_transform;
 	t_isect_func	intersects;
 	t_normal_func	normal_at;
+	double			minimum;
+	double			maximum;
+	t_bool			closed;
 };
-
-typedef struct s_sphere_eq_pars
-{
-	double	a;
-	double	b;
-	double	c;
-	double	sqrt_disc;
-	t_vec3	origin;
-	t_vec3	tmp;
-}	t_sphere_eq_pars;
 
 // cleanup.c
 void	free_obj(t_obj *obj);
@@ -59,6 +53,13 @@ void	free_obj(t_obj *obj);
 // color.c
 void	set_color(double red, double green, double blue, t_color *c);
 int		convert_color(t_color *minirt_color);
+
+// cylinder.c
+void	cylinder_normal_at(t_obj *s, t_vec3 *world_point, t_vec3 *world_normal);
+t_err	set_cylinder(t_obj *cylinder, t_matrix *transform,
+			t_material *material);
+void	set_cylinder_limits(t_obj *cylinder, double minimum, double maximum,
+			t_bool closed);
 
 //object.c
 t_err	set_object(t_obj *object, t_matrix *transform, t_material *material);

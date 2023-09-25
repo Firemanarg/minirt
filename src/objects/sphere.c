@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 19:11:05 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/24 06:45:39 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/24 16:27:21 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,22 @@
 
 t_err	sphere_intersect(t_obj *sphere, t_ray *ray, t_varray *r)
 {
-	t_sphere_eq_pars	pars;
-	t_ray				transformed;
+	double	a;
+	double	b;
+	double	c;
+	double	sqrt_disc;
 
-	transform_ray(sphere->inv_transform, ray, &transformed);
-	set_vec3(0.0, 0.0, 0.0, &pars.origin);
-	subtract(&transformed.start, &pars.origin, &pars.tmp);
-	pars.a = dot(&transformed.direction, &transformed.direction);
-	pars.b = 2 * dot(&transformed.direction, &pars.tmp);
-	pars.c = dot(&pars.tmp, &pars.tmp) - 1;
-	pars.sqrt_disc = pars.b * pars.b - 4 * pars.a * pars.c;
-	if (pars.sqrt_disc < 0)
+	a = dot(&ray->direction, &ray->direction);
+	b = 2 * dot(&ray->direction, &ray->start);
+	c = dot(&ray->start, &ray->start) - 1;
+	sqrt_disc = b * b - 4 * a * c;
+	if (sqrt_disc < 0)
 		return (OK);
-	pars.sqrt_disc = sqrt(pars.sqrt_disc);
+	sqrt_disc = sqrt(sqrt_disc);
 	return (insert_into_array(r,
-			(-pars.b - pars.sqrt_disc) / (2.0 * pars.a), sphere)
+			(-b - sqrt_disc) / (2.0 * a), sphere)
 		|| insert_into_array(r,
-			(-pars.b + pars.sqrt_disc) / (2.0 * pars.a), sphere));
+			(-b + sqrt_disc) / (2.0 * a), sphere));
 }
 
 void	sphere_normal_at(t_obj *s, t_vec3 *world_point, t_vec3 *world_normal)
