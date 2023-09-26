@@ -1,31 +1,52 @@
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
-MLX_DIR	= lib/minilibx-linux
-LIBFLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
-RM = rm -rf
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/09/26 17:29:19 by lsilva-q          #+#    #+#              #
+#    Updated: 2023/09/26 17:29:19 by lsilva-q         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-MANDATORY_DIR = .
-NAME = ${MANDATORY_DIR}/build/minirt
+CC				:= cc
+CFLAGS			:= -Wall -Wextra -Werror -g
+RM				:= rm -rf
 
-INC_DIR = ${MANDATORY_DIR}/inc
-INC_FILES = ${addprefix ${INC_DIR}/,\
+# Libraries
+MLX_DIR			:= lib/minilibx-linux
+LIBFLAGS		:= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
+LFTX_DIR		:= ./libft_x
+LFTX			:= $(LFTX_DIR)/libft_x.a
+
+# Mandatory
+MANDATORY_DIR	:= .
+NAME			:= ${MANDATORY_DIR}/build/minirt
+
+# Header files
+INC_DIR			:= ${MANDATORY_DIR}/inc
+INC_FILES		= ${addprefix ${INC_DIR}/,\
 				error.h\
 				graphics.h\
 				matrix.h\
-				minirt.h}
-
-INC_FILES += ${addprefix ${INC_DIR}/,\
+				minirt.h\
 				objects.h\
 				projection.h\
 				varray.h\
 				vec3.h}
 
-SRC_DIR = ${MANDATORY_DIR}/src
-SRC_FILES = ${addprefix ${SRC_DIR}/, minirt.c}
-SRC_FILES += ${addprefix ${SRC_DIR}/graphics/,\
+# Source files
+SRC_DIR			= ${MANDATORY_DIR}/src
+SRC_FILES		= ${addprefix ${SRC_DIR}/, minirt.c}
+
+# MLX graphics files
+SRC_FILES		+= ${addprefix ${SRC_DIR}/graphics/,\
 				mlx_utils.c\
 				window.c}
-SRC_FILES += ${addprefix ${SRC_DIR}/matrix/,\
+
+# Matrix files
+SRC_FILES		+= ${addprefix ${SRC_DIR}/matrix/,\
 				matrix_apply.c\
 				matrix_determinant.c\
 				matrix_inverse.c\
@@ -40,17 +61,25 @@ SRC_FILES += ${addprefix ${SRC_DIR}/matrix/,\
 				matrix_rotation.c\
 				matrix_submatrix.c\
 				matrix_transpose.c}
-SRC_FILES += ${addprefix ${SRC_DIR}/objects/,\
+
+# Objects files
+SRC_FILES		+= ${addprefix ${SRC_DIR}/objects/,\
 				color.c\
 				sphere.c}
-SRC_FILES += ${addprefix ${SRC_DIR}/projection/,\
+
+# Projection files
+SRC_FILES		+= ${addprefix ${SRC_DIR}/projection/,\
 				hit.c\
 				ray.c}
-SRC_FILES += ${addprefix ${SRC_DIR}/varray/,\
+
+# Varray files
+SRC_FILES		+= ${addprefix ${SRC_DIR}/varray/,\
 				bin_search.c\
 				quicksort.c\
 				var_array.c}
-SRC_FILES += ${addprefix ${SRC_DIR}/vec3/,\
+
+# Vec3 files
+SRC_FILES		+= ${addprefix ${SRC_DIR}/vec3/,\
 				double_ops.c\
 				vec3.c\
 				vec3_add_sub.c\
@@ -58,27 +87,36 @@ SRC_FILES += ${addprefix ${SRC_DIR}/vec3/,\
 				vec3_mul_div.c\
 				vec3_products.c}
 
-BUILD_DIR = ${MANDATORY_DIR}/build
-OBJ_DIR = ${BUILD_DIR}/obj
-OBJ_FILES = ${patsubst ${SRC_DIR}/%.c, ${OBJ_DIR}/%.o, ${SRC_FILES}}
-OBJ_SUBDIRS = ${sort ${dir ${OBJ_FILES}}}
+BUILD_DIR		:= ${MANDATORY_DIR}/build
+
+# Object files
+OBJ_DIR			= ${BUILD_DIR}/obj
+OBJ_FILES		= ${patsubst ${SRC_DIR}/%.c, ${OBJ_DIR}/%.o, ${SRC_FILES}}
+OBJ_SUBDIRS		= ${sort ${dir ${OBJ_FILES}}}
+
+# RULES
 
 all: ${NAME}
 
 ${OBJ_SUBDIRS}:
 	mkdir -p $@
 
-${NAME}: ${OBJ_FILES}
+${NAME}: $(LFTX) ${OBJ_FILES}
 	${CC} ${CFLAGS} ${OBJ_FILES} ${LIBFLAGS} -o $@
 
 ${OBJ_FILES}: ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c ${INC_FILES} | ${OBJ_SUBDIRS}
 	${CC} ${CFLAGS} -I${INC_DIR} -I${MLX_DIR} -c $< -o $@
 
+$(LFTX): $(LFTX_DIR)
+	make -C $(LFTX_DIR)
+
 clean:
 	${RM} ${OBJ_DIR}
+	make -C $(LFTX_DIR) clean
 
 fclean: clean
 	${RM} ${NAME}
+	make -C $(LFTX_DIR) fclean
 
 re: fclean all
 
