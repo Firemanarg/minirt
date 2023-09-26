@@ -36,8 +36,8 @@ project_on_wall: minirt ${TEST_OBJ_DIR}/project_on_wall.o
 		-o ${TEST_BUILD_DIR}/project_on_wall
 	${TEST_BUILD_DIR}/project_on_wall ${CRFLAGS} || true
 
-project_on_wall_with_light: minirt ${TEST_OBJ_DIR}/project_on_wall_with_light.o
-	${CC} ${CFLAGS} ${TEST_OBJ_DIR}/project_on_wall_with_light.o \
+project_on_wall_with_light_cylinder: minirt ${TEST_OBJ_DIR}/project_on_wall_with_light_cylinder.o
+	${CC} ${CFLAGS} ${TEST_OBJ_DIR}/project_on_wall_with_light_cylinder.o \
 		${MINIRT_OBJ_DIR}/graphics/*.o \
 		${MINIRT_OBJ_DIR}/matrix/*.o \
 		${MINIRT_OBJ_DIR}/objects/*.o \
@@ -46,11 +46,11 @@ project_on_wall_with_light: minirt ${TEST_OBJ_DIR}/project_on_wall_with_light.o
 		${MINIRT_OBJ_DIR}/varray/*.o \
 		${MINIRT_OBJ_DIR}/vec3/*.o \
 		${LIBFLAGS} \
-		-o ${TEST_BUILD_DIR}/project_on_wall_with_light
-	${TEST_BUILD_DIR}/project_on_wall_with_light ${CRFLAGS} || true
+		-o ${TEST_BUILD_DIR}/project_on_wall_with_light_cylinder
+	${TEST_BUILD_DIR}/project_on_wall_with_light_cylinder ${CRFLAGS} || true
 
-project_on_wall_with_light_cyl: minirt ${TEST_OBJ_DIR}/project_on_wall_with_light_cyl.o
-	${CC} ${CFLAGS} ${TEST_OBJ_DIR}/project_on_wall_with_light_cyl.o \
+project_on_wall_with_light_plane: minirt ${TEST_OBJ_DIR}/project_on_wall_with_light_plane.o
+	${CC} ${CFLAGS} ${TEST_OBJ_DIR}/project_on_wall_with_light_plane.o \
 		${MINIRT_OBJ_DIR}/graphics/*.o \
 		${MINIRT_OBJ_DIR}/matrix/*.o \
 		${MINIRT_OBJ_DIR}/objects/*.o \
@@ -59,8 +59,21 @@ project_on_wall_with_light_cyl: minirt ${TEST_OBJ_DIR}/project_on_wall_with_ligh
 		${MINIRT_OBJ_DIR}/varray/*.o \
 		${MINIRT_OBJ_DIR}/vec3/*.o \
 		${LIBFLAGS} \
-		-o ${TEST_BUILD_DIR}/project_on_wall_with_light_cyl
-	${TEST_BUILD_DIR}/project_on_wall_with_light_cyl ${CRFLAGS} || true
+		-o ${TEST_BUILD_DIR}/project_on_wall_with_light_plane
+	${TEST_BUILD_DIR}/project_on_wall_with_light_plane ${CRFLAGS} || true
+
+project_on_wall_with_light_sphere: minirt ${TEST_OBJ_DIR}/project_on_wall_with_light_sphere.o
+	${CC} ${CFLAGS} ${TEST_OBJ_DIR}/project_on_wall_with_light_sphere.o \
+		${MINIRT_OBJ_DIR}/graphics/*.o \
+		${MINIRT_OBJ_DIR}/matrix/*.o \
+		${MINIRT_OBJ_DIR}/objects/*.o \
+		${MINIRT_OBJ_DIR}/projection/*.o \
+		${MINIRT_OBJ_DIR}/shading/*.o \
+		${MINIRT_OBJ_DIR}/varray/*.o \
+		${MINIRT_OBJ_DIR}/vec3/*.o \
+		${LIBFLAGS} \
+		-o ${TEST_BUILD_DIR}/project_on_wall_with_light_sphere
+	${TEST_BUILD_DIR}/project_on_wall_with_light_sphere ${CRFLAGS} || true
 
 ${TEST_OBJ_DIR}:
 	@mkdir -p ${TEST_OBJ_DIR}
