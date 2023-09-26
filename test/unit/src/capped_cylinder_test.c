@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 19:24:33 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/24 22:48:26 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/26 02:42:37 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ Test(capped_cylinder, normal_bottom_cap_1)
 	cr_expect(eq(int, cylinder.closed, TRUE));
 	cr_expect(epsilon_eq(dbl, cylinder.maximum, 2.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, cylinder.minimum, 1.0, EPSILON));
-	cylinder.normal_at(&cylinder, &point, &normal);
+	obj_normal_at(&cylinder, &point, &normal);
 	cr_expect(epsilon_eq(dbl, normal.x, 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.y, -1.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.z, 0.0, EPSILON));
@@ -178,7 +178,7 @@ Test(capped_cylinder, normal_bottom_cap_2)
 	cr_expect(eq(int, cylinder.closed, TRUE));
 	cr_expect(epsilon_eq(dbl, cylinder.maximum, 2.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, cylinder.minimum, 1.0, EPSILON));
-	cylinder.normal_at(&cylinder, &point, &normal);
+	obj_normal_at(&cylinder, &point, &normal);
 	cr_expect(epsilon_eq(dbl, normal.x, 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.y, -1.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.z, 0.0, EPSILON));
@@ -196,7 +196,7 @@ Test(capped_cylinder, normal_bottom_cap_3)
 	cr_expect(eq(int, cylinder.closed, TRUE));
 	cr_expect(epsilon_eq(dbl, cylinder.maximum, 2.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, cylinder.minimum, 1.0, EPSILON));
-	cylinder.normal_at(&cylinder, &point, &normal);
+	obj_normal_at(&cylinder, &point, &normal);
 	cr_expect(epsilon_eq(dbl, normal.x, 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.y, -1.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.z, 0.0, EPSILON));
@@ -214,7 +214,7 @@ Test(capped_cylinder, normal_top_cap_1)
 	cr_expect(eq(int, cylinder.closed, TRUE));
 	cr_expect(epsilon_eq(dbl, cylinder.maximum, 2.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, cylinder.minimum, 1.0, EPSILON));
-	cylinder.normal_at(&cylinder, &point, &normal);
+	obj_normal_at(&cylinder, &point, &normal);
 	cr_expect(epsilon_eq(dbl, normal.x, 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.y, 1.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.z, 0.0, EPSILON));
@@ -232,7 +232,7 @@ Test(capped_cylinder, normal_top_cap_2)
 	cr_expect(eq(int, cylinder.closed, TRUE));
 	cr_expect(epsilon_eq(dbl, cylinder.maximum, 2.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, cylinder.minimum, 1.0, EPSILON));
-	cylinder.normal_at(&cylinder, &point, &normal);
+	obj_normal_at(&cylinder, &point, &normal);
 	cr_expect(epsilon_eq(dbl, normal.x, 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.y, 1.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.z, 0.0, EPSILON));
@@ -250,7 +250,7 @@ Test(capped_cylinder, normal_top_cap_3)
 	cr_expect(eq(int, cylinder.closed, TRUE));
 	cr_expect(epsilon_eq(dbl, cylinder.maximum, 2.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, cylinder.minimum, 1.0, EPSILON));
-	cylinder.normal_at(&cylinder, &point, &normal);
+	obj_normal_at(&cylinder, &point, &normal);
 	cr_expect(epsilon_eq(dbl, normal.x, 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.y, 1.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.z, 0.0, EPSILON));

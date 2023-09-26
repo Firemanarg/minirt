@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:44:47 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/24 19:23:16 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/26 02:51:45 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void	set_color(double red, double green, double blue, t_color *c);
 int		convert_color(t_color *minirt_color);
 
 // cylinder.c
-void	cylinder_normal_at(t_obj *s, t_vec3 *world_point, t_vec3 *world_normal);
+void	cylinder_normal_at(t_obj *c, t_vec3 *object_point,
+			t_vec3 *object_normal);
 t_err	set_cylinder(t_obj *cylinder, t_matrix *transform,
 			t_material *material);
 void	set_cylinder_limits(t_obj *cylinder, double minimum, double maximum,
@@ -64,13 +65,14 @@ void	set_cylinder_limits(t_obj *cylinder, double minimum, double maximum,
 //object.c
 t_err	set_object(t_obj *object, t_matrix *transform, t_material *material);
 t_err	set_object_transform(t_obj *object, t_matrix *transform);
+void	obj_normal_at(t_obj *obj, t_vec3 *world_point, t_vec3 *world_normal);
 
 // plane.c
-void	plane_normal_at(t_obj *s, t_vec3 *world_point, t_vec3 *world_normal);
+void	plane_normal_at(t_obj *p, t_vec3 *object_point, t_vec3 *object_normal);
 t_err	set_plane(t_obj *plane, t_matrix *transform, t_material *material);
 
 // sphere.c
-void	sphere_normal_at(t_obj *s, t_vec3 *world_point, t_vec3 *world_normal);
+void	sphere_normal_at(t_obj *s, t_vec3 *object_point, t_vec3 *object_normal);
 t_err	set_sphere(t_obj *sphere, t_matrix *transform, t_material *material);
 
 #endif

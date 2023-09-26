@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 01:14:09 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/23 16:07:02 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/26 02:44:49 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ Test(sphere_normal, default_sphere_x_axis)
 	t_vec3	point = {.x = 1, .y = 0, .z = 0};
 
 	get_sphere(&sphere, matrix_new_identity(4));
-	sphere_normal_at(&sphere, &point, &normal);
+	obj_normal_at(&sphere, &point, &normal);
 	cr_expect(epsilon_eq(dbl, normal.x, 1.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.y, 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.z, 0.0, EPSILON));
@@ -47,7 +47,7 @@ Test(sphere_normal, default_sphere_y_axis)
 	t_vec3	point = {.x = 0, .y = 1, .z = 0};
 
 	get_sphere(&sphere, matrix_new_identity(4));
-	sphere_normal_at(&sphere, &point, &normal);
+	obj_normal_at(&sphere, &point, &normal);
 	cr_expect(epsilon_eq(dbl, normal.x, 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.y, 1.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.z, 0.0, EPSILON));
@@ -62,7 +62,7 @@ Test(sphere_normal, default_sphere_z_axis)
 	t_vec3	point = {.x = 0, .y = 0, .z = 1};
 
 	get_sphere(&sphere, matrix_new_identity(4));
-	sphere_normal_at(&sphere, &point, &normal);
+	obj_normal_at(&sphere, &point, &normal);
 	cr_expect(epsilon_eq(dbl, normal.x, 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.y, 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.z, 1.0, EPSILON));
@@ -80,7 +80,7 @@ Test(sphere_normal, default_sphere_non_axial)
 
 
 	get_sphere(&sphere, matrix_new_identity(4));
-	sphere_normal_at(&sphere, &point, &normal);
+	obj_normal_at(&sphere, &point, &normal);
 	cr_expect(epsilon_eq(dbl, normal.x, sqrt_3_over_3, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.y, sqrt_3_over_3, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.z, sqrt_3_over_3, EPSILON));
@@ -97,7 +97,7 @@ Test(sphere_normal, translated_sphere)
 
 
 	get_sphere(&sphere, matrix_translation(&(t_vec3){.x = 0, .y = 1, .z = 0}));
-	sphere_normal_at(&sphere, &point, &normal);
+	obj_normal_at(&sphere, &point, &normal);
 	cr_expect(epsilon_eq(dbl, normal.x, 0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.y,0.70711, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.z, -0.70711, EPSILON));
@@ -118,7 +118,7 @@ Test(sphere_normal, transformed_sphere)
 
 
 	get_sphere(&sphere, matrix_apply(matrix_new_identity(4), mop));
-	sphere_normal_at(&sphere, &point, &normal);
+	obj_normal_at(&sphere, &point, &normal);
 	cr_expect(epsilon_eq(dbl, normal.x, 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.y,0.97014, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.z, -0.24254, EPSILON));
