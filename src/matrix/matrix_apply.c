@@ -46,9 +46,9 @@ t_matrix	*matrix_apply(t_matrix *m, t_matrix_op *operations)
 		{
 			op_matrix = get_operation_matrix(m, operations++);
 			result = matrix_multiply(op_matrix, m);
-			free(op_matrix);
+			matrix_free(op_matrix);
 		}
-		free(m);
+		matrix_free(m);
 		m = result;
 	}
 	return (m);
