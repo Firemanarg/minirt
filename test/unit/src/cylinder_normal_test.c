@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 17:38:17 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/24 17:47:52 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/26 02:43:04 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ Test(cylinder_normal, surface_point_1)
 	t_vec3	normal;
 
 	get_cylinder(&cylinder, matrix_new_identity(4));
-	cylinder.normal_at(&cylinder, &point, &normal);
+	obj_normal_at(&cylinder, &point, &normal);
 	cr_expect(epsilon_eq(dbl, normal.x, 1.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.y, 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.z, 0.0, EPSILON));
@@ -46,7 +46,7 @@ Test(cylinder_normal, surface_point_2)
 	t_vec3	normal;
 
 	get_cylinder(&cylinder, matrix_new_identity(4));
-	cylinder.normal_at(&cylinder, &point, &normal);
+	obj_normal_at(&cylinder, &point, &normal);
 	cr_expect(epsilon_eq(dbl, normal.x, 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.y, 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.z, -1.0, EPSILON));
@@ -60,7 +60,7 @@ Test(cylinder_normal, surface_point_3)
 	t_vec3	normal;
 
 	get_cylinder(&cylinder, matrix_new_identity(4));
-	cylinder.normal_at(&cylinder, &point, &normal);
+	obj_normal_at(&cylinder, &point, &normal);
 	cr_expect(epsilon_eq(dbl, normal.x, 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.y, 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.z, 1.0, EPSILON));
@@ -74,7 +74,7 @@ Test(cylinder_normal, surface_point_4)
 	t_vec3	normal;
 
 	get_cylinder(&cylinder, matrix_new_identity(4));
-	cylinder.normal_at(&cylinder, &point, &normal);
+	obj_normal_at(&cylinder, &point, &normal);
 	cr_expect(epsilon_eq(dbl, normal.x, -1.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.y, 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, normal.z, 0.0, EPSILON));

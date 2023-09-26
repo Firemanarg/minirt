@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 17:15:20 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/24 08:54:27 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/26 02:47:53 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	trace_pixel(t_args *args, t_trace_args *t, int x, int y)
 	{
 		obj = hit_isect->obj;
 		position(&t->ray, hit_isect->t, &t->phong.point);
-		obj->normal_at(obj, &t->phong.point, &t->phong.normal);
+		obj_normal_at(obj, &t->phong.point, &t->phong.normal);
 		set_vec3(0.0, 0.0, 0.0, &t->phong.eye);
 		subtract(&t->phong.eye, &t->ray.direction, &t->phong.eye);
 		lighting(&t->phong, &final_color);
@@ -87,9 +87,13 @@ void	trace_all(t_args *args, t_trace_args *t)
 {
 	int			x;
 	int			y;
+	t_matrix	*id;
+	t_matrix	*scale;
 
 	t->intersections = new_array(2);
-	set_sphere(&t->obj, matrix_new_identity(4), &t->phong.material);
+	id = matrix_new_identity(4);
+	scale = matrix_scaling(&(t_vec3){.x = 1.0, .y = 0.3, .z = 1.0});
+	set_sphere(&t->obj, matrix_multiply(scale, id), &t->phong.material);
 	y = 0;
 	while (y < t->canvas_pixels - 1)
 	{
@@ -98,8 +102,7 @@ void	trace_all(t_args *args, t_trace_args *t)
 		{
 			get_ray(t, x, y);
 			reset_array(t->intersections);
-			t->obj.intersects(&t->obj, &t->ray,
-				t->intersections);
+			obj_intersect(&t->obj, &t->ray, t->intersections);
 			trace_pixel(args, t, x, y);
 			// mlx_put_image_to_window(args->mlx, args->mlx_win,
 			//	args->mlx_data.img, 0, 0);
@@ -107,6 +110,8 @@ void	trace_all(t_args *args, t_trace_args *t)
 		}
 		++y;
 	}
+	matrix_free(id);
+	matrix_free(scale);
 }
 
 int	create_projection_window(t_args *args, t_trace_args *trace_args)

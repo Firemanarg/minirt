@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 06:38:35 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/24 07:05:07 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/26 02:52:46 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ t_err	plane_intersect(t_obj *plane, t_ray *ray, t_varray *r)
 	return (insert_into_array(r, -ray->start.y / ray->direction.y, plane));
 }
 
-void	plane_normal_at(t_obj *s, t_vec3 *world_point, t_vec3 *world_normal)
+void	plane_normal_at(t_obj *p, t_vec3 *object_point, t_vec3 *object_normal)
 {
-	(void)s;
-	(void)world_point;
-	set_vec3(0.0, 1.0, 0.0, world_normal);
+	(void)p;
+	(void)object_point;
+	set_vec3(0.0, 1.0, 0.0, object_normal);
 }
 
 t_err	set_plane(t_obj *plane, t_matrix *transform, t_material *material)

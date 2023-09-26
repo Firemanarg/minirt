@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 19:11:05 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/24 16:27:21 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/26 02:40:40 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,10 @@ t_err	sphere_intersect(t_obj *sphere, t_ray *ray, t_varray *r)
 			(-b + sqrt_disc) / (2.0 * a), sphere));
 }
 
-void	sphere_normal_at(t_obj *s, t_vec3 *world_point, t_vec3 *world_normal)
+void	sphere_normal_at(t_obj *s, t_vec3 *object_point, t_vec3 *object_normal)
 {
-	t_vec3	obj_point;
-	t_vec3	raw_world_normal;
-
-	matrix_point_multiply(s->inv_transform, world_point, &obj_point);
-	matrix_vector_multiply(s->t_inv_transform, &obj_point, &raw_world_normal);
-	normalize(&raw_world_normal, world_normal);
+	(void)s;
+	*object_normal = *object_point;
 }
 
 t_err	set_sphere(t_obj *sphere, t_matrix *transform, t_material *material)
