@@ -49,6 +49,19 @@ project_on_wall_with_light: minirt ${TEST_OBJ_DIR}/project_on_wall_with_light.o
 		-o ${TEST_BUILD_DIR}/project_on_wall_with_light
 	${TEST_BUILD_DIR}/project_on_wall_with_light ${CRFLAGS} || true
 
+project_on_wall_with_light_cyl: minirt ${TEST_OBJ_DIR}/project_on_wall_with_light_cyl.o
+	${CC} ${CFLAGS} ${TEST_OBJ_DIR}/project_on_wall_with_light_cyl.o \
+		${MINIRT_OBJ_DIR}/graphics/*.o \
+		${MINIRT_OBJ_DIR}/matrix/*.o \
+		${MINIRT_OBJ_DIR}/objects/*.o \
+		${MINIRT_OBJ_DIR}/projection/*.o \
+		${MINIRT_OBJ_DIR}/shading/*.o \
+		${MINIRT_OBJ_DIR}/varray/*.o \
+		${MINIRT_OBJ_DIR}/vec3/*.o \
+		${LIBFLAGS} \
+		-o ${TEST_BUILD_DIR}/project_on_wall_with_light_cyl
+	${TEST_BUILD_DIR}/project_on_wall_with_light_cyl ${CRFLAGS} || true
+
 ${TEST_OBJ_DIR}:
 	@mkdir -p ${TEST_OBJ_DIR}
 
