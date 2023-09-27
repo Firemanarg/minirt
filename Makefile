@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CC				:= cc
-CFLAGS			:= -Wall -Wextra -Werror -g
+CFLAGS			:= -Wall -Wextra -Werror -g -fms-extensions
 RM				:= rm -rf
 
 # Libraries
