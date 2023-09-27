@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:46:31 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/19 02:29:53 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:10:15 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,17 +256,17 @@ Test(matrix_ops, apply_one_inverse)
 Test(matrix_ops, apply_scaling_rotates_inverse)
 {
 	t_matrix	*m;
-	t_matrix_op	mop[7] = {
+	const t_matrix_op	mop[7] = {
 		{.op = SCALE, .params = {.x = 2.0, .y = 3.0, .z = 4.0}},
 		{.op = ROTATE_X, .param = M_PI / 2.0},
 		{.op = ROTATE_Y, .param = M_PI / 2.0},
 		{.op = ROTATE_Z, .param = M_PI / 2.0},
 		{.op = TRANSLATE, .params = {.x = 2.0, .y = 3.0, .z = 4.0}},
 		{.op = INVERSE},
-		{.op = NOP}};
+		{0}};
 
 	m = matrix_new_identity(4);
-	m = matrix_apply(m, mop);
+	m = matrix_apply(m, (t_matrix_op *)mop);
 
 	cr_expect(epsilon_eq(dbl, m->data[0][0], 0.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, m->data[0][1], 0.0, EPSILON));

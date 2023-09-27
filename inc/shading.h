@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 02:55:20 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/23 21:16:44 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/26 21:08:22 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ typedef struct s_point_light
 {
 	t_color	intensity;
 	t_vec3	position;
-
 }	t_point_light;
 
 typedef struct s_material

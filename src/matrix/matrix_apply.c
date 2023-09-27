@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 02:33:46 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/18 15:02:32 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/26 15:45:18 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ t_matrix	*matrix_apply(t_matrix *m, t_matrix_op *operations)
 		{
 			op_matrix = get_operation_matrix(m, operations++);
 			result = matrix_multiply(op_matrix, m);
-			free(op_matrix);
+			matrix_free(op_matrix);
 		}
-		free(m);
+		matrix_free(m);
 		m = result;
 	}
 	return (m);
