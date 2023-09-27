@@ -44,6 +44,13 @@ apply_matrix_ops: minirt ${TEST_OBJ_DIR}/apply_matrix_ops_test.o
 		-o ${TEST_BUILD_DIR}/apply_matrix_ops_test
 	@${TEST_BUILD_DIR}/apply_matrix_ops_test ${CRFLAGS} || true
 
+apply_matrix_ops_leaks: minirt ${TEST_OBJ_DIR}/apply_matrix_ops_leaks.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/apply_matrix_ops_leaks.o ${MINIRT_OBJ_DIR}/varray/*.o \
+		${MINIRT_OBJ_DIR}/matrix/*.o \
+		${MINIRT_OBJ_DIR}/vec3/*.o ${LIBFLAGS} \
+		-o ${TEST_BUILD_DIR}/apply_matrix_ops_leaks
+	@${TEST_BUILD_DIR}/apply_matrix_ops_leaks ${CRFLAGS} || true
+
 bin_search: minirt ${TEST_OBJ_DIR}/bin_search_test.o
 	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/bin_search_test.o ${MINIRT_OBJ_DIR}/varray/*.o \
 		${MINIRT_OBJ_DIR}/vec3/*.o ${LIBFLAGS} \
