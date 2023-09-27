@@ -16,10 +16,4 @@
 # include <stdlib.h>
 # include <math.h>
 
-typedef enum e_bool
-{
-	FALSE,
-	TRUE
-}	t_bool;
-
 #endif
