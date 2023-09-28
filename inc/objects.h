@@ -71,6 +71,7 @@ typedef struct s_geom_obj
 {
 	struct			s_3d_obj;
 	t_vec3			pos;
+	t_vec3			dir;
 	t_material		material;
 	t_isect_func	intersects;
 	t_normal_func	normal_at;
@@ -100,7 +101,6 @@ typedef struct s_point_light
 typedef struct s_camera
 {
 	struct			s_3d_obj;
-	t_vec3			dir;
 	int				fov;
 }	t_camera;
 
@@ -113,7 +113,6 @@ typedef struct s_sphere
 typedef struct s_cylinder
 {
 	struct			s_geom_obj;
-	t_vec3			dir;
 	double			diameter;
 	double			height;
 }	t_cylinder;
@@ -121,7 +120,6 @@ typedef struct s_cylinder
 typedef struct s_plane
 {
 	struct			s_geom_obj;
-	t_vec3			dir;
 }	t_plane;
 
 typedef struct s_scene
