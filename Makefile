@@ -34,7 +34,9 @@ INC_FILES		= ${addprefix ${INC_DIR}/,\
 				objects.h\
 				projection.h\
 				varray.h\
-				vec3.h}
+				vec3.h\
+				shading.h\
+				parser.h}
 
 # Source files
 SRC_DIR			= ${MANDATORY_DIR}/src
