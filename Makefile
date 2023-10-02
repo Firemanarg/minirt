@@ -32,11 +32,11 @@ INC_FILES		= ${addprefix ${INC_DIR}/,\
 				matrix.h\
 				minirt.h\
 				objects.h\
+				parser.h\
 				projection.h\
-				varray.h\
-				vec3.h\
 				shading.h\
-				parser.h}
+				varray.h\
+				vec3.h}
 
 # Source files
 SRC_DIR			= ${MANDATORY_DIR}/src
