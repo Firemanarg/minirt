@@ -13,7 +13,7 @@
 #ifndef SHADING_H
 # define SHADING_H
 
-#include "objects.h"
+# include "objects.h"
 
 typedef struct s_phong_params
 {
