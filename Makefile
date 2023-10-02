@@ -32,7 +32,9 @@ INC_FILES		= ${addprefix ${INC_DIR}/,\
 				matrix.h\
 				minirt.h\
 				objects.h\
+				parser.h\
 				projection.h\
+				shading.h\
 				varray.h\
 				vec3.h}
 
