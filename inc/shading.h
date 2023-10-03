@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/27 15:11:53 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/03 03:37:41 by gmachado         ###   ########.fr       */
+/*   Created: 2023/09/22 02:55:20 by gmachado          #+#    #+#             */
+/*   Updated: 2023/10/03 03:40:52 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,11 @@ typedef struct s_material
 	double	shininess;
 	t_color	color;
 }	t_material;
-# include "objects.h"
 
 typedef struct s_phong_params
 {
 	t_material		material;
-	t_point_light	*light;
+	t_point_light	light;
 	t_vec3			normal;
 	t_vec3			eye;
 	t_vec3			point;

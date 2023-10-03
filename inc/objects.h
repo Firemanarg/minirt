@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:44:47 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/03 03:38:35 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/03 03:40:20 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ typedef enum e_obj_type
 	LIGHT,
 	SPHERE,
 	CYLINDER,
+	PLANE,
+	CONE
 	PLANE,
 	CONE
 }	t_shape;
