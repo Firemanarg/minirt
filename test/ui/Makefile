@@ -36,6 +36,19 @@ project_on_wall: minirt ${TEST_OBJ_DIR}/project_on_wall.o
 		-o ${TEST_BUILD_DIR}/project_on_wall
 	${TEST_BUILD_DIR}/project_on_wall ${CRFLAGS} || true
 
+project_on_wall_with_light_cone: minirt ${TEST_OBJ_DIR}/project_on_wall_with_light_cone.o
+	${CC} ${CFLAGS} ${TEST_OBJ_DIR}/project_on_wall_with_light_cone.o \
+		${MINIRT_OBJ_DIR}/graphics/*.o \
+		${MINIRT_OBJ_DIR}/matrix/*.o \
+		${MINIRT_OBJ_DIR}/objects/*.o \
+		${MINIRT_OBJ_DIR}/projection/*.o \
+		${MINIRT_OBJ_DIR}/shading/*.o \
+		${MINIRT_OBJ_DIR}/varray/*.o \
+		${MINIRT_OBJ_DIR}/vec3/*.o \
+		${LIBFLAGS} \
+		-o ${TEST_BUILD_DIR}/project_on_wall_with_light_cone
+	${TEST_BUILD_DIR}/project_on_wall_with_light_cone ${CRFLAGS} || true
+
 project_on_wall_with_light_cylinder: minirt ${TEST_OBJ_DIR}/project_on_wall_with_light_cylinder.o
 	${CC} ${CFLAGS} ${TEST_OBJ_DIR}/project_on_wall_with_light_cylinder.o \
 		${MINIRT_OBJ_DIR}/graphics/*.o \

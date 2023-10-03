@@ -6,16 +6,12 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:44:47 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/03 03:36:45 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/03 03:38:35 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECTS_H
 # define OBJECTS_H
-# include <vec3.h>
-# include <error.h>
-# include <varray.h>
-# include <matrix.h>
 
 # include "matrix.h"
 # include "vec3.h"
@@ -54,8 +50,9 @@ typedef enum e_obj_type
 	LIGHT,
 	SPHERE,
 	CYLINDER,
-	PLANE
-}	t_obj_type;
+	PLANE,
+	CONE
+}	t_shape;
 
 typedef struct s_base_obj
 {
@@ -144,6 +141,16 @@ typedef struct s_sphere_eq_pars
 	t_vec3	tmp;
 }	t_sphere_eq_pars;
 
+typedef struct s_cone_eq_params
+{
+	double	a;
+	double	b;
+	double	c;
+	double	sqrt_disc;
+	double	t1;
+	double	t2;
+}	t_cone_eq_params;
+
 // cleanup.c
 void	free_obj(t_obj *obj);
 
@@ -152,6 +159,13 @@ t_color	color(double red, double green, double blue);
 
 void	set_color(double red, double green, double blue, t_color *c);
 int		convert_color(t_color *minirt_color);
+
+// cone.c
+void	cone_normal_at(t_obj *c, t_vec3 *object_point,
+			t_vec3 *object_normal);
+t_err	set_cone(t_obj *cone, t_matrix *transform, t_material *material);
+void	set_cone_limits(t_obj *cone, double minimum, double maximum,
+			t_bool closed);
 
 // cylinder.c
 void	cylinder_normal_at(t_obj *c, t_vec3 *object_point,

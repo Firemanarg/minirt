@@ -71,6 +71,7 @@ SRC_FILES += ${addprefix ${SRC_DIR}/objects/, \
 				caps.c \
 				cleanup.c \
 				color.c \
+				cone.c \
 				cylinder.c \
 				object.c \
 				plane.c \

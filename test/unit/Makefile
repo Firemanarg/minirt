@@ -18,7 +18,7 @@ TEST_SRC_DIR = ${TEST_DIR}/src
 TEST_BUILD_DIR = ${TEST_DIR}/build
 TEST_OBJ_DIR = ${TEST_DIR}/build/obj
 
-all: apply_matrix_ops bin_search \
+all: apply_matrix_ops bin_search capped_cone cone_intersect cone_normal \
 	capped_cylinder_test cylinder_intersect cylinder_normal \
 	lighting matrix_vec3_multiply quicksort plane ray_transform reflect \
 	sphere_hit sphere_intersect sphere_normal sphere_transform \
@@ -57,12 +57,34 @@ bin_search: minirt ${TEST_OBJ_DIR}/bin_search_test.o
 		-o ${TEST_BUILD_DIR}/bin_search_test
 	@${TEST_BUILD_DIR}/bin_search_test ${CRFLAGS} || true
 
+capped_cone: minirt ${TEST_OBJ_DIR}/capped_cone_test.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/capped_cone_test.o ${MINIRT_OBJ_DIR}/varray/*.o \
+		${MINIRT_OBJ_DIR}/projection/*.o ${MINIRT_OBJ_DIR}/objects/*.o \
+		${MINIRT_OBJ_DIR}/vec3/*.o ${MINIRT_OBJ_DIR}/matrix/*.o ${LIBFLAGS} \
+		-o ${TEST_BUILD_DIR}/capped_cone_test
+	@${TEST_BUILD_DIR}/capped_cone_test ${CRFLAGS} || true
+
 capped_cylinder: minirt ${TEST_OBJ_DIR}/capped_cylinder_test.o
 	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/capped_cylinder_test.o ${MINIRT_OBJ_DIR}/varray/*.o \
 		${MINIRT_OBJ_DIR}/projection/*.o ${MINIRT_OBJ_DIR}/objects/*.o \
 		${MINIRT_OBJ_DIR}/vec3/*.o ${MINIRT_OBJ_DIR}/matrix/*.o ${LIBFLAGS} \
 		-o ${TEST_BUILD_DIR}/capped_cylinder_test
 	@${TEST_BUILD_DIR}/capped_cylinder_test ${CRFLAGS} || true
+
+cone_intersect: minirt ${TEST_OBJ_DIR}/cone_intersect_test.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/cone_intersect_test.o ${MINIRT_OBJ_DIR}/varray/*.o \
+		${MINIRT_OBJ_DIR}/projection/*.o ${MINIRT_OBJ_DIR}/objects/*.o \
+		${MINIRT_OBJ_DIR}/vec3/*.o ${MINIRT_OBJ_DIR}/matrix/*.o ${LIBFLAGS} \
+		-o ${TEST_BUILD_DIR}/cone_intersect_test
+	@${TEST_BUILD_DIR}/cone_intersect_test ${CRFLAGS} || true
+
+cone_normal: minirt ${TEST_OBJ_DIR}/cone_normal_test.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/cone_normal_test.o ${MINIRT_OBJ_DIR}/matrix/*.o \
+		${MINIRT_OBJ_DIR}/vec3/*.o ${MINIRT_OBJ_DIR}/projection/*.o \
+		${MINIRT_OBJ_DIR}/shading/*.o ${MINIRT_OBJ_DIR}/varray/*.o \
+		${MINIRT_OBJ_DIR}/objects/*.o ${LIBFLAGS} \
+		-o ${TEST_BUILD_DIR}/cone_normal_test
+	@${TEST_BUILD_DIR}/cone_normal_test ${CRFLAGS} || true
 
 cylinder_intersect: minirt ${TEST_OBJ_DIR}/cylinder_intersect_test.o
 	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/cylinder_intersect_test.o ${MINIRT_OBJ_DIR}/varray/*.o \
@@ -174,7 +196,8 @@ ${TEST_OBJ_DIR}/%.o: ${TEST_SRC_DIR}/%.c | ${TEST_OBJ_DIR}
 	@${CC} ${CFLAGS} -I${TEST_INC_DIR} -I${MINIRT_INC_DIR} -I${MLX_DIR} -c $< -o $@
 
 .PHONY: all minirt clean fclean re apply_matrix_ops bin_search \
-		capped_cylinder_test cylinder_intersect cylinder_normal \
+		capped_cone cone_intersect cone_normal \
+		capped_cylinder cylinder_intersect cylinder_normal \
 		lighting matrix_vec3_multiply quicksort \
 		plane ray_transform reflect \
 		sphere_hit sphere_intersect sphere_normal sphere_transform \

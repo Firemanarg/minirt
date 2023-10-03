@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 19:11:05 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/26 02:40:40 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/26 22:26:09 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <varray.h>
 #include <projection.h>
 
-t_err	sphere_intersect(t_obj *sphere, t_ray *ray, t_varray *r)
+static t_err	sphere_intersect(t_obj *sphere, t_ray *ray, t_varray *r)
 {
 	double	a;
 	double	b;
