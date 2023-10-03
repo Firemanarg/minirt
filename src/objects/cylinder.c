@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 14:34:32 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/26 02:37:07 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/26 22:25:52 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_err	insert_if_in_range(t_obj *cylinder, t_varray *r,
 	return (OK);
 }
 
-t_err	cylinder_intersect(t_obj *cylinder, t_ray *ray, t_varray *r)
+static t_err	cylinder_intersect(t_obj *cylinder, t_ray *ray, t_varray *r)
 {
 	double	a;
 	double	b;
@@ -40,7 +40,7 @@ t_err	cylinder_intersect(t_obj *cylinder, t_ray *ray, t_varray *r)
 		+ (ray->start.z) * (ray->start.z) - 1;
 	sqrt_disc = b * b - 4 * a * c;
 	if (sqrt_disc < 0)
-		return (OK);
+		return (intersect_cylinder_caps(cylinder, ray, r));
 	sqrt_disc = sqrt(sqrt_disc);
 	ts[0] = (-b - sqrt_disc) / (2.0 * a);
 	ts[1] = (-b + sqrt_disc) / (2.0 * a);

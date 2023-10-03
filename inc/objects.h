@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:44:47 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/26 02:51:45 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/09/26 22:29:52 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ typedef enum e_shape
 	UNKNOWN,
 	SPHERE,
 	CYLINDER,
-	PLANE
+	PLANE,
+	CONE
 }	t_shape;
 
 struct s_obj
@@ -47,12 +48,29 @@ struct s_obj
 	t_bool			closed;
 };
 
+typedef struct s_cone_eq_params
+{
+	double	a;
+	double	b;
+	double	c;
+	double	sqrt_disc;
+	double	t1;
+	double	t2;
+}	t_cone_eq_params;
+
 // cleanup.c
 void	free_obj(t_obj *obj);
 
 // color.c
 void	set_color(double red, double green, double blue, t_color *c);
 int		convert_color(t_color *minirt_color);
+
+// cone.c
+void	cone_normal_at(t_obj *c, t_vec3 *object_point,
+			t_vec3 *object_normal);
+t_err	set_cone(t_obj *cone, t_matrix *transform, t_material *material);
+void	set_cone_limits(t_obj *cone, double minimum, double maximum,
+			t_bool closed);
 
 // cylinder.c
 void	cylinder_normal_at(t_obj *c, t_vec3 *object_point,
