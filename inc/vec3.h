@@ -13,8 +13,10 @@
 #ifndef VEC3_H
 # define VEC3_H
 
+# include <stdlib.h>
 # include <math.h>
 # include "error.h"
+# include "libft_x.h"
 
 # define EPSILON 0.00001
 
