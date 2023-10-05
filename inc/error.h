@@ -16,7 +16,8 @@
 typedef enum e_err
 {
 	OK,
-	ERR_ALLOC
+	ERR_ALLOC,
+	INVALID_VEC3
 }	t_err;
 
 #endif

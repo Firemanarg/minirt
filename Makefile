@@ -104,10 +104,10 @@ ${OBJ_SUBDIRS}:
 	mkdir -p $@
 
 ${NAME}: $(LFTX) ${OBJ_FILES}
-	${CC} ${CFLAGS} ${OBJ_FILES} ${LIBFLAGS} -o $@
+	${CC} ${CFLAGS} ${OBJ_FILES} ${LIBFLAGS} $(LFTX) -o $@
 
 ${OBJ_FILES}: ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c ${INC_FILES} | ${OBJ_SUBDIRS}
-	${CC} ${CFLAGS} -I${INC_DIR} -I${MLX_DIR} -c $< -o $@
+	${CC} ${CFLAGS} -I${INC_DIR} -I${MLX_DIR} -I$(LFTX_DIR) -c $< -o $@
 
 $(LFTX): $(LFTX_DIR)
 	make -C $(LFTX_DIR)
