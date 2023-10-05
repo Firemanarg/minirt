@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <vec3.h>
+#include "vec3.h"
 
 static int	is_str_vec3_valid(const char *str);
 
@@ -33,7 +33,6 @@ void	set_vec3(double x, double y, double z, t_vec3 *t)
 */
 t_err	str_to_vec3(const char *str, t_vec3 *vec)
 {
-	char	**iter;
 	char	**arr;
 
 	if (!is_str_vec3_valid(str))
@@ -44,14 +43,7 @@ t_err	str_to_vec3(const char *str, t_vec3 *vec)
 	vec->x = ft_atod(arr[0]);
 	vec->y = ft_atod(arr[1]);
 	vec->z = ft_atod(arr[2]);
-	ft_clear_str_arr(arr);
-	// iter = arr;
-	// while (*iter)
-	// {
-	// 	free(*iter);
-	// 	iter++;
-	// }
-	free(arr);
+	ft_clear_strarr(arr);
 	return (OK);
 }
 
