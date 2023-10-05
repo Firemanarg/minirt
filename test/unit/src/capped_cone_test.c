@@ -30,7 +30,7 @@ Test(capped_cone, default_cone_is_open)
 	t_obj	cone;
 
 	get_cone(&cone, matrix_new_identity(4));
-	cr_expect(eq(int, cone.closed, FALSE));
+	cr_expect(eq(int, cone.is_closed, FALSE));
 	free_obj(&cone);
 }
 
@@ -43,7 +43,7 @@ Test(capped_cone, ray_misses)
 
 	get_cone(&cone, matrix_new_identity(4));
 	set_cone_limits(&cone, -0.5, 0.5, TRUE);
-	cr_expect(eq(int, cone.closed, TRUE));
+	cr_expect(eq(int, cone.is_closed, TRUE));
 	cr_expect(epsilon_eq(dbl, cone.maximum, 0.5, EPSILON));
 	cr_expect(epsilon_eq(dbl, cone.minimum, -0.5, EPSILON));
 	xs = new_array(2);
@@ -66,7 +66,7 @@ Test(capped_cone, ray_hits_twice)
 
 	get_cone(&cone, matrix_new_identity(4));
 	set_cone_limits(&cone, -0.5, 0.5, TRUE);
-	cr_expect(eq(int, cone.closed, TRUE));
+	cr_expect(eq(int, cone.is_closed, TRUE));
 	cr_expect(epsilon_eq(dbl, cone.maximum, 0.5, EPSILON));
 	cr_expect(epsilon_eq(dbl, cone.minimum, -0.5, EPSILON));
 	xs = new_array(2);
@@ -90,7 +90,7 @@ Test(capped_cone, ray_hits_four_times)
 
 	get_cone(&cone, matrix_new_identity(4));
 	set_cone_limits(&cone, -0.5, 0.5, TRUE);
-	cr_expect(eq(int, cone.closed, TRUE));
+	cr_expect(eq(int, cone.is_closed, TRUE));
 	cr_expect(epsilon_eq(dbl, cone.maximum, 0.5, EPSILON));
 	cr_expect(epsilon_eq(dbl, cone.minimum, -0.5, EPSILON));
 	xs = new_array(4);

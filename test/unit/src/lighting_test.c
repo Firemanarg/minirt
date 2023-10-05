@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 19:11:22 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/23 21:18:39 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/04 04:37:09 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	get_default_material(t_material *material)
 static void	get_point_light(t_point_light *light, t_vec3 *pos, t_color *color)
 {
 	light->intensity = *color;
-	light->position = *pos;
+	light->pos = *pos;
 }
 
 Test(lighting, eye_between_light_and_surface)

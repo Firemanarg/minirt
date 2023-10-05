@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 00:55:06 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/20 17:11:20 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/04 12:03:35 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,3 @@ int	main(void)
 	create_window(&args);
 	return (0);
 }
-

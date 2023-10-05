@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   project_on_wall_with_light.c                       :+:      :+:    :+:   */
+/*   project_on_wall_with_light_sphere.c                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 17:15:20 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/26 02:47:53 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/04 12:08:24 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	get_default_material(t_material *material)
 static void	get_point_light(t_point_light *light, t_vec3 *pos, t_color *color)
 {
 	light->intensity = *color;
-	light->position = *pos;
+	light->pos = *pos;
 }
 
 void	init_trace_args(int canvas_pixels, double wall_size, double z,

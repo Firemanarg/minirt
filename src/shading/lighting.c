@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 20:07:36 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/23 22:39:03 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/04 03:47:54 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static double	has_diffuse(t_phong_params *p, t_vec3 *light_v)
 {
-	subtract(&p->light.position, &p->point, light_v);
+	subtract(&p->light.pos, &p->point, light_v);
 	normalize(light_v, light_v);
 	return (dot(light_v, &p->normal));
 }

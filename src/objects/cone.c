@@ -79,7 +79,7 @@ t_err	set_cone(t_obj *cone, t_matrix *transform, t_material *material)
 	cone->normal_at = cone_normal_at;
 	cone->minimum = -1.0 / 0.0;
 	cone->maximum = 1.0 / 0.0;
-	cone->closed = FALSE;
+	cone->is_closed = FALSE;
 	return (set_object(cone, transform, material));
 }
 
@@ -88,5 +88,5 @@ void	set_cone_limits(t_obj *cone, double minimum, double maximum,
 {
 	cone->minimum = minimum;
 	cone->maximum = maximum;
-	cone->closed = closed;
+	cone->is_closed = closed;
 }

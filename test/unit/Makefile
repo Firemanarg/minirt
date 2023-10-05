@@ -1,6 +1,6 @@
 CC = cc
 RM = rm -rf
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -Wall -Wextra -fms-extensions -g
 LIBFLAGS = -lcriterion -lm
 CRFLAGS = --verbose=1
 # CRFLAGS =
@@ -19,7 +19,7 @@ TEST_BUILD_DIR = ${TEST_DIR}/build
 TEST_OBJ_DIR = ${TEST_DIR}/build/obj
 
 all: apply_matrix_ops bin_search capped_cone cone_intersect cone_normal \
-	capped_cylinder_test cylinder_intersect cylinder_normal \
+	capped_cylinder cylinder_intersect cylinder_normal \
 	lighting matrix_vec3_multiply quicksort plane ray_transform reflect \
 	sphere_hit sphere_intersect sphere_normal sphere_transform \
 	truncated_cylinder var_array vec3_ops

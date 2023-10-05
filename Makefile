@@ -1,26 +1,29 @@
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
-MLX_DIR	= lib/minilibx-linux
-LIBFLAGS = -L${MLX_DIR} -lmlx -lXext -lX11 -lm -lz
-RM = rm -rf
+CC				:= clang
+CFLAGS			:= -Wall -Wextra -Werror -g -fms-extensions
+RM				:= rm -rf
 
-MANDATORY_DIR = .
-SRC_DIR = ${MANDATORY_DIR}/src
-INC_DIR = ${MANDATORY_DIR}/inc
-BUILD_DIR = ${MANDATORY_DIR}/build
-OBJ_DIR = ${BUILD_DIR}/obj
+# Libraries
+MLX_DIR			:= lib/minilibx-linux
+LIBFLAGS		:= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
+LFTX_DIR		:= ./libft_x
+LFTX			:= $(LFTX_DIR)/libft_x.a
 
-NAME = ${MANDATORY_DIR}/build/minirt
+# Mandatory
+MANDATORY_DIR	:= .
+NAME			:= ${MANDATORY_DIR}/build/minirt
 
-INC_FILES = ${addprefix ${INC_DIR}/, \
-				error.h \
-				graphics.h \
-				matrix.h \
-				minirt.h \
-				objects.h \
-				projection.h \
-				shading.h \
-				varray.h \
+# Header files
+INC_DIR			:= ${MANDATORY_DIR}/inc
+INC_FILES		= ${addprefix ${INC_DIR}/,\
+				error.h\
+				graphics.h\
+				matrix.h\
+				minirt.h\
+				objects.h\
+				parser.h\
+				projection.h\
+				shading.h\
+				varray.h\
 				vec3.h}
 
 # Source files
@@ -31,6 +34,8 @@ SRC_FILES		= ${addprefix ${SRC_DIR}/, minirt.c}
 SRC_FILES		+= ${addprefix ${SRC_DIR}/graphics/,\
 				mlx_utils.c\
 				window.c}
+
+# Matrix operation files
 SRC_FILES += ${addprefix ${SRC_DIR}/matrix/, \
 				matrix_apply.c \
 				matrix_determinant.c \
@@ -47,30 +52,8 @@ SRC_FILES += ${addprefix ${SRC_DIR}/matrix/, \
 				matrix_submatrix.c \
 				matrix_transpose.c \
 				matrix_vec3_multiply.c}
-SRC_FILES += ${addprefix ${SRC_DIR}/objects/, \
-				caps.c \
-				cleanup.c \
-				color.c \
-				cone.c \
-				cylinder.c \
-				object.c \
-				plane.c \
-SRC_FILES += ${addprefix ${SRC_DIR}/matrix/, \
-				matrix_apply.c \
-				matrix_determinant.c \
-				matrix_inverse.c \
-				matrix_multiply.c \
-				matrix_print.c \
-				matrix_scaling.c \
-				matrix_translation.c \
-				matrix_cofactor.c \
-				matrix_free.c \
-				matrix_minor.c \
-				matrix_new.c \
-				matrix_rotation.c \
-				matrix_submatrix.c \
-				matrix_transpose.c \
-				matrix_vec3_multiply.c}
+
+# Object definition files
 SRC_FILES += ${addprefix ${SRC_DIR}/objects/, \
 				caps.c \
 				cleanup.c \
@@ -85,6 +68,12 @@ SRC_FILES += ${addprefix ${SRC_DIR}/objects/, \
 SRC_FILES		+= ${addprefix ${SRC_DIR}/projection/,\
 				hit.c\
 				ray.c}
+
+# Shading, color and lighting operation files
+SRC_FILES		+= ${addprefix ${SRC_DIR}/shading/,\
+				lighting.c\
+				material.c\
+				reflect.c}
 
 # Varray files
 SRC_FILES		+= ${addprefix ${SRC_DIR}/varray/,\

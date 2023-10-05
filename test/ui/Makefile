@@ -1,6 +1,6 @@
 CC = cc
 RM = rm -rf
-CFLAGS = -Wall -Wextra -g -O2
+CFLAGS = -Wall -Wextra -g  -fms-extensions
 MINIRT_DIR = ../..
 MLX_DIR	= ${MINIRT_DIR}/lib/minilibx-linux
 LIBFLAGS = -L${MLX_DIR} -lmlx -lXext -lX11 -lm -lz

@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 14:34:32 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/26 22:25:52 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/04 04:16:03 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_err	set_cylinder(t_obj *cylinder, t_matrix *transform, t_material *material)
 	cylinder->normal_at = cylinder_normal_at;
 	cylinder->minimum = -1.0 / 0.0;
 	cylinder->maximum = 1.0 / 0.0;
-	cylinder->closed = FALSE;
+	cylinder->is_closed = FALSE;
 	return (set_object(cylinder, transform, material));
 }
 
@@ -82,5 +82,5 @@ void	set_cylinder_limits(t_obj *cylinder, double minimum, double maximum,
 {
 	cylinder->minimum = minimum;
 	cylinder->maximum = maximum;
-	cylinder->closed = closed;
+	cylinder->is_closed = closed;
 }

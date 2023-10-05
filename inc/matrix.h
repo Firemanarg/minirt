@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 12:33:50 by marvin            #+#    #+#             */
-/*   Updated: 2023/09/19 10:50:00 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/04 12:00:31 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdio.h>
 # include <math.h>
-# include <vec3.h>
+# include "vec3.h"
 
 /**
  * @brief Matrix structure

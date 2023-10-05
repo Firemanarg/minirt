@@ -6,14 +6,14 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 02:25:17 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/21 03:39:15 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/04 12:06:03 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VARRAY_H
 # define VARRAY_H
 
-# include <error.h>
+# include "error.h"
 
 typedef struct s_varray
 {

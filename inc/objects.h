@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:44:47 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/03 03:40:20 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/04 04:30:44 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,15 @@
 # include "error.h"
 # include "varray.h"
 
-typedef t_vec3			t_color;
+typedef t_vec3				t_color;
 
-typedef struct s_obj	t_obj;
+typedef struct s_geom_obj	t_obj;
 
-typedef t_err			(*t_isect_func)(struct s_obj *obj, void *ray,
-							t_varray * r);
-typedef void			(*t_normal_func)(t_obj *s, t_vec3 *world_point,
-							t_vec3 *world_normal);
+typedef t_err				(*t_isect_func)(t_obj *obj, void *ray,
+								t_varray * r);
+
+typedef void				(*t_normal_func)(t_obj *s, t_vec3 *world_point,
+								t_vec3 *world_normal);
 
 typedef enum e_bool
 {
@@ -52,9 +53,7 @@ typedef enum e_obj_type
 	CYLINDER,
 	PLANE,
 	CONE
-	PLANE,
-	CONE
-}	t_shape;
+}	t_obj_type;
 
 typedef struct s_base_obj
 {
@@ -87,6 +86,7 @@ typedef struct s_base_light
 	struct			s_base_obj;
 	double			ratio;
 	t_color			color;
+	t_color			intensity;
 }	t_base_light;
 
 typedef struct s_ambient_light
@@ -115,9 +115,8 @@ typedef struct s_sphere
 typedef struct s_cylinder
 {
 	struct			s_geom_obj;
-	t_shape			type;
-	t_matrix		*transform;
-	t_matrix		*inv_transform;
+	double			diameter;
+	double			height;
 }	t_cylinder;
 
 typedef struct s_plane
@@ -132,16 +131,6 @@ typedef struct s_scene
 	t_geom_obj		**geometries;
 	t_point_light	**lights;
 }	t_scene;
-
-typedef struct s_sphere_eq_pars
-{
-	double	a;
-	double	b;
-	double	c;
-	double	sqrt_disc;
-	t_vec3	origin;
-	t_vec3	tmp;
-}	t_sphere_eq_pars;
 
 typedef struct s_cone_eq_params
 {
@@ -158,9 +147,7 @@ void	free_obj(t_obj *obj);
 
 // color.c
 t_color	color(double red, double green, double blue);
-
 void	set_color(double red, double green, double blue, t_color *c);
-int		convert_color(t_color *minirt_color);
 
 // cone.c
 void	cone_normal_at(t_obj *c, t_vec3 *object_point,
@@ -176,6 +163,12 @@ t_err	set_cylinder(t_obj *cylinder, t_matrix *transform,
 			t_material *material);
 void	set_cylinder_limits(t_obj *cylinder, double minimum, double maximum,
 			t_bool closed);
+
+// material.c
+void	set_material_shininess(t_material *material, double shininess);
+void	set_material_color(t_material *material, double r, double g, double b);
+void	set_material_coefficients(t_material *material, double ambient,
+			double diffuse, double specular);
 
 //object.c
 t_err	set_object(t_obj *object, t_matrix *transform, t_material *material);
