@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:59:19 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/24 19:37:48 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/05 02:28:33 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <projection.h>
 #include <matrix.h>
 
-void	new_ray(t_vec3 *start, t_vec3 *direction, t_ray *ray)
+void	set_ray(t_vec3 *start, t_vec3 *direction, t_ray *ray)
 {
 	ray->start = *start;
 	normalize(direction, &ray->direction);

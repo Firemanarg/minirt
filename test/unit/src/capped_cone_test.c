@@ -47,7 +47,7 @@ Test(capped_cone, ray_misses)
 	cr_expect(epsilon_eq(dbl, cone.maximum, 0.5, EPSILON));
 	cr_expect(epsilon_eq(dbl, cone.minimum, -0.5, EPSILON));
 	xs = new_array(2);
-	new_ray(&(t_vec3){.x = 0.0, .y = 0.0, .z = -5.0},
+	set_ray(&(t_vec3){.x = 0.0, .y = 0.0, .z = -5.0},
 		&(t_vec3){.x = 0.0, .y = 1.0, .z = 0.0}, &r);
 	err = obj_intersect(&cone, &r, xs);
 	cr_expect(eq(int, err, OK));
@@ -70,7 +70,7 @@ Test(capped_cone, ray_hits_twice)
 	cr_expect(epsilon_eq(dbl, cone.maximum, 0.5, EPSILON));
 	cr_expect(epsilon_eq(dbl, cone.minimum, -0.5, EPSILON));
 	xs = new_array(2);
-	new_ray(&(t_vec3){.x = 0.0, .y = 0.0, .z = -0.25},
+	set_ray(&(t_vec3){.x = 0.0, .y = 0.0, .z = -0.25},
 		&(t_vec3){.x = 0.0, .y = 1.0, .z = 1.0}, &r);
 	normalize(&r.direction, &r.direction);
 	err = cone.intersects(&cone, &r, xs);
@@ -94,7 +94,7 @@ Test(capped_cone, ray_hits_four_times)
 	cr_expect(epsilon_eq(dbl, cone.maximum, 0.5, EPSILON));
 	cr_expect(epsilon_eq(dbl, cone.minimum, -0.5, EPSILON));
 	xs = new_array(4);
-	new_ray(&(t_vec3){.x = 0.0, .y = 0.0, .z = -0.25},
+	set_ray(&(t_vec3){.x = 0.0, .y = 0.0, .z = -0.25},
 		&(t_vec3){.x = 0.0, .y = 1.0, .z = 0.0}, &r);
 	normalize(&r.direction, &r.direction);
 	err = cone.intersects(&cone, &r, xs);

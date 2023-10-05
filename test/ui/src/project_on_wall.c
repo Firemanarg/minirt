@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 17:15:20 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/04 12:08:19 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/05 02:28:33 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	get_ray_direction(t_trace_args *t, t_vec3 *position, t_ray *ray)
 
 	subtract(position, &t->ray_origin, &direction);
 	normalize(&direction, &normalized_direction);
-	new_ray(&t->ray_origin, &normalized_direction, ray);
+	set_ray(&t->ray_origin, &normalized_direction, ray);
 }
 
 void	get_ray(t_trace_args *trace_args, int x, int y)

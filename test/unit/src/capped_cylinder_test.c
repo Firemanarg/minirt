@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 19:24:33 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/04 04:31:25 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/05 03:30:38 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ Test(capped_cylinder, intersect_from_above_hit_caps)
 	cr_expect(epsilon_eq(dbl, cylinder.maximum, 2.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, cylinder.minimum, 1.0, EPSILON));
 	xs = new_array(2);
-	new_ray(&(t_vec3){.x = 0.0, .y = 3.0, .z = 0.0},
+	set_ray(&(t_vec3){.x = 0.0, .y = 3.0, .z = 0.0},
 		&(t_vec3){.x = 0.0, .y = -1.0, .z = 0.0}, &r);
 	err = obj_intersect(&cylinder, &r, xs);
 	cr_expect(eq(int, err, OK));
@@ -70,7 +70,7 @@ Test(capped_cylinder, intersect_from_above_hit_cap_and_side)
 	cr_expect(epsilon_eq(dbl, cylinder.maximum, 2.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, cylinder.minimum, 1.0, EPSILON));
 	xs = new_array(2);
-	new_ray(&(t_vec3){.x = 0.0, .y = 3.0, .z = -2.0},
+	set_ray(&(t_vec3){.x = 0.0, .y = 3.0, .z = -2.0},
 		&(t_vec3){.x = 0.0, .y = -1.0, .z = 2.0}, &r);
 	err = obj_intersect(&cylinder, &r, xs);
 	cr_expect(eq(int, err, OK));
@@ -93,7 +93,7 @@ Test(capped_cylinder, intersect_from_above_hit_cap_and_corner)
 	cr_expect(epsilon_eq(dbl, cylinder.maximum, 2.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, cylinder.minimum, 1.0, EPSILON));
 	xs = new_array(2);
-	new_ray(&(t_vec3){.x = 0.0, .y = 4.0, .z = -2.0},
+	set_ray(&(t_vec3){.x = 0.0, .y = 4.0, .z = -2.0},
 		&(t_vec3){.x = 0.0, .y = -1.0, .z = 1.0}, &r);
 	err = obj_intersect(&cylinder, &r, xs);
 	cr_expect(eq(int, err, OK));
@@ -116,7 +116,7 @@ Test(capped_cylinder, intersect_from_below_hit_cap_and_side)
 	cr_expect(epsilon_eq(dbl, cylinder.maximum, 2.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, cylinder.minimum, 1.0, EPSILON));
 	xs = new_array(2);
-	new_ray(&(t_vec3){.x = 0.0, .y = 0.0, .z = -2.0},
+	set_ray(&(t_vec3){.x = 0.0, .y = 0.0, .z = -2.0},
 		&(t_vec3){.x = 0.0, .y = 1.0, .z = 2.0}, &r);
 	err = obj_intersect(&cylinder, &r, xs);
 	cr_expect(eq(int, err, OK));
@@ -139,7 +139,7 @@ Test(capped_cylinder, intersect_from_below_hit_cap_and_corner)
 	cr_expect(epsilon_eq(dbl, cylinder.maximum, 2.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, cylinder.minimum, 1.0, EPSILON));
 	xs = new_array(2);
-	new_ray(&(t_vec3){.x = 0.0, .y = -1.0, .z = -2.0},
+	set_ray(&(t_vec3){.x = 0.0, .y = -1.0, .z = -2.0},
 		&(t_vec3){.x = 0.0, .y = 1.0, .z = 1.0}, &r);
 	err = obj_intersect(&cylinder, &r, xs);
 	cr_expect(eq(int, err, OK));

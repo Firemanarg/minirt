@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:44:47 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/04 04:30:44 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/05 03:00:18 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_material
 typedef enum e_obj_type
 {
 	UNKNOWN = -1,
+	NONE,
 	AMBIENT_LIGHT,
 	CAMERA,
 	LIGHT,
@@ -126,10 +127,10 @@ typedef struct s_plane
 
 typedef struct s_scene
 {
-	t_camera		*camera;
-	t_ambient_light	*ambient_light;
-	t_geom_obj		**geometries;
-	t_point_light	**lights;
+	t_camera		camera;
+	t_ambient_light	ambient_light;
+	t_geom_obj		*geometries;
+	t_point_light	*lights;
 }	t_scene;
 
 typedef struct s_cone_eq_params

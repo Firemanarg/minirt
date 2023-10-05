@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transform_ray_test.c                               :+:      :+:    :+:   */
+/*   ray_transform_test.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 02:03:50 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/20 10:18:40 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/05 03:31:51 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ Test(transform_ray, translate_ray)
 	t_vec3		direction = {.x = 0, .y = 1, .z = 0};
 
 	transform = matrix_translation(&transform_params);
-	new_ray(&start, &direction, &ray);
+	set_ray(&start, &direction, &ray);
 	transform_ray(transform, &ray, &result);
 	cr_expect(epsilon_eq(dbl, result.start.x, 4.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, result.start.y, 6.0, EPSILON));
@@ -43,7 +43,7 @@ Test(transform_ray, scale_ray)
 	t_vec3		direction = {.x = 0, .y = 1, .z = 0};
 
 	transform = matrix_scaling(&transform_params);
-	new_ray(&start, &direction, &ray);
+	set_ray(&start, &direction, &ray);
 	transform_ray(transform, &ray, &result);
 	cr_expect(epsilon_eq(dbl, result.start.x, 2.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, result.start.y, 6.0, EPSILON));

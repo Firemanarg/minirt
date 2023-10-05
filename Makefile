@@ -1,4 +1,4 @@
-CC				:= clang
+CC				:= cc
 CFLAGS			:= -Wall -Wextra -Werror -g -fms-extensions
 RM				:= rm -rf
 
@@ -68,6 +68,10 @@ SRC_FILES += ${addprefix ${SRC_DIR}/objects/, \
 SRC_FILES		+= ${addprefix ${SRC_DIR}/projection/,\
 				hit.c\
 				ray.c}
+
+# Scene composition files
+SRC_FILES		+= ${addprefix ${SRC_DIR}/scene/,\
+				scene.c}
 
 # Shading, color and lighting operation files
 SRC_FILES		+= ${addprefix ${SRC_DIR}/shading/,\

@@ -21,7 +21,7 @@ TEST_OBJ_DIR = ${TEST_DIR}/build/obj
 all: apply_matrix_ops bin_search capped_cone cone_intersect cone_normal \
 	capped_cylinder cylinder_intersect cylinder_normal \
 	lighting matrix_vec3_multiply quicksort plane ray_transform reflect \
-	sphere_hit sphere_intersect sphere_normal sphere_transform \
+	scene sphere_hit sphere_intersect sphere_normal sphere_transform \
 	truncated_cylinder var_array vec3_ops
 
 minirt:
@@ -142,6 +142,15 @@ reflect: minirt ${TEST_OBJ_DIR}/reflect_test.o
 		-o ${TEST_BUILD_DIR}/reflect_test
 	@${TEST_BUILD_DIR}/reflect_test ${CRFLAGS} || true
 
+scene: minirt ${TEST_OBJ_DIR}/scene_test.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/scene_test.o ${MINIRT_OBJ_DIR}/vec3/*.o \
+		 ${MINIRT_OBJ_DIR}/objects/*.o \
+		 ${MINIRT_OBJ_DIR}/projection/*.o ${MINIRT_OBJ_DIR}/scene/*.o \
+		 ${MINIRT_OBJ_DIR}/shading/*.o ${MINIRT_OBJ_DIR}/varray/*.o \
+		 ${MINIRT_OBJ_DIR}/matrix/*.o ${LIBFLAGS} \
+		-o ${TEST_BUILD_DIR}/scene_test
+	@${TEST_BUILD_DIR}/scene_test ${CRFLAGS} || true
+
 sphere_hit: minirt ${TEST_OBJ_DIR}/sphere_hit_test.o
 	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/sphere_hit_test.o ${MINIRT_OBJ_DIR}/varray/*.o \
 		${MINIRT_OBJ_DIR}/projection/*.o ${MINIRT_OBJ_DIR}/objects/*.o \
@@ -199,6 +208,6 @@ ${TEST_OBJ_DIR}/%.o: ${TEST_SRC_DIR}/%.c | ${TEST_OBJ_DIR}
 		capped_cone cone_intersect cone_normal \
 		capped_cylinder cylinder_intersect cylinder_normal \
 		lighting matrix_vec3_multiply quicksort \
-		plane ray_transform reflect \
+		plane ray_transform reflect scene \
 		sphere_hit sphere_intersect sphere_normal sphere_transform \
 		truncated_cylinder var_array vec3_ops

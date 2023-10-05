@@ -34,7 +34,7 @@ Test(cone_intersect, ray_hits_one_point_1)
 
 	get_cone(&cone, matrix_new_identity(4));
 	xs = new_array(2);
-	new_ray(&(t_vec3){.x = 0, .y = 0, .z = -5},
+	set_ray(&(t_vec3){.x = 0, .y = 0, .z = -5},
 		&(t_vec3){.x = 0, .y = 0, .z = 1}, &r);
 	normalize(&r.direction, &r.direction);
 	err = cone.intersects(&cone, &r, xs);
@@ -60,7 +60,7 @@ Test(cone_intersect, ray_hits_one_point_2)
 
 	get_cone(&cone, matrix_new_identity(4));
 	xs = new_array(2);
-	new_ray(&(t_vec3){.x = 0, .y = 0, .z = -5},
+	set_ray(&(t_vec3){.x = 0, .y = 0, .z = -5},
 		&(t_vec3){.x = 1, .y = 1, .z = 1}, &r);
 	normalize(&r.direction, &r.direction);
 	err = cone.intersects(&cone, &r, xs);
@@ -86,7 +86,7 @@ Test(cone_intersect, ray_hits_two_points)
 
 	get_cone(&cone, matrix_new_identity(4));
 	xs = new_array(2);
-	new_ray(&(t_vec3){.x = 1, .y = 1, .z = -5},
+	set_ray(&(t_vec3){.x = 1, .y = 1, .z = -5},
 		&(t_vec3){.x = -0.5, .y = -1, .z = 1}, &r);
 	normalize(&r.direction, &r.direction);
 	err = cone.intersects(&cone, &r, xs);
@@ -112,7 +112,7 @@ Test(cone_intersect, ray_parallel_to_one_half)
 
 	get_cone(&cone, matrix_new_identity(4));
 	xs = new_array(2);
-	new_ray(&(t_vec3){.x = 0, .y = 0, .z = -1},
+	set_ray(&(t_vec3){.x = 0, .y = 0, .z = -1},
 		&(t_vec3){.x = 0, .y = 1, .z = 1}, &r);
 	normalize(&r.direction, &r.direction);
 	err = cone.intersects(&cone, &r, xs);

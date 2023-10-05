@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 02:55:20 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/04 03:46:14 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/05 04:16:53 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SHADING_H
 
 # include "objects.h"
+# include "projection.h"
 
 typedef struct s_phong_params
 {

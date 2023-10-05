@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 02:49:25 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/24 16:32:05 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/05 03:32:53 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ Test(sphere_transform, intersect_scaled_ray)
 	t_ray		r;
 	t_varray	*intersections;
 
-	new_ray(&(t_vec3){.x = 0, .y = 0, .z = -5},
+	set_ray(&(t_vec3){.x = 0, .y = 0, .z = -5},
 					&(t_vec3){.x = 0, .y = 0, .z = 1}, &r);
 	t_err	err = get_sphere(&sphere, matrix_new_identity(4));
 

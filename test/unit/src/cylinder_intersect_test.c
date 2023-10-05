@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 12:59:59 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/24 19:38:44 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/05 03:30:57 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ Test(cylinder_intersect, parallel_ray_on_surface_misses)
 
 	get_cylinder(&cylinder, matrix_new_identity(4));
 	xs = new_array(2);
-	new_ray(&(t_vec3){.x = 1, .y = 0, .z = 0},
+	set_ray(&(t_vec3){.x = 1, .y = 0, .z = 0},
 		&(t_vec3){.x = 0, .y = 1, .z = 0}, &r);
 	err = obj_intersect(&cylinder, &r, xs);
 	cr_expect(eq(int, err, OK));
@@ -53,7 +53,7 @@ Test(cylinder_intersect, parallel_ray_inside_misses)
 
 	get_cylinder(&cylinder, matrix_new_identity(4));
 	xs = new_array(2);
-	new_ray(&(t_vec3){.x = 0, .y = 0, .z = 0},
+	set_ray(&(t_vec3){.x = 0, .y = 0, .z = 0},
 		&(t_vec3){.x = 0, .y = 1, .z = 0}, &r);
 	err = obj_intersect(&cylinder, &r, xs);
 	cr_expect(eq(int, err, OK));
@@ -72,7 +72,7 @@ Test(cylinder_intersect, parallel_ray_outside_misses)
 
 	get_cylinder(&cylinder, matrix_new_identity(4));
 	xs = new_array(2);
-	new_ray(&(t_vec3){.x = 0, .y = 0, .z = -5},
+	set_ray(&(t_vec3){.x = 0, .y = 0, .z = -5},
 		&(t_vec3){.x = 1, .y = 1, .z = 1}, &r);
 	err = obj_intersect(&cylinder, &r, xs);
 	cr_expect(eq(int, err, OK));
@@ -91,7 +91,7 @@ Test(cylinder_intersect, ray_hits_one_point)
 
 	get_cylinder(&cylinder, matrix_new_identity(4));
 	xs = new_array(2);
-	new_ray(&(t_vec3){.x = 1, .y = 0, .z = -5},
+	set_ray(&(t_vec3){.x = 1, .y = 0, .z = -5},
 		&(t_vec3){.x = 0, .y = 0, .z = 1}, &r);
 	err = obj_intersect(&cylinder, &r, xs);
 	cr_expect(eq(int, err, OK));
@@ -116,7 +116,7 @@ Test(cylinder_intersect, ray_hits_two_points_1)
 
 	get_cylinder(&cylinder, matrix_new_identity(4));
 	xs = new_array(2);
-	new_ray(&(t_vec3){.x = 0, .y = 0, .z = -5},
+	set_ray(&(t_vec3){.x = 0, .y = 0, .z = -5},
 		&(t_vec3){.x = 0, .y = 0, .z = 1}, &r);
 	err = obj_intersect(&cylinder, &r, xs);
 	cr_expect(eq(int, err, OK));
@@ -141,7 +141,7 @@ Test(cylinder_intersect, ray_hits_two_points_2)
 
 	get_cylinder(&cylinder, matrix_new_identity(4));
 	xs = new_array(2);
-	new_ray(&(t_vec3){.x = 0.5, .y = 0, .z = -5},
+	set_ray(&(t_vec3){.x = 0.5, .y = 0, .z = -5},
 		&(t_vec3){.x = 0.1, .y = 1, .z = 1}, &r);
 	err = obj_intersect(&cylinder, &r, xs);
 	cr_expect(eq(int, err, OK));

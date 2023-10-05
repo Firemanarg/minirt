@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 06:35:42 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/26 02:43:33 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/05 03:31:36 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ Test(plane, intersect_with_parallel_ray)
 
 	get_plane(&plane, matrix_new_identity(4));
 	xs = new_array(1);
-	new_ray(&(t_vec3){.x = 0, .y = 10, .z = 0},
+	set_ray(&(t_vec3){.x = 0, .y = 10, .z = 0},
 		&(t_vec3){.x = 0, .y = 0, .z = 1}, &r);
 	plane.intersects(&plane, &r, xs);
 	cr_expect(eq(int, xs->capacity, 1));
@@ -71,7 +71,7 @@ Test(plane, intersect_with_coplanar_ray)
 
 	get_plane(&plane, matrix_new_identity(4));
 	xs = new_array(1);
-	new_ray(&(t_vec3){.x = 0, .y = 0, .z = 0},
+	set_ray(&(t_vec3){.x = 0, .y = 0, .z = 0},
 		&(t_vec3){.x = 0, .y = 0, .z = 1}, &r);
 	plane.intersects(&plane, &r, xs);
 	cr_expect(eq(int, xs->capacity, 1));
@@ -88,7 +88,7 @@ Test(plane, intersect_from_above)
 
 	get_plane(&plane, matrix_new_identity(4));
 	xs = new_array(1);
-	new_ray(&(t_vec3){.x = 0, .y = 1, .z = 0},
+	set_ray(&(t_vec3){.x = 0, .y = 1, .z = 0},
 		&(t_vec3){.x = 0, .y = -1, .z = 0}, &r);
 	plane.intersects(&plane, &r, xs);
 	cr_expect(eq(int, xs->capacity, 1));
@@ -108,7 +108,7 @@ Test(plane, intersect_from_below)
 
 	get_plane(&plane, matrix_new_identity(4));
 	xs = new_array(1);
-	new_ray(&(t_vec3){.x = 0, .y = -1, .z = 0},
+	set_ray(&(t_vec3){.x = 0, .y = -1, .z = 0},
 		&(t_vec3){.x = 0, .y = 1, .z = 0}, &r);
 	plane.intersects(&plane, &r, xs);
 	cr_expect(eq(int, xs->capacity, 1));
