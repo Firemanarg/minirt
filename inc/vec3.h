@@ -14,6 +14,7 @@
 # define VEC3_H
 
 # include <math.h>
+# include "error.h"
 
 # define EPSILON 0.00001
 
@@ -33,24 +34,25 @@ typedef union u_vec3
 	};
 }	t_vec3;
 
-// tuple.c
+// vec3.c
 void	set_vec3(double x, double y, double z, t_vec3 *t);
+t_err	str_to_vec3(const char *str, t_vec3 *vec);
 
-// tuple_add_sub.c
+// vec3_add_sub.c
 void	add(t_vec3 *a, t_vec3 *b, t_vec3 *c);
 void	subtract(t_vec3 *a, t_vec3 *b, t_vec3 *c);
 
-// tuple_products.c
+// vec3_products.c
 double	dot(t_vec3 *a, t_vec3 *b);
 void	cross(t_vec3 *a, t_vec3 *b, t_vec3 *c);
 void	hadamard(t_vec3 *a, t_vec3 *b, t_vec3 *c);
 
-// tuple_misc_ops.c
+// vec3_misc_ops.c
 void	negate(t_vec3 *a, t_vec3 *minus_a);
 double	length(t_vec3 *t);
 void	normalize(t_vec3 *t, t_vec3 *norm_t);
 
-// tuple_mul_div.c
+// vec3_mul_div.c
 void	multiply(t_vec3 *a, double s, t_vec3 *b);
 void	divide(t_vec3 *a, double s, t_vec3 *b);
 
