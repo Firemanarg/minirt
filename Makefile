@@ -89,6 +89,17 @@ SRC_FILES		+= ${addprefix ${SRC_DIR}/vec3/,\
 				vec3_mul_div.c\
 				vec3_products.c}
 
+# Parser files
+SRC_FILES		+= ${addprefix ${SRC_DIR}/parser/,\
+				parse_ambient_light.c\
+				parse_camera.c\
+				parse_cylinder.c\
+				parse_light.c\
+				parse_plane.c\
+				parse_sphere.c\
+				parser.c\
+				validations.c}
+
 BUILD_DIR		:= ${MANDATORY_DIR}/build
 
 # Object files
