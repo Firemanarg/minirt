@@ -62,6 +62,8 @@ typedef struct s_base_obj
 typedef struct s_3d_obj
 {
 	struct			s_base_obj;
+	t_vec3			pos;
+	t_vec3			dir;
 	t_matrix		*transform;
 	t_matrix		*inv_transform;
 	t_matrix		*t_inv_transform;
@@ -70,8 +72,6 @@ typedef struct s_3d_obj
 typedef struct s_geom_obj
 {
 	struct			s_3d_obj;
-	t_vec3			pos;
-	t_vec3			dir;
 	t_material		material;
 	t_isect_func	intersects;
 	t_normal_func	normal_at;
