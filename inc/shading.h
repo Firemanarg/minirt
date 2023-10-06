@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 02:55:20 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/05 04:16:53 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 04:02:20 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,18 @@
 # include "objects.h"
 # include "projection.h"
 
-typedef struct s_phong_params
-{
-	t_material		material;
-	t_point_light	light;
-	t_vec3			normal;
-	t_vec3			eye;
-	t_vec3			point;
-}	t_phong_params;
+// lighting.c
+void		lighting(t_precomp *p, t_material *m, t_point_light *l,
+				t_color *color);
 
-void	lighting(t_phong_params *p, t_color *result);
-void	reflect(t_vec3 *incident, t_vec3 *normal, t_vec3 *reflected);
+//reflect.c
+void		reflect(t_vec3 *incident, t_vec3 *normal, t_vec3 *reflected);
+
+// scene.c
+void		shade_hit(t_scene *w, t_precomp *comp, t_color *color);
+t_err		color_at(t_scene *w, t_ray *r, t_varray *xs, t_color *color);
+
+// view.c
+t_matrix	*view_transform(t_vec3 *from, t_vec3 *to, t_vec3 *up);
 
 #endif

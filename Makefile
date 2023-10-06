@@ -71,7 +71,8 @@ SRC_FILES		+= ${addprefix ${SRC_DIR}/projection/,\
 
 # Scene composition files
 SRC_FILES		+= ${addprefix ${SRC_DIR}/scene/,\
-				scene.c}
+				scene.c\
+				view.c}
 
 # Shading, color and lighting operation files
 SRC_FILES		+= ${addprefix ${SRC_DIR}/shading/,\

@@ -22,7 +22,7 @@ all: apply_matrix_ops bin_search capped_cone cone_intersect cone_normal \
 	capped_cylinder cylinder_intersect cylinder_normal \
 	lighting matrix_vec3_multiply quicksort plane ray_transform reflect \
 	scene sphere_hit sphere_intersect sphere_normal sphere_transform \
-	truncated_cylinder var_array vec3_ops
+	truncated_cylinder var_array vec3_ops view_transform
 
 minirt:
 	@make -s -C ${MINIRT_DIR}
@@ -198,6 +198,13 @@ vec3_ops: minirt ${TEST_OBJ_DIR}/vec3_ops_test.o
 		${LIBFLAGS} -o ${TEST_BUILD_DIR}/vec3_ops_test
 	@${TEST_BUILD_DIR}/vec3_ops_test ${CRFLAGS} || true
 
+view_transform: minirt ${TEST_OBJ_DIR}/view_transform_test.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/view_transform_test.o ${MINIRT_OBJ_DIR}/vec3/*.o \
+		 ${MINIRT_OBJ_DIR}/scene/view.o \
+		 ${MINIRT_OBJ_DIR}/matrix/*.o ${LIBFLAGS} \
+		-o ${TEST_BUILD_DIR}/view_transform
+	@${TEST_BUILD_DIR}/view_transform ${CRFLAGS} || true
+
 ${TEST_OBJ_DIR}:
 	@mkdir -p ${TEST_OBJ_DIR}
 
@@ -210,4 +217,4 @@ ${TEST_OBJ_DIR}/%.o: ${TEST_SRC_DIR}/%.c | ${TEST_OBJ_DIR}
 		lighting matrix_vec3_multiply quicksort \
 		plane ray_transform reflect scene \
 		sphere_hit sphere_intersect sphere_normal sphere_transform \
-		truncated_cylinder var_array vec3_ops
+		truncated_cylinder var_array vec3_ops view_transform
