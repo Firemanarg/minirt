@@ -33,13 +33,15 @@ int	is_valid_fov(double fov)
 	return (fov >= MIN_FOV && fov <= MAX_FOV);
 }
 
-int	is_valid_dir(t_vec3 *dir)
+int	is_valid_direction(t_vec3 *dir)
 {
 	if (dir->x < -1 || dir->x > 1)
 		return (0);
 	else if (dir->y < -1 || dir->y > 1)
 		return (0);
 	else if (dir->z < -1 || dir->z > 1)
+		return (0);
+	else if (dir->x + dir->y + dir->z == 0)
 		return (0);
 	return (1);
 }
