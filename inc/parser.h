@@ -29,15 +29,33 @@
 # define PLANE_FIELDS_COUNT 4
 
 // parser.c
-t_scene		*parse_file(char *file_name);
-t_base_obj	*parse_line(char *line);
-t_obj_type	get_type_by_str(char *str);
+t_scene			*parse_file(char *file_name);
+t_base_obj		*parse_line(char *line);
+// t_obj_type		get_type_by_str(char *str);
 
-t_base_obj	*parse_ambient_light(char **fields, int fields_count);
-t_base_obj	*parse_camera(char **fields, int fields_count);
-t_base_obj	*parse_light(char **fields, int fields_count);
-t_base_obj	*parse_sphere(char **fields, int fields_count);
-t_base_obj	*parse_cylinder(char **fields, int fields_count);
-t_base_obj	*parse_plane(char **fields, int fields_count);
+// validations.c
+int				is_valid_color(t_vec3 *color);
+int				is_valid_ratio(double ratio);
+int				is_valid_fov(double fov);
+int				is_valid_direction(t_vec3 *dir);
+
+// parse_ambient_light.c
+t_ambient_light	*parse_ambient_light(char **fields, int fields_count);
+
+// parse_camera.c
+t_camera		*parse_camera(char **fields, int fields_count);
+
+// parse_light.c
+t_point_light	*parse_light(char **fields, int fields_count);
+
+// parse_sphere.c
+t_sphere		*parse_sphere(char **fields, int fields_count);
+
+// parse_cylinder.c
+t_cylinder		*parse_cylinder(char **fields, int fields_count);
+
+// parse_plane.c
+t_plane			*parse_plane(char **fields, int fields_count);
+
 
 #endif
