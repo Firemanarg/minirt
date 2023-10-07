@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 17:15:20 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/05 02:28:33 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 19:58:59 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ void	trace_pixel(t_args *args, t_trace_args *t, int x, int y)
 {
 	if (hit(t->intersections))
 	{
-		ft_pixel_put(&args->mlx_data, x, y,
-			convert_color(&(t->obj.material.color)));
+		ft_pixel_put(&args->mlx_data, x, y, &(t->obj.material.color));
 	}
 	else
 		ft_pixel_put(&args->mlx_data, x, y, 0);

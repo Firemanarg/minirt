@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 16:41:33 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/23 23:57:36 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 22:53:16 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@
 
 typedef struct s_trace_args
 {
-	double			wall_z;
-	double			wall_size;
-	double			pixel_size;
-	int				canvas_pixels;
-	t_vec3			ray_origin;
-	t_varray		*intersections;
-	t_ray			ray;
-	t_obj			obj;
-	t_phong_params	phong;
+	double		wall_z;
+	double		wall_size;
+	double		pixel_size;
+	int			canvas_pixels;
+	t_vec3		ray_origin;
+	t_varray	*intersections;
+	t_ray		ray;
+	t_obj		obj;
+	t_precomp	phong;
 }	t_trace_args;

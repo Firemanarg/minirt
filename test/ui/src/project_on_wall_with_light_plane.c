@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 17:15:20 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/05 02:28:33 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 19:58:22 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ void	trace_pixel(t_args *args, t_trace_args *t, int x, int y)
 		set_vec3(0.0, 0.0, 0.0, &t->phong.eye);
 		subtract(&t->phong.eye, &t->ray.direction, &t->phong.eye);
 		lighting(&t->phong, &final_color);
-		ft_pixel_put(&args->mlx_data, x, y,
-			convert_color(&final_color));
+		ft_pixel_put(&args->mlx_data, x, y, &final_color);
 	}
 	else
 		ft_pixel_put(&args->mlx_data, x, y, 0);

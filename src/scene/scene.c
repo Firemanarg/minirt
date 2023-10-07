@@ -6,15 +6,12 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 02:55:34 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/06 02:51:18 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/07 00:26:16 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "objects.h"
-#include "projection.h"
 #include "minirt.h"
 #include "shading.h"
-
 
 t_err	intersect_world(t_scene *w, t_ray *r, t_varray *xs)
 {
@@ -46,6 +43,7 @@ void	free_world(t_scene *w)
 	}
 	free(w->geometries);
 	free(w->lights);
+	free_camera(&w->camera);
 }
 
 void	prepare_computations(t_isect *i, t_ray *r, t_precomp *comps)

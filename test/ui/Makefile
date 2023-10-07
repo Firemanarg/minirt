@@ -88,6 +88,20 @@ project_on_wall_with_light_sphere: minirt ${TEST_OBJ_DIR}/project_on_wall_with_l
 		-o ${TEST_BUILD_DIR}/project_on_wall_with_light_sphere
 	${TEST_BUILD_DIR}/project_on_wall_with_light_sphere ${CRFLAGS} || true
 
+render_world_with_camera: minirt ${TEST_OBJ_DIR}/render_world_with_camera.o
+	${CC} ${CFLAGS} ${TEST_OBJ_DIR}/render_world_with_camera.o \
+		${MINIRT_OBJ_DIR}/graphics/*.o \
+		${MINIRT_OBJ_DIR}/matrix/*.o \
+		${MINIRT_OBJ_DIR}/objects/*.o \
+		${MINIRT_OBJ_DIR}/projection/*.o \
+		${MINIRT_OBJ_DIR}/scene/*.o \
+		${MINIRT_OBJ_DIR}/shading/*.o \
+		${MINIRT_OBJ_DIR}/varray/*.o \
+		${MINIRT_OBJ_DIR}/vec3/*.o \
+		${LIBFLAGS} \
+		-o ${TEST_BUILD_DIR}/render_world_with_camera
+	${TEST_BUILD_DIR}/render_world_with_camera ${CRFLAGS} || true
+
 ${TEST_OBJ_DIR}:
 	@mkdir -p ${TEST_OBJ_DIR}
 
@@ -102,6 +116,7 @@ fclean: clean
 	${RM} ${TEST_BUILD_DIR}
 	make -C ${MINIRT_DIR} fclean
 
-re: fclean all
-
-.PHONY: all clean fclean minirt mlx_window project_on_wall project_on_wall_with_light re
+.PHONY: all clean fclean minirt mlx_window project_on_wall \
+		project_on_wall_with_light_cone project_on_wall_with_light_cylinder \
+		project_on_wall_with_light_plane project_on_wall_with_light_sphere \
+		render_world_with_camera

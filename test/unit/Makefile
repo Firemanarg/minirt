@@ -10,6 +10,7 @@ MINIRT_INC_DIR = ${MINIRT_DIR}/inc
 MINIRT_OBJ_DIR = ${MINIRT_DIR}/build/obj
 
 MLX_DIR	= ${MINIRT_DIR}/lib/minilibx-linux
+MLX_FLAGS = -L${MLX_DIR} -lmlx -lXext -lX11 -lz
 
 TEST_DIR = .
 TEST_INC_DIR = ${TEST_DIR}/inc
@@ -18,8 +19,8 @@ TEST_SRC_DIR = ${TEST_DIR}/src
 TEST_BUILD_DIR = ${TEST_DIR}/build
 TEST_OBJ_DIR = ${TEST_DIR}/build/obj
 
-all: apply_matrix_ops bin_search capped_cone cone_intersect cone_normal \
-	capped_cylinder cylinder_intersect cylinder_normal \
+all: apply_matrix_ops bin_search camera capped_cone cone_intersect \
+	cone_normal capped_cylinder cylinder_intersect cylinder_normal \
 	lighting matrix_vec3_multiply quicksort plane ray_transform reflect \
 	scene sphere_hit sphere_intersect sphere_normal sphere_transform \
 	truncated_cylinder var_array vec3_ops view_transform
@@ -56,6 +57,16 @@ bin_search: minirt ${TEST_OBJ_DIR}/bin_search_test.o
 		${MINIRT_OBJ_DIR}/vec3/*.o ${LIBFLAGS} \
 		-o ${TEST_BUILD_DIR}/bin_search_test
 	@${TEST_BUILD_DIR}/bin_search_test ${CRFLAGS} || true
+
+camera: minirt ${TEST_OBJ_DIR}/camera_test.o
+	@${CC} ${CFLAGS}  ${TEST_OBJ_DIR}/camera_test.o \
+		${MINIRT_OBJ_DIR}/vec3/*.o \
+		${MINIRT_OBJ_DIR}/objects/*.o ${MINIRT_OBJ_DIR}/graphics/*.o \
+		${MINIRT_OBJ_DIR}/projection/*.o ${MINIRT_OBJ_DIR}/scene/*.o \
+		${MINIRT_OBJ_DIR}/shading/*.o ${MINIRT_OBJ_DIR}/varray/*.o \
+		${MINIRT_OBJ_DIR}/matrix/*.o ${MLX_FLAGS} ${LIBFLAGS} \
+		-o ${TEST_BUILD_DIR}/camera_test
+	@${TEST_BUILD_DIR}/camera_test ${CRFLAGS} || true
 
 capped_cone: minirt ${TEST_OBJ_DIR}/capped_cone_test.o
 	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/capped_cone_test.o ${MINIRT_OBJ_DIR}/varray/*.o \
@@ -137,17 +148,17 @@ ray_transform: minirt ${TEST_OBJ_DIR}/ray_transform_test.o
 
 reflect: minirt ${TEST_OBJ_DIR}/reflect_test.o
 	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/reflect_test.o ${MINIRT_OBJ_DIR}/vec3/*.o \
-		 ${MINIRT_OBJ_DIR}/projection/*.o ${MINIRT_OBJ_DIR}/shading/*.o \
-		 ${MINIRT_OBJ_DIR}/varray/*.o ${MINIRT_OBJ_DIR}/matrix/*.o ${LIBFLAGS} \
+		${MINIRT_OBJ_DIR}/projection/*.o ${MINIRT_OBJ_DIR}/shading/*.o \
+		${MINIRT_OBJ_DIR}/varray/*.o ${MINIRT_OBJ_DIR}/matrix/*.o ${LIBFLAGS} \
 		-o ${TEST_BUILD_DIR}/reflect_test
 	@${TEST_BUILD_DIR}/reflect_test ${CRFLAGS} || true
 
 scene: minirt ${TEST_OBJ_DIR}/scene_test.o
 	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/scene_test.o ${MINIRT_OBJ_DIR}/vec3/*.o \
-		 ${MINIRT_OBJ_DIR}/objects/*.o \
-		 ${MINIRT_OBJ_DIR}/projection/*.o ${MINIRT_OBJ_DIR}/scene/*.o \
-		 ${MINIRT_OBJ_DIR}/shading/*.o ${MINIRT_OBJ_DIR}/varray/*.o \
-		 ${MINIRT_OBJ_DIR}/matrix/*.o ${LIBFLAGS} \
+		${MINIRT_OBJ_DIR}/objects/*.o \
+		${MINIRT_OBJ_DIR}/projection/*.o ${MINIRT_OBJ_DIR}/scene/*.o \
+		${MINIRT_OBJ_DIR}/shading/*.o ${MINIRT_OBJ_DIR}/varray/*.o \
+		${MINIRT_OBJ_DIR}/matrix/*.o ${LIBFLAGS} \
 		-o ${TEST_BUILD_DIR}/scene_test
 	@${TEST_BUILD_DIR}/scene_test ${CRFLAGS} || true
 
@@ -200,8 +211,8 @@ vec3_ops: minirt ${TEST_OBJ_DIR}/vec3_ops_test.o
 
 view_transform: minirt ${TEST_OBJ_DIR}/view_transform_test.o
 	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/view_transform_test.o ${MINIRT_OBJ_DIR}/vec3/*.o \
-		 ${MINIRT_OBJ_DIR}/scene/view.o \
-		 ${MINIRT_OBJ_DIR}/matrix/*.o ${LIBFLAGS} \
+		${MINIRT_OBJ_DIR}/scene/view.o \
+		${MINIRT_OBJ_DIR}/matrix/*.o ${LIBFLAGS} \
 		-o ${TEST_BUILD_DIR}/view_transform
 	@${TEST_BUILD_DIR}/view_transform ${CRFLAGS} || true
 
@@ -212,7 +223,7 @@ ${TEST_OBJ_DIR}/%.o: ${TEST_SRC_DIR}/%.c | ${TEST_OBJ_DIR}
 	@${CC} ${CFLAGS} -I${TEST_INC_DIR} -I${MINIRT_INC_DIR} -I${MLX_DIR} -c $< -o $@
 
 .PHONY: all minirt clean fclean re apply_matrix_ops bin_search \
-		capped_cone cone_intersect cone_normal \
+		camera capped_cone cone_intersect cone_normal \
 		capped_cylinder cylinder_intersect cylinder_normal \
 		lighting matrix_vec3_multiply quicksort \
 		plane ray_transform reflect scene \
