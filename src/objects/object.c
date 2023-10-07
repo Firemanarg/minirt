@@ -6,13 +6,12 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 06:38:35 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/26 03:00:45 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/07 00:13:19 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <objects.h>
-#include <varray.h>
-#include <projection.h>
+#include "minirt.h"
+#include "projection.h"
 
 t_err	set_object(t_obj *object, t_matrix *transform, t_material *material)
 {
@@ -55,4 +54,14 @@ void	obj_normal_at(t_obj *obj, t_vec3 *world_point, t_vec3 *world_normal)
 	obj->normal_at(obj, &object_point, &object_normal);
 	matrix_vector_multiply(obj->t_inv_transform, &object_normal, world_normal);
 	normalize(world_normal, world_normal);
+}
+
+void	free_obj(t_obj *obj)
+{
+	matrix_free(obj->transform);
+	matrix_free(obj->inv_transform);
+	matrix_free(obj->t_inv_transform);
+	obj->transform = NULL;
+	obj->inv_transform = NULL;
+	obj->t_inv_transform = NULL;
 }

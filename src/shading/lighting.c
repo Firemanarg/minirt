@@ -6,11 +6,11 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 20:07:36 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/06 01:35:02 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:21:38 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shading.h>
+#include "shading.h"
 
 static double	has_diffuse(t_precomp *p, t_point_light *l, t_vec3 *light_v)
 {

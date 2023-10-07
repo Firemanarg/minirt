@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:44:47 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/05 03:00:18 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 11:53:18 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,13 @@ typedef struct s_point_light
 
 typedef struct s_camera
 {
-	struct			s_3d_obj;
-	int				fov;
+	struct	s_3d_obj;
+	double	fov;
+	double	half_width;
+	double	half_height;
+	double	pixel_size;
+	int		hsize;
+	int		vsize;
 }	t_camera;
 
 typedef struct s_sphere

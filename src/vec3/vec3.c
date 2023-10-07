@@ -6,11 +6,11 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 01:37:49 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/18 16:50:09 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:25:31 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <vec3.h>
+#include "vec3.h"
 
 void	set_vec3(double x, double y, double z, t_vec3 *t)
 {

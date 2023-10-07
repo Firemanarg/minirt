@@ -6,12 +6,11 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 01:28:25 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/20 02:36:04 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:28:20 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <matrix.h>
-#include <vec3.h>
+#include "matrix.h"
 
 void	matrix_vector_multiply(t_matrix *matrix, t_vec3 *v, t_vec3 *result)
 {

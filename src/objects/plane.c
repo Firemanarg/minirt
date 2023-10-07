@@ -6,13 +6,11 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 06:38:35 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/26 22:26:59 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:20:03 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <objects.h>
-#include <varray.h>
-#include <projection.h>
+#include "projection.h"
 
 static t_err	plane_intersect(t_obj *plane, t_ray *ray, t_varray *r)
 {

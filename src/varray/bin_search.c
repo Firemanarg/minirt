@@ -6,13 +6,11 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:19:22 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/18 16:48:56 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:23:49 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <projection.h>
-#include <graphics.h>
-#include <varray.h>
+#include "projection.h"
 
 int	bin_search_gt(t_varray *r, double target, int left, int right)
 {

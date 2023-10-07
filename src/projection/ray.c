@@ -6,13 +6,11 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:59:19 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/05 02:28:33 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:20:43 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <vec3.h>
-#include <projection.h>
-#include <matrix.h>
+#include "projection.h"
 
 void	set_ray(t_vec3 *start, t_vec3 *direction, t_ray *ray)
 {

@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <objects.h>
-#include <varray.h>
-#include <projection.h>
+#include "projection.h"
 
 static t_err	insert_if_in_cone_range(t_obj *cone, t_varray *r,
 					double t, double y)

@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 12:33:50 by marvin            #+#    #+#             */
-/*   Updated: 2023/10/04 12:00:31 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:30:10 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MATRIX_H
 
 # include <stdio.h>
-# include <math.h>
 # include "vec3.h"
 
 /**

@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 08:53:15 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/04 03:23:16 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:29:51 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "objects.h"
 # include "error.h"
-# include "vec3.h"
 
 t_scene		*parse_file(char *file_name);
 t_base_obj	*parse_line(char *line);

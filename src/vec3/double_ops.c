@@ -6,11 +6,9 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 01:53:28 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/24 06:55:54 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:24:51 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <minirt.h>
 
 double	dbl_abs(double a)
 {

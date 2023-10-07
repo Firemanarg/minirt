@@ -6,11 +6,11 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 01:27:15 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/23 19:17:07 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:22:38 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shading.h>
+#include "shading.h"
 
 void	set_material_shininess(t_material *material, double shininess)
 {

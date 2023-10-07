@@ -6,13 +6,11 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 14:34:32 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/04 04:16:03 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:19:56 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <objects.h>
-#include <varray.h>
-#include <projection.h>
+#include "projection.h"
 
 static t_err	insert_if_in_range(t_obj *cylinder, t_varray *r,
 					double t, double y)

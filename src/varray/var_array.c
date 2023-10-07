@@ -6,13 +6,12 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 03:47:13 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/21 03:38:59 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:24:32 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <projection.h>
-#include <graphics.h>
-#include <varray.h>
+#include "projection.h"
+#include "minirt.h"
 
 t_varray	*new_array(int initial_capacity)
 {

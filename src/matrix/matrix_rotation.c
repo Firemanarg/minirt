@@ -6,11 +6,11 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 22:17:47 by marvin            #+#    #+#             */
-/*   Updated: 2023/09/18 02:00:34 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:27:49 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <matrix.h>
+#include "matrix.h"
 
 t_matrix	*matrix_rotate_x(double rad)
 {

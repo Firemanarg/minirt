@@ -6,11 +6,11 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 02:34:22 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/22 02:50:28 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:22:35 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <vec3.h>
+#include "vec3.h"
 
 void	reflect(t_vec3 *incident, t_vec3 *normal, t_vec3 *reflected)
 {

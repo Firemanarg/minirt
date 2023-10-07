@@ -6,13 +6,11 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 21:53:53 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/04 04:14:51 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:19:01 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <objects.h>
-#include <varray.h>
-#include <projection.h>
+#include "projection.h"
 
 static t_bool	check_cylinder_cap(t_ray *ray, double t)
 {

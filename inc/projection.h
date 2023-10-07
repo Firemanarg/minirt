@@ -6,16 +6,16 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:32:58 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/05 04:26:27 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 14:30:23 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PROJECTION_H
 # define PROJECTION_H
 
-# include "vec3.h"
 # include "objects.h"
-# include "varray.h"
+
+# define INITIAL_ARRAY_SIZE 8
 
 typedef struct s_isect
 {
@@ -61,5 +61,10 @@ t_isect	*hit(t_varray *r);
 t_err	intersect_world(t_scene *w, t_ray *r, t_varray *xs);
 void	free_world(t_scene *w);
 void	prepare_computations(t_isect *i, t_ray *r, t_precomp *comps);
+
+// camera.c
+void	set_camera(int hsize, int vsize, double fov, t_camera *camera);
+t_err	set_camera_transform(t_matrix *transform, t_camera *camera);
+void	free_camera(t_camera *camera);
 
 #endif

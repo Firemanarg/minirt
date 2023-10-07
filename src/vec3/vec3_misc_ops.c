@@ -6,11 +6,11 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 05:48:50 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/24 06:56:57 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:25:15 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <vec3.h>
+#include "vec3.h"
 
 void	negate(t_vec3 *a, t_vec3 *minus_a)
 {
