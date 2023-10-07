@@ -6,13 +6,12 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 03:47:13 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/18 12:17:24 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:24:32 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <projection.h>
-#include <graphics.h>
-#include <varray.h>
+#include "projection.h"
+#include "minirt.h"
 
 t_varray	*new_array(int initial_capacity)
 {
@@ -62,4 +61,9 @@ void	free_array(t_varray *r)
 {
 	free(r->arr);
 	free(r);
+}
+
+void	reset_array(t_varray *r)
+{
+	r->length = 0;
 }

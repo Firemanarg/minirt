@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:24:32 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/09 15:45:39 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 19:56:56 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define GRAPHICS_H
 
 # include <mlx.h>
-# include <stdio.h>
 # include <stdlib.h>
+# include "objects.h"
 
 typedef struct s_mlx_data {
 	void	*img;
@@ -55,7 +55,8 @@ enum {
 
 // mlx_utils.c
 void	init_args(t_args *args, int width, int height);
-void	ft_pixel_put(t_mlx_data *mlx_data, int x, int y, int color);
+void	ft_pixel_put(t_mlx_data *mlx_data, int x, int y, t_color *minirt_color);
+unsigned int	convert_color(t_color *minirt_color);
 
 // window.c
 int		create_window(t_args *args);

@@ -3,28 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   shading.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/27 15:11:53 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/09/27 15:11:53 by lsilva-q         ###   ########.fr       */
+/*   Created: 2023/09/22 02:55:20 by gmachado          #+#    #+#             */
+/*   Updated: 2023/10/07 03:44:28 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHADING_H
 # define SHADING_H
 
-# include "objects.h"
+# include "projection.h"
+# include "graphics.h"
 
-typedef struct s_phong_params
-{
-	t_material		material;
-	t_point_light	*light;
-	t_vec3			normal;
-	t_vec3			eye;
-	t_vec3			point;
-}	t_phong_params;
+// lighting.c
+void		lighting(t_precomp *p, t_material *m, t_point_light *l,
+				t_color *color);
 
-void	lighting(t_phong_params *p, t_color *result);
-void	reflect(t_vec3 *incident, t_vec3 *normal, t_vec3 *reflected);
+//reflect.c
+void		reflect(t_vec3 *incident, t_vec3 *normal, t_vec3 *reflected);
+
+// render.c
+void		ray_for_pixel(t_camera *camera, int p_x, int p_y, t_ray *ray);
+t_err		render_image(t_camera *camera, t_scene *world,
+				t_mlx_data *mlx_data);
+
+// scene.c
+t_err	shade_hit(t_scene *w, t_precomp *comps, t_color *color, t_varray *xs);
+t_err		color_at(t_scene *w, t_ray *r, t_varray *xs, t_color *color);
+
+// shadow.c
+t_err		is_shadowed(t_scene *world, t_vec3 *point,
+				t_precomp *comps, t_varray *xs);
+
+// view.c
+t_matrix	*view_transform(t_vec3 *from, t_vec3 *to, t_vec3 *up);
 
 #endif

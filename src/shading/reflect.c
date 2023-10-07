@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_test.c                                         :+:      :+:    :+:   */
+/*   reflect.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/01 00:55:06 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/01 00:55:58 by gmachado         ###   ########.fr       */
+/*   Created: 2023/09/22 02:34:22 by gmachado          #+#    #+#             */
+/*   Updated: 2023/10/06 12:22:35 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
+#include "vec3.h"
 
-// From https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html
-int	main(void)
+void	reflect(t_vec3 *incident, t_vec3 *normal, t_vec3 *reflected)
 {
-	void	*mlx;
-	void	*mlx_win;
+	t_vec3	tmp;
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
-	mlx_loop(mlx);
+	multiply(normal, 2.0 * dot(incident, normal), &tmp);
+	subtract(incident, &tmp, reflected);
 }

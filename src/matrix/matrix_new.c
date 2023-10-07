@@ -6,12 +6,12 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 20:41:35 by marvin            #+#    #+#             */
-/*   Updated: 2023/09/18 02:01:00 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:27:23 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
-#include <matrix.h>
+#include "matrix.h"
+#include "minirt.h"
 
 t_matrix	*matrix_new(int rows, int cols)
 {

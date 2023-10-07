@@ -1,15 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt_test.h                                      :+:      :+:    :+:   */
+/*   ui.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/14 03:21:58 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/18 12:11:56 by gmachado         ###   ########.fr       */
+/*   Created: 2023/09/20 16:41:33 by gmachado          #+#    #+#             */
+/*   Updated: 2023/10/06 22:53:16 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <mlx.h>
 #include <minirt.h>
 #include <graphics.h>
 #include <varray.h>
@@ -17,6 +18,18 @@
 #include <objects.h>
 #include <matrix.h>
 #include <error.h>
+#include <shading.h>
 #include <vec3.h>
-#include <criterion/criterion.h>
-#include <criterion/new/assert.h>
+
+typedef struct s_trace_args
+{
+	double		wall_z;
+	double		wall_size;
+	double		pixel_size;
+	int			canvas_pixels;
+	t_vec3		ray_origin;
+	t_varray	*intersections;
+	t_ray		ray;
+	t_obj		obj;
+	t_precomp	phong;
+}	t_trace_args;
