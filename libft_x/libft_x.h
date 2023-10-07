@@ -72,6 +72,7 @@ int		ft_str_isalpha(char const *str);
 int		ft_str_isascii(char const *str);
 int		ft_str_isdigit(char const *str);
 int		ft_str_isprint(char const *str);
+int		ft_str_isdouble(char const *str);
 
 // Output
 void	ft_putchar_fd(char c, int fd);

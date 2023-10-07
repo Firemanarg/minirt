@@ -37,7 +37,7 @@ LFT_SRCFLS	= ft_isalpha.c	ft_isdigit.c	ft_isalnum.c	ft_isascii.c	\
 			ft_lstclear.c		ft_lstiter.c			ft_lstmap.c			\
 			get_next_line.c		ft_lstget.c									\
 			ft_str_isalpha.c	ft_str_isdigit.c	ft_str_isalnum.c		\
-			ft_str_isascii.c	ft_str_isprint.c
+			ft_str_isascii.c	ft_str_isprint.c	ft_str_isdouble.c
 FTP_SRCFLS	= ft_printf.c		utils/put_width_chr.c						\
 			utils/b_appchr.c	utils/e_appchr.c	utils/ft_ltoa.c			\
 			utils/nbr2hex.c		utils/print_chr.c	utils/print_hex.c		\
