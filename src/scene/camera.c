@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 10:03:08 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/07 00:21:36 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/07 03:32:35 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	set_camera(int hsize, int vsize, double fov, t_camera *camera)
 	camera->pixel_size = camera->half_width * 2.0 / camera->hsize;
 	camera->transform = NULL;
 	camera->inv_transform = NULL;
-	camera->t_inv_transform = NULL;
 }
 
 t_err	set_camera_transform(t_matrix *transform, t_camera *camera)
@@ -55,8 +54,6 @@ void	free_camera(t_camera *camera)
 {
 	matrix_free(camera->transform);
 	matrix_free(camera->inv_transform);
-	matrix_free(camera->t_inv_transform);
 	camera->transform = NULL;
 	camera->inv_transform = NULL;
-	camera->t_inv_transform = NULL;
 }

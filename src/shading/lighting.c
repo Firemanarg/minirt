@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 20:07:36 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/06 12:21:38 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/07 01:43:06 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	lighting(t_precomp *p, t_material *m, t_point_light *l, t_color *color)
 
 	hadamard(&m->color, &l->intensity, &effective_color);
 	multiply(&effective_color, m->ambient, color);
+	if (p->in_shadow)
+		return ;
 	light_dot_normal = has_diffuse(p, l, &light_v);
 	if (light_dot_normal < 0)
 		return ;

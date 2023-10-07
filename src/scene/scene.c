@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 02:55:34 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/07 00:26:16 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/07 03:45:45 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,19 @@ void	prepare_computations(t_isect *i, t_ray *r, t_precomp *comps)
 	}
 	else
 		comps->inside = FALSE;
+	multiply(&comps->normal, EPSILON, &comps->over_point);
+	add(&comps->over_point, &comps->point, &comps->over_point);
 }
 
-void	shade_hit(t_scene *w, t_precomp *comps, t_color *color)
+t_err	shade_hit(t_scene *w, t_precomp *comps, t_color *color, t_varray *xs)
 {
+	t_err	err;
+
+	err = is_shadowed(w, &comps->over_point, comps, xs);
+	if (err != OK)
+		return (err);
 	lighting(comps, &(comps->obj->material), w->lights, color);
+	return (OK);
 }
 
 t_err	color_at(t_scene *w, t_ray *r, t_varray *xs, t_color *color)
@@ -83,6 +91,8 @@ t_err	color_at(t_scene *w, t_ray *r, t_varray *xs, t_color *color)
 		return (OK);
 	}
 	prepare_computations(h, r, &comps);
-	shade_hit(w, &comps, color);
+	err = shade_hit(w, &comps, color, xs);
+	if (err != OK)
+		return (err);
 	return (OK);
 }

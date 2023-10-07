@@ -76,10 +76,11 @@ SRC_FILES		+= ${addprefix ${SRC_DIR}/scene/,\
 				view.c}
 
 # Shading, color and lighting operation files
-SRC_FILES		+= ${addprefix ${SRC_DIR}/shading/,\
-				lighting.c\
-				material.c\
-				reflect.c}
+SRC_FILES		+= ${addprefix ${SRC_DIR}/shading/, \
+				lighting.c \
+				material.c \
+				reflect.c \
+				shadow.c}
 
 # Varray files
 SRC_FILES		+= ${addprefix ${SRC_DIR}/varray/,\

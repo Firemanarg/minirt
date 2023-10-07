@@ -22,7 +22,7 @@ TEST_OBJ_DIR = ${TEST_DIR}/build/obj
 all: apply_matrix_ops bin_search camera capped_cone cone_intersect \
 	cone_normal capped_cylinder cylinder_intersect cylinder_normal \
 	lighting matrix_vec3_multiply quicksort plane ray_transform reflect \
-	scene sphere_hit sphere_intersect sphere_normal sphere_transform \
+	scene shadow sphere_hit sphere_intersect sphere_normal sphere_transform \
 	truncated_cylinder var_array vec3_ops view_transform
 
 minirt:
@@ -112,7 +112,7 @@ cylinder_normal: minirt ${TEST_OBJ_DIR}/cylinder_normal_test.o
 		-o ${TEST_BUILD_DIR}/cylinder_normal_test
 	@${TEST_BUILD_DIR}/cylinder_normal_test ${CRFLAGS} || true
 
-lighting: ${TEST_OBJ_DIR}/lighting_test.o
+lighting: minirt ${TEST_OBJ_DIR}/lighting_test.o
 	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/lighting_test.o ${MINIRT_OBJ_DIR}/vec3/*.o \
 		 ${MINIRT_OBJ_DIR}/projection/*.o ${MINIRT_OBJ_DIR}/shading/*.o \
 		 ${MINIRT_OBJ_DIR}/varray/*.o ${MINIRT_OBJ_DIR}/matrix/*.o ${LIBFLAGS} \
@@ -161,6 +161,15 @@ scene: minirt ${TEST_OBJ_DIR}/scene_test.o
 		${MINIRT_OBJ_DIR}/matrix/*.o ${LIBFLAGS} \
 		-o ${TEST_BUILD_DIR}/scene_test
 	@${TEST_BUILD_DIR}/scene_test ${CRFLAGS} || true
+
+shadow: minirt ${TEST_OBJ_DIR}/shadow_test.o
+	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/shadow_test.o ${MINIRT_OBJ_DIR}/vec3/*.o \
+		${MINIRT_OBJ_DIR}/objects/*.o ${MINIRT_OBJ_DIR}/projection/*.o \
+		${MINIRT_OBJ_DIR}/scene/camera.o ${MINIRT_OBJ_DIR}/scene/scene.o \
+		${MINIRT_OBJ_DIR}/shading/*.o ${MINIRT_OBJ_DIR}/varray/*.o \
+		${MINIRT_OBJ_DIR}/matrix/*.o ${LIBFLAGS} \
+		-o ${TEST_BUILD_DIR}/shadow_test
+	@${TEST_BUILD_DIR}/shadow_test ${CRFLAGS} || true
 
 sphere_hit: minirt ${TEST_OBJ_DIR}/sphere_hit_test.o
 	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/sphere_hit_test.o ${MINIRT_OBJ_DIR}/varray/*.o \
@@ -226,6 +235,6 @@ ${TEST_OBJ_DIR}/%.o: ${TEST_SRC_DIR}/%.c | ${TEST_OBJ_DIR}
 		camera capped_cone cone_intersect cone_normal \
 		capped_cylinder cylinder_intersect cylinder_normal \
 		lighting matrix_vec3_multiply quicksort \
-		plane ray_transform reflect scene \
+		plane ray_transform reflect scene shadow \
 		sphere_hit sphere_intersect sphere_normal sphere_transform \
 		truncated_cylinder var_array vec3_ops view_transform

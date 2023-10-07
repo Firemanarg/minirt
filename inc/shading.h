@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 02:55:20 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/06 14:39:46 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/07 03:44:28 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,12 @@ t_err		render_image(t_camera *camera, t_scene *world,
 				t_mlx_data *mlx_data);
 
 // scene.c
-void		shade_hit(t_scene *w, t_precomp *comp, t_color *color);
+t_err	shade_hit(t_scene *w, t_precomp *comps, t_color *color, t_varray *xs);
 t_err		color_at(t_scene *w, t_ray *r, t_varray *xs, t_color *color);
+
+// shadow.c
+t_err		is_shadowed(t_scene *world, t_vec3 *point,
+				t_precomp *comps, t_varray *xs);
 
 // view.c
 t_matrix	*view_transform(t_vec3 *from, t_vec3 *to, t_vec3 *up);
