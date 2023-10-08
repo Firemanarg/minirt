@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:44:47 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/06 11:53:18 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/08 00:08:39 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,15 +156,13 @@ t_color	color(double red, double green, double blue);
 void	set_color(double red, double green, double blue, t_color *c);
 
 // cone.c
-void	cone_normal_at(t_obj *c, t_vec3 *object_point,
-			t_vec3 *object_normal);
+void	cone_normal_at(t_obj *c, t_vec3 *obj_point, t_vec3 *obj_normal);
 t_err	set_cone(t_obj *cone, t_matrix *transform, t_material *material);
 void	set_cone_limits(t_obj *cone, double minimum, double maximum,
 			t_bool closed);
 
 // cylinder.c
-void	cylinder_normal_at(t_obj *c, t_vec3 *object_point,
-			t_vec3 *object_normal);
+void	cylinder_normal_at(t_obj *c, t_vec3 *obj_point, t_vec3 *obj_normal);
 t_err	set_cylinder(t_obj *cylinder, t_matrix *transform,
 			t_material *material);
 void	set_cylinder_limits(t_obj *cylinder, double minimum, double maximum,

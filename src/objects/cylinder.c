@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 14:34:32 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/06 12:19:56 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/08 00:09:03 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,19 @@ static t_err	cylinder_intersect(t_obj *cylinder, t_ray *ray, t_varray *r)
 		|| intersect_cylinder_caps(cylinder, ray, r));
 }
 
-void	cylinder_normal_at(t_obj *c, t_vec3 *object_point,
-			t_vec3 *object_normal)
+void	cylinder_normal_at(t_obj *c, t_vec3 *obj_point,
+			t_vec3 *obj_normal)
 {
 	double	dist;
 
-	dist = object_point->x * object_point->x
-		+ object_point->z * object_point->z;
-	if (dist < 1.0 && object_point->y >= c->maximum - EPSILON)
-		set_vec3(0.0, 1.0, 0.0, object_normal);
-	else if (dist < 1 && object_point->y <= c->minimum + EPSILON)
-		set_vec3(0.0, -1.0, 0.0, object_normal);
+	dist = obj_point->x * obj_point->x
+		+ obj_point->z * obj_point->z;
+	if (dist < 1.0 && obj_point->y >= c->maximum - EPSILON)
+		set_vec3(0.0, 1.0, 0.0, obj_normal);
+	else if (dist < 1 && obj_point->y <= c->minimum + EPSILON)
+		set_vec3(0.0, -1.0, 0.0, obj_normal);
 	else
-		set_vec3(object_point->x, 0.0, object_point->z, object_normal);
+		set_vec3(obj_point->x, 0.0, obj_point->z, obj_normal);
 }
 
 t_err	set_cylinder(t_obj *cylinder, t_matrix *transform, t_material *material)

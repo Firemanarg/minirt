@@ -49,24 +49,26 @@ static t_err	cone_intersect(t_obj *cone, t_ray *ray, t_varray *r)
 		|| intersect_cone_caps(cone, ray, r));
 }
 
-void	cone_normal_at(t_obj *c, t_vec3 *object_point,
-			t_vec3 *object_normal)
+void	cone_normal_at(t_obj *c, t_vec3 *obj_point, t_vec3 *obj_normal)
 {
 	double	dist;
 	double	y;
+	double	r_sq;
 
-	dist = object_point->x * object_point->x
-		+ object_point->z * object_point->z;
-	if (dist < 1.0 && object_point->y >= c->maximum - EPSILON)
-		set_vec3(0.0, 1.0, 0.0, object_normal);
-	else if (dist < 1 && object_point->y <= c->minimum + EPSILON)
-		set_vec3(0.0, -1.0, 0.0, object_normal);
+	dist = obj_point->x * obj_point->x
+		+ obj_point->z * obj_point->z;
+	r_sq = obj_point->y * obj_point->y;
+
+	if (dist < r_sq && obj_point->y >= c->maximum - EPSILON)
+		set_vec3(0.0, 1.0, 0.0, obj_normal);
+	else if (dist < r_sq && obj_point->y <= c->minimum + EPSILON)
+		set_vec3(0.0, -1.0, 0.0, obj_normal);
 	else
 	{
 		y = sqrt(dist);
-		if (object_point->y > 0.0)
+		if (obj_point->y > 0.0)
 			y = -y;
-		set_vec3(object_point->x, y, object_point->z, object_normal);
+		set_vec3(obj_point->x, y, obj_point->z, obj_normal);
 	}
 }
 
