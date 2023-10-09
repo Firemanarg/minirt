@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:44:47 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/08 00:08:39 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/09 00:22:01 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ typedef struct s_base_light
 	struct			s_base_obj;
 	double			ratio;
 	t_color			color;
-	t_color			intensity;
 }	t_base_light;
 
 typedef struct s_ambient_light
@@ -167,6 +166,9 @@ t_err	set_cylinder(t_obj *cylinder, t_matrix *transform,
 			t_material *material);
 void	set_cylinder_limits(t_obj *cylinder, double minimum, double maximum,
 			t_bool closed);
+
+// light.c
+void	set_point_light(t_vec3 *pos, t_color *color, t_point_light *light);
 
 // material.c
 void	set_material_shininess(t_material *material, double shininess);

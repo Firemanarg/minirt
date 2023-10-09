@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:17:40 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/08 00:33:02 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/09 01:21:47 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <math.h>
 
-# define EPSILON 0.0000001
+# define EPSILON 0.00000001
 
 typedef union u_vec3
 {

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_world_with_objects.c                        :+:      :+:    :+:   */
+/*   render_world_with_multiple_lights.c                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 22:51:50 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/08 22:26:37 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/09 01:20:52 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	get_floor(t_geom_obj *floor)
 
 	set_default_material(&m);
 	m.color = (t_color){.r = 1.0, .g = 0.9, .b = 0.9};
-	m.specular = 0.0;
+	// m.specular = 0.0;
 	set_sphere(floor,
 		matrix_scaling(&(t_vec3){.x = 10.0, .y = 0.01, .z = 10.0}), &m);
 }
@@ -44,7 +44,7 @@ static void	get_left_wall(t_geom_obj *left_wall)
 
 	set_default_material(&m);
 	m.color = (t_color){.r = 1.0, .g = 0.9, .b = 0.9};
-	m.specular = 0.0;
+	// m.specular = 0.0;
 	set_plane(left_wall, matrix_apply(matrix_new_identity(4), mops), &m);
 }
 
@@ -59,23 +59,23 @@ static void	get_right_wall(t_geom_obj *right_wall)
 
 	set_default_material(&m);
 	m.color = (t_color){.r = 1.0, .g = 0.9, .b = 0.9};
-	m.specular = 0.0;
+	// m.specular = 0.0;
 	set_plane(right_wall, matrix_apply(matrix_new_identity(4), mops), &m);
 }
 
 static void	get_large_cylinder(t_geom_obj *cylinder)
 {
 	t_material	m;
-	t_matrix_op mops[4] = {
-	{.op = ROTATE_X, .param = -M_PI_4},
-	{.op = ROTATE_Y, .param = M_PI_4 / 2},
+	t_matrix_op mops[3] = {
+	{.op = ROTATE_X, .param = M_PI_2},
+	// {.op = ROTATE_Y, .param = M_PI_4},
 	{.op = TRANSLATE, .params = {.x = -0.5, .y = 1.0, .z = 0.5}},
 	{0}};
 
 	set_default_material(&m);
 	m.color = (t_color){.r = 0.1, .g = 1.0, .b = 0.5};
-	m.diffuse = 0.7;
-	m.specular = 0.3;
+	// m.diffuse = 0.7;
+	// m.specular = 0.3;
 	set_cylinder(cylinder,
 		matrix_apply(matrix_new_identity(4), mops), &m);
 	set_cylinder_limits(cylinder, 0.0, 1.5, TRUE);
@@ -93,8 +93,8 @@ static void	get_medium_cone(t_geom_obj *cone)
 
 	set_default_material(&m);
 	m.color = (t_color){.r = 0.50, .g = 1.0, .b = 0.1};
-	m.diffuse = 0.7;
-	m.specular = 0.3;
+	// m.diffuse = 0.7;
+	// m.specular = 0.3;
 	set_cone(cone, matrix_apply(matrix_new_identity(4), mops), &m);
 	set_cone_limits(cone, 0.0, 1.5, TRUE);
 }
@@ -109,8 +109,8 @@ static void	get_small_sphere(t_geom_obj *sphere)
 
 	set_default_material(&m);
 	m.color = (t_color){.r = 1.0, .g = 0.8, .b = 0.1};
-	m.diffuse = 0.7;
-	m.specular = 0.3;
+	// m.diffuse = 0.7;
+	// m.specular = 0.3;
 	set_sphere(sphere, matrix_apply(matrix_new_identity(4), mops), &m);
 }
 
@@ -135,11 +135,17 @@ static void	get_world(t_scene *world, int width, int height)
 	get_medium_cone(world->geometries + 4);
 	get_small_sphere(world->geometries + 5);
 	world->geometries[6] = (t_geom_obj){0};
-	world->lights = malloc(sizeof(t_point_light) * 2);
-	world->lights[0].pos = (t_vec3){.x = -10.0, .y = 10.0, .z = -10.0};
-	world->lights[0].intensity = (t_color){.r = 1.0, .g = 1.0, .b = 1.0};
-	world->lights[0].type = LIGHT;
-	world->lights[1] = (t_point_light){0};
+	world->ambient_light.color = (t_color){.r = 1.0, .g = 1.0, .b = 1.0};
+	world->lights = malloc(sizeof(t_point_light) * 4);
+	set_point_light(&(t_vec3){.x = -10.0, .y = 15.0, .z = -10.0},
+					&(t_color){.r = 1.0, .g = 0.0, .b = 0.0}, world->lights);
+	set_point_light(&(t_vec3){.x = -5.0, .y = 10.0, .z = -10.0},
+					&(t_color){.r = 0.0, .g = 1.0, .b = 0.0},
+					world->lights + 1);
+	set_point_light(&(t_vec3){.x = 0.0, .y = 5.0, .z = -10.0},
+					&(t_color){.r = 0.0, .g = 0.0, .b = 1.0},
+					world->lights + 2);
+	world->lights[3] = (t_point_light){0};
 }
 
 int	main(void)

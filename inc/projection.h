@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:32:58 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/07 03:40:18 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/08 23:18:54 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ typedef struct s_ray
 
 typedef struct s_precomp
 {
-	double		t;
-	t_geom_obj	*obj;
-	t_vec3		point;
-	t_vec3		normal;
-	t_vec3		eye;
-	t_vec3		over_point;
-	t_bool		inside;
-	t_bool		in_shadow;
+	double			t;
+	t_geom_obj		*obj;
+	t_vec3			point;
+	t_vec3			normal;
+	t_vec3			eye;
+	t_vec3			over_point;
+	t_bool			inside;
+	t_bool			in_shadow;
 }	t_precomp;
 
 // caps.c

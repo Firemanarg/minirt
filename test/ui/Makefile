@@ -88,6 +88,20 @@ project_on_wall_with_light_sphere: minirt ${TEST_OBJ_DIR}/project_on_wall_with_l
 		-o ${TEST_BUILD_DIR}/project_on_wall_with_light_sphere
 	${TEST_BUILD_DIR}/project_on_wall_with_light_sphere ${CRFLAGS} || true
 
+render_world_test_specular: minirt ${TEST_OBJ_DIR}/render_world_test_specular.o
+	${CC} ${CFLAGS} ${TEST_OBJ_DIR}/render_world_test_specular.o \
+		${MINIRT_OBJ_DIR}/graphics/*.o \
+		${MINIRT_OBJ_DIR}/matrix/*.o \
+		${MINIRT_OBJ_DIR}/objects/*.o \
+		${MINIRT_OBJ_DIR}/projection/*.o \
+		${MINIRT_OBJ_DIR}/scene/*.o \
+		${MINIRT_OBJ_DIR}/shading/*.o \
+		${MINIRT_OBJ_DIR}/varray/*.o \
+		${MINIRT_OBJ_DIR}/vec3/*.o \
+		${LIBFLAGS} \
+		-o ${TEST_BUILD_DIR}/render_world_test_specular
+	${TEST_BUILD_DIR}/render_world_test_specular ${CRFLAGS} || true
+
 render_world_with_camera: minirt ${TEST_OBJ_DIR}/render_world_with_camera.o
 	${CC} ${CFLAGS} ${TEST_OBJ_DIR}/render_world_with_camera.o \
 		${MINIRT_OBJ_DIR}/graphics/*.o \
@@ -101,6 +115,20 @@ render_world_with_camera: minirt ${TEST_OBJ_DIR}/render_world_with_camera.o
 		${LIBFLAGS} \
 		-o ${TEST_BUILD_DIR}/render_world_with_camera
 	${TEST_BUILD_DIR}/render_world_with_camera ${CRFLAGS} || true
+
+render_world_with_multiple_lights: minirt ${TEST_OBJ_DIR}/render_world_with_multiple_lights.o
+	${CC} ${CFLAGS} ${TEST_OBJ_DIR}/render_world_with_multiple_lights.o \
+		${MINIRT_OBJ_DIR}/graphics/*.o \
+		${MINIRT_OBJ_DIR}/matrix/*.o \
+		${MINIRT_OBJ_DIR}/objects/*.o \
+		${MINIRT_OBJ_DIR}/projection/*.o \
+		${MINIRT_OBJ_DIR}/scene/*.o \
+		${MINIRT_OBJ_DIR}/shading/*.o \
+		${MINIRT_OBJ_DIR}/varray/*.o \
+		${MINIRT_OBJ_DIR}/vec3/*.o \
+		${LIBFLAGS} \
+		-o ${TEST_BUILD_DIR}/render_world_with_multiple_lights
+	${TEST_BUILD_DIR}/render_world_with_multiple_lights ${CRFLAGS} || true
 
 render_world_with_objects: minirt ${TEST_OBJ_DIR}/render_world_with_objects.o
 	${CC} ${CFLAGS} ${TEST_OBJ_DIR}/render_world_with_objects.o \
@@ -147,5 +175,6 @@ fclean: clean
 .PHONY: all clean fclean minirt mlx_window project_on_wall \
 		project_on_wall_with_light_cone project_on_wall_with_light_cylinder \
 		project_on_wall_with_light_plane project_on_wall_with_light_sphere \
-		render_world_with_camera render_world_with_objects \
-		render_world_with_planes
+		render_world_test_specular \
+		render_world_with_camera render_world_with_multiple_lights \
+		render_world_with_objects render_world_with_planes
