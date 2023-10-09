@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 22:51:50 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/07 01:00:10 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/09 02:58:14 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,9 +128,11 @@ static void	get_world(t_scene *world, int width, int height)
 	get_medium_sphere(world->geometries + 4);
 	get_small_sphere(world->geometries + 5);
 	world->geometries[6] = (t_geom_obj){0};
-	world->lights = malloc(sizeof(t_point_light));
-	world->lights[0].pos = (t_vec3){.x = -10.0, .y = 10.0, .z = -10.0};
-	world->lights[0].intensity = (t_color){.r = 1.0, .g = 1.0, .b = 1.0};
+	world->ambient_light.color = (t_color){.r = 1.0, .g = 1.0, .b = 1.0};
+	world->lights = malloc(sizeof(t_point_light) * 2);
+	set_point_light(&(t_vec3){.x = -10.0, .y = 10.0, .z = -10.0},
+					&(t_color){.r = 1.0, .g = 1.0, .b = 1.0}, world->lights);
+	world->lights[3] = (t_point_light){0};
 }
 
 int	main(void)
