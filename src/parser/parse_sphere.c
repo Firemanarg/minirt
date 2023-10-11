@@ -12,6 +12,9 @@
 
 #include "parser.h"
 
+static void	is_valid(t_sphere *sphere);
+static void	apply_transforms(t_sphere *sphere);
+
 t_sphere	*parse_sphere(char **fields, int fields_count)
 {
 	t_sphere	*sphere;
