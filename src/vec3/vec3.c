@@ -12,8 +12,6 @@
 
 #include "vec3.h"
 
-static int	is_str_vec3_valid(const char *str);
-
 void	set_vec3(double x, double y, double z, t_vec3 *t)
 {
 	t->x = x;
@@ -35,41 +33,18 @@ t_err	str_to_vec3(const char *str, t_vec3 *vec)
 {
 	char	**arr;
 
-	if (!is_str_vec3_valid(str))
-		return (INVALID_VEC3);
 	arr = ft_split(str, ',');
 	if (arr == NULL)
 		return (ERR_ALLOC);
+	if (!ft_str_isdouble(arr[0]) || !ft_str_isdouble(arr[1])
+		|| !ft_str_isdouble(arr[2]))
+	{
+		ft_clear_strarr(arr);
+		return (INVALID_VEC3);
+	}
 	vec->x = ft_atod(arr[0]);
 	vec->y = ft_atod(arr[1]);
 	vec->z = ft_atod(arr[2]);
 	ft_clear_strarr(arr);
 	return (OK);
-}
-
-static int	is_str_vec3_valid(const char *str)
-{
-	int	i;
-	int	comma_count;
-	int	last_comma;
-
-	last_comma = -1;
-	comma_count = 0;
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == ',')
-		{
-			comma_count += 1;
-			last_comma = i;
-		}
-		else if ((str[i] == '-') && (i != last_comma + 1))
-			return (0);
-		else if ((str[i] != '-') && !ft_isdigit(str[i]))
-			return (0);
-		i++;
-	}
-	if (comma_count != 2)
-		return (0);
-	return (1);
 }
