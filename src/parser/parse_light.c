@@ -17,7 +17,7 @@ static int	is_valid(t_point_light *light);
 t_point_light	*parse_light(char **fields, int fields_count)
 {
 	t_point_light	*light;
-	t_err		err;
+	t_err			err;
 
 	if (fields_count != LIGHT_FIELDS_COUNT)
 		return (NULL);
