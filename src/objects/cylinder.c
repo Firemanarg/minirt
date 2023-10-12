@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 14:34:32 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/12 04:52:45 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:56:28 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,3 @@ t_err	set_cylinder(t_geom_obj *cyl, t_matrix *transform, t_material *material)
 	cyl->is_closed = FALSE;
 	return (set_object(cyl, transform, material));
 }
-

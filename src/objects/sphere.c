@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 19:11:05 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/12 04:13:43 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:58:12 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	sphere_normal_at(t_geom_obj *sph, t_vec3 *object_point,
 	*object_normal = *object_point;
 }
 
-t_err	set_sphere(t_geom_obj *sph, t_matrix *transform,t_material *material)
+t_err	set_sphere(t_geom_obj *sph, t_matrix *transform, t_material *material)
 {
 	sph->type = SPHERE;
 	sph->intersects = (t_isect_func)sphere_intersect;

@@ -58,7 +58,6 @@ void	cone_normal_at(t_geom_obj *c, t_vec3 *obj_point, t_vec3 *obj_normal)
 	dist = obj_point->x * obj_point->x
 		+ obj_point->z * obj_point->z;
 	r_sq = obj_point->y * obj_point->y;
-
 	if (dist < r_sq && obj_point->y >= c->maximum - EPSILON)
 		set_vec3(0.0, 1.0, 0.0, obj_normal);
 	else if (dist < r_sq && obj_point->y <= c->minimum + EPSILON)
