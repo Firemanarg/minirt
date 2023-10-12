@@ -140,4 +140,8 @@ void	set_material_color(t_material *material, double r, double g, double b);
 void	set_material_coefficients(t_material *material, double ambient,
 			double diffuse, double specular);
 
+// scene.c
+t_scene	*new_scene(int light_count, int geometries_count);
+void	*free_scene(t_scene *scene);
+
 #endif
