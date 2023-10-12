@@ -13,6 +13,8 @@
 #ifndef PARSER_H
 # define PARSER_H
 
+# include <unistd.h>
+# include <fcntl.h>
 # include "objects.h"
 # include "error.h"
 # include "vec3.h"
@@ -41,7 +43,7 @@ typedef struct s_scene_parser
 // parser.c
 t_scene			*parse_file(char *file_name);
 t_base_obj		*parse_line(char *line);
-// t_obj_type		get_type_by_str(char *str);
+t_obj_type		get_type_by_str(char *str);
 
 // validations.c
 int				is_valid_color(t_vec3 *color);
