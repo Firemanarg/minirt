@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:44:47 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/12 04:52:43 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 17:41:04 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ typedef t_err				(*t_isect_func)(t_geom_obj *obj, void *ray,
 typedef void				(*t_normal_func)(t_geom_obj *s, t_vec3 *world_point,
 								t_vec3 *world_normal);
 
-typedef void				(*t_uv_func)(t_vec3 *p, double *u, double *v);
+typedef void				(*t_uv_func)(t_geom_obj * obj, t_vec3 *p,
+								double *u, double *v);
 
 typedef enum e_bool
 {
@@ -199,13 +200,11 @@ void	obj_normal_at(t_geom_obj *obj, t_vec3 *world_point,
 void	plane_normal_at(t_geom_obj *p, t_vec3 *object_point,
 			t_vec3 *object_normal);
 t_err	set_plane(t_geom_obj *plane, t_matrix *transform, t_material *material);
-void	plane_map_uv(t_vec3 *p, double *u, double *v);
 
 // sphere.c
 void	sphere_normal_at(t_geom_obj *sph, t_vec3 *object_point,
 			t_vec3 *object_normal);
 t_err	set_sphere(t_geom_obj *sph, t_matrix *transform,
 			t_material *material);
-void	sphere_map_uv(t_vec3 *p, double *u, double *v);
 
 #endif

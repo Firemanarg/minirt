@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 19:11:22 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/12 16:46:26 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 17:50:24 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ static void	get_default_material(t_material *material)
 	set_material_shininess(material, 200.0);
 }
 
-static void	ambient_lighting(t_material *material, t_color *light_color,
-				t_color *color)
+static void	pre_lighting(t_material *material, t_color *light_color,
+				t_color *amb_lit, t_color *tmp)
 {
-	hadamard(&material->color, light_color, color);
-	multiply(color, material->ambient, color);
+	hadamard(&material->color, light_color, amb_lit);
+	multiply(amb_lit, material->ambient, amb_lit);
+	*tmp = material->color;
 }
 
 Test(lighting, eye_between_light_and_surface)
@@ -42,7 +43,7 @@ Test(lighting, eye_between_light_and_surface)
 	p.point = (t_vec3){.x = 0, .y = 0, .z = 0};
 	p.in_shadow = FALSE;
 	p.over_point = (t_vec3){.x = 0, .y = 0, .z = 0};
-	ambient_lighting(&material, &light.color, &amb_lit);
+	pre_lighting(&material, &light.color, &amb_lit, &result);
 	lighting(&p, &material, &light, &result);
 	add(&result, &amb_lit, &result);
 	cr_expect(epsilon_eq(dbl, result.r, 1.9, EPSILON));
@@ -66,7 +67,7 @@ Test(lighting, eye_between_light_and_surface_eye_45deg)
 	p.point = (t_vec3){.x = 0, .y = 0, .z = 0};
 	p.in_shadow = FALSE;
 	p.over_point = (t_vec3){.x = 0, .y = 0, .z = 0};
-	ambient_lighting(&material, &light.color, &amb_lit);
+	pre_lighting(&material, &light.color, &amb_lit, &result);
 	lighting(&p, &material, &light, &result);
 	add(&result, &amb_lit, &result);
 	cr_expect(epsilon_eq(dbl, result.r, 1.0, EPSILON));
@@ -90,7 +91,7 @@ Test(lighting, eye_opposite_surface_light_45deg)
 	p.point = (t_vec3){.x = 0, .y = 0, .z = 0};
 	p.in_shadow = FALSE;
 	p.over_point = (t_vec3){.x = 0, .y = 0, .z = 0};
-	ambient_lighting(&material, &light.color, &amb_lit);
+	pre_lighting(&material, &light.color, &amb_lit, &result);
 	lighting(&p, &material, &light, &result);
 	add(&result, &amb_lit, &result);
 	cr_expect(epsilon_eq(dbl, result.r, 0.7364, EPSILON));
@@ -114,7 +115,7 @@ Test(lighting, eye_in_path_of_reflection_vector)
 	p.point = (t_vec3){.x = 0, .y = 0, .z = 0};
 	p.in_shadow = FALSE;
 	p.over_point = (t_vec3){.x = 0, .y = 0, .z = 0};
-	ambient_lighting(&material, &light.color, &amb_lit);
+	pre_lighting(&material, &light.color, &amb_lit, &result);
 	lighting(&p, &material, &light, &result);
 	add(&result, &amb_lit, &result);
 	cr_expect(epsilon_eq(dbl, result.r, 1.6364, EPSILON));
@@ -138,7 +139,7 @@ Test(lighting, light_behind_surface)
 	p.point = (t_vec3){.x = 0, .y = 0, .z = 0};
 	p.in_shadow = FALSE;
 	p.over_point = (t_vec3){.x = 0, .y = 0, .z = 0};
-	ambient_lighting(&material, &light.color, &amb_lit);
+	pre_lighting(&material, &light.color, &amb_lit, &result);
 	lighting(&p, &material, &light, &result);
 	add(&result, &amb_lit, &result);
 	cr_expect(epsilon_eq(dbl, result.r, 0.1, EPSILON));
@@ -162,7 +163,7 @@ Test(lighting, point_in_shadow)
 	p.point = (t_vec3){.x = 0, .y = 0, .z = 0};
 	p.in_shadow = TRUE;
 	p.over_point = (t_vec3){.x = 0, .y = 0, .z = 0};
-	ambient_lighting(&material, &light.color, &amb_lit);
+	pre_lighting(&material, &light.color, &amb_lit, &result);
 	lighting(&p, &material, &light, &result);
 	add(&result, &amb_lit, &result);
 	cr_expect(epsilon_eq(dbl, result.r, 0.1, EPSILON));

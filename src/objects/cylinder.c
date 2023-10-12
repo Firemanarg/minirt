@@ -6,17 +6,17 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 14:34:32 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/12 16:56:28 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 17:21:29 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projection.h"
 
-static t_err	insert_if_in_range(t_geom_obj *cylinder, t_varray *r,
+static t_err	insert_if_in_range(t_geom_obj *cyl, t_varray *r,
 					double t, double y)
 {
-	if (y > cylinder->minimum && y < cylinder->maximum)
-		return (insert_into_array(r, t, cylinder));
+	if (y > cyl->minimum && y < cyl->maximum)
+		return (insert_into_array(r, t, cyl));
 	return (OK);
 }
 
@@ -64,11 +64,21 @@ void	cylinder_normal_at(t_geom_obj *cyl, t_vec3 *obj_point,
 		set_vec3(obj_point->x, 0.0, obj_point->z, obj_normal);
 }
 
+static void	cylinder_map_uv(t_geom_obj *cyl, t_vec3 *p, double *u, double *v)
+{
+	if (p->y > cyl->minimum && p->y < cyl->maximum)
+		*u = 1 - (atan2(p->x, p->z) * 0.5 * M_1_PI + 0.5);
+	else
+		*u = fmod(p->x, 1);
+	*v = fmod(p->y, 1);
+}
+
 t_err	set_cylinder(t_geom_obj *cyl, t_matrix *transform, t_material *material)
 {
 	cyl->type = CYLINDER;
 	cyl->intersects = (t_isect_func)cylinder_intersect;
 	cyl->normal_at = cylinder_normal_at;
+	cyl->map_uv = cylinder_map_uv;
 	cyl->minimum = -1.0 / 0.0;
 	cyl->maximum = 1.0 / 0.0;
 	cyl->is_closed = FALSE;

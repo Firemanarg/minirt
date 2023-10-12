@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 00:21:39 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/12 04:20:37 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 17:06:14 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ void	pattern_at(t_geom_obj *obj, t_vec3 *point, t_color *c)
 	double	u;
 	double	v;
 
-	obj->map_uv(point, &u, &v);
+	obj->map_uv(obj, point, &u, &v);
 	uv_checkers_at(&obj->checkers, u, v, c);
 }
