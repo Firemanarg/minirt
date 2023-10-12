@@ -28,7 +28,7 @@ t_plane	*parse_plane(char **fields, int fields_count)
 	plane->type = PLANE;
 	err = str_to_vec3(fields[1], &plane->pos);
 	err |= str_to_vec3(fields[2], &plane->dir);
-	err |= str_to_vec3(fields[3], &plane->color);
+	err |= str_to_vec3(fields[3], &(plane->material.color));
 	if (err != OK || !is_valid(plane))
 	{
 		free(plane);
@@ -42,7 +42,7 @@ static int	is_valid(t_plane *plane)
 {
 	if (!is_valid_direction(&plane->dir))
 		return (0);
-	else if (!is_valid_color(&plane->color))
+	else if (!is_valid_color(&(plane->material.color)))
 		return (0);
 	return (1);
 }

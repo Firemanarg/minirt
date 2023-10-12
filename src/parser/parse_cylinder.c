@@ -30,7 +30,7 @@ t_cylinder	*parse_cylinder(char **fields, int fields_count)
 	err |= str_to_vec3(fields[2], &cylinder->dir);
 	cylinder->diameter = ft_atod(fields[3]);
 	cylinder->height = ft_atod(fields[4]);
-	err |= str_to_vec3(fields[5], &cylinder->color);
+	err |= str_to_vec3(fields[5], &(cylinder->material.color));
 	if (err != OK || !is_valid(cylinder))
 	{
 		free(cylinder);
@@ -44,7 +44,7 @@ static int	is_valid(t_cylinder *cylinder)
 {
 	if (!is_valid_direction(&cylinder->dir))
 		return (0);
-	else if (!is_valid_color(&cylinder->color))
+	else if (!is_valid_color(&(cylinder->material.color)))
 		return (0);
 	else if (cylinder->diameter <= 0)
 		return (0);

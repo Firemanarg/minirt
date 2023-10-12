@@ -12,7 +12,7 @@
 
 #include "parser.h"
 
-static void	is_valid(t_sphere *sphere);
+static int	is_valid(t_sphere *sphere);
 static void	apply_transforms(t_sphere *sphere);
 
 t_sphere	*parse_sphere(char **fields, int fields_count)
@@ -27,8 +27,8 @@ t_sphere	*parse_sphere(char **fields, int fields_count)
 		return (NULL);
 	sphere->type = SPHERE;
 	err = str_to_vec3(fields[1], &sphere->pos);
-	sphere->radius = ft_atod(fields[2]);
-	err |= str_to_vec3(fields[3], &sphere->color);
+	sphere->diameter = ft_atod(fields[2]);
+	err |= str_to_vec3(fields[3], &(sphere->material.color));
 	if (err != OK || !is_valid(sphere))
 	{
 		free(sphere);
@@ -38,11 +38,11 @@ t_sphere	*parse_sphere(char **fields, int fields_count)
 	return (sphere);
 }
 
-static void	is_valid(t_sphere *sphere)
+static int	is_valid(t_sphere *sphere)
 {
-	if (!is_valid_color(&sphere->color))
+	if (!is_valid_color(&(sphere->material.color)))
 		return (0);
-	else if (sphere->radius <= 0)
+	else if (sphere->diameter <= 0)
 		return (0);
 	return (1);
 }
