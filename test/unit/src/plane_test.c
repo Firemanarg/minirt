@@ -6,13 +6,13 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 06:35:42 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/05 03:31:36 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 04:55:50 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_test.h>
 
-static void	get_plane(t_obj *plane, t_matrix *transform)
+static void	get_plane(t_geom_obj *plane, t_matrix *transform)
 {
 	t_material	material;
 
@@ -27,7 +27,7 @@ static void	get_plane(t_obj *plane, t_matrix *transform)
 
 Test(plane, normal_is_constant_everywhere)
 {
-	t_obj	plane;
+	t_geom_obj	plane;
 	t_vec3	normal;
 
 	get_plane(&plane, matrix_new_identity(4));
@@ -48,7 +48,7 @@ Test(plane, normal_is_constant_everywhere)
 
 Test(plane, intersect_with_parallel_ray)
 {
-	t_obj		plane;
+	t_geom_obj		plane;
 	t_ray		r;
 	t_varray	*xs;
 
@@ -65,7 +65,7 @@ Test(plane, intersect_with_parallel_ray)
 
 Test(plane, intersect_with_coplanar_ray)
 {
-	t_obj		plane;
+	t_geom_obj		plane;
 	t_ray		r;
 	t_varray	*xs;
 
@@ -82,7 +82,7 @@ Test(plane, intersect_with_coplanar_ray)
 
 Test(plane, intersect_from_above)
 {
-	t_obj		plane;
+	t_geom_obj		plane;
 	t_ray		r;
 	t_varray	*xs;
 
@@ -102,7 +102,7 @@ Test(plane, intersect_from_above)
 
 Test(plane, intersect_from_below)
 {
-	t_obj		plane;
+	t_geom_obj		plane;
 	t_ray		r;
 	t_varray	*xs;
 

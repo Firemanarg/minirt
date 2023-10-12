@@ -6,13 +6,13 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 02:49:25 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/05 03:32:53 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 13:41:30 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_test.h>
 
-static t_err	get_sphere(t_obj *sphere, t_matrix *transform)
+static t_err	get_sphere(t_geom_obj *sphere, t_matrix *transform)
 {
 	t_material	material;
 
@@ -27,7 +27,7 @@ static t_err	get_sphere(t_obj *sphere, t_matrix *transform)
 
 Test(sphere_transform, sphere_transform_identity)
 {
-	t_obj	sphere;
+	t_geom_obj	sphere;
 	t_err	err = get_sphere(&sphere, matrix_new_identity(4));
 
 	cr_assert(eq(int, err, OK));
@@ -58,7 +58,7 @@ Test(sphere_transform, sphere_transform_identity)
 
 Test(sphere_transform, sphere_transform_change)
 {
-	t_obj	sphere;
+	t_geom_obj	sphere;
 	t_err	err = get_sphere(&sphere, matrix_new_identity(4));
 
 	cr_assert(eq(int, err, OK));
@@ -93,7 +93,7 @@ Test(sphere_transform, sphere_transform_change)
 
 Test(sphere_transform, intersect_scaled_ray)
 {
-	t_obj		sphere;
+	t_geom_obj	sphere;
 	t_ray		r;
 	t_varray	*intersections;
 
@@ -111,8 +111,10 @@ Test(sphere_transform, intersect_scaled_ray)
 	obj_intersect(&sphere, &r, intersections);
 	quicksort(intersections);
 	cr_expect(eq(int, intersections->length, 2));
-	cr_expect(epsilon_eq(dbl, ((t_isect *)intersections->arr)[0].t, 3.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, ((t_isect *)intersections->arr)[1].t, 7.0, EPSILON));
+	cr_expect(epsilon_eq(dbl, ((t_isect *)intersections->arr)[0].t, 3.0,
+		EPSILON));
+	cr_expect(epsilon_eq(dbl, ((t_isect *)intersections->arr)[1].t, 7.0,
+		EPSILON));
 	matrix_free(sphere.transform);
 	matrix_free(sphere.inv_transform);
 	free_array(intersections);

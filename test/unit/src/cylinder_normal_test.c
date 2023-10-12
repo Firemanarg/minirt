@@ -6,13 +6,13 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 17:38:17 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/26 02:43:04 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 04:55:20 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_test.h>
 
-static void	get_cylinder(t_obj *cylinder, t_matrix *transform)
+static void	get_cylinder(t_geom_obj *cylinder, t_matrix *transform)
 {
 	t_material	material;
 
@@ -27,7 +27,7 @@ static void	get_cylinder(t_obj *cylinder, t_matrix *transform)
 
 Test(cylinder_normal, surface_point_1)
 {
-	t_obj	cylinder;
+	t_geom_obj	cylinder;
 	t_vec3	point = {.x = 1, .y = 0, .z = 0};
 	t_vec3	normal;
 
@@ -41,7 +41,7 @@ Test(cylinder_normal, surface_point_1)
 
 Test(cylinder_normal, surface_point_2)
 {
-	t_obj	cylinder;
+	t_geom_obj	cylinder;
 	t_vec3	point = {.x = 0, .y = 5, .z = -1};
 	t_vec3	normal;
 
@@ -55,7 +55,7 @@ Test(cylinder_normal, surface_point_2)
 
 Test(cylinder_normal, surface_point_3)
 {
-	t_obj	cylinder;
+	t_geom_obj	cylinder;
 	t_vec3	point = {.x = 0, .y = -2, .z = 1};
 	t_vec3	normal;
 
@@ -69,7 +69,7 @@ Test(cylinder_normal, surface_point_3)
 
 Test(cylinder_normal, surface_point_4)
 {
-	t_obj	cylinder;
+	t_geom_obj	cylinder;
 	t_vec3	point = {.x = -1, .y = 1, .z = 0};
 	t_vec3	normal;
 

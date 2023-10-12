@@ -6,13 +6,13 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 12:59:59 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/05 03:30:57 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 04:55:11 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_test.h>
 
-static void	get_cylinder(t_obj *cylinder, t_matrix *transform)
+static void	get_cylinder(t_geom_obj *cylinder, t_matrix *transform)
 {
 	t_material	material;
 
@@ -27,7 +27,7 @@ static void	get_cylinder(t_obj *cylinder, t_matrix *transform)
 
 Test(cylinder_intersect, parallel_ray_on_surface_misses)
 {
-	t_obj		cylinder;
+	t_geom_obj		cylinder;
 	t_ray		r;
 	t_varray	*xs;
 	t_err 		err;
@@ -46,7 +46,7 @@ Test(cylinder_intersect, parallel_ray_on_surface_misses)
 
 Test(cylinder_intersect, parallel_ray_inside_misses)
 {
-	t_obj		cylinder;
+	t_geom_obj		cylinder;
 	t_ray		r;
 	t_varray	*xs;
 	t_err 		err;
@@ -65,7 +65,7 @@ Test(cylinder_intersect, parallel_ray_inside_misses)
 
 Test(cylinder_intersect, parallel_ray_outside_misses)
 {
-	t_obj		cylinder;
+	t_geom_obj		cylinder;
 	t_ray		r;
 	t_varray	*xs;
 	t_err 		err;
@@ -84,7 +84,7 @@ Test(cylinder_intersect, parallel_ray_outside_misses)
 
 Test(cylinder_intersect, ray_hits_one_point)
 {
-	t_obj		cylinder;
+	t_geom_obj		cylinder;
 	t_ray		r;
 	t_varray	*xs;
 	t_err 		err;
@@ -109,7 +109,7 @@ Test(cylinder_intersect, ray_hits_one_point)
 
 Test(cylinder_intersect, ray_hits_two_points_1)
 {
-	t_obj		cylinder;
+	t_geom_obj		cylinder;
 	t_ray		r;
 	t_varray	*xs;
 	t_err 		err;
@@ -134,7 +134,7 @@ Test(cylinder_intersect, ray_hits_two_points_1)
 
 Test(cylinder_intersect, ray_hits_two_points_2)
 {
-	t_obj		cylinder;
+	t_geom_obj		cylinder;
 	t_ray		r;
 	t_varray	*xs;
 	t_err 		err;

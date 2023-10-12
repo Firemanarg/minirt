@@ -12,7 +12,7 @@
 
 #include <minirt_test.h>
 
-static void	get_cone(t_obj *cone, t_matrix *transform)
+static void	get_cone(t_geom_obj *cone, t_matrix *transform)
 {
 	t_material	material;
 
@@ -27,7 +27,7 @@ static void	get_cone(t_obj *cone, t_matrix *transform)
 
 Test(cone_normal, surface_point_1)
 {
-	t_obj	cone;
+	t_geom_obj	cone;
 	t_vec3	point = {.x = 0, .y = 0, .z = 0};
 	t_vec3	normal;
 
@@ -41,7 +41,7 @@ Test(cone_normal, surface_point_1)
 
 Test(cone_normal, surface_point_2)
 {
-	t_obj	cone;
+	t_geom_obj	cone;
 	t_vec3	point = {.x = 1, .y = 1, .z = 1};
 	t_vec3	normal;
 
@@ -55,7 +55,7 @@ Test(cone_normal, surface_point_2)
 
 Test(cone_normal, surface_point_3)
 {
-	t_obj	cone;
+	t_geom_obj	cone;
 	t_vec3	point = {.x = -1, .y = -1, .z = 0};
 	t_vec3	normal;
 

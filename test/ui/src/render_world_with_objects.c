@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 22:51:50 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/09 02:58:54 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 04:36:34 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	get_large_cylinder(t_geom_obj *cylinder)
 	m.specular = 0.3;
 	set_cylinder(cylinder,
 		matrix_apply(matrix_new_identity(4), mops), &m);
-	set_cylinder_limits(cylinder, 0.0, 1.5, TRUE);
+	set_object_limits(cylinder, 0.0, 1.5, TRUE);
 }
 
 static void	get_medium_cone(t_geom_obj *cone)
@@ -96,7 +96,7 @@ static void	get_medium_cone(t_geom_obj *cone)
 	m.diffuse = 0.7;
 	m.specular = 0.3;
 	set_cone(cone, matrix_apply(matrix_new_identity(4), mops), &m);
-	set_cone_limits(cone, 0.0, 1.5, TRUE);
+	set_object_limits(cone, 0.0, 1.5, TRUE);
 }
 
 static void	get_small_sphere(t_geom_obj *sphere)

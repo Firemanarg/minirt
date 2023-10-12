@@ -12,7 +12,7 @@
 
 #include <minirt_test.h>
 
-static void	get_cone(t_obj *cone, t_matrix *transform)
+static void	get_cone(t_geom_obj *cone, t_matrix *transform)
 {
 	t_material	material;
 
@@ -27,7 +27,7 @@ static void	get_cone(t_obj *cone, t_matrix *transform)
 
 Test(capped_cone, default_cone_is_open)
 {
-	t_obj	cone;
+	t_geom_obj	cone;
 
 	get_cone(&cone, matrix_new_identity(4));
 	cr_expect(eq(int, cone.is_closed, FALSE));
@@ -36,13 +36,13 @@ Test(capped_cone, default_cone_is_open)
 
 Test(capped_cone, ray_misses)
 {
-	t_obj		cone;
+	t_geom_obj		cone;
 	t_ray		r;
 	t_varray	*xs;
 	t_err 		err;
 
 	get_cone(&cone, matrix_new_identity(4));
-	set_cone_limits(&cone, -0.5, 0.5, TRUE);
+	set_object_limits(&cone, -0.5, 0.5, TRUE);
 	cr_expect(eq(int, cone.is_closed, TRUE));
 	cr_expect(epsilon_eq(dbl, cone.maximum, 0.5, EPSILON));
 	cr_expect(epsilon_eq(dbl, cone.minimum, -0.5, EPSILON));
@@ -59,13 +59,13 @@ Test(capped_cone, ray_misses)
 
 Test(capped_cone, ray_hits_twice)
 {
-	t_obj		cone;
+	t_geom_obj		cone;
 	t_ray		r;
 	t_varray	*xs;
 	t_err 		err;
 
 	get_cone(&cone, matrix_new_identity(4));
-	set_cone_limits(&cone, -0.5, 0.5, TRUE);
+	set_object_limits(&cone, -0.5, 0.5, TRUE);
 	cr_expect(eq(int, cone.is_closed, TRUE));
 	cr_expect(epsilon_eq(dbl, cone.maximum, 0.5, EPSILON));
 	cr_expect(epsilon_eq(dbl, cone.minimum, -0.5, EPSILON));
@@ -83,13 +83,13 @@ Test(capped_cone, ray_hits_twice)
 
 Test(capped_cone, ray_hits_four_times)
 {
-	t_obj		cone;
+	t_geom_obj		cone;
 	t_ray		r;
 	t_varray	*xs;
 	t_err 		err;
 
 	get_cone(&cone, matrix_new_identity(4));
-	set_cone_limits(&cone, -0.5, 0.5, TRUE);
+	set_object_limits(&cone, -0.5, 0.5, TRUE);
 	cr_expect(eq(int, cone.is_closed, TRUE));
 	cr_expect(epsilon_eq(dbl, cone.maximum, 0.5, EPSILON));
 	cr_expect(epsilon_eq(dbl, cone.minimum, -0.5, EPSILON));

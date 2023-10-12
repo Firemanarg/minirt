@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 22:51:50 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/09 01:43:23 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 04:36:01 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	get_cylinder(t_geom_obj *cylinder)
 	set_default_material(&m);
 	m.color = (t_color){.r = 0.0, .g = 0.0, .b = 1.0};
 	set_cylinder(cylinder, matrix_apply(matrix_new_identity(4), mops), &m);
-	set_cylinder_limits(cylinder, 0.1, 0.5, FALSE);
+	set_object_limits(cylinder, 0.1, 0.5, FALSE);
 }
 
 static void	get_camera(t_camera *camera, int width, int height)

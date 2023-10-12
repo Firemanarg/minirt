@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 01:51:28 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/06 03:03:36 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:50:58 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,21 @@ static void	set_default_world(t_scene *world)
 	t_material			m1;
 	t_material			m2;
 
-	world->lights = malloc(sizeof(*(world->lights)) * 1);
+	world->camera.transform = NULL;
+	world->camera.inv_transform = NULL;
+	world->camera.t_inv_transform = NULL;
+	world->ambient_light.color = (t_color){.r = 1.0, .g = 1.0, .b = 1.0};
+	world->lights = malloc(sizeof(*(world->lights)) * 2);
 	world->geometries = malloc(sizeof(*(world->geometries)) * 3);
 	set_material(&m1);
 	set_sphere(world->geometries, matrix_new_identity(4), &m1);
 	set_default_material(&m2);
 	set_sphere(world->geometries + 1, matrix_apply(matrix_new_identity(4),
 			(t_matrix_op *)ops), &m2);
-	world->lights[0] = (t_point_light){
-		.pos = (t_vec3){.x = -10, .y = 10, .z = -10},
-		.intensity = (t_color){.r = 1, .g = 1, .b = 1}};
 	world->geometries[2] = (t_geom_obj){0};
+	set_point_light(&(t_vec3){.x = -10.0, .y = 10.0, .z = -10.0},
+					&(t_color){.r = 1.0, .g = 1.0, .b = 1.0}, world->lights);
+	world->lights[1] = (t_point_light){0};
 }
 
 Test(world, intersect_world_with_ray)
@@ -168,18 +172,21 @@ Test(world, shade_intersection)
 	t_isect		i;
 	t_precomp	comps;
 	t_color		color;
+	t_varray	*xs;
 
+	xs = new_array(4);
 	set_default_world(&w);
 	set_ray(&(t_vec3){.x = 0, .y = 0, .z = -5},
 			&(t_vec3){.x = 0, .y = 0, .z = 1}, &r);
 	i.obj = w.geometries;
 	i.t = 4;
 	prepare_computations(&i, &r, &comps);
-	shade_hit(&w, &comps, &color);
+	shade_hit(&w, &comps, &color, xs);
 	cr_expect(epsilon_eq(dbl, color.r, 0.38066, EPSILON));
 	cr_expect(epsilon_eq(dbl, color.g, 0.47583, EPSILON));
 	cr_expect(epsilon_eq(dbl, color.b, 0.2855, EPSILON));
 	free_world(&w);
+	free_array(xs);
 }
 
 Test(world, shade_intersection_from_inside)
@@ -189,22 +196,23 @@ Test(world, shade_intersection_from_inside)
 	t_isect		i;
 	t_precomp	comps;
 	t_color		color;
+	t_varray	*xs;
 
+	xs = new_array(4);
 	set_default_world(&w);
-	w.lights[0] = (t_point_light){
-		.pos = (t_vec3){.x = 0, .y = 0.25, .z = 0},
-		.intensity = (t_color){.r = 1, .g = 1, .b = 1}
-	};
+	set_point_light(&(t_vec3){.x = 0, .y = 0.25, .z = 0},
+		 &(t_color){.r = 1, .g = 1, .b = 1}, w.lights + 1);
 	set_ray(&(t_vec3){.x = 0, .y = 0, .z = 0},
 			&(t_vec3){.x = 0, .y = 0, .z = 1}, &r);
 	i.obj = w.geometries + 1;
 	i.t = 0.5;
 	prepare_computations(&i, &r, &comps);
-	shade_hit(&w, &comps, &color);
+	shade_hit(&w, &comps, &color, xs);
 	cr_expect(epsilon_eq(dbl, color.r, 0.90498, EPSILON));
 	cr_expect(epsilon_eq(dbl, color.g, 0.90498, EPSILON));
 	cr_expect(epsilon_eq(dbl, color.b, 0.90498, EPSILON));
 	free_world(&w);
+	free_array(xs);
 }
 
 Test(world, color_on_ray_miss)

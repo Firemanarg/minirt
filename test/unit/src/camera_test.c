@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:05:14 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/06 22:44:37 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 15:45:41 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,31 @@ static void	set_default_world(t_scene *world)
 	t_material			m1;
 	t_material			m2;
 
-	world->lights = malloc(sizeof(*(world->lights)) * 1);
+	world->camera.transform = NULL;
+	world->camera.inv_transform = NULL;
+	world->camera.t_inv_transform = NULL;
+	world->ambient_light.color = (t_color){.r = 1.0, .g = 1.0, .b = 1.0};
+	world->lights = malloc(sizeof(*(world->lights)) * 2);
 	world->geometries = malloc(sizeof(*(world->geometries)) * 3);
 	set_material(&m1);
 	set_sphere(world->geometries, matrix_new_identity(4), &m1);
 	set_default_material(&m2);
 	set_sphere(world->geometries + 1, matrix_apply(matrix_new_identity(4),
 			(t_matrix_op *)ops), &m2);
-	world->lights[0] = (t_point_light){
-		.pos = (t_vec3){.x = -10, .y = 10, .z = -10},
-		.intensity = (t_color){.r = 1, .g = 1, .b = 1}};
 	world->geometries[2] = (t_geom_obj){0};
+	set_point_light(&(t_vec3){.x = -10.0, .y = 10.0, .z = -10.0},
+					&(t_color){.r = 1.0, .g = 1.0, .b = 1.0}, world->lights);
+	world->lights[1] = (t_point_light){0};
 }
 
 static unsigned int	pixel_at(t_mlx_data *mlx_data, int x, int y)
 {
-	return (*(unsigned int *)(mlx_data->addr
-		+ (y * mlx_data->line_length + x * (mlx_data->bits_per_pixel / 8))));
+	void	*src;
+
+	src = mlx_data->addr + (y * mlx_data->line_length
+			+ x * (mlx_data->bits_per_pixel / 8));
+
+	return (*(unsigned int *)src);
 }
 
 Test(camera, create_camera)
@@ -162,6 +170,7 @@ Test(camera, ray_camera_is_transformed)
 	transform = matrix_multiply(rotate_y, translate);
 	set_camera(201, 101, M_PI_2, &camera);
 	set_camera_transform(transform, &camera);
+	get_transformed_ray_origin(&camera, &ray);
 	ray_for_pixel(&camera, 100, 50, &ray);
 
 	cr_expect(epsilon_eq(dbl, ray.start.x, 0.0, EPSILON));
@@ -179,25 +188,23 @@ Test(camera, ray_camera_is_transformed)
 
 Test(camera, render_world_with_camera)
 {
-	t_camera	camera;
 	t_scene		world;
 	t_args		args;
 	t_color		expected_color = {.r = 0.38066, .g = 0.47583, .b = 0.2855};
 
 	init_args(&args, 11, 11);
-	set_camera(11, 11, M_PI_2, &camera);
+	set_default_world(&world);
+	set_camera(11, 11, M_PI_2, &world.camera);
 	set_camera_transform(view_transform(
 		&(t_vec3){.x = 0.0, .y = 0.0, .z = -5.0},
 		&(t_vec3){.x = 0.0, .y = 0.0, .z = 0.0},
 		&(t_vec3){.x = 0.0, .y = 1.0, .z = 0.0}),
-	&camera);
-	set_default_world(&world);
-	render_image(&camera, &world, &args.mlx_data);
+	&world.camera);
+	render_image(&world.camera, &world, &args.mlx_data);
 
 	cr_expect(eq(uint, pixel_at(&args.mlx_data, 5, 5),
 		convert_color(&expected_color)));
 
-	free_camera(&camera);
 	free_world(&world);
 	close_graphics(&args);
 }

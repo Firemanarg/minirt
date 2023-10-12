@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 19:11:22 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/07 01:47:22 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:46:26 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,32 @@ static void	get_default_material(t_material *material)
 	set_material_shininess(material, 200.0);
 }
 
-static void	get_point_light(t_point_light *light, t_vec3 *pos, t_color *color)
+static void	ambient_lighting(t_material *material, t_color *light_color,
+				t_color *color)
 {
-	light->intensity = *color;
-	light->pos = *pos;
+	hadamard(&material->color, light_color, color);
+	multiply(color, material->ambient, color);
 }
 
 Test(lighting, eye_between_light_and_surface)
 {
 	t_precomp		p;
+	t_color			amb_lit;
 	t_color			result;
 	t_material		material;
 	t_point_light	light;
 
 	get_default_material(&material);
-	get_point_light(&light, &(t_vec3){.x = 0, .y = 0, .z = -10},
-		&(t_color){.r = 1, .g = 1, .b = 1});
+	set_point_light(&(t_vec3){.x = 0, .y = 0, .z = -10},
+		&(t_color){.r = 1, .g = 1, .b = 1}, &light);
 	p.normal = (t_vec3){.x = 0, .y = 0, .z = -1};
 	p.eye = (t_vec3){.x = 0, .y = 0, .z = -1};
 	p.point = (t_vec3){.x = 0, .y = 0, .z = 0};
 	p.in_shadow = FALSE;
+	p.over_point = (t_vec3){.x = 0, .y = 0, .z = 0};
+	ambient_lighting(&material, &light.color, &amb_lit);
 	lighting(&p, &material, &light, &result);
+	add(&result, &amb_lit, &result);
 	cr_expect(epsilon_eq(dbl, result.r, 1.9, EPSILON));
 	cr_expect(epsilon_eq(dbl, result.g, 1.9, EPSILON));
 	cr_expect(epsilon_eq(dbl, result.b, 1.9, EPSILON));
@@ -48,18 +53,22 @@ Test(lighting, eye_between_light_and_surface)
 Test(lighting, eye_between_light_and_surface_eye_45deg)
 {
 	t_precomp		p;
+	t_color			amb_lit;
 	t_color			result;
 	t_material		material;
 	t_point_light	light;
 
 	get_default_material(&material);
-	get_point_light(&light, &(t_vec3){.x = 0, .y = 0, .z = -10},
-		&(t_color){.r = 1, .g = 1, .b = 1});
+	set_point_light(&(t_vec3){.x = 0, .y = 0, .z = -10},
+		&(t_color){.r = 1, .g = 1, .b = 1}, &light);
 	p.normal = (t_vec3){.x = 0, .y = 0, .z = -1};
 	p.eye = (t_vec3){.x = 0, .y = M_SQRT1_2, .z = -M_SQRT1_2};
 	p.point = (t_vec3){.x = 0, .y = 0, .z = 0};
 	p.in_shadow = FALSE;
+	p.over_point = (t_vec3){.x = 0, .y = 0, .z = 0};
+	ambient_lighting(&material, &light.color, &amb_lit);
 	lighting(&p, &material, &light, &result);
+	add(&result, &amb_lit, &result);
 	cr_expect(epsilon_eq(dbl, result.r, 1.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, result.g, 1.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, result.b, 1.0, EPSILON));
@@ -68,18 +77,22 @@ Test(lighting, eye_between_light_and_surface_eye_45deg)
 Test(lighting, eye_opposite_surface_light_45deg)
 {
 	t_precomp		p;
+	t_color			amb_lit;
 	t_color			result;
 	t_material		material;
 	t_point_light	light;
 
 	get_default_material(&material);
-	get_point_light(&light, &(t_vec3){.x = 0, .y = 10, .z = -10},
-		&(t_color){.r = 1, .g = 1, .b = 1});
+	set_point_light(&(t_vec3){.x = 0, .y = 10, .z = -10},
+		&(t_color){.r = 1, .g = 1, .b = 1}, &light);
 	p.normal = (t_vec3){.x = 0, .y = 0, .z = -1};
 	p.eye = (t_vec3){.x = 0, .y = 0, .z = -1};
 	p.point = (t_vec3){.x = 0, .y = 0, .z = 0};
 	p.in_shadow = FALSE;
+	p.over_point = (t_vec3){.x = 0, .y = 0, .z = 0};
+	ambient_lighting(&material, &light.color, &amb_lit);
 	lighting(&p, &material, &light, &result);
+	add(&result, &amb_lit, &result);
 	cr_expect(epsilon_eq(dbl, result.r, 0.7364, EPSILON));
 	cr_expect(epsilon_eq(dbl, result.g, 0.7364, EPSILON));
 	cr_expect(epsilon_eq(dbl, result.b, 0.7364, EPSILON));
@@ -88,18 +101,22 @@ Test(lighting, eye_opposite_surface_light_45deg)
 Test(lighting, eye_in_path_of_reflection_vector)
 {
 	t_precomp		p;
+	t_color			amb_lit;
 	t_color			result;
 	t_material		material;
 	t_point_light	light;
 
 	get_default_material(&material);
-	get_point_light(&light, &(t_vec3){.x = 0, .y = 10, .z = -10},
-		&(t_color){.r = 1, .g = 1, .b = 1});
+	set_point_light(&(t_vec3){.x = 0, .y = 10, .z = -10},
+		&(t_color){.r = 1, .g = 1, .b = 1}, &light);
 	p.normal = (t_vec3){.x = 0, .y = 0, .z = -1};
 	p.eye = (t_vec3){.x = 0, .y = -M_SQRT1_2, .z = -M_SQRT1_2};
 	p.point = (t_vec3){.x = 0, .y = 0, .z = 0};
 	p.in_shadow = FALSE;
+	p.over_point = (t_vec3){.x = 0, .y = 0, .z = 0};
+	ambient_lighting(&material, &light.color, &amb_lit);
 	lighting(&p, &material, &light, &result);
+	add(&result, &amb_lit, &result);
 	cr_expect(epsilon_eq(dbl, result.r, 1.6364, EPSILON));
 	cr_expect(epsilon_eq(dbl, result.g, 1.6364, EPSILON));
 	cr_expect(epsilon_eq(dbl, result.b, 1.6364, EPSILON));
@@ -108,18 +125,22 @@ Test(lighting, eye_in_path_of_reflection_vector)
 Test(lighting, light_behind_surface)
 {
 	t_precomp		p;
+	t_color			amb_lit;
 	t_color			result;
 	t_material		material;
 	t_point_light	light;
 
 	get_default_material(&material);
-	get_point_light(&light, &(t_vec3){.x = 0, .y = 0, .z = 10},
-		&(t_color){.r = 1, .g = 1, .b = 1});
+	set_point_light(&(t_vec3){.x = 0, .y = 0, .z = 10},
+		&(t_color){.r = 1, .g = 1, .b = 1}, &light);
 	p.normal = (t_vec3){.x = 0, .y = 0, .z = -1};
 	p.eye = (t_vec3){.x = 0, .y = 0, .z = -1};
 	p.point = (t_vec3){.x = 0, .y = 0, .z = 0};
 	p.in_shadow = FALSE;
+	p.over_point = (t_vec3){.x = 0, .y = 0, .z = 0};
+	ambient_lighting(&material, &light.color, &amb_lit);
 	lighting(&p, &material, &light, &result);
+	add(&result, &amb_lit, &result);
 	cr_expect(epsilon_eq(dbl, result.r, 0.1, EPSILON));
 	cr_expect(epsilon_eq(dbl, result.g, 0.1, EPSILON));
 	cr_expect(epsilon_eq(dbl, result.b, 0.1, EPSILON));
@@ -128,18 +149,22 @@ Test(lighting, light_behind_surface)
 Test(lighting, point_in_shadow)
 {
 	t_precomp		p;
+	t_color			amb_lit;
 	t_color			result;
 	t_material		material;
 	t_point_light	light;
 
 	get_default_material(&material);
-	get_point_light(&light, &(t_vec3){.x = 0, .y = 0, .z = -10},
-		&(t_color){.r = 1, .g = 1, .b = 1});
+	set_point_light(&(t_vec3){.x = 0, .y = 0, .z = -10},
+		&(t_color){.r = 1, .g = 1, .b = 1}, &light);
 	p.normal = (t_vec3){.x = 0, .y = 0, .z = -1};
 	p.eye = (t_vec3){.x = 0, .y = 0, .z = -1};
 	p.point = (t_vec3){.x = 0, .y = 0, .z = 0};
 	p.in_shadow = TRUE;
+	p.over_point = (t_vec3){.x = 0, .y = 0, .z = 0};
+	ambient_lighting(&material, &light.color, &amb_lit);
 	lighting(&p, &material, &light, &result);
+	add(&result, &amb_lit, &result);
 	cr_expect(epsilon_eq(dbl, result.r, 0.1, EPSILON));
 	cr_expect(epsilon_eq(dbl, result.g, 0.1, EPSILON));
 	cr_expect(epsilon_eq(dbl, result.b, 0.1, EPSILON));

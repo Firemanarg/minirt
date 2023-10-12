@@ -6,13 +6,13 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 01:14:09 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/26 02:44:49 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 05:04:20 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_test.h>
 
-static void	get_sphere(t_obj *sphere, t_matrix *transform)
+static void	get_sphere(t_geom_obj *sphere, t_matrix *transform)
 {
 	t_material	material;
 
@@ -27,7 +27,7 @@ static void	get_sphere(t_obj *sphere, t_matrix *transform)
 
 Test(sphere_normal, default_sphere_x_axis)
 {
-	t_obj	sphere;
+	t_geom_obj	sphere;
 	t_vec3	normal;
 	t_vec3	point = {.x = 1, .y = 0, .z = 0};
 
@@ -42,7 +42,7 @@ Test(sphere_normal, default_sphere_x_axis)
 
 Test(sphere_normal, default_sphere_y_axis)
 {
-	t_obj	sphere;
+	t_geom_obj	sphere;
 	t_vec3	normal;
 	t_vec3	point = {.x = 0, .y = 1, .z = 0};
 
@@ -57,7 +57,7 @@ Test(sphere_normal, default_sphere_y_axis)
 
 Test(sphere_normal, default_sphere_z_axis)
 {
-	t_obj	sphere;
+	t_geom_obj	sphere;
 	t_vec3	normal;
 	t_vec3	point = {.x = 0, .y = 0, .z = 1};
 
@@ -72,7 +72,7 @@ Test(sphere_normal, default_sphere_z_axis)
 
 Test(sphere_normal, default_sphere_non_axial)
 {
-	t_obj	sphere;
+	t_geom_obj	sphere;
 	t_vec3	normal;
 	double	sqrt_3_over_3 = sqrt(3.0) / 3.0;
 	t_vec3	point = {.x = sqrt_3_over_3, .y = sqrt_3_over_3,
@@ -90,7 +90,7 @@ Test(sphere_normal, default_sphere_non_axial)
 
 Test(sphere_normal, translated_sphere)
 {
-	t_obj	sphere;
+	t_geom_obj	sphere;
 	t_vec3	normal;
 	t_vec3	point = {.x = 0, .y = 1.70711,
 				.z = -0.70711};
@@ -107,7 +107,7 @@ Test(sphere_normal, translated_sphere)
 
 Test(sphere_normal, transformed_sphere)
 {
-	t_obj	sphere;
+	t_geom_obj	sphere;
 	t_vec3	normal;
 	t_vec3	point = {.x = 0.0, .y = M_SQRT1_2,
 				.z = -M_SQRT1_2};

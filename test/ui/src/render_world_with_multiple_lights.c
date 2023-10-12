@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 22:51:50 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/09 11:17:35 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 04:35:16 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	get_large_cylinder(t_geom_obj *cylinder)
 	m.specular = 0.3;
 	set_cylinder(cylinder,
 		matrix_apply(matrix_new_identity(4), mops), &m);
-	set_cylinder_limits(cylinder, 0.0, 1.5, TRUE);
+	set_object_limits(cylinder, 0.0, 1.5, TRUE);
 }
 
 static void	get_medium_cone(t_geom_obj *cone)
@@ -96,7 +96,7 @@ static void	get_medium_cone(t_geom_obj *cone)
 	m.diffuse = 0.7;
 	m.specular = 0.3;
 	set_cone(cone, matrix_apply(matrix_new_identity(4), mops), &m);
-	set_cone_limits(cone, 0.0, 1.5, TRUE);
+	set_object_limits(cone, 0.0, 1.5, TRUE);
 }
 
 static void	get_small_sphere(t_geom_obj *sphere)
@@ -168,8 +168,6 @@ int	main(void)
 	get_world(&world, width, height);
 	render_image(&world.camera, &world, &args.mlx_data);
 	free_world(&world);
-	// mlx_put_image_to_window(args.mlx, args.mlx_win,
-	// 	args.mlx_data.img, 0, 0);
 	clock_gettime(CLOCK_MONOTONIC_RAW, &end);
 	printf("Rendered in %.0f ms.\n", (end.tv_nsec - begin.tv_nsec) / 1000000.0
 		+ (end.tv_sec - begin.tv_sec) * 1000.0);
