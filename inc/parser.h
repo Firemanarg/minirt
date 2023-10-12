@@ -34,6 +34,8 @@ typedef struct s_scene_parser
 {
 	t_scene		*scene;
 	t_base_obj	*obj;
+	char		*line;
+	int			fd;
 	int			amb_light_count;
 	int			camera_count;
 	int			light_count;
