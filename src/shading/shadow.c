@@ -6,11 +6,11 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 02:49:34 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/08 22:55:54 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 13:15:21 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projection.h"
+#include "shading.h"
 
 t_err	is_shadowed(t_scene *world, t_point_light *light,
 			t_precomp *comps, t_varray *xs)

@@ -6,14 +6,14 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 12:33:27 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/07 01:13:09 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 15:07:24 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shading.h"
 #include "graphics.h"
 
-static void	get_transformed_ray_origin(t_camera *camera, t_ray *ray)
+void	get_transformed_ray_origin(t_camera *camera, t_ray *ray)
 {
 	t_vec3	zero;
 

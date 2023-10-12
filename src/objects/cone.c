@@ -12,7 +12,7 @@
 
 #include "projection.h"
 
-static t_err	insert_if_in_cone_range(t_obj *cone, t_varray *r,
+static t_err	insert_if_in_cone_range(t_geom_obj *cone, t_varray *r,
 					double t, double y)
 {
 	if (y > cone->minimum && y < cone->maximum)
@@ -20,7 +20,7 @@ static t_err	insert_if_in_cone_range(t_obj *cone, t_varray *r,
 	return (OK);
 }
 
-static t_err	cone_intersect(t_obj *cone, t_ray *ray, t_varray *r)
+static t_err	cone_intersect(t_geom_obj *cone, t_ray *ray, t_varray *r)
 {
 	t_cone_eq_params	p;
 
@@ -49,7 +49,7 @@ static t_err	cone_intersect(t_obj *cone, t_ray *ray, t_varray *r)
 		|| intersect_cone_caps(cone, ray, r));
 }
 
-void	cone_normal_at(t_obj *c, t_vec3 *obj_point, t_vec3 *obj_normal)
+void	cone_normal_at(t_geom_obj *c, t_vec3 *obj_point, t_vec3 *obj_normal)
 {
 	double	dist;
 	double	y;
@@ -72,7 +72,7 @@ void	cone_normal_at(t_obj *c, t_vec3 *obj_point, t_vec3 *obj_normal)
 	}
 }
 
-t_err	set_cone(t_obj *cone, t_matrix *transform, t_material *material)
+t_err	set_cone(t_geom_obj *cone, t_matrix *transform, t_material *material)
 {
 	cone->type = CONE;
 	cone->intersects = (t_isect_func)cone_intersect;
@@ -81,12 +81,4 @@ t_err	set_cone(t_obj *cone, t_matrix *transform, t_material *material)
 	cone->maximum = 1.0 / 0.0;
 	cone->is_closed = FALSE;
 	return (set_object(cone, transform, material));
-}
-
-void	set_cone_limits(t_obj *cone, double minimum, double maximum,
-			t_bool closed)
-{
-	cone->minimum = minimum;
-	cone->maximum = maximum;
-	cone->is_closed = closed;
 }

@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:24:32 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/06 19:56:56 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 04:02:09 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,15 @@ enum {
 };
 
 // mlx_utils.c
-void	init_args(t_args *args, int width, int height);
-void	ft_pixel_put(t_mlx_data *mlx_data, int x, int y, t_color *minirt_color);
+void			init_args(t_args *args, int width, int height);
+void			ft_pixel_put(t_mlx_data *mlx_data, int x, int y,
+					t_color *minirt_color);
 unsigned int	convert_color(t_color *minirt_color);
 
 // window.c
-int		create_window(t_args *args);
-int		close_graphics(t_args *data);
-int		on_destroy(t_args *data);
-int		on_key_press(int keycode, t_args *data);
+int				create_window(t_args *args);
+int				close_graphics(t_args *data);
+int				on_destroy(t_args *data);
+int				on_key_press(int keycode, t_args *data);
 
 #endif
