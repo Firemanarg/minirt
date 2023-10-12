@@ -20,27 +20,27 @@ static int	increment_counters(t_scene_parser *parser, t_obj_type type);
 t_scene_parser	*get_scene_parser_args(char const *file_name)
 {
 	t_scene_parser	*parser;
-	int				fd;
-	char			*line;
 	t_obj_type		type;
 
 	parser = (t_scene_parser *) malloc(sizeof(t_scene_parser));
 	*parser = (t_scene_parser) {0};
 	parser->scene = (t_scene *) malloc(sizeof(t_scene));
-	fd = open(file_name, O_RDONLY);
-	if (fd < 0)
+	parser->fd = open(file_name, O_RDONLY);
+	if (parser->fd < 0)
 		return (NULL);
-	line = get_next_line(fd);
-	while (line != NULL)
+	parser->line = get_next_line(parser->fd);
+	while (parser->line != NULL)
 	{
 		type = get_type_from_line(line);
 		if (!increment_counters(parser, type))
 			return (free_scene_parser(parser));
-		free(line);
-		line = get_next_line(fd);
+		free(parser->line);
+		parser->line = get_next_line(parser->fd);
 	}
-	free(line);
-	close(fd);
+	free(parser->line);
+	parser->line = NULL;
+	parser->fd = -1;
+	close(parser->fd);
 	return (parser);
 }
 
