@@ -91,6 +91,7 @@ SRC_FILES		+= ${addprefix ${SRC_DIR}/vec3/,\
 
 # Parser files
 SRC_FILES		+= ${addprefix ${SRC_DIR}/parser/,\
+				get_scene_parser_args.c\
 				parse_ambient_light.c\
 				parse_camera.c\
 				parse_cylinder.c\
