@@ -13,15 +13,15 @@
 #include "libft_x.h"
 
 /**
- * @brief Clears a string array (last str must be NULL) and returns NULL.
+ * @brief Clears an array (last value must be NULL) and returns NULL.
  *
- * @param arr The string array to be cleared.
+ * @param arr The array to be cleaned.
  *
  * @return NULL.
 */
-void	*ft_clear_strarr(char **arr)
+void	*ft_clear_arr(void **arr)
 {
-	char	**iter;
+	void	**iter;
 
 	iter = arr;
 	while (*iter)
