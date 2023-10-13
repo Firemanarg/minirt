@@ -39,12 +39,12 @@ t_err	str_to_vec3(const char *str, t_vec3 *vec)
 	if (!ft_str_isdouble(arr[0]) || !ft_str_isdouble(arr[1])
 		|| !ft_str_isdouble(arr[2]))
 	{
-		ft_clear_arr((void **) arr);
+		ft_clear_arr((void **) arr, NULL);
 		return (INVALID_VEC3);
 	}
 	vec->x = ft_atod(arr[0]);
 	vec->y = ft_atod(arr[1]);
 	vec->z = ft_atod(arr[2]);
-	ft_clear_arr((void **) arr);
+	ft_clear_arr((void **) arr, NULL);
 	return (OK);
 }

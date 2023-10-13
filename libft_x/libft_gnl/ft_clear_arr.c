@@ -16,17 +16,23 @@
  * @brief Clears an array (last value must be NULL) and returns NULL.
  *
  * @param arr The array to be cleaned.
+ * @param del The function used to delete the array's values. If NULL, default
+ * free() is used.
  *
  * @return NULL.
 */
-void	*ft_clear_arr(void **arr)
+void	*ft_clear_arr(void **arr, void (*del)(void *))
 {
 	void	**iter;
 
+	if (arr == NULL)
+		return (NULL);
+	if (del == NULL)
+		del = &free;
 	iter = arr;
 	while (*iter)
 	{
-		free(*iter);
+		del(*iter);
 		iter++;
 	}
 	free(arr);

@@ -74,7 +74,7 @@ t_base_obj	*parse_line(char *line)
 	if (fields_count == 0)
 		return (NULL);
 	obj = parse_obj(fields, fields_count);
-	ft_clear_arr((void **) fields);
+	ft_clear_arr((void **) fields, NULL);
 	return (obj);
 }
 
