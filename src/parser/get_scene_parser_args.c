@@ -12,43 +12,61 @@
 
 #include "parser.h"
 
-static int	type_is_geom(t_obj_type obj);
 static t_obj_type	get_type_from_line(const char *line);
-static void	*free_scene_parser(t_scene_parser *parser);
-static int	increment_counters(t_scene_parser *parser, t_obj_type type);
+static int			is_valid_parser(t_scene_parser *parser);
+static int			increment_counters(t_scene_parser *parser, t_obj_type type);
+static int			iterate_over_lines(t_scene_parser *parser);
 
+/**
+ * @details Creates a new scene parser object and returns it. The returned parser
+ * object is already validated and contains the scene object with allocated
+ * arrays for lights and geometries.
+ *
+ * @param file_name The name of the file to be parsed.
+*/
 t_scene_parser	*get_scene_parser_args(char const *file_name)
 {
 	t_scene_parser	*parser;
-	t_obj_type		type;
+	int				aux;
 
 	parser = (t_scene_parser *) malloc(sizeof(t_scene_parser));
-	*parser = (t_scene_parser) {0};
-	parser->scene = (t_scene *) malloc(sizeof(t_scene));
+	*parser = (t_scene_parser){0, .fd = -1};
 	parser->fd = open(file_name, O_RDONLY);
 	if (parser->fd < 0)
 		return (NULL);
-	parser->line = get_next_line(parser->fd);
-	while (parser->line != NULL)
-	{
-		type = get_type_from_line(line);
-		if (!increment_counters(parser, type))
-			return (free_scene_parser(parser));
-		free(parser->line);
-		parser->line = get_next_line(parser->fd);
-	}
-	free(parser->line);
-	parser->line = NULL;
-	parser->fd = -1;
+	aux = iterate_over_lines(parser);
 	close(parser->fd);
+	parser->fd = -1;
+	if (aux != 1 || !is_valid_parser(parser))
+	{
+		free(parser->scene);
+		free(parser);
+		return (NULL);
+	}
+	parser->scene = new_scene(parser->light_count, parser->geometry_count);
 	return (parser);
 }
 
-static int	type_is_geom(t_obj_type type)
+static int	iterate_over_lines(t_scene_parser *parser)
 {
-	if (type == SPHERE || type == CYLINDER || type == PLANE)
-		return (1);
-	return (0);
+	t_obj_type	type;
+
+	if (parser == NULL)
+		return (0);
+	parser->line = get_next_line(parser->fd);
+	while (parser->line != NULL)
+	{
+		type = get_type_from_line(parser->line);
+		if (!increment_counters(parser, type))
+			break ;
+		free(parser->line);
+		parser->line = get_next_line(parser->fd);
+	}
+	if (parser->line != NULL)
+		return (0);
+	free(parser->line);
+	parser->line = NULL;
+	return (1);
 }
 
 static t_obj_type	get_type_from_line(const char *line)
@@ -65,11 +83,21 @@ static t_obj_type	get_type_from_line(const char *line)
 	return (type);
 }
 
-static void	*free_scene_parser(t_scene_parser *parser)
+static int	is_valid_parser(t_scene_parser *parser)
 {
-	free(parser->scene);
-	free(parser);
-	return (NULL);
+	if (parser == NULL)
+		return (0);
+	else if (parser->scene == NULL)
+		return (0);
+	else if (parser->amb_light_count != 1)
+		return (0);
+	else if (parser->camera_count != 1)
+		return (0);
+	else if (parser->light_count <= 0)
+		return (0);
+	else if (parser->geometry_count <= 0)
+		return (0);
+	return (1);
 }
 
 static int	increment_counters(t_scene_parser *parser, t_obj_type type)
@@ -80,7 +108,7 @@ static int	increment_counters(t_scene_parser *parser, t_obj_type type)
 		parser->light_count += 1;
 	else if (type == AMBIENT_LIGHT)
 		parser->amb_light_count += 1;
-	else if (type_is_geom(type))
+	else if (type == SPHERE || type == CYLINDER || type == PLANE)
 		parser->geometry_count += 1;
 	else
 		return (0);
