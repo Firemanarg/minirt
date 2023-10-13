@@ -20,11 +20,11 @@ t_scene	*new_scene(int light_count, int geometries_count)
 	if (scene == NULL)
 		return (NULL);
 	scene->ambient_light = NULL;
-	scene->cameras = NULL;
-	scene->lights = (t_point_light *) ft_calloc(
-			sizeof(t_point_light) * light_count + 1);
-	scene->geometries = (t_geom_obj *) ft_calloc(
-			sizeof(t_geom_obj) * geometries_count + 1);
+	scene->camera = NULL;
+	scene->lights = (t_point_light **) ft_calloc(
+			light_count + 1, sizeof(t_point_light *));
+	scene->geometries = (t_geom_obj **) ft_calloc(
+			geometries_count + 1, sizeof(t_geom_obj *));
 	return (scene);
 }
 
@@ -34,8 +34,8 @@ void	*free_scene(t_scene *scene)
 		return (NULL);
 	if (scene->ambient_light != NULL)
 		free(scene->ambient_light);
-	if (scene->cameras != NULL)
-		ft_clear_strarr(scene->cameras);
+	if (scene->camera != NULL)
+		free(scene->camera);
 	if (scene->lights != NULL)
 		free(scene->lights);
 	if (scene->geometries != NULL)
