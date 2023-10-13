@@ -22,9 +22,9 @@ t_scene	*new_scene(int light_count, int geometries_count)
 	scene->ambient_light = NULL;
 	scene->cameras = NULL;
 	scene->lights = (t_point_light *) ft_calloc(
-		sizeof(t_point_light) * light_count + 1);
+			sizeof(t_point_light) * light_count + 1);
 	scene->geometries = (t_geom_obj *) ft_calloc(
-		sizeof(t_geom_obj) * geometries_count + 1);
+			sizeof(t_geom_obj) * geometries_count + 1);
 	return (scene);
 }
 
