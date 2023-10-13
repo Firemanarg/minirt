@@ -28,6 +28,8 @@ t_scene	*new_scene(int light_count, int geometries_count)
 	return (scene);
 }
 
+static void	free_3d_obj(void *ptr);
+
 void	*free_scene(t_scene *scene)
 {
 	if (scene == NULL)
@@ -37,9 +39,22 @@ void	*free_scene(t_scene *scene)
 	if (scene->camera != NULL)
 		free(scene->camera);
 	if (scene->lights != NULL)
-		free(scene->lights);
+		ft_clear_arr((void **) scene->lights, NULL);
 	if (scene->geometries != NULL)
-		free(scene->geometries);
+		ft_clear_arr((void **) scene->geometries, &free_3d_obj);
 	free(scene);
 	return (NULL);
+}
+
+static void	free_3d_obj(void *ptr)
+{
+	t_3d_obj	*obj;
+
+	obj = (t_3d_obj *) ptr;
+	if (obj == NULL)
+		return ;
+	matrix_free(obj->transform);
+	matrix_free(obj->inv_transform);
+	matrix_free(obj->t_inv_transform);
+	free(obj);
 }
