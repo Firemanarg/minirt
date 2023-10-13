@@ -66,7 +66,7 @@ SRC_FILES		+= ${addprefix ${SRC_DIR}/matrix/,\
 
 # Objects files
 SRC_FILES		+= ${addprefix ${SRC_DIR}/objects/,\
-				scene.h\
+				scene.c\
 				color.c\
 				sphere.c}
 
