@@ -1,6 +1,6 @@
 CC = cc
 RM = rm -rf
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -Wall -Wextra -g -fms-extensions
 LIBFLAGS = -lcriterion -lm
 CRFLAGS = --verbose=1
 
@@ -10,6 +10,9 @@ MINIRT_OBJ_DIR = ${MINIRT_DIR}/build/obj
 
 MLX_DIR	= ../lib/minilibx-linux
 
+LFTX_DIR = ../libft_x
+LFTX = ${LFTX_DIR}/libft_x.a
+
 TEST_DIR = .
 TEST_INC_DIR = ${TEST_DIR}/inc
 TEST_INC_FILES = ${addprefix ${TEST_INC_DIR}/, minirt_test.h}
@@ -17,10 +20,13 @@ TEST_SRC_DIR = ${TEST_DIR}/src
 TEST_BUILD_DIR = ${TEST_DIR}/build
 TEST_OBJ_DIR = ${TEST_DIR}/build/obj
 
-all: apply_matrix_ops bin_search hit_sphere intersect_sphere quicksort var_array vec3_ops
+all: apply_matrix_ops bin_search hit_sphere intersect_sphere quicksort var_array vec3_ops camera_parser_test
 
 minirt:
 	@make -s -C ${MINIRT_DIR}
+
+$(LFTX): $(LFTX_DIR)
+	@make -C $(LFTX_DIR)
 
 apply_matrix_ops: minirt ${TEST_OBJ_DIR}/apply_matrix_ops_test.o
 	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/apply_matrix_ops_test.o ${MINIRT_OBJ_DIR}/varray/*.o\
@@ -66,19 +72,30 @@ vec3_ops: minirt ${TEST_OBJ_DIR}/vec3_ops_test.o
 		${LIBFLAGS} -o ${TEST_BUILD_DIR}/vec3_ops_test
 	@${TEST_BUILD_DIR}/vec3_ops_test ${CRFLAGS} || true
 
+camera_parser_test: $(LFTX) minirt ${TEST_OBJ_DIR}/camera_parser_test.o
+	@${CC} ${CFLAGS} $(LFTX) -I$(LFTX_DIR) ${TEST_OBJ_DIR}/camera_parser_test.o\
+		${MINIRT_OBJ_DIR}/parser/*.o ${MINIRT_OBJ_DIR}/vec3/*.o \
+		${MINIRT_OBJ_DIR}/matrix/*.o ${MINIRT_OBJ_DIR}/objects/*.o \
+		${MINIRT_OBJ_DIR}/varray/*.o $(LFTX_DIR)/objs/*.o $(LFTX_DIR)/objs/utils/*.o\
+		${LIBFLAGS} -o ${TEST_BUILD_DIR}/camera_parser_test
+	@${TEST_BUILD_DIR}/camera_parser_test ${CRFLAGS} || true
+
 ${TEST_OBJ_DIR}:
 	@mkdir -p ${TEST_OBJ_DIR}
 
 ${TEST_OBJ_DIR}/%.o: ${TEST_SRC_DIR}/%.c | ${TEST_OBJ_DIR}
-	@${CC} ${CFLAGS} -I${TEST_INC_DIR} -I${MINIRT_INC_DIR} -I${MLX_DIR} -c $< -o $@
+	@${CC} ${CFLAGS} -I${TEST_INC_DIR} -I${MINIRT_INC_DIR} -I${MLX_DIR} \
+		-I$(LFTX_DIR) $(LFTX) -c $< -o $@
 
 clean:
 	${RM} ${TEST_OBJ_DIR}
 	make -C ${MINIRT_DIR} clean
+	make -C $(LFTX) clean
 
 fclean: clean
 	${RM} ${TEST_BUILD_DIR}
 	make -C ${MINIRT_DIR} fclean
+	make -C $(LFTX) fclean
 
 re: fclean all
 

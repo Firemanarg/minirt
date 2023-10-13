@@ -18,5 +18,7 @@
 #include <matrix.h>
 #include <error.h>
 #include <vec3.h>
+#include "parser.h"
+#include "libft_x.h"
 #include <criterion/criterion.h>
 #include <criterion/new/assert.h>
