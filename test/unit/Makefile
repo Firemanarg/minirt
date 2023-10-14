@@ -12,6 +12,9 @@ MINIRT_OBJ_DIR = ${MINIRT_DIR}/build/obj
 MLX_DIR	= ${MINIRT_DIR}/lib/minilibx-linux
 MLX_FLAGS = -L${MLX_DIR} -lmlx -lXext -lX11 -lz
 
+LFTX_DIR = ../libft_x
+LFTX = ${LFTX_DIR}/libft_x.a
+
 TEST_DIR = .
 TEST_INC_DIR = ${TEST_DIR}/inc
 TEST_INC_FILES = ${addprefix ${TEST_INC_DIR}/, minirt_test.h}
@@ -19,11 +22,12 @@ TEST_SRC_DIR = ${TEST_DIR}/src
 TEST_BUILD_DIR = ${TEST_DIR}/build
 TEST_OBJ_DIR = ${TEST_DIR}/build/obj
 
-all: apply_matrix_ops bin_search camera capped_cone cone_intersect \
-	cone_normal capped_cylinder cylinder_intersect cylinder_normal \
-	lighting matrix_vec3_multiply quicksort plane ray_transform reflect \
-	scene shadow sphere_hit sphere_intersect sphere_normal sphere_transform \
-	truncated_cylinder var_array vec3_ops view_transform
+all: apply_matrix_ops bin_search camera camera_parser capped_cone \
+	cone_intersect cone_normal capped_cylinder cylinder_intersect \
+	cylinder_normal lighting matrix_vec3_multiply quicksort plane \
+	ray_transform reflect scene shadow sphere_hit sphere_intersect \
+	sphere_normal sphere_transform truncated_cylinder var_array \
+	vec3_ops view_transform
 
 minirt:
 	@make -s -C ${MINIRT_DIR}
@@ -67,6 +71,14 @@ camera: minirt ${TEST_OBJ_DIR}/camera_test.o
 		${MINIRT_OBJ_DIR}/matrix/*.o ${MLX_FLAGS} ${LIBFLAGS} \
 		-o ${TEST_BUILD_DIR}/camera_test
 	@${TEST_BUILD_DIR}/camera_test ${CRFLAGS} || true
+
+camera_parser: $(LFTX) minirt ${TEST_OBJ_DIR}/camera_parser_test.o
+	@${CC} ${CFLAGS} $(LFTX) -I$(LFTX_DIR) ${TEST_OBJ_DIR}/camera_parser_test.o\
+		${MINIRT_OBJ_DIR}/parser/*.o ${MINIRT_OBJ_DIR}/vec3/*.o \
+		${MINIRT_OBJ_DIR}/matrix/*.o ${MINIRT_OBJ_DIR}/objects/*.o \
+		${MINIRT_OBJ_DIR}/varray/*.o $(LFTX_DIR)/objs/*.o $(LFTX_DIR)/objs/utils/*.o\
+		${LIBFLAGS} -o ${TEST_BUILD_DIR}/camera_parser_test
+	@${TEST_BUILD_DIR}/camera_parser_test ${CRFLAGS} || true
 
 capped_cone: minirt ${TEST_OBJ_DIR}/capped_cone_test.o
 	@${CC} ${CFLAGS} ${TEST_OBJ_DIR}/capped_cone_test.o ${MINIRT_OBJ_DIR}/varray/*.o \
@@ -242,7 +254,7 @@ ${TEST_OBJ_DIR}/%.o: ${TEST_SRC_DIR}/%.c | ${TEST_OBJ_DIR}
 	@${CC} ${CFLAGS} -I${TEST_INC_DIR} -I${MINIRT_INC_DIR} -I${MLX_DIR} -c $< -o $@
 
 .PHONY: all minirt clean fclean re apply_matrix_ops bin_search \
-		camera capped_cone cone_intersect cone_normal \
+		camera camera_parser capped_cone cone_intersect cone_normal \
 		capped_cylinder cylinder_intersect cylinder_normal \
 		lighting matrix_vec3_multiply quicksort \
 		plane ray_transform reflect scene shadow \
