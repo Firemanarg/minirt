@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:44:47 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/12 19:57:50 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/14 15:43:36 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,5 +210,9 @@ void	sphere_normal_at(t_geom_obj *sph, t_vec3 *object_point,
 t_err	set_sphere(t_geom_obj *sph, t_matrix *transform,
 			t_material *material);
 void	sphere_map_uv(t_geom_obj *sph, t_vec3 *p, double *u, double *v);
+
+// scene.c
+t_scene	*new_scene(int light_count, int geometries_count);
+void	*free_scene(t_scene *scene);
 
 #endif

@@ -13,20 +13,26 @@
 #include "libft_x.h"
 
 /**
- * @brief Clears a string array (last str must be NULL) and returns NULL.
+ * @brief Clears an array (last value must be NULL) and returns NULL.
  *
- * @param arr The string array to be cleared.
+ * @param arr The array to be cleaned.
+ * @param del The function used to delete the array's values. If NULL, default
+ * free() is used.
  *
  * @return NULL.
 */
-void	*ft_clear_strarr(char **arr)
+void	*ft_clear_arr(void **arr, void (*del)(void *))
 {
-	char	**iter;
+	void	**iter;
 
+	if (arr == NULL)
+		return (NULL);
+	if (del == NULL)
+		del = &free;
 	iter = arr;
 	while (*iter)
 	{
-		free(*iter);
+		del(*iter);
 		iter++;
 	}
 	free(arr);
