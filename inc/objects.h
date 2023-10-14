@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:44:47 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/12 17:41:04 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 19:57:50 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,12 +173,14 @@ void	set_color(double red, double green, double blue, t_color *c);
 // cone.c
 void	cone_normal_at(t_geom_obj *c, t_vec3 *obj_point, t_vec3 *obj_normal);
 t_err	set_cone(t_geom_obj *cone, t_matrix *transform, t_material *material);
+void	cone_map_uv(t_geom_obj *cone, t_vec3 *p, double *u, double *v);
 
 // cylinder.c
 void	cylinder_normal_at(t_geom_obj *cyl, t_vec3 *obj_point,
 			t_vec3 *obj_normal);
 t_err	set_cylinder(t_geom_obj *cyl, t_matrix *transform,
 			t_material *material);
+void	cylinder_map_uv(t_geom_obj *cyl, t_vec3 *p, double *u, double *v);
 
 // light.c
 void	set_point_light(t_vec3 *pos, t_color *color, t_point_light *light);
@@ -200,11 +202,13 @@ void	obj_normal_at(t_geom_obj *obj, t_vec3 *world_point,
 void	plane_normal_at(t_geom_obj *p, t_vec3 *object_point,
 			t_vec3 *object_normal);
 t_err	set_plane(t_geom_obj *plane, t_matrix *transform, t_material *material);
+void	plane_map_uv(t_geom_obj *plane, t_vec3 *p, double *u, double *v);
 
 // sphere.c
 void	sphere_normal_at(t_geom_obj *sph, t_vec3 *object_point,
 			t_vec3 *object_normal);
 t_err	set_sphere(t_geom_obj *sph, t_matrix *transform,
 			t_material *material);
+void	sphere_map_uv(t_geom_obj *sph, t_vec3 *p, double *u, double *v);
 
 #endif

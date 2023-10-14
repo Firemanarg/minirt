@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 02:37:52 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/12 15:59:20 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 19:26:25 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,7 @@ Test(shadow, hit_should_offset_point)
 	i.obj = &sphere;
 	i.t = 5;
 	prepare_computations(&i, &ray, &comps);
-
+	// cr_expect(epsilon_eq(dbl, comps.over_point.z, 0.1, -EPSILON_TEST / 2));
 	cr_expect(comps.over_point.z < -EPSILON / 2);
 	cr_expect(comps.point.z > comps.over_point.z);
 }

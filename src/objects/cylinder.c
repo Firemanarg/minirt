@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 14:34:32 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/12 17:21:29 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/13 03:46:44 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,24 @@ void	cylinder_normal_at(t_geom_obj *cyl, t_vec3 *obj_point,
 		+ obj_point->z * obj_point->z;
 	if (dist < 1.0 && obj_point->y >= cyl->maximum - EPSILON)
 		set_vec3(0.0, 1.0, 0.0, obj_normal);
-	else if (dist < 1 && obj_point->y <= cyl->minimum + EPSILON)
+	else if (dist < 1.0 && obj_point->y <= cyl->minimum + EPSILON)
 		set_vec3(0.0, -1.0, 0.0, obj_normal);
 	else
 		set_vec3(obj_point->x, 0.0, obj_point->z, obj_normal);
 }
 
-static void	cylinder_map_uv(t_geom_obj *cyl, t_vec3 *p, double *u, double *v)
+void	cylinder_map_uv(t_geom_obj *cyl, t_vec3 *p, double *u, double *v)
 {
-	if (p->y > cyl->minimum && p->y < cyl->maximum)
+	if (p->y > cyl->minimum + EPSILON && p->y < cyl->maximum - EPSILON)
+	{
 		*u = 1 - (atan2(p->x, p->z) * 0.5 * M_1_PI + 0.5);
+		*v = fmod(p->y, (M_PI * 2)) * 0.5 * M_1_PI;
+	}
 	else
-		*u = fmod(p->x, 1);
-	*v = fmod(p->y, 1);
+	{
+		*u = fmod(p->x, (M_PI * 2)) * 0.5 * M_1_PI;
+		*v = fmod(p->z, (M_PI * 2)) * 0.5 * M_1_PI;
+	}
 }
 
 t_err	set_cylinder(t_geom_obj *cyl, t_matrix *transform, t_material *material)
@@ -78,7 +83,7 @@ t_err	set_cylinder(t_geom_obj *cyl, t_matrix *transform, t_material *material)
 	cyl->type = CYLINDER;
 	cyl->intersects = (t_isect_func)cylinder_intersect;
 	cyl->normal_at = cylinder_normal_at;
-	cyl->map_uv = cylinder_map_uv;
+	cyl->map_uv = NULL;
 	cyl->minimum = -1.0 / 0.0;
 	cyl->maximum = 1.0 / 0.0;
 	cyl->is_closed = FALSE;

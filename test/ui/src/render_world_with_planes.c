@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 22:51:50 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/09 02:59:24 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 20:53:55 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	get_floor(t_geom_obj *floor)
 	set_default_material(&m);
 	m.color = (t_color){.r = 1.0, .g = 0.9, .b = 0.9};
 	m.specular = 0.0;
-	set_sphere(floor,
+	set_plane(floor,
 		matrix_scaling(&(t_vec3){.x = 10.0, .y = 0.01, .z = 10.0}), &m);
 }
 

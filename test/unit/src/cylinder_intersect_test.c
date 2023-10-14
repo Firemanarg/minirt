@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 12:59:59 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/12 04:55:11 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 19:38:43 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,10 @@ Test(cylinder_intersect, ray_hits_one_point)
 	cr_expect(eq(int, xs->length, 2));
 	cr_expect(eq(ptr, ((t_isect *)xs->arr)[0].obj, &cylinder));
 	cr_expect(epsilon_eq(dbl, ((t_isect *)xs->arr)[0].t,
-				5.0, EPSILON));
+				5.0, EPSILON_TEST));
 	cr_expect(eq(ptr, ((t_isect *)xs->arr)[1].obj, &cylinder));
 	cr_expect(epsilon_eq(dbl, ((t_isect *)xs->arr)[1].t,
-				5.0, EPSILON));
+				5.0, EPSILON_TEST));
 	free_obj(&cylinder);
 	free_array(xs);
 }
@@ -124,10 +124,10 @@ Test(cylinder_intersect, ray_hits_two_points_1)
 	cr_expect(eq(int, xs->length, 2));
 	cr_expect(eq(ptr, ((t_isect *)xs->arr)[0].obj, &cylinder));
 	cr_expect(epsilon_eq(dbl, ((t_isect *)xs->arr)[0].t,
-				4.0, EPSILON));
+				4.0, EPSILON_TEST));
 	cr_expect(eq(ptr, ((t_isect *)xs->arr)[1].obj, &cylinder));
 	cr_expect(epsilon_eq(dbl, ((t_isect *)xs->arr)[1].t,
-				6.0, EPSILON));
+				6.0, EPSILON_TEST));
 	free_obj(&cylinder);
 	free_array(xs);
 }
@@ -149,10 +149,10 @@ Test(cylinder_intersect, ray_hits_two_points_2)
 	cr_expect(eq(int, xs->length, 2));
 	cr_expect(eq(ptr, ((t_isect *)xs->arr)[0].obj, &cylinder));
 	cr_expect(epsilon_eq(dbl, ((t_isect *)xs->arr)[0].t,
-				6.80798, EPSILON));
+				6.80798, EPSILON_TEST));
 	cr_expect(eq(ptr, ((t_isect *)xs->arr)[1].obj, &cylinder));
 	cr_expect(epsilon_eq(dbl, ((t_isect *)xs->arr)[1].t,
-				7.08872, EPSILON));
+				7.08872, EPSILON_TEST));
 	free_obj(&cylinder);
 	free_array(xs);
 }

@@ -71,11 +71,26 @@ void	cone_normal_at(t_geom_obj *c, t_vec3 *obj_point, t_vec3 *obj_normal)
 	}
 }
 
+void	cone_map_uv(t_geom_obj *cone, t_vec3 *p, double *u, double *v)
+{
+	if (p->y > cone->minimum + EPSILON && p->y < cone->maximum - EPSILON)
+	{
+		*u = 1 - (atan2(p->x, p->z) * 0.5 * M_1_PI + 0.5);
+		*v = fmod(p->y, (M_PI * 2)) * 0.5 * M_1_PI;
+	}
+	else
+	{
+		*u = fmod(p->x, (M_PI * 2)) * 0.5 * M_1_PI;
+		*v = fmod(p->z, (M_PI * 2)) * 0.5 * M_1_PI;
+	}
+}
+
 t_err	set_cone(t_geom_obj *cone, t_matrix *transform, t_material *material)
 {
 	cone->type = CONE;
 	cone->intersects = (t_isect_func)cone_intersect;
 	cone->normal_at = cone_normal_at;
+	cone->map_uv = NULL;
 	cone->minimum = -1.0 / 0.0;
 	cone->maximum = 1.0 / 0.0;
 	cone->is_closed = FALSE;

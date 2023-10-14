@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 19:11:22 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/12 17:50:24 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 18:58:50 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ Test(lighting, eye_between_light_and_surface)
 	pre_lighting(&material, &light.color, &amb_lit, &result);
 	lighting(&p, &material, &light, &result);
 	add(&result, &amb_lit, &result);
-	cr_expect(epsilon_eq(dbl, result.r, 1.9, EPSILON));
-	cr_expect(epsilon_eq(dbl, result.g, 1.9, EPSILON));
-	cr_expect(epsilon_eq(dbl, result.b, 1.9, EPSILON));
+	cr_expect(epsilon_eq(dbl, result.r, 1.9, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, result.g, 1.9, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, result.b, 1.9, EPSILON_TEST));
 }
 
 Test(lighting, eye_between_light_and_surface_eye_45deg)
@@ -70,9 +70,9 @@ Test(lighting, eye_between_light_and_surface_eye_45deg)
 	pre_lighting(&material, &light.color, &amb_lit, &result);
 	lighting(&p, &material, &light, &result);
 	add(&result, &amb_lit, &result);
-	cr_expect(epsilon_eq(dbl, result.r, 1.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, result.g, 1.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, result.b, 1.0, EPSILON));
+	cr_expect(epsilon_eq(dbl, result.r, 1.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, result.g, 1.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, result.b, 1.0, EPSILON_TEST));
 }
 
 Test(lighting, eye_opposite_surface_light_45deg)
@@ -94,9 +94,9 @@ Test(lighting, eye_opposite_surface_light_45deg)
 	pre_lighting(&material, &light.color, &amb_lit, &result);
 	lighting(&p, &material, &light, &result);
 	add(&result, &amb_lit, &result);
-	cr_expect(epsilon_eq(dbl, result.r, 0.7364, EPSILON));
-	cr_expect(epsilon_eq(dbl, result.g, 0.7364, EPSILON));
-	cr_expect(epsilon_eq(dbl, result.b, 0.7364, EPSILON));
+	cr_expect(epsilon_eq(dbl, result.r, 0.7364, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, result.g, 0.7364, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, result.b, 0.7364, EPSILON_TEST));
 }
 
 Test(lighting, eye_in_path_of_reflection_vector)
@@ -118,9 +118,9 @@ Test(lighting, eye_in_path_of_reflection_vector)
 	pre_lighting(&material, &light.color, &amb_lit, &result);
 	lighting(&p, &material, &light, &result);
 	add(&result, &amb_lit, &result);
-	cr_expect(epsilon_eq(dbl, result.r, 1.6364, EPSILON));
-	cr_expect(epsilon_eq(dbl, result.g, 1.6364, EPSILON));
-	cr_expect(epsilon_eq(dbl, result.b, 1.6364, EPSILON));
+	cr_expect(epsilon_eq(dbl, result.r, 1.6364, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, result.g, 1.6364, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, result.b, 1.6364, EPSILON_TEST));
 }
 
 Test(lighting, light_behind_surface)
@@ -142,9 +142,9 @@ Test(lighting, light_behind_surface)
 	pre_lighting(&material, &light.color, &amb_lit, &result);
 	lighting(&p, &material, &light, &result);
 	add(&result, &amb_lit, &result);
-	cr_expect(epsilon_eq(dbl, result.r, 0.1, EPSILON));
-	cr_expect(epsilon_eq(dbl, result.g, 0.1, EPSILON));
-	cr_expect(epsilon_eq(dbl, result.b, 0.1, EPSILON));
+	cr_expect(epsilon_eq(dbl, result.r, 0.1, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, result.g, 0.1, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, result.b, 0.1, EPSILON_TEST));
 }
 
 Test(lighting, point_in_shadow)
@@ -166,7 +166,7 @@ Test(lighting, point_in_shadow)
 	pre_lighting(&material, &light.color, &amb_lit, &result);
 	lighting(&p, &material, &light, &result);
 	add(&result, &amb_lit, &result);
-	cr_expect(epsilon_eq(dbl, result.r, 0.1, EPSILON));
-	cr_expect(epsilon_eq(dbl, result.g, 0.1, EPSILON));
-	cr_expect(epsilon_eq(dbl, result.b, 0.1, EPSILON));
+	cr_expect(epsilon_eq(dbl, result.r, 0.1, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, result.g, 0.1, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, result.b, 0.1, EPSILON_TEST));
 }

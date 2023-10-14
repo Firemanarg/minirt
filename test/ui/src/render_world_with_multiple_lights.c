@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 22:51:50 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/12 04:35:16 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/14 01:58:55 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	get_floor(t_geom_obj *floor)
 	set_default_material(&m);
 	m.color = (t_color){.r = 1.0, .g = 0.9, .b = 0.9};
 	// m.specular = 0.0;
-	set_sphere(floor,
+	set_plane(floor,
 		matrix_scaling(&(t_vec3){.x = 10.0, .y = 0.01, .z = 10.0}), &m);
 }
 
@@ -158,8 +158,8 @@ static int	refresh(t_args *args)
 int	main(void)
 {
 	t_args			args;
-	int				width = 1920;
-	int				height = 1080;
+	int				width = 800;
+	int				height = 600;
 	t_scene			world;
 	struct timespec	begin, end;
 
@@ -169,6 +169,7 @@ int	main(void)
 	render_image(&world.camera, &world, &args.mlx_data);
 	free_world(&world);
 	clock_gettime(CLOCK_MONOTONIC_RAW, &end);
+	args.mlx_win = mlx_new_window(args.mlx, width, height, "MiniRT");
 	printf("Rendered in %.0f ms.\n", (end.tv_nsec - begin.tv_nsec) / 1000000.0
 		+ (end.tv_sec - begin.tv_sec) * 1000.0);
 	mlx_expose_hook(args.mlx_win, refresh, &args);

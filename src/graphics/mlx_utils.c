@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 15:18:55 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/12 14:14:11 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/14 01:58:22 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 void	init_args(t_args *args, int width, int height)
 {
 	args->mlx = mlx_init();
-	args->mlx_win = mlx_new_window(args->mlx, width, height, "MiniRT");
 	args->mlx_data.img = mlx_new_image(args->mlx, width, height);
 	args->mlx_data.addr = mlx_get_data_addr(args->mlx_data.img,
 			&args->mlx_data.bits_per_pixel,

@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:05:14 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/12 15:45:41 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 19:39:15 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,27 +72,27 @@ Test(camera, create_camera)
 	set_camera_transform(matrix_new_identity(4), &camera);
 	cr_expect(eq(int, camera.hsize, 160));
 	cr_expect(eq(int, camera.vsize, 120));
-	cr_expect(epsilon_eq(dbl, camera.fov, M_PI_2, EPSILON));
+	cr_expect(epsilon_eq(dbl, camera.fov, M_PI_2, EPSILON_TEST));
 
-	cr_expect(epsilon_eq(dbl, camera.transform->data[0][0], 1.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, camera.transform->data[0][1], 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, camera.transform->data[0][2], 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, camera.transform->data[0][3], 0.0, EPSILON));
+	cr_expect(epsilon_eq(dbl, camera.transform->data[0][0], 1.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, camera.transform->data[0][1], 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, camera.transform->data[0][2], 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, camera.transform->data[0][3], 0.0, EPSILON_TEST));
 
-	cr_expect(epsilon_eq(dbl, camera.transform->data[1][0], 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, camera.transform->data[1][1], 1.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, camera.transform->data[1][2], 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, camera.transform->data[1][3], 0.0, EPSILON));
+	cr_expect(epsilon_eq(dbl, camera.transform->data[1][0], 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, camera.transform->data[1][1], 1.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, camera.transform->data[1][2], 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, camera.transform->data[1][3], 0.0, EPSILON_TEST));
 
-	cr_expect(epsilon_eq(dbl, camera.transform->data[2][0], 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, camera.transform->data[2][1], 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, camera.transform->data[2][2], 1.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, camera.transform->data[2][3], 0.0, EPSILON));
+	cr_expect(epsilon_eq(dbl, camera.transform->data[2][0], 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, camera.transform->data[2][1], 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, camera.transform->data[2][2], 1.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, camera.transform->data[2][3], 0.0, EPSILON_TEST));
 
-	cr_expect(epsilon_eq(dbl, camera.transform->data[3][0], 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, camera.transform->data[3][1], 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, camera.transform->data[3][2], 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, camera.transform->data[3][3], 1.0, EPSILON));
+	cr_expect(epsilon_eq(dbl, camera.transform->data[3][0], 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, camera.transform->data[3][1], 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, camera.transform->data[3][2], 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, camera.transform->data[3][3], 1.0, EPSILON_TEST));
 
 	free_camera(&camera);
 }
@@ -103,7 +103,7 @@ Test(camera, horizontal_canvas_pixel_size)
 
 	set_camera(200, 125, M_PI_2, &camera);
 	set_camera_transform(matrix_new_identity(4), &camera);
-	cr_expect(epsilon_eq(dbl, camera.pixel_size, 0.01, EPSILON));
+	cr_expect(epsilon_eq(dbl, camera.pixel_size, 0.01, EPSILON_TEST));
 	free_camera(&camera);
 }
 
@@ -113,7 +113,7 @@ Test(camera, vertical_canvas_pixel_size)
 
 	set_camera(125, 200, M_PI_2, &camera);
 	set_camera_transform(matrix_new_identity(4), &camera);
-	cr_expect(epsilon_eq(dbl, camera.pixel_size, 0.01, EPSILON));
+	cr_expect(epsilon_eq(dbl, camera.pixel_size, 0.01, EPSILON_TEST));
 	free_camera(&camera);
 }
 
@@ -126,13 +126,13 @@ Test(camera, ray_through_canvas_center)
 	set_camera_transform(matrix_new_identity(4), &camera);
 	ray_for_pixel(&camera, 100, 50, &ray);
 
-	cr_expect(epsilon_eq(dbl, ray.start.x, 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, ray.start.y, 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, ray.start.z, 0.0, EPSILON));
+	cr_expect(epsilon_eq(dbl, ray.start.x, 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, ray.start.y, 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, ray.start.z, 0.0, EPSILON_TEST));
 
-	cr_expect(epsilon_eq(dbl, ray.direction.x, 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, ray.direction.y, 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, ray.direction.z, -1.0, EPSILON));
+	cr_expect(epsilon_eq(dbl, ray.direction.x, 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, ray.direction.y, 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, ray.direction.z, -1.0, EPSILON_TEST));
 
 	free_camera(&camera);
 }
@@ -146,13 +146,13 @@ Test(camera, ray_through_canvas_corner)
 	set_camera_transform(matrix_new_identity(4), &camera);
 	ray_for_pixel(&camera, 0, 0, &ray);
 
-	cr_expect(epsilon_eq(dbl, ray.start.x, 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, ray.start.y, 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, ray.start.z, 0.0, EPSILON));
+	cr_expect(epsilon_eq(dbl, ray.start.x, 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, ray.start.y, 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, ray.start.z, 0.0, EPSILON_TEST));
 
-	cr_expect(epsilon_eq(dbl, ray.direction.x, 0.66519, EPSILON));
-	cr_expect(epsilon_eq(dbl, ray.direction.y, 0.33259, EPSILON));
-	cr_expect(epsilon_eq(dbl, ray.direction.z, -0.66851, EPSILON));
+	cr_expect(epsilon_eq(dbl, ray.direction.x, 0.66519, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, ray.direction.y, 0.33259, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, ray.direction.z, -0.66851, EPSILON_TEST));
 
 	free_camera(&camera);
 }
@@ -173,13 +173,13 @@ Test(camera, ray_camera_is_transformed)
 	get_transformed_ray_origin(&camera, &ray);
 	ray_for_pixel(&camera, 100, 50, &ray);
 
-	cr_expect(epsilon_eq(dbl, ray.start.x, 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, ray.start.y, 2.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, ray.start.z, -5.0, EPSILON));
+	cr_expect(epsilon_eq(dbl, ray.start.x, 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, ray.start.y, 2.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, ray.start.z, -5.0, EPSILON_TEST));
 
-	cr_expect(epsilon_eq(dbl, ray.direction.x, M_SQRT1_2, EPSILON));
-	cr_expect(epsilon_eq(dbl, ray.direction.y, 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, ray.direction.z, -M_SQRT1_2, EPSILON));
+	cr_expect(epsilon_eq(dbl, ray.direction.x, M_SQRT1_2, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, ray.direction.y, 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, ray.direction.z, -M_SQRT1_2, EPSILON_TEST));
 
 	free_camera(&camera);
 	matrix_free(rotate_y);
