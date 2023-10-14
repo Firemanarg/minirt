@@ -12,7 +12,7 @@
 
 #include "projection.h"
 
-static t_err	insert_if_in_cone_range(t_obj *cone, t_varray *r,
+static t_err	insert_if_in_cone_range(t_geom_obj *cone, t_varray *r,
 					double t, double y)
 {
 	if (y > cone->minimum && y < cone->maximum)
@@ -20,7 +20,7 @@ static t_err	insert_if_in_cone_range(t_obj *cone, t_varray *r,
 	return (OK);
 }
 
-static t_err	cone_intersect(t_obj *cone, t_ray *ray, t_varray *r)
+static t_err	cone_intersect(t_geom_obj *cone, t_ray *ray, t_varray *r)
 {
 	t_cone_eq_params	p;
 
@@ -49,42 +49,50 @@ static t_err	cone_intersect(t_obj *cone, t_ray *ray, t_varray *r)
 		|| intersect_cone_caps(cone, ray, r));
 }
 
-void	cone_normal_at(t_obj *c, t_vec3 *object_point,
-			t_vec3 *object_normal)
+void	cone_normal_at(t_geom_obj *c, t_vec3 *obj_point, t_vec3 *obj_normal)
 {
 	double	dist;
 	double	y;
+	double	r_sq;
 
-	dist = object_point->x * object_point->x
-		+ object_point->z * object_point->z;
-	if (dist < 1.0 && object_point->y >= c->maximum - EPSILON)
-		set_vec3(0.0, 1.0, 0.0, object_normal);
-	else if (dist < 1 && object_point->y <= c->minimum + EPSILON)
-		set_vec3(0.0, -1.0, 0.0, object_normal);
+	dist = obj_point->x * obj_point->x
+		+ obj_point->z * obj_point->z;
+	r_sq = obj_point->y * obj_point->y;
+	if (dist < r_sq && obj_point->y >= c->maximum - EPSILON)
+		set_vec3(0.0, 1.0, 0.0, obj_normal);
+	else if (dist < r_sq && obj_point->y <= c->minimum + EPSILON)
+		set_vec3(0.0, -1.0, 0.0, obj_normal);
 	else
 	{
 		y = sqrt(dist);
-		if (object_point->y > 0.0)
+		if (obj_point->y > 0.0)
 			y = -y;
-		set_vec3(object_point->x, y, object_point->z, object_normal);
+		set_vec3(obj_point->x, y, obj_point->z, obj_normal);
 	}
 }
 
-t_err	set_cone(t_obj *cone, t_matrix *transform, t_material *material)
+void	cone_map_uv(t_geom_obj *cone, t_vec3 *p, double *u, double *v)
+{
+	if (p->y > cone->minimum + EPSILON && p->y < cone->maximum - EPSILON)
+	{
+		*u = 1 - (atan2(p->x, p->z) * 0.5 * M_1_PI + 0.5);
+		*v = fmod(p->y, (M_PI * 2)) * 0.5 * M_1_PI;
+	}
+	else
+	{
+		*u = fmod(p->x, (M_PI * 2)) * 0.5 * M_1_PI;
+		*v = fmod(p->z, (M_PI * 2)) * 0.5 * M_1_PI;
+	}
+}
+
+t_err	set_cone(t_geom_obj *cone, t_matrix *transform, t_material *material)
 {
 	cone->type = CONE;
 	cone->intersects = (t_isect_func)cone_intersect;
 	cone->normal_at = cone_normal_at;
+	cone->map_uv = NULL;
 	cone->minimum = -1.0 / 0.0;
 	cone->maximum = 1.0 / 0.0;
 	cone->is_closed = FALSE;
 	return (set_object(cone, transform, material));
-}
-
-void	set_cone_limits(t_obj *cone, double minimum, double maximum,
-			t_bool closed)
-{
-	cone->minimum = minimum;
-	cone->maximum = maximum;
-	cone->is_closed = closed;
 }

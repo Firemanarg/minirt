@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_world_with_camera.c                         :+:      :+:    :+:   */
+/*   render_world_with_planes.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 22:51:50 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/09 02:58:14 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 20:53:55 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,14 @@ static void	get_floor(t_geom_obj *floor)
 	set_default_material(&m);
 	m.color = (t_color){.r = 1.0, .g = 0.9, .b = 0.9};
 	m.specular = 0.0;
-	set_sphere(floor,
+	set_plane(floor,
 		matrix_scaling(&(t_vec3){.x = 10.0, .y = 0.01, .z = 10.0}), &m);
 }
 
 static void	get_left_wall(t_geom_obj *left_wall)
 {
 	t_material	m;
-	t_matrix_op mops[5] = {
-	{.op = SCALE, .params = {.x = 10.0, .y = 0.01, .z = 10.0}},
+	t_matrix_op mops[4] = {
 	{.op = ROTATE_X, .param = M_PI_2},
 	{.op = ROTATE_Y, .param = -M_PI_4},
 	{.op = TRANSLATE, .params = {.x = 0.0, .y = 0.0, .z = 5.0}},
@@ -46,14 +45,13 @@ static void	get_left_wall(t_geom_obj *left_wall)
 	set_default_material(&m);
 	m.color = (t_color){.r = 1.0, .g = 0.9, .b = 0.9};
 	m.specular = 0.0;
-	set_sphere(left_wall, matrix_apply(matrix_new_identity(4), mops), &m);
+	set_plane(left_wall, matrix_apply(matrix_new_identity(4), mops), &m);
 }
 
 static void	get_right_wall(t_geom_obj *right_wall)
 {
 	t_material	m;
-	t_matrix_op mops[5] = {
-	{.op = SCALE, .params = {.x = 10.0, .y = 0.01, .z = 10.0}},
+	t_matrix_op mops[4] = {
 	{.op = ROTATE_X, .param = M_PI_2},
 	{.op = ROTATE_Y, .param = M_PI_4},
 	{.op = TRANSLATE, .params = {.x = 0.0, .y = 0.0, .z = 5.0}},
@@ -62,7 +60,7 @@ static void	get_right_wall(t_geom_obj *right_wall)
 	set_default_material(&m);
 	m.color = (t_color){.r = 1.0, .g = 0.9, .b = 0.9};
 	m.specular = 0.0;
-	set_sphere(right_wall, matrix_apply(matrix_new_identity(4), mops), &m);
+	set_plane(right_wall, matrix_apply(matrix_new_identity(4), mops), &m);
 }
 
 static void	get_large_sphere(t_geom_obj *sphere)

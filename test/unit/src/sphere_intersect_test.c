@@ -6,13 +6,13 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 03:47:33 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/05 02:28:33 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 05:04:12 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_test.h>
 
-static void	get_sphere(t_obj *sphere, t_matrix *transform)
+static void	get_sphere(t_geom_obj *sphere, t_matrix *transform)
 {
 	t_material	material;
 
@@ -27,7 +27,7 @@ static void	get_sphere(t_obj *sphere, t_matrix *transform)
 
 Test(intersect, intersect_sphere_two_points) {
 	t_varray	*intersections;
-	t_obj		sphere;
+	t_geom_obj		sphere;
 	t_ray		ray;
 
 	get_sphere(&sphere, matrix_new_identity(4));
@@ -49,7 +49,7 @@ Test(intersect, intersect_sphere_two_points) {
 
 Test(intersect, intersect_sphere_one_point) {
 	t_varray	*intersections;
-	t_obj		sphere;
+	t_geom_obj		sphere;
 	t_ray		ray;
 
 	get_sphere(&sphere, matrix_new_identity(4));
@@ -71,7 +71,7 @@ Test(intersect, intersect_sphere_one_point) {
 
 Test(intersect, intersect_sphere_miss) {
 	t_varray	*intersections;
-	t_obj		sphere;
+	t_geom_obj		sphere;
 	t_ray		ray;
 
 	get_sphere(&sphere, matrix_new_identity(4));
@@ -89,7 +89,7 @@ Test(intersect, intersect_sphere_miss) {
 
 Test(intersect, intersect_sphere_ray_inside) {
 	t_varray	*intersections;
-	t_obj		sphere;
+	t_geom_obj		sphere;
 	t_ray		ray;
 
 	get_sphere(&sphere, matrix_new_identity(4));
@@ -111,7 +111,7 @@ Test(intersect, intersect_sphere_ray_inside) {
 
 Test(intersect, intersect_sphere_behind_ray) {
 	t_varray	*intersections;
-	t_obj		sphere;
+	t_geom_obj		sphere;
 	t_ray		ray;
 
 	get_sphere(&sphere, matrix_new_identity(4));

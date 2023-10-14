@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt_test.h                                      :+:      :+:    :+:   */
+/*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/14 03:21:58 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/12 18:58:27 by gmachado         ###   ########.fr       */
+/*   Created: 2023/10/08 23:27:02 by gmachado          #+#    #+#             */
+/*   Updated: 2023/10/09 00:21:37 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define EPSILON_TEST 0.00001
+#include "objects.h"
 
-#include <minirt.h>
-#include <graphics.h>
-#include <varray.h>
-#include <projection.h>
-#include <objects.h>
-#include <matrix.h>
-#include <error.h>
-#include <vec3.h>
-#include <shading.h>
-#include <criterion/criterion.h>
-#include <criterion/new/assert.h>
+void	set_point_light(t_vec3 *pos, t_color *color, t_point_light *light)
+{
+	light->pos = *pos;
+	light->color = *color;
+	light->type = LIGHT;
+}

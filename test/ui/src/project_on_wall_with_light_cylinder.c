@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 17:15:20 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/06 19:58:05 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 04:50:39 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	get_default_material(t_material *material)
 
 static void	get_point_light(t_point_light *light, t_vec3 *pos, t_color *color)
 {
-	light->intensity = *color;
+	light->color = *color;
 	light->pos = *pos;
 }
 
@@ -32,17 +32,17 @@ void	init_trace_args(int canvas_pixels, double wall_size, double z,
 	t->wall_size = wall_size;
 	t->pixel_size = wall_size / canvas_pixels;
 	t->canvas_pixels = canvas_pixels;
-	get_default_material(&t->phong.material);
-	get_point_light(&t->phong.light, &(t_vec3){.x = -10, .y = 0, .z = -10},
+	get_default_material(&t->phong.obj->material);
+	get_point_light(&t->light, &(t_vec3){.x = -10, .y = 0, .z = -10},
 		&(t_color){.r = 1.0, .g = 1.0, .b = 1.0});
 	set_vec3(0.0, 0.0, -5.0, &t->ray_origin);
 }
 
 void	trace_pixel(t_args *args, t_trace_args *t, int x, int y)
 {
-	t_color	final_color;
-	t_obj	*obj;
-	t_isect	*hit_isect;
+	t_color		final_color;
+	t_geom_obj	*obj;
+	t_isect		*hit_isect;
 
 	hit_isect = hit(t->intersections);
 	if (hit_isect)
@@ -52,7 +52,7 @@ void	trace_pixel(t_args *args, t_trace_args *t, int x, int y)
 		obj_normal_at(obj, &t->phong.point, &t->phong.normal);
 		set_vec3(0.0, 0.0, 0.0, &t->phong.eye);
 		subtract(&t->phong.eye, &t->ray.direction, &t->phong.eye);
-		lighting(&t->phong, &final_color);
+		lighting(&t->phong, &t->phong.obj->material, &t->light, &final_color);
 		ft_pixel_put(&args->mlx_data, x, y, &final_color);
 	}
 	else
@@ -92,8 +92,8 @@ void	trace_all(t_args *args, t_trace_args *t)
 	t->intersections = new_array(2);
 	id = matrix_new_identity(4);
 	scale = matrix_scaling(&(t_vec3){.x = 0.3, .y = 2.0, .z = 0.3});
-	set_cylinder(&t->obj, matrix_multiply(scale, id), &t->phong.material);
-	set_cylinder_limits(&t->obj, -0.5, 0.5, TRUE);
+	set_cylinder(&t->obj, matrix_multiply(scale, id), &t->phong.obj->material);
+	set_object_limits(&t->obj, -0.5, 0.5, TRUE);
 	y = 0;
 	while (y < t->canvas_pixels - 1)
 	{

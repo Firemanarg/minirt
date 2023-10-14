@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hit_sphere_test.c                                  :+:      :+:    :+:   */
+/*   sphere_hit_test.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 04:24:52 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/23 14:41:45 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 05:03:58 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_test.h>
 
-static void	get_sphere(t_obj *sphere, t_matrix *transform)
+static void	get_sphere(t_geom_obj *sphere, t_matrix *transform)
 {
 	t_material	material;
 
@@ -27,7 +27,7 @@ static void	get_sphere(t_obj *sphere, t_matrix *transform)
 
 Test(hit, hit_sphere_positive_values) {
 	t_varray	*intersections;
-	t_obj		sphere;
+	t_geom_obj		sphere;
 	int			first_idx;
 
 	get_sphere(&sphere, matrix_new_identity(4));
@@ -56,7 +56,7 @@ Test(hit, hit_sphere_positive_values) {
 
 Test(hit, hit_sphere_negative_positive_values) {
 	t_varray	*intersections;
-	t_obj		sphere;
+	t_geom_obj		sphere;
 	int			first_idx;
 
 	get_sphere(&sphere, matrix_new_identity(4));
@@ -85,7 +85,7 @@ Test(hit, hit_sphere_negative_positive_values) {
 
 Test(hit, hit_sphere_negative_values) {
 	t_varray	*intersections;
-	t_obj		sphere;
+	t_geom_obj		sphere;
 	int			first_idx;
 
 	get_sphere(&sphere, matrix_new_identity(4));
@@ -111,7 +111,7 @@ Test(hit, hit_sphere_negative_values) {
 
 Test(hit, hit_sphere_random_order) {
 	t_varray	*intersections;
-	t_obj		sphere;
+	t_geom_obj		sphere;
 	int			first_idx;
 
 	get_sphere(&sphere, matrix_new_identity(4));

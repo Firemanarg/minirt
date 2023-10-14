@@ -6,13 +6,13 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:49:44 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/05 03:33:27 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 05:06:08 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_test.h>
 
-static void	get_cylinder(t_obj *cylinder, t_matrix *transform)
+static void	get_cylinder(t_geom_obj *cylinder, t_matrix *transform)
 {
 	t_material	material;
 
@@ -27,7 +27,7 @@ static void	get_cylinder(t_obj *cylinder, t_matrix *transform)
 
 Test(truncated_cylinder, default_cylinder_is_infinite)
 {
-	t_obj	cylinder;
+	t_geom_obj	cylinder;
 
 	get_cylinder(&cylinder, matrix_new_identity(4));
 	cr_expect(epsilon_eq(dbl, cylinder.maximum, 1.0/0.0, EPSILON));
@@ -37,13 +37,13 @@ Test(truncated_cylinder, default_cylinder_is_infinite)
 
 Test(truncated_cylinder, intersect_diagonal_ray_inside_miss)
 {
-	t_obj	cylinder;
+	t_geom_obj	cylinder;
 	t_ray		r;
 	t_varray	*xs;
 	t_err 		err;
 
 	get_cylinder(&cylinder, matrix_new_identity(4));
-	set_cylinder_limits(&cylinder, 1.0, 2.0, FALSE);
+	set_object_limits(&cylinder, 1.0, 2.0, FALSE);
 	cr_expect(epsilon_eq(dbl, cylinder.maximum, 2.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, cylinder.minimum, 1.0, EPSILON));
 	xs = new_array(2);
@@ -59,13 +59,13 @@ Test(truncated_cylinder, intersect_diagonal_ray_inside_miss)
 
 Test(truncated_cylinder, intersect_ray_perp_y_above_miss)
 {
-	t_obj	cylinder;
+	t_geom_obj	cylinder;
 	t_ray		r;
 	t_varray	*xs;
 	t_err 		err;
 
 	get_cylinder(&cylinder, matrix_new_identity(4));
-	set_cylinder_limits(&cylinder, 1.0, 2.0, FALSE);
+	set_object_limits(&cylinder, 1.0, 2.0, FALSE);
 	cr_expect(epsilon_eq(dbl, cylinder.maximum, 2.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, cylinder.minimum, 1.0, EPSILON));
 	xs = new_array(2);
@@ -81,13 +81,13 @@ Test(truncated_cylinder, intersect_ray_perp_y_above_miss)
 
 Test(truncated_cylinder, intersect_ray_perp_y_below_miss)
 {
-	t_obj	cylinder;
+	t_geom_obj	cylinder;
 	t_ray		r;
 	t_varray	*xs;
 	t_err 		err;
 
 	get_cylinder(&cylinder, matrix_new_identity(4));
-	set_cylinder_limits(&cylinder, 1.0, 2.0, FALSE);
+	set_object_limits(&cylinder, 1.0, 2.0, FALSE);
 	cr_expect(epsilon_eq(dbl, cylinder.maximum, 2.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, cylinder.minimum, 1.0, EPSILON));
 	xs = new_array(2);
@@ -103,13 +103,13 @@ Test(truncated_cylinder, intersect_ray_perp_y_below_miss)
 
 Test(truncated_cylinder, intersect_ray_at_maximum_miss)
 {
-	t_obj	cylinder;
+	t_geom_obj	cylinder;
 	t_ray		r;
 	t_varray	*xs;
 	t_err 		err;
 
 	get_cylinder(&cylinder, matrix_new_identity(4));
-	set_cylinder_limits(&cylinder, 1.0, 2.0, FALSE);
+	set_object_limits(&cylinder, 1.0, 2.0, FALSE);
 	cr_expect(epsilon_eq(dbl, cylinder.maximum, 2.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, cylinder.minimum, 1.0, EPSILON));
 	xs = new_array(2);
@@ -125,13 +125,13 @@ Test(truncated_cylinder, intersect_ray_at_maximum_miss)
 
 Test(truncated_cylinder, intersect_ray_at_minimum_miss)
 {
-	t_obj	cylinder;
+	t_geom_obj	cylinder;
 	t_ray		r;
 	t_varray	*xs;
 	t_err 		err;
 
 	get_cylinder(&cylinder, matrix_new_identity(4));
-	set_cylinder_limits(&cylinder, 1.0, 2.0, FALSE);
+	set_object_limits(&cylinder, 1.0, 2.0, FALSE);
 	cr_expect(epsilon_eq(dbl, cylinder.maximum, 2.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, cylinder.minimum, 1.0, EPSILON));
 	xs = new_array(2);
@@ -147,13 +147,13 @@ Test(truncated_cylinder, intersect_ray_at_minimum_miss)
 
 Test(truncated_cylinder, intersect_ray_at_middle_hit)
 {
-	t_obj	cylinder;
+	t_geom_obj	cylinder;
 	t_ray		r;
 	t_varray	*xs;
 	t_err 		err;
 
 	get_cylinder(&cylinder, matrix_new_identity(4));
-	set_cylinder_limits(&cylinder, 1.0, 2.0, FALSE);
+	set_object_limits(&cylinder, 1.0, 2.0, FALSE);
 	cr_expect(epsilon_eq(dbl, cylinder.maximum, 2.0, EPSILON));
 	cr_expect(epsilon_eq(dbl, cylinder.minimum, 1.0, EPSILON));
 	xs = new_array(2);

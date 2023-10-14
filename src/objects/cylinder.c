@@ -6,21 +6,21 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 14:34:32 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/06 12:19:56 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/13 03:46:44 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projection.h"
 
-static t_err	insert_if_in_range(t_obj *cylinder, t_varray *r,
+static t_err	insert_if_in_range(t_geom_obj *cyl, t_varray *r,
 					double t, double y)
 {
-	if (y > cylinder->minimum && y < cylinder->maximum)
-		return (insert_into_array(r, t, cylinder));
+	if (y > cyl->minimum && y < cyl->maximum)
+		return (insert_into_array(r, t, cyl));
 	return (OK);
 }
 
-static t_err	cylinder_intersect(t_obj *cylinder, t_ray *ray, t_varray *r)
+static t_err	cylinder_intersect(t_geom_obj *cyl, t_ray *ray, t_varray *r)
 {
 	double	a;
 	double	b;
@@ -31,54 +31,61 @@ static t_err	cylinder_intersect(t_obj *cylinder, t_ray *ray, t_varray *r)
 	a = (ray->direction.x) * (ray->direction.x)
 		+ (ray->direction.z) * (ray->direction.z);
 	if (dbl_abs(a) < EPSILON)
-		return (intersect_cylinder_caps(cylinder, ray, r));
+		return (intersect_cylinder_caps(cyl, ray, r));
 	b = 2 * ((ray->start.x) * (ray->direction.x)
 			+ (ray->start.z) * (ray->direction.z));
 	c = (ray->start.x) * (ray->start.x)
 		+ (ray->start.z) * (ray->start.z) - 1;
 	sqrt_disc = b * b - 4 * a * c;
 	if (sqrt_disc < 0)
-		return (intersect_cylinder_caps(cylinder, ray, r));
+		return (intersect_cylinder_caps(cyl, ray, r));
 	sqrt_disc = sqrt(sqrt_disc);
 	ts[0] = (-b - sqrt_disc) / (2.0 * a);
 	ts[1] = (-b + sqrt_disc) / (2.0 * a);
-	return (insert_if_in_range(cylinder, r, ts[0],
+	return (insert_if_in_range(cyl, r, ts[0],
 			ray->start.y + ts[0] * ray->direction.y)
-		|| insert_if_in_range(cylinder, r, ts[1],
+		|| insert_if_in_range(cyl, r, ts[1],
 			ray->start.y + ts[1] * ray->direction.y)
-		|| intersect_cylinder_caps(cylinder, ray, r));
+		|| intersect_cylinder_caps(cyl, ray, r));
 }
 
-void	cylinder_normal_at(t_obj *c, t_vec3 *object_point,
-			t_vec3 *object_normal)
+void	cylinder_normal_at(t_geom_obj *cyl, t_vec3 *obj_point,
+			t_vec3 *obj_normal)
 {
 	double	dist;
 
-	dist = object_point->x * object_point->x
-		+ object_point->z * object_point->z;
-	if (dist < 1.0 && object_point->y >= c->maximum - EPSILON)
-		set_vec3(0.0, 1.0, 0.0, object_normal);
-	else if (dist < 1 && object_point->y <= c->minimum + EPSILON)
-		set_vec3(0.0, -1.0, 0.0, object_normal);
+	dist = obj_point->x * obj_point->x
+		+ obj_point->z * obj_point->z;
+	if (dist < 1.0 && obj_point->y >= cyl->maximum - EPSILON)
+		set_vec3(0.0, 1.0, 0.0, obj_normal);
+	else if (dist < 1.0 && obj_point->y <= cyl->minimum + EPSILON)
+		set_vec3(0.0, -1.0, 0.0, obj_normal);
 	else
-		set_vec3(object_point->x, 0.0, object_point->z, object_normal);
+		set_vec3(obj_point->x, 0.0, obj_point->z, obj_normal);
 }
 
-t_err	set_cylinder(t_obj *cylinder, t_matrix *transform, t_material *material)
+void	cylinder_map_uv(t_geom_obj *cyl, t_vec3 *p, double *u, double *v)
 {
-	cylinder->type = CYLINDER;
-	cylinder->intersects = (t_isect_func)cylinder_intersect;
-	cylinder->normal_at = cylinder_normal_at;
-	cylinder->minimum = -1.0 / 0.0;
-	cylinder->maximum = 1.0 / 0.0;
-	cylinder->is_closed = FALSE;
-	return (set_object(cylinder, transform, material));
+	if (p->y > cyl->minimum + EPSILON && p->y < cyl->maximum - EPSILON)
+	{
+		*u = 1 - (atan2(p->x, p->z) * 0.5 * M_1_PI + 0.5);
+		*v = fmod(p->y, (M_PI * 2)) * 0.5 * M_1_PI;
+	}
+	else
+	{
+		*u = fmod(p->x, (M_PI * 2)) * 0.5 * M_1_PI;
+		*v = fmod(p->z, (M_PI * 2)) * 0.5 * M_1_PI;
+	}
 }
 
-void	set_cylinder_limits(t_obj *cylinder, double minimum, double maximum,
-			t_bool closed)
+t_err	set_cylinder(t_geom_obj *cyl, t_matrix *transform, t_material *material)
 {
-	cylinder->minimum = minimum;
-	cylinder->maximum = maximum;
-	cylinder->is_closed = closed;
+	cyl->type = CYLINDER;
+	cyl->intersects = (t_isect_func)cylinder_intersect;
+	cyl->normal_at = cylinder_normal_at;
+	cyl->map_uv = NULL;
+	cyl->minimum = -1.0 / 0.0;
+	cyl->maximum = 1.0 / 0.0;
+	cyl->is_closed = FALSE;
+	return (set_object(cyl, transform, material));
 }

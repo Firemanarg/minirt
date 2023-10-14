@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 01:51:28 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/06 03:03:36 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 19:38:16 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,21 @@ static void	set_default_world(t_scene *world)
 	t_material			m1;
 	t_material			m2;
 
-	world->lights = malloc(sizeof(*(world->lights)) * 1);
+	world->camera.transform = NULL;
+	world->camera.inv_transform = NULL;
+	world->camera.t_inv_transform = NULL;
+	world->ambient_light.color = (t_color){.r = 1.0, .g = 1.0, .b = 1.0};
+	world->lights = malloc(sizeof(*(world->lights)) * 2);
 	world->geometries = malloc(sizeof(*(world->geometries)) * 3);
 	set_material(&m1);
 	set_sphere(world->geometries, matrix_new_identity(4), &m1);
 	set_default_material(&m2);
 	set_sphere(world->geometries + 1, matrix_apply(matrix_new_identity(4),
 			(t_matrix_op *)ops), &m2);
-	world->lights[0] = (t_point_light){
-		.pos = (t_vec3){.x = -10, .y = 10, .z = -10},
-		.intensity = (t_color){.r = 1, .g = 1, .b = 1}};
 	world->geometries[2] = (t_geom_obj){0};
+	set_point_light(&(t_vec3){.x = -10.0, .y = 10.0, .z = -10.0},
+					&(t_color){.r = 1.0, .g = 1.0, .b = 1.0}, world->lights);
+	world->lights[1] = (t_point_light){0};
 }
 
 Test(world, intersect_world_with_ray)
@@ -66,13 +70,13 @@ Test(world, intersect_world_with_ray)
 	cr_expect(eq(int, xs->capacity, 4));
 	cr_expect(eq(int, xs->length, 4));
 	cr_expect(epsilon_eq(dbl, ((t_isect *)xs->arr)[0].t,
-				4.0, EPSILON));
+				4.0, EPSILON_TEST));
 	cr_expect(epsilon_eq(dbl, ((t_isect *)xs->arr)[1].t,
-				4.5, EPSILON));
+				4.5, EPSILON_TEST));
 	cr_expect(epsilon_eq(dbl, ((t_isect *)xs->arr)[2].t,
-				5.5, EPSILON));
+				5.5, EPSILON_TEST));
 	cr_expect(epsilon_eq(dbl, ((t_isect *)xs->arr)[3].t,
-				6.0, EPSILON));
+				6.0, EPSILON_TEST));
 	free_world(&w);
 }
 
@@ -91,20 +95,20 @@ Test(world, prepare_computations)
 	i.obj = &sphere;
 	i.t = 4;
 	prepare_computations(&i, &r, &comps);
-	cr_expect(epsilon_eq(dbl, comps.t, 4.0, EPSILON));
+	cr_expect(epsilon_eq(dbl, comps.t, 4.0, EPSILON_TEST));
 	cr_expect(eq(ptr, comps.obj, &sphere));
 
-	cr_expect(epsilon_eq(dbl, comps.point.x, 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, comps.point.y, 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, comps.point.z, -1.0, EPSILON));
+	cr_expect(epsilon_eq(dbl, comps.point.x, 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, comps.point.y, 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, comps.point.z, -1.0, EPSILON_TEST));
 
-	cr_expect(epsilon_eq(dbl, comps.eye.x, 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, comps.eye.y, 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, comps.eye.z, -1.0, EPSILON));
+	cr_expect(epsilon_eq(dbl, comps.eye.x, 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, comps.eye.y, 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, comps.eye.z, -1.0, EPSILON_TEST));
 
-	cr_expect(epsilon_eq(dbl, comps.normal.x, 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, comps.normal.y, 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, comps.normal.z, -1.0, EPSILON));
+	cr_expect(epsilon_eq(dbl, comps.normal.x, 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, comps.normal.y, 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, comps.normal.z, -1.0, EPSILON_TEST));
 
 	free_obj(&sphere);
 }
@@ -146,17 +150,17 @@ Test(world, hit_inside)
 	prepare_computations(&i, &r, &comps);
 	cr_expect(eq(int, comps.inside, TRUE));
 
-	cr_expect(epsilon_eq(dbl, comps.point.x, 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, comps.point.y, 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, comps.point.z, 1.0, EPSILON));
+	cr_expect(epsilon_eq(dbl, comps.point.x, 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, comps.point.y, 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, comps.point.z, 1.0, EPSILON_TEST));
 
-	cr_expect(epsilon_eq(dbl, comps.eye.x, 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, comps.eye.y, 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, comps.eye.z, -1.0, EPSILON));
+	cr_expect(epsilon_eq(dbl, comps.eye.x, 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, comps.eye.y, 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, comps.eye.z, -1.0, EPSILON_TEST));
 
-	cr_expect(epsilon_eq(dbl, comps.normal.x, 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, comps.normal.y, 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, comps.normal.z, -1.0, EPSILON));
+	cr_expect(epsilon_eq(dbl, comps.normal.x, 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, comps.normal.y, 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, comps.normal.z, -1.0, EPSILON_TEST));
 
 	free_obj(&sphere);
 }
@@ -168,18 +172,21 @@ Test(world, shade_intersection)
 	t_isect		i;
 	t_precomp	comps;
 	t_color		color;
+	t_varray	*xs;
 
+	xs = new_array(4);
 	set_default_world(&w);
 	set_ray(&(t_vec3){.x = 0, .y = 0, .z = -5},
 			&(t_vec3){.x = 0, .y = 0, .z = 1}, &r);
 	i.obj = w.geometries;
 	i.t = 4;
 	prepare_computations(&i, &r, &comps);
-	shade_hit(&w, &comps, &color);
-	cr_expect(epsilon_eq(dbl, color.r, 0.38066, EPSILON));
-	cr_expect(epsilon_eq(dbl, color.g, 0.47583, EPSILON));
-	cr_expect(epsilon_eq(dbl, color.b, 0.2855, EPSILON));
+	shade_hit(&w, &comps, &color, xs);
+	cr_expect(epsilon_eq(dbl, color.r, 0.38066, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, color.g, 0.47583, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, color.b, 0.2855, EPSILON_TEST));
 	free_world(&w);
+	free_array(xs);
 }
 
 Test(world, shade_intersection_from_inside)
@@ -189,22 +196,23 @@ Test(world, shade_intersection_from_inside)
 	t_isect		i;
 	t_precomp	comps;
 	t_color		color;
+	t_varray	*xs;
 
+	xs = new_array(4);
 	set_default_world(&w);
-	w.lights[0] = (t_point_light){
-		.pos = (t_vec3){.x = 0, .y = 0.25, .z = 0},
-		.intensity = (t_color){.r = 1, .g = 1, .b = 1}
-	};
+	set_point_light(&(t_vec3){.x = 0, .y = 0.25, .z = 0},
+		 &(t_color){.r = 1, .g = 1, .b = 1}, w.lights + 1);
 	set_ray(&(t_vec3){.x = 0, .y = 0, .z = 0},
 			&(t_vec3){.x = 0, .y = 0, .z = 1}, &r);
 	i.obj = w.geometries + 1;
 	i.t = 0.5;
 	prepare_computations(&i, &r, &comps);
-	shade_hit(&w, &comps, &color);
-	cr_expect(epsilon_eq(dbl, color.r, 0.90498, EPSILON));
-	cr_expect(epsilon_eq(dbl, color.g, 0.90498, EPSILON));
-	cr_expect(epsilon_eq(dbl, color.b, 0.90498, EPSILON));
+	shade_hit(&w, &comps, &color, xs);
+	cr_expect(epsilon_eq(dbl, color.r, 0.90498, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, color.g, 0.90498, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, color.b, 0.90498, EPSILON_TEST));
 	free_world(&w);
+	free_array(xs);
 }
 
 Test(world, color_on_ray_miss)
@@ -221,9 +229,9 @@ Test(world, color_on_ray_miss)
 			&(t_vec3){.x = 0, .y = 1, .z = 0}, &r);
 	err = color_at(&w, &r, xs, &color);
 	cr_expect(eq(int, err, OK));
-	cr_expect(epsilon_eq(dbl, color.r, 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, color.g, 0.0, EPSILON));
-	cr_expect(epsilon_eq(dbl, color.b, 0.0, EPSILON));
+	cr_expect(epsilon_eq(dbl, color.r, 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, color.g, 0.0, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, color.b, 0.0, EPSILON_TEST));
 	free_world(&w);
 	free_array(xs);
 }
@@ -242,9 +250,9 @@ Test(world, color_on_ray_hit)
 			&(t_vec3){.x = 0, .y = 0, .z = 1}, &r);
 	err = color_at(&w, &r, xs, &color);
 	cr_expect(eq(int, err, OK));
-	cr_expect(epsilon_eq(dbl, color.r, 0.38066, EPSILON));
-	cr_expect(epsilon_eq(dbl, color.g, 0.47583, EPSILON));
-	cr_expect(epsilon_eq(dbl, color.b, 0.2855, EPSILON));
+	cr_expect(epsilon_eq(dbl, color.r, 0.38066, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, color.g, 0.47583, EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, color.b, 0.2855, EPSILON_TEST));
 	free_world(&w);
 	free_array(xs);
 }
@@ -266,11 +274,11 @@ Test(world, color_on_intersection_behind_ray)
 	err = color_at(&w, &r, xs, &color);
 	cr_expect(eq(int, err, OK));
 	cr_expect(epsilon_eq(dbl, color.r,
-		w.geometries[1].material.color.r, EPSILON));
+		w.geometries[1].material.color.r, EPSILON_TEST));
 	cr_expect(epsilon_eq(dbl, color.g,
-		w.geometries[1].material.color.g, EPSILON));
+		w.geometries[1].material.color.g, EPSILON_TEST));
 	cr_expect(epsilon_eq(dbl, color.b,
-		w.geometries[1].material.color.b, EPSILON));
+		w.geometries[1].material.color.b, EPSILON_TEST));
 	free_world(&w);
 	free_array(xs);
 }

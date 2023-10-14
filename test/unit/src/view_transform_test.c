@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 03:08:48 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/06 04:09:19 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 19:37:39 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 
 static void compare_matrices(t_matrix *t, t_matrix *expected)
 {
-	cr_expect(epsilon_eq(dbl, t->data[0][0], expected->data[0][0], EPSILON));
-	cr_expect(epsilon_eq(dbl, t->data[0][1], expected->data[0][1], EPSILON));
-	cr_expect(epsilon_eq(dbl, t->data[0][2], expected->data[0][2], EPSILON));
-	cr_expect(epsilon_eq(dbl, t->data[0][3], expected->data[0][3], EPSILON));
+	cr_expect(epsilon_eq(dbl, t->data[0][0], expected->data[0][0], EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, t->data[0][1], expected->data[0][1], EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, t->data[0][2], expected->data[0][2], EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, t->data[0][3], expected->data[0][3], EPSILON_TEST));
 
-	cr_expect(epsilon_eq(dbl, t->data[1][0], expected->data[1][0], EPSILON));
-	cr_expect(epsilon_eq(dbl, t->data[1][1], expected->data[1][1], EPSILON));
-	cr_expect(epsilon_eq(dbl, t->data[1][2], expected->data[1][2], EPSILON));
-	cr_expect(epsilon_eq(dbl, t->data[1][3], expected->data[1][3], EPSILON));
+	cr_expect(epsilon_eq(dbl, t->data[1][0], expected->data[1][0], EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, t->data[1][1], expected->data[1][1], EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, t->data[1][2], expected->data[1][2], EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, t->data[1][3], expected->data[1][3], EPSILON_TEST));
 
-	cr_expect(epsilon_eq(dbl, t->data[2][0], expected->data[2][0], EPSILON));
-	cr_expect(epsilon_eq(dbl, t->data[2][1], expected->data[2][1], EPSILON));
-	cr_expect(epsilon_eq(dbl, t->data[2][2], expected->data[2][2], EPSILON));
-	cr_expect(epsilon_eq(dbl, t->data[2][3], expected->data[2][3], EPSILON));
+	cr_expect(epsilon_eq(dbl, t->data[2][0], expected->data[2][0], EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, t->data[2][1], expected->data[2][1], EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, t->data[2][2], expected->data[2][2], EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, t->data[2][3], expected->data[2][3], EPSILON_TEST));
 
-	cr_expect(epsilon_eq(dbl, t->data[3][0], expected->data[3][0], EPSILON));
-	cr_expect(epsilon_eq(dbl, t->data[3][1], expected->data[3][1], EPSILON));
-	cr_expect(epsilon_eq(dbl, t->data[3][2], expected->data[3][2], EPSILON));
-	cr_expect(epsilon_eq(dbl, t->data[3][3], expected->data[3][3], EPSILON));
+	cr_expect(epsilon_eq(dbl, t->data[3][0], expected->data[3][0], EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, t->data[3][1], expected->data[3][1], EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, t->data[3][2], expected->data[3][2], EPSILON_TEST));
+	cr_expect(epsilon_eq(dbl, t->data[3][3], expected->data[3][3], EPSILON_TEST));
 }
 
 Test(view_transform, default_orientation)

@@ -12,7 +12,7 @@
 
 #include <minirt_test.h>
 
-static void	get_cone(t_obj *cone, t_matrix *transform)
+static void	get_cone(t_geom_obj *cone, t_matrix *transform)
 {
 	t_material	material;
 
@@ -27,7 +27,7 @@ static void	get_cone(t_obj *cone, t_matrix *transform)
 
 Test(cone_intersect, ray_hits_one_point_1)
 {
-	t_obj		cone;
+	t_geom_obj		cone;
 	t_ray		r;
 	t_varray	*xs;
 	t_err 		err;
@@ -43,17 +43,17 @@ Test(cone_intersect, ray_hits_one_point_1)
 	cr_expect(eq(int, xs->length, 2));
 	cr_expect(eq(ptr, ((t_isect *)xs->arr)[0].obj, &cone));
 	cr_expect(epsilon_eq(dbl, ((t_isect *)xs->arr)[0].t,
-				5.0, EPSILON));
+				5.0, EPSILON_TEST));
 	cr_expect(eq(ptr, ((t_isect *)xs->arr)[1].obj, &cone));
 	cr_expect(epsilon_eq(dbl, ((t_isect *)xs->arr)[1].t,
-				5.0, EPSILON));
+				5.0, EPSILON_TEST));
 	free_obj(&cone);
 	free_array(xs);
 }
 
 Test(cone_intersect, ray_hits_one_point_2)
 {
-	t_obj		cone;
+	t_geom_obj		cone;
 	t_ray		r;
 	t_varray	*xs;
 	t_err 		err;
@@ -69,17 +69,17 @@ Test(cone_intersect, ray_hits_one_point_2)
 	cr_expect(eq(int, xs->length, 2));
 	cr_expect(eq(ptr, ((t_isect *)xs->arr)[0].obj, &cone));
 	cr_expect(epsilon_eq(dbl, ((t_isect *)xs->arr)[0].t,
-				8.66025, EPSILON));
+				8.66025, EPSILON_TEST));
 	cr_expect(eq(ptr, ((t_isect *)xs->arr)[1].obj, &cone));
 	cr_expect(epsilon_eq(dbl, ((t_isect *)xs->arr)[1].t,
-				8.66025, EPSILON));
+				8.66025, EPSILON_TEST));
 	free_obj(&cone);
 	free_array(xs);
 }
 
 Test(cone_intersect, ray_hits_two_points)
 {
-	t_obj		cone;
+	t_geom_obj		cone;
 	t_ray		r;
 	t_varray	*xs;
 	t_err 		err;
@@ -95,17 +95,17 @@ Test(cone_intersect, ray_hits_two_points)
 	cr_expect(eq(int, xs->length, 2));
 	cr_expect(eq(ptr, ((t_isect *)xs->arr)[0].obj, &cone));
 	cr_expect(epsilon_eq(dbl, ((t_isect *)xs->arr)[0].t,
-				4.55006, EPSILON));
+				4.55006, EPSILON_TEST));
 	cr_expect(eq(ptr, ((t_isect *)xs->arr)[1].obj, &cone));
 	cr_expect(epsilon_eq(dbl, ((t_isect *)xs->arr)[1].t,
-				49.44994, EPSILON));
+				49.44994, EPSILON_TEST));
 	free_obj(&cone);
 	free_array(xs);
 }
 
 Test(cone_intersect, ray_parallel_to_one_half)
 {
-	t_obj		cone;
+	t_geom_obj		cone;
 	t_ray		r;
 	t_varray	*xs;
 	t_err 		err;
@@ -121,7 +121,7 @@ Test(cone_intersect, ray_parallel_to_one_half)
 	cr_expect(eq(int, xs->length, 1));
 	cr_expect(eq(ptr, ((t_isect *)xs->arr)[0].obj, &cone));
 	cr_expect(epsilon_eq(dbl, ((t_isect *)xs->arr)[0].t,
-				0.35355, EPSILON));
+				0.35355, EPSILON_TEST));
 	free_obj(&cone);
 	free_array(xs);
 }

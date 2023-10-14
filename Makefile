@@ -59,6 +59,7 @@ SRC_FILES += ${addprefix ${SRC_DIR}/objects/, \
 				color.c \
 				cone.c \
 				cylinder.c \
+				light.c \
 				object.c \
 				plane.c \
 				sphere.c}
@@ -79,6 +80,7 @@ SRC_FILES		+= ${addprefix ${SRC_DIR}/scene/,\
 SRC_FILES		+= ${addprefix ${SRC_DIR}/shading/, \
 				lighting.c \
 				material.c \
+				pattern.c \
 				reflect.c \
 				shadow.c}
 

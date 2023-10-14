@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_world_with_camera.c                         :+:      :+:    :+:   */
+/*   render_world_with_multiple_lights.c                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 22:51:50 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/09 02:58:14 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/14 01:58:55 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,15 @@ static void	get_floor(t_geom_obj *floor)
 
 	set_default_material(&m);
 	m.color = (t_color){.r = 1.0, .g = 0.9, .b = 0.9};
-	m.specular = 0.0;
-	set_sphere(floor,
+	// m.specular = 0.0;
+	set_plane(floor,
 		matrix_scaling(&(t_vec3){.x = 10.0, .y = 0.01, .z = 10.0}), &m);
 }
 
 static void	get_left_wall(t_geom_obj *left_wall)
 {
 	t_material	m;
-	t_matrix_op mops[5] = {
-	{.op = SCALE, .params = {.x = 10.0, .y = 0.01, .z = 10.0}},
+	t_matrix_op mops[4] = {
 	{.op = ROTATE_X, .param = M_PI_2},
 	{.op = ROTATE_Y, .param = -M_PI_4},
 	{.op = TRANSLATE, .params = {.x = 0.0, .y = 0.0, .z = 5.0}},
@@ -45,15 +44,14 @@ static void	get_left_wall(t_geom_obj *left_wall)
 
 	set_default_material(&m);
 	m.color = (t_color){.r = 1.0, .g = 0.9, .b = 0.9};
-	m.specular = 0.0;
-	set_sphere(left_wall, matrix_apply(matrix_new_identity(4), mops), &m);
+	// m.specular = 0.0;
+	set_plane(left_wall, matrix_apply(matrix_new_identity(4), mops), &m);
 }
 
 static void	get_right_wall(t_geom_obj *right_wall)
 {
 	t_material	m;
-	t_matrix_op mops[5] = {
-	{.op = SCALE, .params = {.x = 10.0, .y = 0.01, .z = 10.0}},
+	t_matrix_op mops[4] = {
 	{.op = ROTATE_X, .param = M_PI_2},
 	{.op = ROTATE_Y, .param = M_PI_4},
 	{.op = TRANSLATE, .params = {.x = 0.0, .y = 0.0, .z = 5.0}},
@@ -62,25 +60,33 @@ static void	get_right_wall(t_geom_obj *right_wall)
 	set_default_material(&m);
 	m.color = (t_color){.r = 1.0, .g = 0.9, .b = 0.9};
 	m.specular = 0.0;
-	set_sphere(right_wall, matrix_apply(matrix_new_identity(4), mops), &m);
+	set_plane(right_wall, matrix_apply(matrix_new_identity(4), mops), &m);
 }
 
-static void	get_large_sphere(t_geom_obj *sphere)
+static void	get_large_cylinder(t_geom_obj *cylinder)
 {
 	t_material	m;
+	t_matrix_op mops[4] = {
+	{.op = ROTATE_X, .param = -M_PI_4},
+	{.op = ROTATE_Y, .param = M_PI_4 / 2},
+	{.op = TRANSLATE, .params = {.x = -0.5, .y = 1.0, .z = 0.5}},
+	{0}};
 
 	set_default_material(&m);
 	m.color = (t_color){.r = 0.1, .g = 1.0, .b = 0.5};
 	m.diffuse = 0.7;
 	m.specular = 0.3;
-	set_sphere(sphere,
-		matrix_translation(&(t_vec3){.x = -0.5, .y = 1.0, .z = 0.5}), &m);
+	set_cylinder(cylinder,
+		matrix_apply(matrix_new_identity(4), mops), &m);
+	set_object_limits(cylinder, 0.0, 1.5, TRUE);
 }
 
-static void	get_medium_sphere(t_geom_obj *sphere)
+static void	get_medium_cone(t_geom_obj *cone)
 {
 	t_material	m;
-	t_matrix_op mops[3] = {
+	t_matrix_op mops[5] = {
+	{.op = ROTATE_X, .param = -M_PI_4},
+	{.op = ROTATE_Y, .param = -M_PI_4 / 2},
 	{.op = SCALE, .params = {.x = 0.5, .y = 0.5, .z = 0.5}},
 	{.op = TRANSLATE, .params = {.x = 1.5, .y = 0.5, .z = -0.5}},
 	{0}};
@@ -89,7 +95,8 @@ static void	get_medium_sphere(t_geom_obj *sphere)
 	m.color = (t_color){.r = 0.50, .g = 1.0, .b = 0.1};
 	m.diffuse = 0.7;
 	m.specular = 0.3;
-	set_sphere(sphere, matrix_apply(matrix_new_identity(4), mops), &m);
+	set_cone(cone, matrix_apply(matrix_new_identity(4), mops), &m);
+	set_object_limits(cone, 0.0, 1.5, TRUE);
 }
 
 static void	get_small_sphere(t_geom_obj *sphere)
@@ -111,7 +118,7 @@ static void	get_camera(t_camera *camera, int width, int height)
 {
 	set_camera(width, height, M_PI / 3.0, camera);
 	set_camera_transform(view_transform(
-		&(t_vec3){.x = 0.0, .y = 1.5, .z = -5.0},
+		&(t_vec3){.x = -2.0, .y = 1.5, .z = -6.0},
 		&(t_vec3){.x = 0.0, .y = 1.0, .z = 0.0},
 		&(t_vec3){.x = 0.0, .y = 1.0, .z = 0.0}),
 	camera);
@@ -124,15 +131,28 @@ static void	get_world(t_scene *world, int width, int height)
 	get_floor(world->geometries);
 	get_left_wall(world->geometries + 1);
 	get_right_wall(world->geometries + 2);
-	get_large_sphere(world->geometries + 3);
-	get_medium_sphere(world->geometries + 4);
+	get_large_cylinder(world->geometries + 3);
+	get_medium_cone(world->geometries + 4);
 	get_small_sphere(world->geometries + 5);
 	world->geometries[6] = (t_geom_obj){0};
 	world->ambient_light.color = (t_color){.r = 1.0, .g = 1.0, .b = 1.0};
-	world->lights = malloc(sizeof(t_point_light) * 2);
+	world->lights = malloc(sizeof(t_point_light) * 4);
 	set_point_light(&(t_vec3){.x = -10.0, .y = 10.0, .z = -10.0},
-					&(t_color){.r = 1.0, .g = 1.0, .b = 1.0}, world->lights);
+					&(t_color){.r = 1.0, .g = 0.0, .b = 0.0}, world->lights);
+	set_point_light(&(t_vec3){.x = 10.0, .y = 10.0, .z = -10.0},
+					&(t_color){.r = 0.0, .g = 1.0, .b = 0.0},
+					world->lights + 1);
+	set_point_light(&(t_vec3){.x = 0.0, .y = 10.0, .z = -10.0},
+					&(t_color){.r = 0.0, .g = 0.0, .b = 1.0},
+					world->lights + 2);
 	world->lights[3] = (t_point_light){0};
+}
+
+static int	refresh(t_args *args)
+{
+	mlx_put_image_to_window(args->mlx, args->mlx_win,
+		args->mlx_data.img, 0, 0);
+	return (0);
 }
 
 int	main(void)
@@ -148,11 +168,11 @@ int	main(void)
 	get_world(&world, width, height);
 	render_image(&world.camera, &world, &args.mlx_data);
 	free_world(&world);
-	mlx_put_image_to_window(args.mlx, args.mlx_win,
-		args.mlx_data.img, 0, 0);
 	clock_gettime(CLOCK_MONOTONIC_RAW, &end);
+	args.mlx_win = mlx_new_window(args.mlx, width, height, "MiniRT");
 	printf("Rendered in %.0f ms.\n", (end.tv_nsec - begin.tv_nsec) / 1000000.0
 		+ (end.tv_sec - begin.tv_sec) * 1000.0);
+	mlx_expose_hook(args.mlx_win, refresh, &args);
 	mlx_hook(args.mlx_win, ON_DESTROY,
 		MASK_STRUCTURE_NOTIFY, on_destroy, &args);
 	mlx_hook(args.mlx_win, ON_KEYDOWN, MASK_KEY_PRESS, on_key_press, &args);

@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 21:53:53 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/06 12:19:01 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/13 00:04:31 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_bool	check_cylinder_cap(t_ray *ray, double t)
 	return ((x * x + z * z) <= 1.0);
 }
 
-t_err	intersect_cylinder_caps(t_obj *cylinder, t_ray *ray, t_varray *xs)
+t_err	intersect_cylinder_caps(t_geom_obj *cylinder, t_ray *ray, t_varray *xs)
 {
 	double	t;
 	t_err	err;
@@ -51,7 +51,7 @@ static t_bool	check_cone_cap(t_ray *ray, double t, double y)
 	return ((x * x + z * z) <= y * y);
 }
 
-t_err	intersect_cone_caps(t_obj *cone, t_ray *ray, t_varray *xs)
+t_err	intersect_cone_caps(t_geom_obj *cone, t_ray *ray, t_varray *xs)
 {
 	double	t;
 	t_err	err;
@@ -68,4 +68,12 @@ t_err	intersect_cone_caps(t_obj *cone, t_ray *ray, t_varray *xs)
 	if (check_cone_cap(ray, t, cone->maximum))
 		err = insert_into_array(xs, t, cone);
 	return (err);
+}
+
+void	set_object_limits(t_geom_obj *obj, double minimum,
+			double maximum, t_bool closed)
+{
+	obj->minimum = minimum;
+	obj->maximum = maximum;
+	obj->is_closed = closed;
 }

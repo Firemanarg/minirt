@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 03:47:13 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/06 12:24:32 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 04:14:37 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_err	resize_array(t_varray *r, int new_capacity)
 	return (OK);
 }
 
-t_err	insert_into_array(t_varray *r, double t, t_obj *obj)
+t_err	insert_into_array(t_varray *r, double t, t_geom_obj *obj)
 {
 	if (r->length == r->capacity)
 	{

@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 20:07:36 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/07 01:43:06 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 17:55:20 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static double	has_diffuse(t_precomp *p, t_point_light *l, t_vec3 *light_v)
 {
-	subtract(&l->pos, &p->point, light_v);
+	subtract(&l->pos, &p->over_point, light_v);
 	normalize(light_v, light_v);
 	return (dot(light_v, &p->normal));
 }
@@ -37,11 +37,14 @@ void	lighting(t_precomp *p, t_material *m, t_point_light *l, t_color *color)
 	double	light_dot_normal;
 	double	reflect_dot_eye;
 
-	hadamard(&m->color, &l->intensity, &effective_color);
-	multiply(&effective_color, m->ambient, color);
 	if (p->in_shadow)
+	{
+		set_color(0.0, 0.0, 0.0, color);
 		return ;
+	}
+	hadamard(color, &l->color, &effective_color);
 	light_dot_normal = has_diffuse(p, l, &light_v);
+	set_color(0.0, 0.0, 0.0, color);
 	if (light_dot_normal < 0)
 		return ;
 	multiply(&effective_color, m->diffuse * light_dot_normal, &tmp);
@@ -49,7 +52,7 @@ void	lighting(t_precomp *p, t_material *m, t_point_light *l, t_color *color)
 	reflect_dot_eye = has_specular(p, &light_v);
 	if (reflect_dot_eye <= 0)
 		return ;
-	multiply(&l->intensity,
+	multiply(&l->color,
 		m->specular * pow(reflect_dot_eye, m->shininess),
 		&tmp);
 	add(color, &tmp, color);

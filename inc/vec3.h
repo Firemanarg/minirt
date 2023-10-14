@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:17:40 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/04 03:34:05 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 23:54:16 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "error.h"
 # include "libft_x.h"
 
-# define EPSILON 0.00001
+# define EPSILON 1e-6
 
 typedef union u_vec3
 {
