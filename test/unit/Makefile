@@ -12,7 +12,7 @@ MINIRT_OBJ_DIR = ${MINIRT_DIR}/build/obj
 MLX_DIR	= ${MINIRT_DIR}/lib/minilibx-linux
 MLX_FLAGS = -L${MLX_DIR} -lmlx -lXext -lX11 -lz
 
-LFTX_DIR = ../libft_x
+LFTX_DIR = ../../libft_x
 LFTX = ${LFTX_DIR}/libft_x.a
 
 TEST_DIR = .
