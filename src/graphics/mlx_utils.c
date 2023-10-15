@@ -13,10 +13,10 @@
 #include "graphics.h"
 #include "objects.h"
 
-void	init_args(t_args *args, int width, int height)
+void	init_args(t_args *args)
 {
 	args->mlx = mlx_init();
-	args->mlx_data.img = mlx_new_image(args->mlx, width, height);
+	args->mlx_data.img = mlx_new_image(args->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	args->mlx_data.addr = mlx_get_data_addr(args->mlx_data.img,
 			&args->mlx_data.bits_per_pixel,
 			&args->mlx_data.line_length,
