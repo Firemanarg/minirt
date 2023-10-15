@@ -46,6 +46,7 @@ typedef struct s_material
 typedef enum e_obj_type
 {
 	UNKNOWN = -1,
+	NONE = 0,
 	AMBIENT_LIGHT,
 	CAMERA,
 	LIGHT,
@@ -124,10 +125,10 @@ typedef struct s_plane
 
 typedef struct s_scene
 {
-	t_camera		*camera;
-	t_ambient_light	*ambient_light;
-	t_geom_obj		**geometries;
-	t_point_light	**lights;
+	t_camera		camera;
+	t_ambient_light	ambient_light;
+	t_geom_obj		*geometries;
+	t_point_light	*lights;
 }	t_scene;
 
 // color.c
@@ -143,5 +144,8 @@ void	set_material_coefficients(t_material *material, double ambient,
 // scene.c
 t_scene	*new_scene(int light_count, int geometries_count);
 void	*free_scene(t_scene *scene);
+
+// clean_obj.c
+void	clean_obj(t_base_obj *obj);
 
 #endif
