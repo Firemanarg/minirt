@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/09/26 17:29:19 by lsilva-q          #+#    #+#              #
-#    Updated: 2023/09/26 17:29:19 by lsilva-q         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 CC				:= cc
 CFLAGS			:= -Wall -Wextra -Werror -g -fms-extensions
 RM				:= rm -rf
@@ -47,34 +35,56 @@ SRC_FILES		+= ${addprefix ${SRC_DIR}/graphics/,\
 				mlx_utils.c\
 				window.c}
 
-# Matrix files
-SRC_FILES		+= ${addprefix ${SRC_DIR}/matrix/,\
-				matrix_apply.c\
-				matrix_determinant.c\
-				matrix_inverse.c\
-				matrix_multiply.c\
-				matrix_print.c\
-				matrix_scaling.c\
-				matrix_translation.c\
-				matrix_cofactor.c\
-				matrix_free.c\
-				matrix_minor.c\
-				matrix_new.c\
-				matrix_rotation.c\
-				matrix_submatrix.c\
-				matrix_transpose.c}
+# Matrix operation files
+SRC_FILES += ${addprefix ${SRC_DIR}/matrix/, \
+				matrix_apply.c \
+				matrix_determinant.c \
+				matrix_inverse.c \
+				matrix_multiply.c \
+				matrix_print.c \
+				matrix_scaling.c \
+				matrix_translation.c \
+				matrix_cofactor.c \
+				matrix_free.c \
+				matrix_minor.c \
+				matrix_new.c \
+				matrix_rotation.c \
+				matrix_submatrix.c \
+				matrix_transpose.c \
+				matrix_vec3_multiply.c}
 
-# Objects files
-SRC_FILES		+= ${addprefix ${SRC_DIR}/objects/,\
-				scene.c\
-				color.c\
-				sphere.c\
-				clean_obj.c}
+# Object definition files
+SRC_FILES += ${addprefix ${SRC_DIR}/objects/, \
+				caps.c \
+				scene.c \
+				clean_obj.c \
+				color.c \
+				cone.c \
+				cylinder.c \
+				light.c \
+				object.c \
+				plane.c \
+				sphere.c}
 
 # Projection files
 SRC_FILES		+= ${addprefix ${SRC_DIR}/projection/,\
 				hit.c\
 				ray.c}
+
+# Scene composition files
+SRC_FILES		+= ${addprefix ${SRC_DIR}/scene/,\
+				camera.c \
+				render.c \
+				scene.c \
+				view.c}
+
+# Shading, color and lighting operation files
+SRC_FILES		+= ${addprefix ${SRC_DIR}/shading/, \
+				lighting.c \
+				material.c \
+				pattern.c \
+				reflect.c \
+				shadow.c}
 
 # Varray files
 SRC_FILES		+= ${addprefix ${SRC_DIR}/varray/,\

@@ -6,13 +6,12 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 03:47:13 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/18 12:17:24 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 04:14:37 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <projection.h>
-#include <graphics.h>
-#include <varray.h>
+#include "projection.h"
+#include "minirt.h"
 
 t_varray	*new_array(int initial_capacity)
 {
@@ -46,7 +45,7 @@ t_err	resize_array(t_varray *r, int new_capacity)
 	return (OK);
 }
 
-t_err	insert_into_array(t_varray *r, double t, t_obj *obj)
+t_err	insert_into_array(t_varray *r, double t, t_geom_obj *obj)
 {
 	if (r->length == r->capacity)
 	{
@@ -62,4 +61,9 @@ void	free_array(t_varray *r)
 {
 	free(r->arr);
 	free(r);
+}
+
+void	reset_array(t_varray *r)
+{
+	r->length = 0;
 }

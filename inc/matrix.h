@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 12:33:50 by marvin            #+#    #+#             */
-/*   Updated: 2023/09/18 14:50:31 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:30:10 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 # define MATRIX_H
 
 # include <stdio.h>
-# include <math.h>
-# include <vec3.h>
+# include "vec3.h"
 
 /**
  * @brief Matrix structure
@@ -71,6 +70,8 @@ double		matrix_determinant_2x2(t_matrix *m);
 double		matrix_minor(t_matrix *m, int row, int col);
 double		matrix_cofactor(t_matrix *m, int row, int col);
 t_matrix	*matrix_apply(t_matrix *m, t_matrix_op *operations);
+void		matrix_vector_multiply(t_matrix *matrix, t_vec3 *v, t_vec3 *result);
+void		matrix_point_multiply(t_matrix *matrix, t_vec3 *v, t_vec3 *result);
 // t_matrix	*mtx_shear(t_matrix *m, t_vec3 x, t_vec3 y);
 
 #endif

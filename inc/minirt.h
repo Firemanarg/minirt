@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 01:20:29 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/16 21:34:48 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/12 19:34:15 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,5 @@
 # define MINIRT_H
 
 # include <stdlib.h>
-# include <math.h>
 
 #endif

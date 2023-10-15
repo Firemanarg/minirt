@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 08:53:15 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/09/28 08:53:15 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:29:51 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <fcntl.h>
 # include "objects.h"
 # include "error.h"
-# include "vec3.h"
 
 # define MAX_RATIO 1.0
 # define MIN_RATIO 0.0

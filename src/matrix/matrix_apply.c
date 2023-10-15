@@ -6,13 +6,11 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 02:33:46 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/18 15:02:32 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:26:19 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
-#include <vec3.h>
-#include <matrix.h>
+#include "matrix.h"
 
 static t_matrix	*get_operation_matrix(t_matrix *m, t_matrix_op *operation)
 {

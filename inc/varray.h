@@ -6,14 +6,14 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 02:25:17 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/18 16:35:34 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/04 12:06:03 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VARRAY_H
 # define VARRAY_H
 
-# include <error.h>
+# include "error.h"
 
 typedef struct s_varray
 {
@@ -26,6 +26,7 @@ typedef struct s_varray
 t_varray	*new_array(int initial_capacity);
 t_err		resize_array(t_varray *r, int new_capacity);
 void		free_array(t_varray *r);
+void		reset_array(t_varray *r);
 
 // quicksort.c
 void		quicksort(t_varray *r);

@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   leak_test.c                                        :+:      :+:    :+:   */
+/*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/16 19:56:28 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/16 20:00:24 by gmachado         ###   ########.fr       */
+/*   Created: 2023/10/08 23:27:02 by gmachado          #+#    #+#             */
+/*   Updated: 2023/10/09 00:21:37 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt_test.h>
+#include "objects.h"
 
-Test(leaks, simple_test) {
-	int	a = 1;
-	int	b = 2;
-
-	cr_expect(eq(int,a + b, 3));
+void	set_point_light(t_vec3 *pos, t_color *color, t_point_light *light)
+{
+	light->pos = *pos;
+	light->color = *color;
+	light->type = LIGHT;
 }

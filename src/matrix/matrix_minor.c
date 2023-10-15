@@ -6,11 +6,11 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:41:21 by marvin            #+#    #+#             */
-/*   Updated: 2023/09/18 02:00:34 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:26:53 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <matrix.h>
+#include "matrix.h"
 
 double	matrix_minor(t_matrix *m, int row, int col)
 {
