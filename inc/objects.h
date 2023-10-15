@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:44:47 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/15 17:00:45 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:04:39 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "error.h"
 # include "varray.h"
 
-# define AMBIENT 0.0
+# define AMBIENT 0.2
 # define DIFFUSE 0.9
 # define SPECULAR 0.0
 # define SHININESS 200
