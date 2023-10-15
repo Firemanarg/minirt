@@ -6,13 +6,13 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:41:22 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/15 14:08:57 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 17:53:28 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "graphics.h"
-#include "matrix.h"
+#include "shading.h"
 
 static int	is_valid(t_camera *camera);
 // static void	apply_transforms(t_camera *camera);
@@ -44,9 +44,10 @@ static void	set_camera_pars(int hsize, int vsize, double fov, t_camera *camera)
 t_err	parse_camera(char **fields, int fields_count, t_camera *camera)
 {
 	t_err	err;
-	t_vec3	axis;
+	t_vec3	up;
+	t_vec3	to;
 
-	axis = (t_vec3){.x = 0, .y = 0, .z = 1};
+	up = (t_vec3){.x = 0.0, .y = 1.0, .z = 0.0};
 	if (fields_count != CAMERA_FIELDS_COUNT)
 		return (INVALID_ARG);
 	if (camera == NULL)
@@ -54,14 +55,14 @@ t_err	parse_camera(char **fields, int fields_count, t_camera *camera)
 	camera->type = CAMERA;
 	err = str_to_vec3(fields[1], &camera->pos);
 	err |= str_to_vec3(fields[2], &camera->dir);
+	add(&camera->pos, &camera->dir, &to);
 	camera->fov = ft_atoi(fields[3]);
 	err |= !is_valid(camera);
 	if (err != OK)
 		return (INVALID_ARG);
-	camera->transform = matrix_rotate_translate(&axis,
-			&camera->dir, &camera->pos);
+	camera->transform = view_transform(&camera->pos, &to, &up);
 	camera->inv_transform = matrix_inverse(camera->transform);
-	camera->t_inv_transform = matrix_transpose(camera->inv_transform);
+	camera->t_inv_transform = NULL;
 	// apply_transforms(camera);
 	set_camera_pars(WINDOW_WIDTH, WINDOW_HEIGHT, camera->fov, camera);
 	return (OK);
