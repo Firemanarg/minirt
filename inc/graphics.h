@@ -17,6 +17,10 @@
 # include <stdlib.h>
 # include "objects.h"
 
+# define WINDOW_TITLE "miniRT"
+# define WINDOW_WIDTH 800
+# define WINDOW_HEIGHT 600
+
 typedef struct s_mlx_data {
 	void	*img;
 	char	*addr;
@@ -30,6 +34,7 @@ typedef struct s_args
 	void		*mlx;
 	void		*mlx_win;
 	t_mlx_data	mlx_data;
+	t_scene		*scene;
 }	t_args;
 
 enum {
@@ -54,15 +59,12 @@ enum {
 };
 
 // mlx_utils.c
-void			init_args(t_args *args, int width, int height);
+void			init_args(t_args *args);
 void			ft_pixel_put(t_mlx_data *mlx_data, int x, int y,
 					t_color *minirt_color);
 unsigned int	convert_color(t_color *minirt_color);
 
 // window.c
 int				create_window(t_args *args);
-int				close_graphics(t_args *data);
-int				on_destroy(t_args *data);
-int				on_key_press(int keycode, t_args *data);
 
 #endif
