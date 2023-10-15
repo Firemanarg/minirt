@@ -50,23 +50,30 @@ t_scene_parser	*get_scene_parser_args(char const *file_name)
 static int	iterate_over_lines(t_scene_parser *parser)
 {
 	t_obj_type	type;
+	char		*endl_ptr;
 
 	if (parser == NULL)
 		return (0);
 	parser->line = get_next_line(parser->fd);
 	while (parser->line != NULL)
 	{
-		type = get_type_from_line(parser->line);
-		if (!increment_counters(parser, type))
-			break ;
+		endl_ptr = ft_strchr(parser->line, '\n');
+		if (endl_ptr != NULL)
+			*endl_ptr = 0;
+		if ((parser->line)[0] != '\0')
+		{
+			type = get_type_from_line(parser->line);
+			if (!increment_counters(parser, type))
+				break ;
+		}
 		free(parser->line);
 		parser->line = get_next_line(parser->fd);
 	}
-	if (parser->line != NULL)
-		return (0);
+	if (parser->line == NULL)
+		return (1);
 	free(parser->line);
 	parser->line = NULL;
-	return (1);
+	return (0);
 }
 
 static t_obj_type	get_type_from_line(const char *line)
