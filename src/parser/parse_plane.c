@@ -15,27 +15,23 @@
 static int	is_valid(t_plane *plane);
 static void	apply_transforms(t_plane *plane);
 
-t_plane	*parse_plane(char **fields, int fields_count)
+t_err	parse_plane(char **fields, int fields_count, t_plane *plane)
 {
-	t_plane	*plane;
 	t_err	err;
 
 	if (fields_count != PLANE_FIELDS_COUNT)
-		return (NULL);
-	plane = malloc(sizeof(t_plane));
+		return (INVALID_ARG);
 	if (!plane)
-		return (NULL);
+		return (INVALID_ARG);
 	plane->type = PLANE;
 	err = str_to_vec3(fields[1], &plane->pos);
 	err |= str_to_vec3(fields[2], &plane->dir);
 	err |= str_to_vec3(fields[3], &(plane->material.color));
-	if (err != OK || !is_valid(plane))
-	{
-		free(plane);
-		return (NULL);
-	}
+	err |= !is_valid(plane);
+	if (err != OK)
+		return (INVALID_ARG);
 	apply_transforms(plane);
-	return (plane);
+	return (OK);
 }
 
 static int	is_valid(t_plane *plane)
