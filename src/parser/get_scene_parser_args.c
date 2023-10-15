@@ -33,13 +33,15 @@ t_scene_parser	*get_scene_parser_args(char const *file_name)
 	*parser = (t_scene_parser){0, .fd = -1};
 	parser->fd = open(file_name, O_RDONLY);
 	if (parser->fd < 0)
+	{
+		free(parser);
 		return (NULL);
+	}
 	aux = iterate_over_lines(parser);
 	close(parser->fd);
 	parser->fd = -1;
 	if (aux != 1 || !is_valid_parser(parser))
 	{
-		free(parser->scene);
 		free(parser);
 		return (NULL);
 	}
@@ -59,7 +61,7 @@ static int	iterate_over_lines(t_scene_parser *parser)
 	{
 		endl_ptr = ft_strchr(parser->line, '\n');
 		if (endl_ptr != NULL)
-			*endl_ptr = 0;
+			*endl_ptr = '\0';
 		if ((parser->line)[0] != '\0')
 		{
 			type = get_type_from_line(parser->line);
@@ -94,15 +96,13 @@ static int	is_valid_parser(t_scene_parser *parser)
 {
 	if (parser == NULL)
 		return (0);
-	else if (parser->scene == NULL)
-		return (0);
 	else if (parser->amb_light_count != 1)
 		return (0);
 	else if (parser->camera_count != 1)
 		return (0);
-	else if (parser->light_count <= 0)
+	else if (parser->light_count < 0 || parser->light_count > 1)
 		return (0);
-	else if (parser->geometry_count <= 0)
+	else if (parser->geometry_count < 0)
 		return (0);
 	return (1);
 }
