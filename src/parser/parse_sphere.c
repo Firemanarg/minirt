@@ -15,27 +15,23 @@
 static int	is_valid(t_sphere *sphere);
 static void	apply_transforms(t_sphere *sphere);
 
-t_sphere	*parse_sphere(char **fields, int fields_count)
+t_err	parse_sphere(char **fields, int fields_count, t_sphere *sphere)
 {
-	t_sphere	*sphere;
-	t_err		err;
+	t_err	err;
 
 	if (fields_count != SPHERE_FIELDS_COUNT)
-		return (NULL);
-	sphere = malloc(sizeof(t_sphere));
-	if (!sphere)
-		return (NULL);
+		return (INVALID_ARG);
+	if (sphere == NULL)
+		return (INVALID_ARG);
 	sphere->type = SPHERE;
 	err = str_to_vec3(fields[1], &sphere->pos);
 	sphere->diameter = ft_atod(fields[2]);
 	err |= str_to_vec3(fields[3], &(sphere->material.color));
-	if (err != OK || !is_valid(sphere))
-	{
-		free(sphere);
-		return (NULL);
-	}
+	err |= !is_valid(sphere);
+	if (err != OK)
+		return (INVALID_ARG);
 	apply_transforms(sphere);
-	return (sphere);
+	return (OK);
 }
 
 static int	is_valid(t_sphere *sphere)

@@ -56,7 +56,8 @@ SRC_FILES += ${addprefix ${SRC_DIR}/matrix/, \
 # Object definition files
 SRC_FILES += ${addprefix ${SRC_DIR}/objects/, \
 				caps.c \
-				scene.c\
+				scene.c \
+				clean_obj.c \
 				color.c \
 				cone.c \
 				cylinder.c \
@@ -110,7 +111,8 @@ SRC_FILES		+= ${addprefix ${SRC_DIR}/parser/,\
 				parse_plane.c\
 				parse_sphere.c\
 				parser.c\
-				validations.c}
+				validations.c\
+				parser_utils.c}
 
 BUILD_DIR		:= ${MANDATORY_DIR}/build
 

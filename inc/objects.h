@@ -48,7 +48,7 @@ typedef struct s_material
 typedef enum e_obj_type
 {
 	UNKNOWN = -1,
-	NONE,
+	NONE = 0,
 	AMBIENT_LIGHT,
 	CAMERA,
 	LIGHT,
@@ -214,5 +214,8 @@ void	sphere_map_uv(t_geom_obj *sph, t_vec3 *p, double *u, double *v);
 // scene.c
 t_scene	*new_scene(int light_count, int geometries_count);
 void	*free_scene(t_scene *scene);
+
+// clean_obj.c
+void	clean_obj(t_base_obj *obj);
 
 #endif

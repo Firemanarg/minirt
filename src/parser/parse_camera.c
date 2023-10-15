@@ -15,27 +15,23 @@
 static int	is_valid(t_camera *camera);
 static void	apply_transforms(t_camera *camera);
 
-t_camera	*parse_camera(char **fields, int fields_count)
+t_err	parse_camera(char **fields, int fields_count, t_camera *camera)
 {
-	t_camera	*camera;
-	t_err		err;
+	t_err	err;
 
 	if (fields_count != CAMERA_FIELDS_COUNT)
-		return (NULL);
-	camera = malloc(sizeof(t_camera));
-	if (!camera)
-		return (NULL);
+		return (INVALID_ARG);
+	if (camera == NULL)
+		return (INVALID_ARG);
 	camera->type = CAMERA;
 	err = str_to_vec3(fields[1], &camera->pos);
 	err |= str_to_vec3(fields[2], &camera->dir);
 	camera->fov = ft_atoi(fields[3]);
-	if (err != OK || !is_valid(camera))
-	{
-		free(camera);
-		return (NULL);
-	}
+	err |= !is_valid(camera);
+	if (err != OK)
+		return (INVALID_ARG);
 	apply_transforms(camera);
-	return (camera);
+	return (OK);
 }
 
 static int	is_valid(t_camera *camera)

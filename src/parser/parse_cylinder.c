@@ -15,29 +15,25 @@
 static int	is_valid(t_cylinder *cylinder);
 static void	apply_transforms(t_cylinder *cylinder);
 
-t_cylinder	*parse_cylinder(char **fields, int fields_count)
+t_err	parse_cylinder(char **fields, int fields_count, t_cylinder *cylinder)
 {
-	t_cylinder	*cylinder;
-	t_err		err;
+	t_err	err;
 
 	if (fields_count != CYLINDER_FIELDS_COUNT)
-		return (NULL);
-	cylinder = malloc(sizeof(t_cylinder));
-	if (!cylinder)
-		return (NULL);
+		return (INVALID_ARG);
+	if (cylinder == NULL)
+		return (INVALID_ARG);
 	cylinder->type = CYLINDER;
 	err = str_to_vec3(fields[1], &cylinder->pos);
 	err |= str_to_vec3(fields[2], &cylinder->dir);
 	cylinder->diameter = ft_atod(fields[3]);
 	cylinder->height = ft_atod(fields[4]);
 	err |= str_to_vec3(fields[5], &(cylinder->material.color));
-	if (err != OK || !is_valid(cylinder))
-	{
-		free(cylinder);
-		return (NULL);
-	}
+	err |= !is_valid(cylinder);
+	if (err != OK)
+		return (INVALID_ARG);
 	apply_transforms(cylinder);
-	return (cylinder);
+	return (OK);
 }
 
 static int	is_valid(t_cylinder *cylinder)

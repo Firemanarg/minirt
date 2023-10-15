@@ -14,26 +14,22 @@
 
 static int	is_valid(t_point_light *light);
 
-t_point_light	*parse_light(char **fields, int fields_count)
+t_err	parse_light(char **fields, int fields_count, t_point_light *light)
 {
-	t_point_light	*light;
-	t_err			err;
+	t_err	err;
 
 	if (fields_count != LIGHT_FIELDS_COUNT)
-		return (NULL);
-	light = malloc(sizeof(t_point_light));
-	if (!light)
-		return (NULL);
+		return (INVALID_ARG);
+	if (light == NULL)
+		return (INVALID_ARG);
 	light->type = LIGHT;
 	err = str_to_vec3(fields[1], &light->pos);
 	light->ratio = ft_atod(fields[2]);
 	err |= str_to_vec3(fields[3], &light->color);
-	if (err != OK || !is_valid(light))
-	{
-		free(light);
-		return (NULL);
-	}
-	return (light);
+	err |= !is_valid(light);
+	if (err != OK)
+		return (INVALID_ARG);
+	return (OK);
 }
 
 static int	is_valid(t_point_light *light)
