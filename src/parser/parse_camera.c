@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:41:22 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/15 10:19:38 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 14:08:57 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_err	parse_camera(char **fields, int fields_count, t_camera *camera)
 	t_err	err;
 	t_vec3	axis;
 
-	axis = (t_vec3){.x = 0, .y = 1, .z = 0};
+	axis = (t_vec3){.x = 0, .y = 0, .z = 1};
 	if (fields_count != CAMERA_FIELDS_COUNT)
 		return (INVALID_ARG);
 	if (camera == NULL)

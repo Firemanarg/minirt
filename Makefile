@@ -1,5 +1,5 @@
 CC				:= cc
-CFLAGS			:= -Wall -Wextra -Werror -g -fms-extensions
+CFLAGS			:= -Wall -Wextra -Werror -g
 RM				:= rm -rf
 
 # Libraries
