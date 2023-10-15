@@ -68,7 +68,8 @@ SRC_FILES		+= ${addprefix ${SRC_DIR}/matrix/,\
 SRC_FILES		+= ${addprefix ${SRC_DIR}/objects/,\
 				scene.c\
 				color.c\
-				sphere.c}
+				sphere.c\
+				clean_obj.c}
 
 # Projection files
 SRC_FILES		+= ${addprefix ${SRC_DIR}/projection/,\
@@ -100,7 +101,8 @@ SRC_FILES		+= ${addprefix ${SRC_DIR}/parser/,\
 				parse_plane.c\
 				parse_sphere.c\
 				parser.c\
-				validations.c}
+				validations.c\
+				parser_utils.c}
 
 BUILD_DIR		:= ${MANDATORY_DIR}/build
 
