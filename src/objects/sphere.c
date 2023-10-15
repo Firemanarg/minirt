@@ -6,13 +6,13 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 19:11:05 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/12 18:46:53 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 07:29:59 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projection.h"
 
-static t_err	sphere_intersect(t_geom_obj *sph, t_ray *ray, t_varray *r)
+t_err	sphere_intersect(t_geom_obj *sph, t_ray *ray, t_varray *r)
 {
 	double	a;
 	double	b;

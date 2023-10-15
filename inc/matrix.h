@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 12:33:50 by marvin            #+#    #+#             */
-/*   Updated: 2023/10/06 12:30:10 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 10:03:41 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_matrix	*matrix_transpose(t_matrix *m);
 t_matrix	*matrix_inverse(t_matrix *m);
 t_matrix	*matrix_translation(t_vec3 *v);
 t_matrix	*matrix_scaling(t_vec3 *v);
+t_matrix	*matrix_rotate_translate(t_vec3 *v1, t_vec3 *v2, t_vec3 *tr);
 t_matrix	*matrix_rotate_x(double rad);
 t_matrix	*matrix_rotate_y(double rad);
 t_matrix	*matrix_rotate_z(double rad);
@@ -72,6 +73,5 @@ double		matrix_cofactor(t_matrix *m, int row, int col);
 t_matrix	*matrix_apply(t_matrix *m, t_matrix_op *operations);
 void		matrix_vector_multiply(t_matrix *matrix, t_vec3 *v, t_vec3 *result);
 void		matrix_point_multiply(t_matrix *matrix, t_vec3 *v, t_vec3 *result);
-// t_matrix	*mtx_shear(t_matrix *m, t_vec3 x, t_vec3 y);
 
 #endif

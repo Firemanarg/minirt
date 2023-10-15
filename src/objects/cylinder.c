@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 14:34:32 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/13 03:46:44 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 07:29:48 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_err	insert_if_in_range(t_geom_obj *cyl, t_varray *r,
 	return (OK);
 }
 
-static t_err	cylinder_intersect(t_geom_obj *cyl, t_ray *ray, t_varray *r)
+t_err	cylinder_intersect(t_geom_obj *cyl, t_ray *ray, t_varray *r)
 {
 	double	a;
 	double	b;

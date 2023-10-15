@@ -6,29 +6,25 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:44:21 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/07 00:19:07 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 06:08:45 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
 
-static int	on_destroy(t_args *data);
-static int	on_key_press(int keycode, t_args *data);
-static int	refresh(t_args *args);
-
 int	create_window(t_args *args)
 {
 	args->mlx_win = mlx_new_window(args->mlx, WINDOW_WIDTH,
 			WINDOW_HEIGHT, WINDOW_TITLE);
-	mlx_expose_hook(args->mlx_win, refresh, &args);
+	mlx_expose_hook(args->mlx_win, refresh, args);
 	mlx_hook(args->mlx_win, ON_DESTROY,
-			MASK_STRUCTURE_NOTIFY, on_destroy, &args);
-	mlx_hook(args->mlx_win, ON_KEYDOWN, MASK_KEY_PRESS, on_key_press, &args);
+			MASK_STRUCTURE_NOTIFY, on_destroy, args);
+	mlx_hook(args->mlx_win, ON_KEYDOWN, MASK_KEY_PRESS, on_key_press, args);
 	mlx_loop(args->mlx);
 	return (0);
 }
 
-static int	on_destroy(t_args *data)
+int	on_destroy(t_args *data)
 {
 	printf("Bye bye :D\n");
 	mlx_loop_end(data->mlx);
@@ -41,7 +37,7 @@ static int	on_destroy(t_args *data)
 	return (0);
 }
 
-static int	on_key_press(int keycode, t_args *data)
+int	on_key_press(int keycode, t_args *data)
 {
 	if (keycode == KEY_ESCAPE)
 	{
@@ -53,7 +49,7 @@ static int	on_key_press(int keycode, t_args *data)
 	return (0);
 }
 
-static int	refresh(t_args *args)
+int	refresh(t_args *args)
 {
 	mlx_put_image_to_window(args->mlx, args->mlx_win,
 		args->mlx_data.img, 0, 0);

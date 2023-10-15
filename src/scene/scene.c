@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 02:55:34 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/12 20:33:20 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 07:23:05 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ t_err	intersect_world(t_scene *w, t_ray *r, t_varray *xs)
 
 	reset_array(xs);
 	tmp = w->geometries;
+	if (!tmp)
+		return (OK);
 	while (tmp->type > NONE)
 	{
 		err = obj_intersect(tmp, r, xs);

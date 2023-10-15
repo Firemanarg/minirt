@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:32:58 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/12 04:27:25 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 07:30:04 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,20 @@ typedef struct s_precomp
 t_err	intersect_cylinder_caps(t_geom_obj *cylinder, t_ray *ray, t_varray *xs);
 t_err	intersect_cone_caps(t_geom_obj *cone, t_ray *ray, t_varray *xs);
 
+// cone.c
+t_err	cone_intersect(t_geom_obj *cone, t_ray *ray, t_varray *xs);
+
+// cylinder.c
+t_err	cylinder_intersect(t_geom_obj *cylinder, t_ray *ray, t_varray *xs);
+
 // object.c
 t_err	obj_intersect(t_geom_obj *obj, t_ray *ray, t_varray *r);
+
+// plane.c
+t_err	plane_intersect(t_geom_obj *plane, t_ray *ray, t_varray *r);
+
+// sphere.c
+t_err	sphere_intersect(t_geom_obj *sphere, t_ray *ray, t_varray *r);
 
 // var_array.c
 t_err	insert_into_array(t_varray *r, double t, t_geom_obj *obj);

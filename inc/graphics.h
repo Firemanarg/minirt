@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:24:32 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/12 19:33:15 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 06:08:19 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,8 @@ unsigned int	convert_color(t_color *minirt_color);
 
 // window.c
 int				create_window(t_args *args);
+int				on_key_press(int keycode, t_args *data);
+int				on_destroy(t_args *data);
+int				refresh(t_args *args);
 
 #endif

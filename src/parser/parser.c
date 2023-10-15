@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:42 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/02 13:13:42 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/10/15 06:52:17 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ static t_err	add_to_scene(t_scene_parser *parser)
 {
 	t_obj_type	type;
 
-	type = parser->obj.b.type;
+	type = parser->obj.c.type;
 	if (type == AMBIENT_LIGHT)
 		parser->scene->ambient_light = *((t_ambient_light *) &parser->obj);
 	else if (type == CAMERA)

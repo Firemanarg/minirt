@@ -20,7 +20,7 @@ static t_err	insert_if_in_cone_range(t_geom_obj *cone, t_varray *r,
 	return (OK);
 }
 
-static t_err	cone_intersect(t_geom_obj *cone, t_ray *ray, t_varray *r)
+t_err	cone_intersect(t_geom_obj *cone, t_ray *ray, t_varray *r)
 {
 	t_cone_eq_params	p;
 

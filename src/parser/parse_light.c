@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_light.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:41:35 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/02 13:41:35 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/10/15 06:35:06 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ t_err	parse_light(char **fields, int fields_count, t_point_light *light)
 	err |= !is_valid(light);
 	if (err != OK)
 		return (INVALID_ARG);
+	light->color.r = light->color.r * light->ratio / 255.0;
+	light->color.g = light->color.g * light->ratio / 255.0;
+	light->color.b = light->color.b * light->ratio / 255.0;
 	return (OK);
 }
 

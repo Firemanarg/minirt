@@ -42,6 +42,7 @@ SRC_FILES += ${addprefix ${SRC_DIR}/matrix/, \
 				matrix_inverse.c \
 				matrix_multiply.c \
 				matrix_print.c \
+				matrix_rotate_translate.c \
 				matrix_scaling.c \
 				matrix_translation.c \
 				matrix_cofactor.c \

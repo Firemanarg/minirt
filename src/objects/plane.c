@@ -6,13 +6,13 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 06:38:35 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/12 20:52:50 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 07:29:19 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projection.h"
 
-static t_err	plane_intersect(t_geom_obj *plane, t_ray *ray, t_varray *r)
+t_err	plane_intersect(t_geom_obj *plane, t_ray *ray, t_varray *r)
 {
 	if (dbl_abs(ray->direction.y) < EPSILON)
 		return (OK);

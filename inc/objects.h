@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:44:47 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/14 15:43:36 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 09:23:03 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@
 # include "vec3.h"
 # include "error.h"
 # include "varray.h"
+
+# define AMBIENT 0.1
+# define DIFFUSE 0.9
+# define SPECULAR 0.0
+# define SHININESS 200
 
 typedef t_vec3				t_color;
 typedef struct s_geom_obj	t_geom_obj;
@@ -58,21 +63,6 @@ typedef enum e_obj_type
 	CONE
 }	t_obj_type;
 
-typedef struct s_base_obj
-{
-	t_obj_type		type;
-}	t_base_obj;
-
-typedef struct s_3d_obj
-{
-	struct			s_base_obj;
-	t_vec3			pos;
-	t_vec3			dir;
-	t_matrix		*transform;
-	t_matrix		*inv_transform;
-	t_matrix		*t_inv_transform;
-}	t_3d_obj;
-
 typedef struct s_checkers
 {
 	double	width;
@@ -83,63 +73,68 @@ typedef struct s_checkers
 
 struct s_geom_obj
 {
-	struct			s_3d_obj;
+	t_obj_type		type;
+	t_vec3			pos;
+	t_vec3			dir;
+	t_matrix		*transform;
+	t_matrix		*inv_transform;
+	t_matrix		*t_inv_transform;
 	t_material		material;
 	t_isect_func	intersects;
 	t_normal_func	normal_at;
 	t_uv_func		map_uv;
 	t_checkers		checkers;
+	double			diameter;
+	double			height;
 	double			minimum;
 	double			maximum;
 	t_bool			is_closed;
 };
 
-typedef struct s_base_light
-{
-	struct			s_base_obj;
-	double			ratio;
-	t_color			color;
-}	t_base_light;
-
 typedef struct s_ambient_light
 {
-	struct			s_base_light;
+	t_obj_type		type;
+	double			ratio;
+	t_color			color;
 }	t_ambient_light;
 
 typedef struct s_point_light
 {
-	struct			s_base_light;
+	t_obj_type		type;
+	double			ratio;
+	t_color			color;
 	t_vec3			pos;
 }	t_point_light;
 
 typedef struct s_camera
 {
-	struct	s_3d_obj;
-	double	fov;
-	double	half_width;
-	double	half_height;
-	double	pixel_size;
-	int		hsize;
-	int		vsize;
+	t_obj_type		type;
+	t_vec3			pos;
+	t_vec3			dir;
+	t_matrix		*transform;
+	t_matrix		*inv_transform;
+	t_matrix		*t_inv_transform;
+	double			fov;
+	double			half_width;
+	double			half_height;
+	double			pixel_size;
+	int				hsize;
+	int				vsize;
 }	t_camera;
 
-typedef struct s_sphere
-{
-	struct			s_geom_obj;
-	double			diameter;
-}	t_sphere;
+typedef t_geom_obj			t_sphere;
 
-typedef struct s_cylinder
-{
-	struct			s_geom_obj;
-	double			diameter;
-	double			height;
-}	t_cylinder;
+typedef t_geom_obj			t_cylinder;
 
-typedef struct s_plane
+typedef t_geom_obj			t_plane;
+
+typedef struct s_base_obj
 {
-	struct			s_geom_obj;
-}	t_plane;
+	union {
+		t_camera	c;
+		t_geom_obj	g;
+	};
+}	t_base_obj;
 
 typedef struct s_scene
 {
