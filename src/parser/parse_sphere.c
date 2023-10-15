@@ -14,7 +14,7 @@
 #include "projection.h"
 
 static int	is_valid(t_sphere *sphere);
-static void	apply_scaling(t_sphere *sphere);
+static void	apply_transform(t_sphere *sphere);
 
 static void	set_sphere_pars(t_sphere *sphere)
 {
@@ -44,10 +44,7 @@ t_err	parse_sphere(char **fields, int fields_count, t_sphere *sphere)
 	err |= !is_valid(sphere);
 	if (err != OK)
 		return (INVALID_ARG);
-	sphere->transform = matrix_translation(&sphere->pos);
-	apply_scaling(sphere);
-	sphere->inv_transform = matrix_inverse(sphere->transform);
-	sphere->t_inv_transform = matrix_transpose(sphere->inv_transform);
+	apply_transform(sphere);
 	set_sphere_pars(sphere);
 	return (OK);
 }
@@ -61,16 +58,20 @@ static int	is_valid(t_sphere *sphere)
 	return (1);
 }
 
-static void	apply_scaling(t_sphere *sphere)
+static void	apply_transform(t_sphere *sphere)
 {
-	t_vec3		scale_v;
 	t_matrix	*tmp;
-	t_matrix	*scale_m;
+	t_matrix	*op_buffer;
+	t_vec3		scale_v;
 
-	set_vec3(sphere->diameter, sphere->diameter, sphere->diameter, &scale_v);
-	scale_m = matrix_scaling(&scale_v);
-	tmp = matrix_multiply(scale_m, sphere->transform);
-	matrix_free(scale_m);
+	sphere->transform = matrix_translation(&sphere->pos);
+	scale_v = (t_vec3){.x = sphere->diameter, .y = sphere->diameter,
+			.z = sphere->diameter};
+	op_buffer = matrix_scaling(&scale_v);
+	tmp = matrix_multiply(sphere->transform, op_buffer);
 	matrix_free(sphere->transform);
+	matrix_free(op_buffer);
 	sphere->transform = tmp;
+	sphere->inv_transform = matrix_inverse(sphere->transform);
+	sphere->t_inv_transform = matrix_transpose(sphere->inv_transform);
 }
