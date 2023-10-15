@@ -36,7 +36,7 @@ void	ray_for_pixel(t_camera *camera, int p_x, int p_y, t_ray *ray)
 	normalize(&ray->direction, &ray->direction);
 }
 
-t_err	render_image(t_camera *camera, t_scene *world, t_mlx_data *mlx_data)
+t_err	render_image(t_scene *world, t_mlx_data *mlx_data)
 {
 	int			x;
 	int			y;
@@ -47,14 +47,14 @@ t_err	render_image(t_camera *camera, t_scene *world, t_mlx_data *mlx_data)
 	xs = new_array(INITIAL_ARRAY_SIZE);
 	if (!xs)
 		return (ERR_ALLOC);
-	get_transformed_ray_origin(camera, &ray);
+	get_transformed_ray_origin(&world->camera, &ray);
 	y = 0;
-	while (y < camera->vsize)
+	while (y < world->camera.vsize)
 	{
 		x = 0;
-		while (x < camera->hsize)
+		while (x < world->camera.hsize)
 		{
-			ray_for_pixel(camera, x, y, &ray);
+			ray_for_pixel(&world->camera, x, y, &ray);
 			color_at(world, &ray, xs, &color);
 			ft_pixel_put(mlx_data, x, y, &color);
 			++x;
