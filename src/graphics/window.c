@@ -12,7 +12,23 @@
 
 #include "graphics.h"
 
-int	close_graphics(t_args *data)
+static int	on_destroy(t_args *data);
+static int	on_key_press(int keycode, t_args *data);
+static int	refresh(t_args *args);
+
+int	create_window(t_args *args)
+{
+	args->mlx_win = mlx_new_window(args->mlx, WINDOW_WIDTH,
+			WINDOW_HEIGHT, WINDOW_TITLE);
+	mlx_expose_hook(args->mlx_win, refresh, &args);
+	mlx_hook(args->mlx_win, ON_DESTROY,
+			MASK_STRUCTURE_NOTIFY, on_destroy, &args);
+	mlx_hook(args->mlx_win, ON_KEYDOWN, MASK_KEY_PRESS, on_key_press, &args);
+	mlx_loop(args->mlx);
+	return (0);
+}
+
+static int	on_destroy(t_args *data)
 {
 	printf("Bye bye :D\n");
 	mlx_loop_end(data->mlx);
@@ -21,21 +37,15 @@ int	close_graphics(t_args *data)
 	mlx_destroy_window(data->mlx, data->mlx_win);
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
-	return (0);
-}
-
-int	on_destroy(t_args *data)
-{
-	close_graphics(data);
 	exit(0);
 	return (0);
 }
 
-int	on_key_press(int keycode, t_args *data)
+static int	on_key_press(int keycode, t_args *data)
 {
 	if (keycode == KEY_ESCAPE)
 	{
-		close_graphics(data);
+		on_destroy(data);
 		return (0);
 	}
 	else
@@ -43,17 +53,9 @@ int	on_key_press(int keycode, t_args *data)
 	return (0);
 }
 
-int	create_window(t_args *args)
+static int	refresh(t_args *args)
 {
-	t_color	color;
-
-	set_color(1.0, 0.0, 0.0, &color);
-	init_args(args, 800, 600);
-	ft_pixel_put(&args->mlx_data, 5, 5, &color);
-	mlx_put_image_to_window(args->mlx, args->mlx_win, args->mlx_data.img, 0, 0);
-	mlx_hook(args->mlx_win, ON_DESTROY,
-		MASK_STRUCTURE_NOTIFY, on_destroy, args);
-	mlx_hook(args->mlx_win, ON_KEYDOWN, MASK_KEY_PRESS, on_key_press, args);
-	mlx_loop(args->mlx);
+	mlx_put_image_to_window(args->mlx, args->mlx_win,
+		args->mlx_data.img, 0, 0);
 	return (0);
 }
