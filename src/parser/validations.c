@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:58:18 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/15 07:41:34 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 21:46:13 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	is_valid_direction(t_vec3 *dir)
 		return (0);
 	else if (dir->z < -1 || dir->z > 1)
 		return (0);
-	else if (dir->x  == 0 && dir->y  == 0 && dir->z == 0)
+	else if (!dbl_equal(length(dir), 1.0))
 		return (0);
 	return (1);
 }

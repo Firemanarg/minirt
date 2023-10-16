@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:41:48 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/15 21:17:24 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 21:37:21 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "projection.h"
 
 static int	is_valid(t_sphere *sphere);
-// static void	apply_transform(t_sphere *sphere);
 static void	apply_sphere_transforms(t_sphere *sphere);
 
 static void	set_sphere_pars(t_sphere *sphere)
@@ -58,24 +57,6 @@ static int	is_valid(t_sphere *sphere)
 		return (0);
 	return (1);
 }
-
-// static void	apply_transform(t_sphere *sphere)
-// {
-// 	t_matrix	*tmp;
-// 	t_matrix	*op_buffer;
-// 	t_vec3		scale_v;
-
-// 	sphere->transform = matrix_translation(&sphere->pos);
-// 	scale_v = (t_vec3){.x = sphere->diameter, .y = sphere->diameter,
-// 		.z = sphere->diameter};
-// 	op_buffer = matrix_scaling(&scale_v);
-// 	tmp = matrix_multiply(sphere->transform, op_buffer);
-// 	matrix_free(sphere->transform);
-// 	matrix_free(op_buffer);
-// 	sphere->transform = tmp;
-// 	sphere->inv_transform = matrix_inverse(sphere->transform);
-// 	sphere->t_inv_transform = matrix_transpose(sphere->inv_transform);
-// }
 
 static void	apply_sphere_transforms(t_sphere *sphere)
 {

@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 01:40:44 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/15 06:07:35 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 22:08:39 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	main(int argc, char **argv)
 	}
 	free_scene(args.scene);
 	create_window(&args);
-	// mlx_loop(args.mlx);
 	return (0);
 }
 

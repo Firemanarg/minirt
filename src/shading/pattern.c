@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 00:21:39 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/12 21:08:19 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 22:09:30 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	uv_checkers_at(t_checkers *checkers, double u, double v, t_color *c)
 {
-	if (dbl_abs(fmod(floor(u * checkers->width) + floor(v * checkers->height), 2.0)))
+	if (dbl_abs(fmod(floor(u * checkers->width)
+				+ floor(v * checkers->height), 2.0)))
 		*c = checkers->c2;
 	else
 		*c = checkers->c1;

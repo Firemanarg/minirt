@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:44:21 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/15 06:08:45 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 21:38:33 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	create_window(t_args *args)
 			WINDOW_HEIGHT, WINDOW_TITLE);
 	mlx_expose_hook(args->mlx_win, refresh, args);
 	mlx_hook(args->mlx_win, ON_DESTROY,
-			MASK_STRUCTURE_NOTIFY, on_destroy, args);
+		MASK_STRUCTURE_NOTIFY, on_destroy, args);
 	mlx_hook(args->mlx_win, ON_KEYDOWN, MASK_KEY_PRESS, on_key_press, args);
 	mlx_loop(args->mlx);
 	return (0);

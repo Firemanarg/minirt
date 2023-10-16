@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:41:22 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/15 19:32:35 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 21:38:55 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "shading.h"
 
 static int	is_valid(t_camera *camera);
-// static void	apply_transforms(t_camera *camera);
 
 static void	set_camera_pars(int hsize, int vsize, double fov, t_camera *camera)
 {
@@ -62,7 +61,6 @@ t_err	parse_camera(char **fields, int fields_count, t_camera *camera)
 		return (INVALID_ARG);
 	camera->transform = view_transform(&camera->pos, &to, &up);
 	camera->inv_transform = matrix_inverse(camera->transform);
-	// camera->t_inv_transform = matrix_transpose(camera->inv_transform);
 	set_camera_pars(WINDOW_WIDTH, WINDOW_HEIGHT, camera->fov, camera);
 	return (OK);
 }

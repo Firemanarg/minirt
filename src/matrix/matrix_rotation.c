@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 22:17:47 by marvin            #+#    #+#             */
-/*   Updated: 2023/10/15 20:43:02 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 22:07:27 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,3 @@ t_matrix	*matrix_rotate_to_vec(t_vec3 *to)
 	m->data[3][3] = 1.0;
 	return (m);
 }
-
