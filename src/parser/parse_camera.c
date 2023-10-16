@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:41:22 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/15 17:53:28 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 19:32:35 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,7 @@ t_err	parse_camera(char **fields, int fields_count, t_camera *camera)
 		return (INVALID_ARG);
 	camera->transform = view_transform(&camera->pos, &to, &up);
 	camera->inv_transform = matrix_inverse(camera->transform);
-	camera->t_inv_transform = NULL;
-	// apply_transforms(camera);
+	// camera->t_inv_transform = matrix_transpose(camera->inv_transform);
 	set_camera_pars(WINDOW_WIDTH, WINDOW_HEIGHT, camera->fov, camera);
 	return (OK);
 }
@@ -76,18 +75,3 @@ static int	is_valid(t_camera *camera)
 		return (0);
 	return (1);
 }
-
-// static void	apply_transforms(t_camera *camera)
-// {
-// 	t_matrix_op	ops[5];
-
-// 	camera->transform = matrix_new_identity(4);
-// 	ops[0] = (t_matrix_op){.op = TRANSLATE, .params = camera->pos};
-// 	ops[1] = (t_matrix_op){.op = ROTATE_X, .param = camera->dir.x};
-// 	ops[2] = (t_matrix_op){.op = ROTATE_Y, .param = camera->dir.y};
-// 	ops[3] = (t_matrix_op){.op = ROTATE_Z, .param = camera->dir.z};
-// 	ops[4] = (t_matrix_op){.op = NOP};
-// 	camera->transform = matrix_apply(camera->transform, ops);
-// 	camera->inv_transform = matrix_inverse(camera->transform);
-// 	camera->t_inv_transform = matrix_transpose(camera->inv_transform);
-// }

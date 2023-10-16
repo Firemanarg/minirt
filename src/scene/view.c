@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 03:29:32 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/06 04:00:19 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 20:16:41 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,15 @@ t_matrix	*view_transform(t_vec3 *from, t_vec3 *to, t_vec3 *up)
 	t_vec3		true_up;
 	t_vec3		forward;
 	t_vec3		left;
+	t_vec3		zero;
 
 	subtract(to, from, &forward);
 	normalize(&forward, &forward);
 	normalize(up, &true_up);
 	cross(&forward, &true_up, &left);
+	set_vec3(0.0, 0.0, 0.0, &zero);
+	if (equal(&left, &zero))
+		set_vec3(1.0, 0.0, 0.0, &left);
 	cross(&left, &forward, &true_up);
 	return (get_transform_matrix(&true_up, &forward, &left, from));
 }

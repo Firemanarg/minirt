@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:44:47 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/15 18:04:39 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:57:17 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,6 @@ typedef void				(*t_normal_func)(t_geom_obj *s, t_vec3 *world_point,
 
 typedef void				(*t_uv_func)(t_geom_obj * obj, t_vec3 *p,
 								double *u, double *v);
-
-typedef enum e_bool
-{
-	FALSE,
-	TRUE
-}	t_bool;
 
 typedef struct s_material
 {

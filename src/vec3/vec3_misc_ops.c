@@ -6,11 +6,12 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 05:48:50 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/06 12:25:15 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:58:28 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vec3.h"
+#include "objects.h"
 
 void	negate(t_vec3 *a, t_vec3 *minus_a)
 {
@@ -34,4 +35,11 @@ void	normalize(t_vec3 *t, t_vec3 *norm_t)
 		divide(t, len, norm_t);
 	else
 		set_vec3(0.0, 0.0, 0.0, norm_t);
+}
+
+t_bool	equal(t_vec3 *a, t_vec3 *b)
+{
+	return (dbl_equal(a->x, b->x)
+		&& dbl_equal(a->y, b->y)
+		&& dbl_equal(a->z, b->z));
 }

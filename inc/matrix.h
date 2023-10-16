@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 12:33:50 by marvin            #+#    #+#             */
-/*   Updated: 2023/10/15 10:03:41 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 19:22:55 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef enum e_matrix_opcode
 	ROTATE_X,
 	ROTATE_Y,
 	ROTATE_Z,
+	ROTATE_VEC,
 	TRANSLATE,
 	SCALE
 }	t_matrix_opcode;
@@ -66,6 +67,7 @@ t_matrix	*matrix_rotate_translate(t_vec3 *v1, t_vec3 *v2, t_vec3 *tr);
 t_matrix	*matrix_rotate_x(double rad);
 t_matrix	*matrix_rotate_y(double rad);
 t_matrix	*matrix_rotate_z(double rad);
+t_matrix	*matrix_rotate_to_vec(t_vec3 *to);
 double		matrix_determinant(t_matrix *m);
 double		matrix_determinant_2x2(t_matrix *m);
 double		matrix_minor(t_matrix *m, int row, int col);
