@@ -7,6 +7,10 @@ MLX_DIR			:= lib/minilibx-linux
 LIBFLAGS		:= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
 LFTX_DIR		:= ./libft_x
 LFTX			:= $(LFTX_DIR)/libft_x.a
+FTLST_DIR		:= ./ft_list
+FTLST			:= $(FTLST_DIR)/ft_list.a
+
+LIBS_INC		:= -I$(MLX_DIR) -I$(LFTX_DIR) -I$(FTLST_DIR)
 
 # Mandatory
 MANDATORY_DIR	:= .
@@ -129,22 +133,27 @@ all: ${NAME}
 ${OBJ_SUBDIRS}:
 	mkdir -p $@
 
-${NAME}: $(LFTX) ${OBJ_FILES}
+${NAME}: $(LFTX) $(FTLST) ${OBJ_FILES}
 	${CC} ${CFLAGS} ${OBJ_FILES} ${LIBFLAGS} $(LFTX) -o $@
 
 ${OBJ_FILES}: ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c ${INC_FILES} | ${OBJ_SUBDIRS}
-	${CC} ${CFLAGS} -I${INC_DIR} -I${MLX_DIR} -I$(LFTX_DIR) -c $< -o $@
+	${CC} ${CFLAGS} -I${INC_DIR} -I$(LIBS_INC) -c $< -o $@
 
 $(LFTX): $(LFTX_DIR)
 	make -C $(LFTX_DIR)
 
+$(FTLST): $(FTLST_DIR)
+	make -C $(FTLST_DIR)
+
 clean:
 	${RM} ${OBJ_DIR}
 	make -C $(LFTX_DIR) clean
+	make -C $(FTLST_DIR) clean
 
 fclean: clean
 	${RM} ${NAME}
 	make -C $(LFTX_DIR) fclean
+	make -C $(FTLST_DIR) fclean
 
 re: fclean all
 
