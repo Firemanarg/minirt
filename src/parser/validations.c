@@ -45,3 +45,23 @@ int	is_valid_direction(t_vec3 *dir)
 		return (0);
 	return (1);
 }
+
+int	is_str_vec3(char *str)
+{
+	char	**split;
+	char	**iter;
+	int		count;
+
+	split = ft_split(str, ',');
+	count = 0;
+	iter = split;
+	while (*iter)
+	{
+		if (!ft_str_isdouble(*iter))
+			return ((int) ft_clear_arr((void **) split);)
+		count += 1;
+		iter++;
+	}
+	ft_clear_arr((void **) split);
+	return (count == 3);
+}
