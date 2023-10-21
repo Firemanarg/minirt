@@ -12,34 +12,88 @@
 
 #include "parser.h"
 
-static int	is_valid(t_ambient_light *light);
+static t_err	lex_checker(t_parser_obj *obj);
+static void		cast_fields(t_parser_obj *obj);
+static int		validate_fields(t_parser_obj *obj);
 
-t_err	parse_ambient_light(char **fields, int fields_count,
-			t_ambient_light *light)
+void	parse_ambient_light(t_parser_obj *obj)
 {
-	t_err	err;
+	t_ambient_light	*light;
 
-	if (fields_count != AMBIENT_LIGHT_FIELDS_COUNT)
-		return (INVALID_ARG);
-	if (light == NULL)
-		return (INVALID_ARG);
+	obj->obj = malloc(sizeof(t_ambient_light));
+	light = (t_ambient_light *) obj->obj;
 	light->type = AMBIENT_LIGHT;
-	light->ratio = ft_atod(fields[1]);
-	err = str_to_vec3(fields[2], &light->color);
-	err |= !is_valid(light);
-	if (err != OK)
-		return (err);
+	obj->status = OK;
+	if (lex_checker(obj) != OK)
+		return (free(obj->obj));
+	cast_fields(obj);
+	if (validate_fields(obj) != OK)
+		return (free(obj->obj));
+}
+
+static t_err	lex_checker(t_parser_obj *obj)
+{
+	if (obj->fields_count != AMBIENT_LIGHT_FIELDS_COUNT)
+		obj->err = INVALID_ARG_COUNT;
+	else if (!ft_str_isdouble(obj->fields[1]))
+		obj->err = INVALID_ARG;
+	else if (!is_str_vec3(obj->fields[2]))
+		obj->err = INVALID_VEC3;
+	return (obj->err);
+}
+
+static void	cast_fields(t_parser_obj *obj)
+{
+	t_ambient_light	*light;
+
+	light = (t_ambient_light *) obj->obj;
+	light->ratio = ft_atod(obj->fields[1]);
+	obj->status = str_to_vec3(obj->fields[2], &light->color);
 	light->color.r = light->color.r * light->ratio / 255.0;
 	light->color.g = light->color.g * light->ratio / 255.0;
 	light->color.b = light->color.b * light->ratio / 255.0;
-	return (OK);
 }
 
-static int	is_valid(t_ambient_light *light)
+static int	validate_fields(t_parser_obj *obj)
 {
+	t_ambient_light	*light;
+
+	light = (t_ambient_light *) obj->obj;
 	if (!is_valid_color(&light->color))
-		return (0);
+		obj->err = INVALID_COLOR;
 	if (!is_valid_ratio(light->ratio))
-		return (0);
-	return (1);
+		obj->err = INVALID_RATIO;
+	return (obj->err);
 }
+
+// static int	is_valid(t_ambient_light *light);
+
+// t_err	parse_ambient_light(char **fields, int fields_count,
+// 			t_ambient_light *light)
+// {
+// 	t_err	err;
+
+// 	if (fields_count != AMBIENT_LIGHT_FIELDS_COUNT)
+// 		return (INVALID_ARG);
+// 	if (light == NULL)
+// 		return (INVALID_ARG);
+// 	light->type = AMBIENT_LIGHT;
+// 	light->ratio = ft_atod(fields[1]);
+// 	err = str_to_vec3(fields[2], &light->color);
+// 	err |= !is_valid(light);
+// 	if (err != OK)
+// 		return (err);
+// 	light->color.r = light->color.r * light->ratio / 255.0;
+// 	light->color.g = light->color.g * light->ratio / 255.0;
+// 	light->color.b = light->color.b * light->ratio / 255.0;
+// 	return (OK);
+// }
+
+// static int	is_valid(t_ambient_light *light)
+// {
+// 	if (!is_valid_color(&light->color))
+// 		return (0);
+// 	if (!is_valid_ratio(light->ratio))
+// 		return (0);
+// 	return (1);
+// }
