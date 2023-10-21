@@ -17,6 +17,8 @@
 # include <fcntl.h>
 # include "objects.h"
 # include "error.h"
+# include "libft_x.h"
+# include "ft_list.h"
 
 # define MAX_RATIO 1.0
 # define MIN_RATIO 0.0
@@ -28,6 +30,8 @@
 # define SPHERE_FIELDS_COUNT 4
 # define CYLINDER_FIELDS_COUNT 6
 # define PLANE_FIELDS_COUNT 4
+
+# define PARSER_BUFFER_SIZE 4096
 
 typedef union u_def_obj
 {
@@ -54,6 +58,24 @@ typedef struct s_scene_parser
 	int			geometry_index;
 }	t_scene_parser;
 
+typedef struct s_parser_obj
+{
+	t_obj_type	type;
+	char		**fields;
+	int			fields_count;
+	void		*obj;
+	t_err		status;
+	int			line;
+}	t_parser_obj;
+
+typedef struct s_line_parser
+{
+	char	*aux;
+	char	*line;
+	char	*iter;
+	char	*endl_ptr;
+}	t_line_parser;
+
 // parser.c
 t_scene			*parse_file(char *file_name);
 t_obj_type		get_type_by_str(char *str);
@@ -63,10 +85,12 @@ int				is_valid_color(t_vec3 *color);
 int				is_valid_ratio(double ratio);
 int				is_valid_fov(double fov);
 int				is_valid_direction(t_vec3 *dir);
+int				is_str_vec3(char *str);
 
 // parse_ambient_light.c
-t_err			parse_ambient_light(char **fields, int fields_count,
-					t_ambient_light *light);
+void			parse_ambient_light(t_parser_obj *obj);
+// t_err			parse_ambient_light(char **fields, int fields_count,
+// 					t_ambient_light *light);
 
 // parse_camera.c
 t_err			parse_camera(char **fields, int fields_count,
