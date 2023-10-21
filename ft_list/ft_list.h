@@ -6,7 +6,7 @@
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 17:45:04 by lsilva-q          #+#    #+#             */
-/*   Updated: 2022/12/14 15:44:55 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/10/21 16:38:45 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,6 @@ t_ftnode	*ft_lst_find(t_ftlist *lst, void *value,
 				int (*cmp_func)(void *, void *));
 
 void		ft_lst_func_apply(t_ftlist *lst,
-				void (*func)(void *, size_t, int, int));
+				void *(*func)(void *, size_t, int, int));
 
 #endif
