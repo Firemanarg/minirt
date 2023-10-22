@@ -14,7 +14,7 @@
 
 static t_err	lex_checker(t_parser_obj *obj);
 static void		cast_fields(t_parser_obj *obj);
-static int		validate_fields(t_parser_obj *obj);
+static t_err	validate_fields(t_parser_obj *obj);
 
 void	parse_ambient_light(t_parser_obj *obj)
 {
@@ -34,12 +34,12 @@ void	parse_ambient_light(t_parser_obj *obj)
 static t_err	lex_checker(t_parser_obj *obj)
 {
 	if (obj->fields_count != AMBIENT_LIGHT_FIELDS_COUNT)
-		obj->err = INVALID_ARG_COUNT;
+		obj->status = INVALID_ARG_COUNT;
 	else if (!ft_str_isdouble(obj->fields[1]))
-		obj->err = INVALID_ARG;
+		obj->status = INVALID_ARG;
 	else if (!is_str_vec3(obj->fields[2]))
-		obj->err = INVALID_VEC3;
-	return (obj->err);
+		obj->status = INVALID_VEC3;
+	return (obj->status);
 }
 
 static void	cast_fields(t_parser_obj *obj)
@@ -54,16 +54,16 @@ static void	cast_fields(t_parser_obj *obj)
 	light->color.b = light->color.b * light->ratio / 255.0;
 }
 
-static int	validate_fields(t_parser_obj *obj)
+static t_err	validate_fields(t_parser_obj *obj)
 {
 	t_ambient_light	*light;
 
 	light = (t_ambient_light *) obj->obj;
 	if (!is_valid_color(&light->color))
-		obj->err = INVALID_COLOR;
+		obj->status = INVALID_COLOR;
 	if (!is_valid_ratio(light->ratio))
-		obj->err = INVALID_RATIO;
-	return (obj->err);
+		obj->status = INVALID_RATIO;
+	return (obj->status);
 }
 
 // static int	is_valid(t_ambient_light *light);
