@@ -6,7 +6,7 @@
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 17:45:04 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/21 16:38:45 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/10/21 23:17:17 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void		**ft_lst_toarray(t_ftlist *lst);
 int			ft_lst_is_empty(t_ftlist *lst);
 void		*ft_lst_last(t_ftlist *lst);
 void		*ft_lst_first(t_ftlist *lst);
+void		ft_lst_func_apply(t_ftlist *lst,
+				void *(*func)(void *, size_t, int, int));
 
 // Private functions
 
@@ -91,7 +93,6 @@ t_ftnode	*ft_lst_push_ord(t_ftlist *lst, void *content,
 t_ftnode	*ft_lst_find(t_ftlist *lst, void *value,
 				int (*cmp_func)(void *, void *));
 
-void		ft_lst_func_apply(t_ftlist *lst,
-				void *(*func)(void *, size_t, int, int));
+void		ft_lst_rmv_null(t_ftlist *lst);
 
 #endif
