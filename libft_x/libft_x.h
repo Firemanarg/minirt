@@ -117,4 +117,7 @@ int		b_print_str(char *str, int width);
 int		b_print_chr(char c, int width);
 int		put_width_chr(int width, int len, char chr);
 
+// General utils
+int		ft_free_ret(void *ptr, int ret);
+
 #endif
