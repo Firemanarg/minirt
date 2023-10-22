@@ -6,7 +6,7 @@
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 02:30:33 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/15 02:31:28 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/10/22 15:19:20 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,17 @@ t_obj_type	get_type_by_str(char *str)
 		return (PLANE);
 	else
 		return (UNKNOWN);
+}
+
+void	free_parser_obj(void *obj)
+{
+	t_parser_obj	*aux;
+
+	aux = (t_parser_obj *) obj;
+	if (aux == NULL)
+		return ;
+	ft_clear_arr((void **) aux->fields, NULL);
+	if (aux->obj != NULL)
+		free(aux->obj);
+	free(aux);
 }
