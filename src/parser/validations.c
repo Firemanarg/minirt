@@ -58,10 +58,10 @@ int	is_str_vec3(char *str)
 	while (*iter)
 	{
 		if (!ft_str_isdouble(*iter))
-			return ((int) ft_clear_arr((void **) split);)
+			return ((long) ft_clear_arr((void **) split, free));
 		count += 1;
 		iter++;
 	}
-	ft_clear_arr((void **) split);
+	ft_clear_arr((void **) split, free);
 	return (count == 3);
 }
