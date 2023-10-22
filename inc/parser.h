@@ -44,11 +44,40 @@ typedef union u_def_obj
 	t_plane			pl;
 }	t_def_obj;
 
+// typedef struct s_scene_parser
+// {
+// 	t_scene		*scene;
+// 	t_def_obj	obj;
+// 	char		*line;
+// 	int			fd;
+// 	int			amb_light_count;
+// 	int			camera_count;
+// 	int			light_count;
+// 	int			geometry_count;
+// 	int			light_index;
+// 	int			geometry_index;
+// }	t_scene_parser;
+
+/**
+ * @brief Struct to hold the parser scene data
+ *
+ * @param scene Pointer to the scene
+ * @param objs List of objects
+ * @param err_flag Flag to indicate if there was an error
+ * @param fd File descriptor
+ * @param amb_light_count Number of ambient lights
+ * @param camera_count Number of cameras
+ * @param light_count Number of lights
+ * @param geometry_count Number of geometries
+ * @param light_index Index of the light
+ * @param geometry_index Index of the geometry
+*/
 typedef struct s_scene_parser
 {
+	char		*line;	// TEMPORARY
 	t_scene		*scene;
-	t_def_obj	obj;
-	char		*line;
+	t_ftlist	objs;
+	int			err_flag;
 	int			fd;
 	int			amb_light_count;
 	int			camera_count;
@@ -58,14 +87,26 @@ typedef struct s_scene_parser
 	int			geometry_index;
 }	t_scene_parser;
 
+/**
+ * @brief Struct to hold the parser object data
+ *
+ * @param parser Pointer to the scene parser
+ * @param type Type of the object
+ * @param fields Array of strings with the object fields
+ * @param fields_count Number of fields
+ * @param obj Pointer to the object
+ * @param status Status of the object parsing
+ * @param line Line of the object in the file
+*/
 typedef struct s_parser_obj
 {
-	t_obj_type	type;
-	char		**fields;
-	int			fields_count;
-	void		*obj;
-	t_err		status;
-	int			line;
+	t_scene_parser	*parser;
+	t_obj_type		type;
+	char			**fields;
+	int				fields_count;
+	void			*obj;
+	t_err			status;
+	int				line;
 }	t_parser_obj;
 
 typedef struct s_line_parser
@@ -79,8 +120,14 @@ typedef struct s_line_parser
 // parser_1.c
 t_scene			*parse_file(char *file_name);
 
+// parser_2.c
+void			assign_parser_to_objs(t_scene_parser *parser);
+void			print_parser_errors(t_scene_parser *parser);
+void			populate_scene(t_scene_parser *parser);
+
 // parser_utils.c
 t_obj_type		get_type_by_str(char *str);
+void			free_parser_obj(void *obj);
 
 // validations.c
 int				is_valid_color(t_vec3 *color);
@@ -90,7 +137,7 @@ int				is_valid_direction(t_vec3 *dir);
 int				is_str_vec3(char *str);
 
 // parse_ambient_light.c
-void			parse_ambient_light(t_parser_obj *obj);
+int				parse_ambient_light(t_parser_obj *obj);
 // t_err			parse_ambient_light(char **fields, int fields_count,
 // 					t_ambient_light *light);
 
