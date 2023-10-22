@@ -115,7 +115,7 @@ SRC_FILES		+= ${addprefix ${SRC_DIR}/parser/,\
 				parse_light.c\
 				parse_plane.c\
 				parse_sphere.c\
-				parser.c\
+				parser_1.c\
 				validations.c\
 				parser_utils.c}
 

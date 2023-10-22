@@ -76,8 +76,10 @@ typedef struct s_line_parser
 	char	*endl_ptr;
 }	t_line_parser;
 
-// parser.c
+// parser_1.c
 t_scene			*parse_file(char *file_name);
+
+// parser_utils.c
 t_obj_type		get_type_by_str(char *str);
 
 // validations.c

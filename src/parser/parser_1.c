@@ -20,6 +20,9 @@ static void	free_parser_obj(void *obj);
 static void	*parse_obj(void *content, size_t, int, int);
 // static void	*print_fields(void *p_obj, size_t, int, int);
 
+// PAREI AQUI: Falta inserir os objetos na cena após o parsing. Falta também
+// recriar a função de parse para cada objeto utilizando a nova struct.
+
 t_scene	*parse_file(char *file_name)
 {
 	t_scene		*scene;
@@ -31,7 +34,7 @@ t_scene	*parse_file(char *file_name)
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
-	get_file_as_list(fd, &objs);
+	get_file_as_strlist(fd, &objs);
 	close(fd);
 	ft_lst_func_apply(&objs, get_parser_obj);
 	ft_lst_func_apply(&objs, parse_obj);
