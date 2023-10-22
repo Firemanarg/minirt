@@ -16,37 +16,47 @@
 #include "error.h"
 #include "shading.h"
 
-static void	init(t_args *args, char *file_name);
+// static void	init(t_args *args, char *file_name);
 
 int	main(int argc, char **argv)
 {
 	t_args	args;
-	t_err	err;
+	// t_err	err;
 
 	if (argc != 2)
 	{
-		printf("Error\nUsage: ./miniRT <file.rt>\n");
+		print_error("Program", ERR_WRONG_USAGE, 0);
+		// printf("Error\nUsage: ./miniRT <file.rt>\n");
 		return (1);
 	}
-	init(&args, argv[1]);
-	err = render_image(args.scene, &args.mlx_data);
-	if (err != OK)
+	args.scene = parse_file(argv[1]);
+	if (args.scene == NULL)
 	{
-		printf("Error during render\n");
+		print_error("Parsing", ERR_PARSING_FILE, 0);
 		return (1);
 	}
+	else
+		printf("[Parsing]: Successfully parsed file\n");
+	// init(&args, argv[1]);
+	// err = render_image(args.scene, &args.mlx_data);
+	// if (err != OK)
+	// {
+	// 	printf("Error during render\n");
+	// 	return (1);
+	// }
 	free_scene(args.scene);
-	create_window(&args);
+	// create_window(&args);
 	return (0);
 }
 
-static void	init(t_args *args, char *file_name)
-{
-	args->scene = parse_file(file_name);
-	if (args->scene == NULL)
-	{
-		printf("Error parsing file\n");
-		exit(1);
-	}
-	init_args(args);
-}
+// static void	init(t_args *args, char *file_name)
+// {
+// 	args->scene = parse_file(file_name);
+// 	if (args->scene == NULL)
+// 	{
+// 		// printf("Error parsing file\n");
+// 		print_error("Parsing", ERR_PARSING_FILE, 0);
+// 		exit(1);
+// 	}
+// 	init_args(args);
+// }
