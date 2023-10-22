@@ -16,19 +16,21 @@ static t_err	lex_checker(t_parser_obj *obj);
 static void		cast_fields(t_parser_obj *obj);
 static t_err	validate_fields(t_parser_obj *obj);
 
-void	parse_ambient_light(t_parser_obj *obj)
+int	parse_ambient_light(t_parser_obj *obj)
 {
 	t_ambient_light	*light;
 
-	obj->obj = malloc(sizeof(t_ambient_light));
-	light = (t_ambient_light *) obj->obj;
+	light = malloc(sizeof(t_ambient_light));
+	obj->obj = light;
 	light->type = AMBIENT_LIGHT;
+	obj->parser->amb_light_count += 1;
 	obj->status = OK;
 	if (lex_checker(obj) != OK)
-		return (free(obj->obj));
+		return (ft_free_ret(obj->obj, 1));
 	cast_fields(obj);
 	if (validate_fields(obj) != OK)
-		return (free(obj->obj));
+		return (ft_free_ret(obj->obj, 1));
+	return (0);
 }
 
 static t_err	lex_checker(t_parser_obj *obj)
