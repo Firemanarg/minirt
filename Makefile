@@ -116,8 +116,12 @@ SRC_FILES		+= ${addprefix ${SRC_DIR}/parser/,\
 				parse_plane.c\
 				parse_sphere.c\
 				parser_1.c\
+				parser_2.c\
 				validations.c\
 				parser_utils.c}
+
+SRC_FILES		+= ${addprefix ${SRC_DIR}/error/,\
+				error.c}
 
 BUILD_DIR		:= ${MANDATORY_DIR}/build
 

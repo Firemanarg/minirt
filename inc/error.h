@@ -13,6 +13,8 @@
 #ifndef ERROR_H
 # define ERROR_H
 
+# include "libft_x.h"
+
 typedef enum e_err
 {
 	OK = 0,
@@ -23,6 +25,10 @@ typedef enum e_err
 	INVALID_ARG_COUNT,
 	INVALID_RATIO,
 	INVALID_COLOR,
+	ERR_PARSING_FILE,
+	ERR_WRONG_USAGE
 }	t_err;
+
+void	print_error(char *context, t_err err, int line);
 
 #endif
