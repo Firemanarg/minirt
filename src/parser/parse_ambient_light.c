@@ -26,10 +26,10 @@ int	parse_ambient_light(t_parser_obj *obj)
 	obj->parser->amb_light_count += 1;
 	obj->status = OK;
 	if (lex_checker(obj) != OK)
-		return (ft_free_ret(obj->obj, 1));
+		return (1);
 	cast_fields(obj);
 	if (validate_fields(obj) != OK)
-		return (ft_free_ret(obj->obj, 1));
+		return (1);
 	return (0);
 }
 
