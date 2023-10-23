@@ -6,7 +6,7 @@
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 18:14:39 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/22 18:33:15 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/10/23 16:33:08 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,15 @@ void	print_error(char *context, t_err err, int line)
 		ft_putstr_fd(context, 2);
 		ft_putstr_fd("]: ", 2);
 	}
-	ft_putstr_fd("Error of code ", 2);
-	ft_putnbr_fd(err, 2);
+	ft_putstr_fd("Error", 2);
 	if (line > 0)
 	{
 		ft_putstr_fd(" at line ", 2);
 		ft_putnbr_fd(line, 2);
 	}
-	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(": (code ", 2);
+	ft_putnbr_fd(err, 2);
+	ft_putstr_fd(") ", 2);
 	ft_putstr_fd(err_msg[err], 2);
 	ft_putstr_fd("\n", 2);
 }
