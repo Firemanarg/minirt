@@ -36,12 +36,15 @@ t_scene	*parse_file(char *file_name)
 	ft_lst_func_apply(&parser.objs, get_parser_obj);
 	ft_lst_rmv_null(&parser.objs);
 	assign_parser_to_objs(&parser);
+	if (print_parser_errors(&parser))
+	{
+		ft_lst_clear(&parser.objs, free_parser_obj);
+		return (NULL);
+	}
 	ft_lst_func_apply(&parser.objs, parse_obj);
 	check_objs_count(&parser);
-	if (!parser.err_flag)
+	if (!print_parser_errors(&parser))
 		populate_scene(&parser);
-	else
-		print_parser_errors(&parser);
 	ft_lst_clear(&parser.objs, free_parser_obj);
 	return (parser.scene);
 }
@@ -105,6 +108,8 @@ static void	*get_parser_obj(void *line, size_t index, int, int)
 	while (obj->fields[obj->fields_count] != NULL)
 		obj->fields_count++;
 	obj->type = get_type_by_str(obj->fields[0]);
+	if (obj->type == UNKNOWN)
+		obj->status = INVALID_TYPE;
 	obj->line = index + 1;
 	free(line);
 	return (obj);

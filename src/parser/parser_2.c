@@ -6,7 +6,7 @@
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 15:04:39 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/22 18:21:47 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/10/23 16:28:14 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,18 @@ void	assign_parser_to_objs(t_scene_parser *parser)
 	}
 }
 
-void	print_parser_errors(t_scene_parser *parser)
+/**
+ * @brief Prints all errors found during parsing and returns 1 if any error was
+ * found, 0 otherwise.
+ *
+ * @param parser The parser object containing the list of objects to be checked.
+ *
+ * @return int 1 if any error was found, 0 otherwise.
+*/
+int	print_parser_errors(t_scene_parser *parser)
 {
 	ft_lst_func_apply(&parser->objs, iter_print_errors);
+	return (parser->err_flag);
 }
 
 static void	*iter_print_errors(void *content, size_t, int, int)
@@ -40,7 +49,10 @@ static void	*iter_print_errors(void *content, size_t, int, int)
 
 	obj = (t_parser_obj *) content;
 	if (obj->status != OK)
+	{
+		obj->parser->err_flag = 1;
 		print_error("Parsing", obj->status, obj->line);
+	}
 	return (content);
 }
 

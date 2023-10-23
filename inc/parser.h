@@ -122,7 +122,7 @@ t_scene			*parse_file(char *file_name);
 
 // parser_2.c
 void			assign_parser_to_objs(t_scene_parser *parser);
-void			print_parser_errors(t_scene_parser *parser);
+int				print_parser_errors(t_scene_parser *parser);
 void			populate_scene(t_scene_parser *parser);
 
 // parser_utils.c
