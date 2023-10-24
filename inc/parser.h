@@ -142,8 +142,9 @@ int				parse_ambient_light(t_parser_obj *obj);
 // 					t_ambient_light *light);
 
 // parse_camera.c
-t_err			parse_camera(char **fields, int fields_count,
-					t_camera *camera);
+int				parse_camera(t_parser_obj *obj);
+// t_err			parse_camera(char **fields, int fields_count,
+// 					t_camera *camera);
 
 // parse_light.c
 t_err			parse_light(char **fields, int fields_count,
