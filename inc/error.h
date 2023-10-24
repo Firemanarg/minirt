@@ -26,7 +26,10 @@ typedef enum e_err
 	INVALID_RATIO,
 	INVALID_COLOR,
 	ERR_PARSING_FILE,
-	ERR_WRONG_USAGE
+	ERR_WRONG_USAGE,
+	TOO_MANY_AMBIENT_LIGHTS,
+	TOO_MANY_CAMERAS,
+	TOO_MANY_LIGHTS
 }	t_err;
 
 void	print_error(char *context, t_err err, int line);

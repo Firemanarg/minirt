@@ -126,20 +126,24 @@ static void	*parse_obj(void *content, size_t, int, int)
 		return (NULL);
 	if (obj->type == AMBIENT_LIGHT)
 		*err_flag |= parse_ambient_light(obj);
+	// else if (obj->type == CAMERA)
+	// 	*err_flag |= parse_camera(obj);
 	return (content);
 }
 
 static void	check_objs_count(t_scene_parser *parser)
 {
-	int	found_err;
-
-	found_err = 0;
-	found_err |= (parser->amb_light_count != 1);
-	// found_err |= (parser->camera_count != 1);
+	if (parser->amb_light_count != 1)
+	{
+		print_error("Parsing", TOO_MANY_AMBIENT_LIGHTS, 0);
+		parser->err_flag = 1;
+	}
+	if (parser->camera_count != 1)
+	{
+		print_error("Parsing", TOO_MANY_CAMERAS, 0);
+		parser->err_flag = 1;
+	}
 	// found_err |= (parser->light_count > 1);
-	if (found_err)
-		print_error("Parsing", INVALID_ARG_COUNT, 0);
-	parser->err_flag |= found_err;
 }
 
 	// else if (obj->type == CAMERA)
