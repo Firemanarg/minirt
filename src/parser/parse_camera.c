@@ -30,7 +30,7 @@ int	parse_camera(t_parser_obj *obj)
 {
 	t_camera	*camera;
 
-	camera = malloc(sizeof(t_camera));
+	camera = ft_calloc(1, sizeof(t_camera));
 	obj->obj = camera;
 	camera->type = CAMERA;
 	obj->parser->camera_count += 1;
@@ -74,9 +74,9 @@ static t_err	validate_fields(t_parser_obj *obj)
 
 	camera = (t_camera *) obj->obj;
 	if (!is_valid_direction(&camera->dir))
-		obj->status = INVALID_VEC3;
+		obj->status = INVALID_DIRECTION;
 	else if (!is_valid_fov(camera->fov))
-		obj->status = INVALID_ARG;
+		obj->status = INVALID_FOV;
 	return (obj->status);
 }
 
