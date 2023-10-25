@@ -63,7 +63,7 @@ static t_err	validate_fields(t_parser_obj *obj)
 	light = (t_ambient_light *) obj->obj;
 	if (!is_valid_color(&light->color))
 		obj->status = INVALID_COLOR;
-	if (!is_valid_ratio(light->ratio))
+	else if (!is_valid_ratio(light->ratio))
 		obj->status = INVALID_RATIO;
 	return (obj->status);
 }
