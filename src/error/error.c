@@ -6,7 +6,7 @@
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 18:14:39 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/25 11:57:03 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/10/25 13:58:06 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static char	*get_err_msg(t_err err)
 		"INVALID_ARG_COUNT", "INVALID_RATIO", "INVALID_COLOR",
 		"ERR_PARSING_FILE", "ERR_WRONG_USAGE", "TOO_MANY_AMBIENT_LIGHTS",
 		"TOO_MANY_CAMERAS", "TOO_MANY_LIGHTS", "MISSING_AMBIENT_LIGHT",
-		"MISSING_CAMERA", "MISSING_LIGHT", "INVALID_DIAMETER"
+		"MISSING_CAMERA", "MISSING_LIGHT", "INVALID_DIAMETER", "INVALID_FOV",
+		"INVALID_HEIGHT", "INVALID_DIRECTION"
 	};
 
 	return (err_msg[err]);

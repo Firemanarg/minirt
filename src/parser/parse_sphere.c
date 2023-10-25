@@ -66,7 +66,7 @@ static t_err	validate_fields(t_parser_obj *obj)
 
 	sphere = (t_sphere *) obj->obj;
 	if (!is_valid_color(&sphere->material.color))
-		obj->status = INVALID_VEC3;
+		obj->status = INVALID_COLOR;
 	else if (sphere->diameter <= 0)
 		obj->status = INVALID_DIAMETER;
 	return (obj->status);
