@@ -29,7 +29,10 @@ typedef enum e_err
 	ERR_WRONG_USAGE,
 	TOO_MANY_AMBIENT_LIGHTS,
 	TOO_MANY_CAMERAS,
-	TOO_MANY_LIGHTS
+	TOO_MANY_LIGHTS,
+	MISSING_AMBIENT_LIGHT,
+	MISSING_CAMERA,
+	MISSING_LIGHT,
 }	t_err;
 
 void	print_error(char *context, t_err err, int line);

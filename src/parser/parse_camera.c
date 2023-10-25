@@ -84,12 +84,25 @@ static void	apply_transforms(t_camera *camera)
 {
 	t_vec3	up;
 	t_vec3	to;
+	double	half_view;
+	double	aspect;
 
+	camera->fov *= (M_PI / 180);
+	camera->hsize = WINDOW_WIDTH;
+	camera->vsize = WINDOW_HEIGHT;
 	up = (t_vec3){.x = 0.0, .y = 1.0, .z = 0.0};
 	add(&camera->pos, &camera->dir, &to);
 	camera->transform = view_transform(&camera->pos, &to, &up);
 	camera->inv_transform = matrix_inverse(camera->transform);
-	set_camera_pars(WINDOW_WIDTH, WINDOW_HEIGHT, camera->fov, camera);
+	half_view = tan(camera->fov / 2.0);
+	aspect = (double) camera->hsize / (double) camera->vsize;
+	camera->half_height = half_view;
+	camera->half_width = half_view;
+	if (aspect >= 1.0)
+		camera->half_height /= aspect;
+	else
+		camera->half_width *= aspect;
+	camera->pixel_size = camera->half_width * 2.0 / camera->hsize;
 }
 
 // -------- OLD PARSE CAMERA --------
