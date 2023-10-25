@@ -162,8 +162,9 @@ int				parse_cylinder(t_parser_obj *obj);
 // 					t_cylinder *cylinder);
 
 // parse_plane.c
-t_err			parse_plane(char **fields, int fields_count,
-					t_plane *plane);
+int				parse_plane(t_parser_obj *obj);
+// t_err			parse_plane(char **fields, int fields_count,
+// 					t_plane *plane);
 
 // get_scene_parser_args.c
 t_scene_parser	*get_scene_parser_args(char const *file_name);
