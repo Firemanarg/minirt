@@ -33,6 +33,7 @@ typedef enum e_err
 	MISSING_AMBIENT_LIGHT,
 	MISSING_CAMERA,
 	MISSING_LIGHT,
+	INVALID_DIAMETER
 }	t_err;
 
 void	print_error(char *context, t_err err, int line);
