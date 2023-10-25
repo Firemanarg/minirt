@@ -12,34 +12,64 @@
 
 #include "parser.h"
 
-static int	is_valid(t_point_light *light);
+static t_err	lex_checker(t_parser_obj *obj);
+static void		cast_fields(t_parser_obj *obj);
+static t_err	validate_fields(t_parser_obj *obj);
 
-t_err	parse_light(char **fields, int fields_count, t_point_light *light)
+int	parse_light(t_parser_obj *obj)
 {
-	t_err	err;
+	t_point_light	*light;
 
-	if (fields_count != LIGHT_FIELDS_COUNT)
-		return (INVALID_ARG);
-	if (light == NULL)
-		return (INVALID_ARG);
+	light = malloc(sizeof(t_point_light));
+	obj->obj = light;
 	light->type = LIGHT;
-	err = str_to_vec3(fields[1], &light->pos);
-	light->ratio = ft_atod(fields[2]);
-	err |= str_to_vec3(fields[3], &light->color);
-	err |= !is_valid(light);
+	obj->parser->light_count += 1;
+	obj->status = OK;
+	if (lex_checker(obj) != OK)
+		return (1);
+	cast_fields(obj);
+	if (validate_fields(obj) != OK)
+		return (1);
+	return (0);
+}
+
+static t_err	lex_checker(t_parser_obj *obj)
+{
+	if (obj->fields_count != LIGHT_FIELDS_COUNT)
+		obj->status = INVALID_ARG_COUNT;
+	else if (!is_str_vec3(obj->fields[1]))
+		obj->status = INVALID_VEC3;
+	else if (!ft_str_isdouble(obj->fields[2]))
+		obj->status = INVALID_ARG;
+	else if (!is_str_vec3(obj->fields[3]))
+		obj->status = INVALID_VEC3;
+	return (obj->status);
+}
+
+static void	cast_fields(t_parser_obj *obj)
+{
+	t_point_light	*light;
+	t_err			err;
+
+	light = (t_point_light *) obj->obj;
+	err = str_to_vec3(obj->fields[1], &light->color);
+	light->ratio = ft_atod(obj->fields[2]);
+	err |= str_to_vec3(obj->fields[3], &light->color);
 	if (err != OK)
-		return (INVALID_ARG);
+		obj->status = INVALID_VEC3;
 	light->color.r = light->color.r * light->ratio / 255.0;
 	light->color.g = light->color.g * light->ratio / 255.0;
 	light->color.b = light->color.b * light->ratio / 255.0;
-	return (OK);
 }
 
-static int	is_valid(t_point_light *light)
+static t_err	validate_fields(t_parser_obj *obj)
 {
+	t_point_light	*light;
+
+	light = (t_point_light *) obj->obj;
+	if (!is_valid_color(&light->color))
+		obj->status = INVALID_COLOR;
 	if (!is_valid_ratio(light->ratio))
-		return (0);
-	else if (!is_valid_color(&light->color))
-		return (0);
-	return (1);
+		obj->status = INVALID_RATIO;
+	return (obj->status);
 }

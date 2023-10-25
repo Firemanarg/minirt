@@ -128,7 +128,8 @@ static void	*parse_obj(void *content, size_t, int, int)
 		*err_flag |= parse_ambient_light(obj);
 	else if (obj->type == CAMERA)
 		*err_flag |= parse_camera(obj);
-	// 	*err_flag |= parse_camera(obj);
+	else if (obj->type == LIGHT)
+		*err_flag |= parse_light(obj);
 	return (content);
 }
 
