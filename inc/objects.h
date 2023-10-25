@@ -152,6 +152,10 @@ typedef struct s_cone_eq_params
 void	set_object_limits(t_geom_obj *cyl, double minimum,
 			double maximum, t_bool closed);
 
+// clean_obj.c
+void	clean_geometry(t_geom_obj *obj);
+void	clean_camera(t_camera *obj);
+
 // cleanup.c
 void	free_obj(t_geom_obj *obj);
 

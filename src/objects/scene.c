@@ -6,7 +6,7 @@
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 14:15:02 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/22 18:56:38 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/10/25 15:57:02 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,23 @@ t_scene	*new_scene(int light_count, int geometries_count)
 
 void	*free_scene(t_scene *scene)
 {
-	// t_geom_obj	*iter;
+	t_geom_obj	*iter;
 
 	if (scene == NULL)
 		return (NULL);
-	// clean_obj((t_base_obj *) &scene->camera);
-	free(scene->lights);
-	free(scene->geometries);	// TEMPORARY
-	// if (scene->geometries != NULL)
-	// {
-	// 	iter = scene->geometries;
-	// 	while (iter->type != NONE)
-	// 	{
-	// 		clean_obj((t_base_obj *) iter);
-	// 		iter++;
-	// 	}
-	// 	free(scene->geometries);
-	// }
+	clean_camera(&scene->camera);
+	if (scene->geometries != NULL)
+	{
+		iter = scene->geometries;
+		while (iter->type != NONE)
+		{
+			clean_geometry(iter);
+			iter++;
+		}
+		free(scene->geometries);
+	}
+	if (scene->lights != NULL)
+		free(scene->lights);
 	free(scene);
 	return (NULL);
 }

@@ -20,6 +20,8 @@
 */
 void	clean_obj(t_base_obj *obj)
 {
+	if (obj == NULL)
+		return ;
 	if (obj->c.type == CAMERA || obj->g.type == SPHERE
 		|| obj->g.type == CYLINDER || obj->g.type == PLANE)
 	{
@@ -27,4 +29,22 @@ void	clean_obj(t_base_obj *obj)
 		matrix_free(((t_geom_obj *) obj)->inv_transform);
 		matrix_free(((t_geom_obj *) obj)->t_inv_transform);
 	}
+}
+
+void	clean_geometry(t_geom_obj *obj)
+{
+	if (obj == NULL)
+		return ;
+	matrix_free(obj->transform);
+	matrix_free(obj->inv_transform);
+	matrix_free(obj->t_inv_transform);
+}
+
+void	clean_camera(t_camera *obj)
+{
+	if (obj == NULL)
+		return ;
+	matrix_free(obj->transform);
+	matrix_free(obj->inv_transform);
+	matrix_free(obj->t_inv_transform);
 }
