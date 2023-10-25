@@ -23,6 +23,7 @@ int	main(int argc, char **argv)
 	t_args	args;
 	// t_err	err;
 
+	args = (t_args){0};
 	if (argc != 2)
 	{
 		print_error("Program", ERR_WRONG_USAGE, 0);
