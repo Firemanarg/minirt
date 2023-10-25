@@ -130,6 +130,8 @@ static void	*parse_obj(void *content, size_t, int, int)
 		*err_flag |= parse_camera(obj);
 	else if (obj->type == LIGHT)
 		*err_flag |= parse_light(obj);
+	else if (obj->type == SPHERE)
+		*err_flag |= parse_sphere(obj);
 	return (content);
 }
 

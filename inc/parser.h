@@ -152,8 +152,9 @@ int				parse_light(t_parser_obj *obj);
 // 					t_point_light *light);
 
 // parse_sphere.c
-t_err			parse_sphere(char **fields, int fields_count,
-					t_sphere *sphere);
+int				parse_sphere(t_parser_obj *obj);
+// t_err			parse_sphere(char **fields, int fields_count,
+// 					t_sphere *sphere);
 
 // parse_cylinder.c
 t_err			parse_cylinder(char **fields, int fields_count,
