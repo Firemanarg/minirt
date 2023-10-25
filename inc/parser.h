@@ -157,8 +157,9 @@ int				parse_sphere(t_parser_obj *obj);
 // 					t_sphere *sphere);
 
 // parse_cylinder.c
-t_err			parse_cylinder(char **fields, int fields_count,
-					t_cylinder *cylinder);
+int				parse_cylinder(t_parser_obj *obj);
+// t_err			parse_cylinder(char **fields, int fields_count,
+// 					t_cylinder *cylinder);
 
 // parse_plane.c
 t_err			parse_plane(char **fields, int fields_count,

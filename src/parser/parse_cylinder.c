@@ -13,63 +13,75 @@
 #include "parser.h"
 #include "projection.h"
 
-static int	is_valid(t_cylinder *cylinder);
-static void	apply_cylinder_transforms(t_cylinder *cylinder);
+static t_err	lex_checker(t_parser_obj *obj);
+static void		cast_fields(t_parser_obj *obj);
+static t_err	validate_fields(t_parser_obj *obj);
+static void		apply_transforms(t_cylinder *cylinder);
 
-static void	set_cylinder_pars(t_cylinder *cylinder)
+int	parse_cylinder(t_parser_obj *obj)
 {
-	cylinder->minimum = -cylinder->height / 2.0;
-	cylinder->maximum = cylinder->height / 2.0;
-	cylinder->is_closed = TRUE;
-	cylinder->intersects = (t_isect_func)cylinder_intersect;
-	cylinder->normal_at = cylinder_normal_at;
-	cylinder->map_uv = NULL;
-	cylinder->material.color.r /= 255.0;
-	cylinder->material.color.g /= 255.0;
-	cylinder->material.color.b /= 255.0;
-	cylinder->material.diffuse = DIFFUSE;
-	cylinder->material.specular = SPECULAR;
-	cylinder->material.ambient = AMBIENT;
+	t_cylinder	*cylinder;
+
+	cylinder = malloc(sizeof(t_cylinder));
+	obj->obj = cylinder;
+	cylinder->type = SPHERE;
+	obj->parser->geometry_count += 1;
+	obj->status = OK;
+	if (lex_checker(obj) != OK)
+		return (1);
+	cast_fields(obj);
+	if (validate_fields(obj) != OK)
+		return (1);
+	apply_transforms(cylinder);
+	return (0);
 }
 
-t_err	parse_cylinder(char **fields, int fields_count, t_cylinder *cylinder)
+static t_err	lex_checker(t_parser_obj *obj)
 {
-	t_err	err;
+	if (obj->fields_count != CYLINDER_FIELDS_COUNT)
+		obj->status = INVALID_ARG_COUNT;
+	else if (!is_str_vec3(obj->fields[1]) || !is_str_vec3(obj->fields[2])
+		|| !is_str_vec3(obj->fields[5]))
+		obj->status = INVALID_VEC3;
+	else if (!ft_str_isdouble(obj->fields[2]))
+		obj->status = INVALID_DIAMETER;
+	else if (!ft_str_isdouble(obj->fields[3]))
+		obj->status = INVALID_HEIGHT;
+	return (obj->status);
+}
 
-	if (fields_count != CYLINDER_FIELDS_COUNT)
-		return (INVALID_ARG);
-	if (cylinder == NULL)
-		return (INVALID_ARG);
-	cylinder->type = CYLINDER;
-	err = str_to_vec3(fields[1], &cylinder->pos);
-	err |= str_to_vec3(fields[2], &cylinder->dir);
-	cylinder->diameter = ft_atod(fields[3]);
-	cylinder->height = ft_atod(fields[4]);
-	err |= str_to_vec3(fields[5], &(cylinder->material.color));
-	err |= !is_valid(cylinder);
+static void	cast_fields(t_parser_obj *obj)
+{
+	t_cylinder	*cylinder;
+	t_err		err;
+
+	cylinder = (t_cylinder *) obj->obj;
+	err = str_to_vec3(obj->fields[1], &cylinder->pos);
+	err |= str_to_vec3(obj->fields[2], &cylinder->dir);
+	cylinder->diameter = ft_atod(obj->fields[3]);
+	cylinder->height = ft_atod(obj->fields[4]);
+	err |= str_to_vec3(obj->fields[5], &cylinder->material.color);
 	if (err != OK)
-		return (INVALID_ARG);
-	apply_cylinder_transforms(cylinder);
-	cylinder->inv_transform = matrix_inverse(cylinder->transform);
-	cylinder->t_inv_transform = matrix_transpose(cylinder->inv_transform);
-	set_cylinder_pars(cylinder);
-	return (OK);
+		obj->status = INVALID_VEC3;
 }
 
-static int	is_valid(t_cylinder *cylinder)
+static t_err	validate_fields(t_parser_obj *obj)
 {
+	t_cylinder	*cylinder;
+
+	cylinder = (t_cylinder *) obj->obj;
 	if (!is_valid_direction(&cylinder->dir))
-		return (0);
-	else if (!is_valid_color(&(cylinder->material.color)))
-		return (0);
+		obj->status = INVALID_DIRECTION;
 	else if (cylinder->diameter <= 0)
-		return (0);
+		obj->status = INVALID_DIAMETER;
 	else if (cylinder->height <= 0)
-		return (0);
-	return (1);
+		obj->status = INVALID_HEIGHT;
+	else if (!is_valid_color(&cylinder->material.color))
+		obj->status = INVALID_COLOR;
+	return (obj->status);
 }
 
-static void	apply_cylinder_transforms(t_cylinder *cylinder)
+static void	apply_transforms(t_cylinder *cylinder)
 {
 	t_matrix_op	ops[4];
 	t_vec3		scale_v;
@@ -85,4 +97,14 @@ static void	apply_cylinder_transforms(t_cylinder *cylinder)
 	cylinder->transform = matrix_apply(cylinder->transform, ops);
 	cylinder->inv_transform = matrix_inverse(cylinder->transform);
 	cylinder->t_inv_transform = matrix_transpose(cylinder->inv_transform);
+	cylinder->minimum = -cylinder->height / 2.0;
+	cylinder->maximum = cylinder->height / 2.0;
+	cylinder->is_closed = TRUE;
+	cylinder->intersects = (t_isect_func)cylinder_intersect;
+	cylinder->normal_at = cylinder_normal_at;
+	cylinder->map_uv = NULL;
+	divide(&cylinder->material.color, 255.0, &cylinder->material.color);
+	cylinder->material.diffuse = DIFFUSE;
+	cylinder->material.specular = SPECULAR;
+	cylinder->material.ambient = AMBIENT;
 }
