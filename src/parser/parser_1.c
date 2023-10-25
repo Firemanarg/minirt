@@ -110,6 +110,10 @@ static void	*parse_obj(void *content, size_t i, int f, int l)
 		*err_flag |= parse_light(obj);
 	else if (obj->type == SPHERE)
 		*err_flag |= parse_sphere(obj);
+	else if (obj->type == CYLINDER)
+		*err_flag |= parse_cylinder(obj);
+	else if (obj->type == PLANE)
+		*err_flag |= parse_plane(obj);
 	return (content);
 }
 
