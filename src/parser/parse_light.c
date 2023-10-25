@@ -15,6 +15,7 @@
 static t_err	lex_checker(t_parser_obj *obj);
 static void		cast_fields(t_parser_obj *obj);
 static t_err	validate_fields(t_parser_obj *obj);
+static void		apply_transforms(t_point_light *light);
 
 int	parse_light(t_parser_obj *obj)
 {
@@ -30,6 +31,7 @@ int	parse_light(t_parser_obj *obj)
 	cast_fields(obj);
 	if (validate_fields(obj) != OK)
 		return (1);
+	apply_transforms(light);
 	return (0);
 }
 
@@ -52,14 +54,11 @@ static void	cast_fields(t_parser_obj *obj)
 	t_err			err;
 
 	light = (t_point_light *) obj->obj;
-	err = str_to_vec3(obj->fields[1], &light->color);
+	err = str_to_vec3(obj->fields[1], &light->pos);
 	light->ratio = ft_atod(obj->fields[2]);
 	err |= str_to_vec3(obj->fields[3], &light->color);
 	if (err != OK)
 		obj->status = INVALID_VEC3;
-	light->color.r = light->color.r * light->ratio / 255.0;
-	light->color.g = light->color.g * light->ratio / 255.0;
-	light->color.b = light->color.b * light->ratio / 255.0;
 }
 
 static t_err	validate_fields(t_parser_obj *obj)
@@ -69,7 +68,14 @@ static t_err	validate_fields(t_parser_obj *obj)
 	light = (t_point_light *) obj->obj;
 	if (!is_valid_color(&light->color))
 		obj->status = INVALID_COLOR;
-	if (!is_valid_ratio(light->ratio))
+	else if (!is_valid_ratio(light->ratio))
 		obj->status = INVALID_RATIO;
 	return (obj->status);
+}
+
+static void	apply_transforms(t_point_light *light)
+{
+	light->color.r = light->color.r * light->ratio / 255.0;
+	light->color.g = light->color.g * light->ratio / 255.0;
+	light->color.b = light->color.b * light->ratio / 255.0;
 }
