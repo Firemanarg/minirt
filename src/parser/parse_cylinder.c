@@ -22,9 +22,9 @@ int	parse_cylinder(t_parser_obj *obj)
 {
 	t_cylinder	*cylinder;
 
-	cylinder = malloc(sizeof(t_cylinder));
+	cylinder = ft_calloc(1, sizeof(t_cylinder));
 	obj->obj = cylinder;
-	cylinder->type = SPHERE;
+	cylinder->type = CYLINDER;
 	obj->parser->geometry_count += 1;
 	obj->status = OK;
 	if (lex_checker(obj) != OK)
@@ -100,7 +100,7 @@ static void	apply_transforms(t_cylinder *cylinder)
 	cylinder->minimum = -cylinder->height / 2.0;
 	cylinder->maximum = cylinder->height / 2.0;
 	cylinder->is_closed = TRUE;
-	cylinder->intersects = (t_isect_func)cylinder_intersect;
+	cylinder->intersects = (t_isect_func) cylinder_intersect;
 	cylinder->normal_at = cylinder_normal_at;
 	cylinder->map_uv = NULL;
 	divide(&cylinder->material.color, 255.0, &cylinder->material.color);
