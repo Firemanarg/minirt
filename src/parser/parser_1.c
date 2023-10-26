@@ -35,11 +35,6 @@ t_scene	*parse_file(char *file_name)
 	ft_lst_func_apply(&parser.objs, get_parser_obj);
 	ft_lst_rmv_null(&parser.objs);
 	assign_parser_to_objs(&parser);
-	if (print_parser_errors(&parser))
-	{
-		ft_lst_clear(&parser.objs, free_parser_obj);
-		return (NULL);
-	}
 	ft_lst_func_apply(&parser.objs, parse_obj);
 	check_objs_count(&parser);
 	if (print_parser_errors(&parser))
