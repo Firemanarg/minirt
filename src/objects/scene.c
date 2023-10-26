@@ -6,7 +6,7 @@
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 14:15:02 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/25 15:57:02 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/10/26 18:11:18 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	*free_scene(t_scene *scene)
 {
 	t_geom_obj	*iter;
 
+	print_msg("Cleaning", "Cleaning scene", TXT_COLOR_MAGENTA);
 	if (scene == NULL)
 		return (NULL);
 	clean_camera(&scene->camera);
@@ -48,5 +49,6 @@ void	*free_scene(t_scene *scene)
 	if (scene->lights != NULL)
 		free(scene->lights);
 	free(scene);
+	print_msg("Cleaning", "Scene cleaned", TXT_COLOR_GREEN);
 	return (NULL);
 }

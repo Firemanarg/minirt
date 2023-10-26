@@ -41,6 +41,7 @@ int	parse_camera(t_parser_obj *obj)
 	if (validate_fields(obj) != OK)
 		return (1);
 	apply_transforms(camera);
+	print_msg("Parsing", "Parsed camera", TXT_COLOR_CYAN);
 	return (0);
 }
 

@@ -33,6 +33,7 @@ int	parse_cylinder(t_parser_obj *obj)
 	if (validate_fields(obj) != OK)
 		return (1);
 	apply_transforms(cylinder);
+	print_msg("Parsing", "Parsed cylinder", TXT_COLOR_CYAN);
 	return (0);
 }
 
@@ -43,9 +44,9 @@ static t_err	lex_checker(t_parser_obj *obj)
 	else if (!is_str_vec3(obj->fields[1]) || !is_str_vec3(obj->fields[2])
 		|| !is_str_vec3(obj->fields[5]))
 		obj->status = INVALID_VEC3;
-	else if (!ft_str_isdouble(obj->fields[2]))
-		obj->status = INVALID_DIAMETER;
 	else if (!ft_str_isdouble(obj->fields[3]))
+		obj->status = INVALID_DIAMETER;
+	else if (!ft_str_isdouble(obj->fields[4]))
 		obj->status = INVALID_HEIGHT;
 	return (obj->status);
 }

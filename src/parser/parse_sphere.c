@@ -33,6 +33,7 @@ int	parse_sphere(t_parser_obj *obj)
 	if (validate_fields(obj) != OK)
 		return (1);
 	apply_transforms(sphere);
+	print_msg("Parsing", "Parsed sphere", TXT_COLOR_CYAN);
 	return (0);
 }
 

@@ -33,6 +33,7 @@ int	parse_plane(t_parser_obj *obj)
 	if (validate_fields(obj) != OK)
 		return (1);
 	apply_transforms(plane);
+	print_msg("Parsing", "Parsed plane", TXT_COLOR_CYAN);
 	return (0);
 }
 
@@ -49,7 +50,7 @@ static t_err	lex_checker(t_parser_obj *obj)
 static void	cast_fields(t_parser_obj *obj)
 {
 	t_plane	*plane;
-	t_err		err;
+	t_err	err;
 
 	plane = (t_plane *) obj->obj;
 	err = str_to_vec3(obj->fields[1], &plane->pos);

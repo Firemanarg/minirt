@@ -30,6 +30,7 @@ int	parse_ambient_light(t_parser_obj *obj)
 	cast_fields(obj);
 	if (validate_fields(obj) != OK)
 		return (1);
+	print_msg("Parsing", "Parsed ambient light", TXT_COLOR_CYAN);
 	return (0);
 }
 

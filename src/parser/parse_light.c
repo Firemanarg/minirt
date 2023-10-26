@@ -32,6 +32,7 @@ int	parse_light(t_parser_obj *obj)
 	if (validate_fields(obj) != OK)
 		return (1);
 	apply_transforms(light);
+	print_msg("Parsing", "Parsed light", TXT_COLOR_CYAN);
 	return (0);
 }
 
