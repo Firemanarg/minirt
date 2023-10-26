@@ -156,6 +156,9 @@ void	set_object_limits(t_geom_obj *cyl, double minimum,
 void	clean_geometry(t_geom_obj *obj);
 void	clean_camera(t_camera *obj);
 
+// obj_utils.c
+char	*get_obj_name(t_obj_type type);
+
 // cleanup.c
 void	free_obj(t_geom_obj *obj);
 
