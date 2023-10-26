@@ -62,6 +62,7 @@ SRC_FILES += ${addprefix ${SRC_DIR}/matrix/, \
 SRC_FILES += ${addprefix ${SRC_DIR}/objects/, \
 				caps.c \
 				scene.c \
+				obj_utils.c \
 				clean_obj.c \
 				color.c \
 				cone.c \
