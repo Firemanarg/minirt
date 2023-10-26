@@ -45,6 +45,7 @@ typedef enum e_err
 	INVALID_FOV,
 	INVALID_HEIGHT,
 	INVALID_DIRECTION,
+	ERR_RENDERING
 }	t_err;
 
 void	print_error(char *context, t_err err, int line);

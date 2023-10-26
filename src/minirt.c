@@ -21,13 +21,13 @@
 int	main(int argc, char **argv)
 {
 	t_args	args;
-	// t_err	err;
+	t_err	err;
 
 	args = (t_args){0};
 	if (argc != 2)
 	{
 		print_error("Program", ERR_WRONG_USAGE, 0);
-		// printf("Error\nUsage: ./miniRT <file.rt>\n");
+		print_msg("Warning", "Usage: ./miniRT <file.rt>", TXT_COLOR_YELLOW);
 		return (1);
 	}
 	args.scene = parse_file(argv[1]);
@@ -38,16 +38,17 @@ int	main(int argc, char **argv)
 	}
 	else
 		print_msg("Parsing", "Successfully parsed file", TXT_COLOR_GREEN);
-		// printf("[Parsing]: Successfully parsed file\n");
+	init_args(&args);
 	// init(&args, argv[1]);
-	// err = render_image(args.scene, &args.mlx_data);
-	// if (err != OK)
-	// {
-	// 	printf("Error during render\n");
-	// 	return (1);
-	// }
+	err = render_image(args.scene, &args.mlx_data);
+	if (err != OK)
+	{
+		printf("Error during render\n");
+		print_error("Rendering", ERR_RENDERING, 0);
+		return (1);
+	}
 	free_scene(args.scene);
-	// create_window(&args);
+	create_window(&args);
 	return (0);
 }
 
