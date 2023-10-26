@@ -20,7 +20,7 @@ int	parse_ambient_light(t_parser_obj *obj)
 {
 	t_ambient_light	*light;
 
-	light = malloc(sizeof(t_ambient_light));
+	light = ft_calloc(1, sizeof(t_ambient_light));
 	obj->obj = light;
 	light->type = AMBIENT_LIGHT;
 	obj->parser->amb_light_count += 1;

@@ -22,7 +22,7 @@ int	parse_sphere(t_parser_obj *obj)
 {
 	t_sphere	*sphere;
 
-	sphere = malloc(sizeof(t_sphere));
+	sphere = ft_calloc(1, sizeof(t_sphere));
 	obj->obj = sphere;
 	sphere->type = SPHERE;
 	obj->parser->geometry_count += 1;

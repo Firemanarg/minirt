@@ -21,7 +21,7 @@ int	parse_light(t_parser_obj *obj)
 {
 	t_point_light	*light;
 
-	light = malloc(sizeof(t_point_light));
+	light = ft_calloc(1, sizeof(t_point_light));
 	obj->obj = light;
 	light->type = LIGHT;
 	obj->parser->light_count += 1;
