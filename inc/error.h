@@ -15,6 +15,14 @@
 
 # include "libft_x.h"
 
+# define TXT_COLOR_RED "\033[0;31m"
+# define TXT_COLOR_GREEN "\033[0;32m"
+# define TXT_COLOR_YELLOW "\033[0;33m"
+# define TXT_COLOR_BLUE "\033[0;34m"
+# define TXT_COLOR_MAGENTA "\033[0;35m"
+# define TXT_COLOR_CYAN "\033[0;36m"
+# define TXT_COLOR_RESET "\033[0m"
+
 typedef enum e_err
 {
 	OK = 0,
@@ -40,5 +48,6 @@ typedef enum e_err
 }	t_err;
 
 void	print_error(char *context, t_err err, int line);
+void	print_msg(char *context, char *msg, char *color);
 
 #endif

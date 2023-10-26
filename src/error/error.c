@@ -6,7 +6,7 @@
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 18:14:39 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/25 13:58:06 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/10/26 17:37:26 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,25 @@
 
 static char	*get_err_msg(t_err err);
 
+void	print_msg(char *context, char *msg, char *color)
+{
+	ft_putstr_fd(TXT_COLOR_RESET, 1);
+	if (color)
+		ft_putstr_fd(color, 1);
+	if (context)
+	{
+		ft_putstr_fd("[", 1);
+		ft_putstr_fd(context, 1);
+		ft_putstr_fd("]: ", 1);
+	}
+	ft_putstr_fd(msg, 1);
+	ft_putstr_fd("\n", 1);
+	ft_putstr_fd(TXT_COLOR_RESET, 1);
+}
+
 void	print_error(char *context, t_err err, int line)
 {
+	ft_putstr_fd(TXT_COLOR_RED, 2);
 	if (context)
 	{
 		ft_putstr_fd("[", 2);
@@ -33,6 +50,7 @@ void	print_error(char *context, t_err err, int line)
 	ft_putstr_fd(") ", 2);
 	ft_putstr_fd(get_err_msg(err), 2);
 	ft_putstr_fd("\n", 2);
+	ft_putstr_fd(TXT_COLOR_RESET, 2);
 }
 
 static char	*get_err_msg(t_err err)
