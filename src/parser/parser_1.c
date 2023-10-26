@@ -23,6 +23,9 @@ t_scene	*parse_file(char *file_name)
 {
 	t_scene_parser	parser;
 
+	ft_putstr_fd(TXT_COLOR_MAGENTA"[Parsing]: Parsing file <", 1);
+	ft_putstr_fd(file_name, 1);
+	ft_putstr_fd(">\n"TXT_COLOR_RESET, 1);
 	parser = (t_scene_parser){0};
 	parser.fd = open(file_name, O_RDONLY);
 	if (parser.fd < 0)
@@ -39,9 +42,13 @@ t_scene	*parse_file(char *file_name)
 	}
 	ft_lst_func_apply(&parser.objs, parse_obj);
 	check_objs_count(&parser);
-	if (!print_parser_errors(&parser))
-		populate_scene(&parser);
-	ft_lst_clear(&parser.objs, free_parser_obj);
+	if (print_parser_errors(&parser))
+	{
+		ft_lst_clear(&parser.objs, free_parser_obj);
+		return (NULL);
+	}
+	populate_scene(&parser);
+	ft_lst_clear(&parser.objs, clean_parser_obj);
 	return (parser.scene);
 }
 
@@ -79,8 +86,7 @@ static void	*get_parser_obj(void *line, size_t index, int f, int l)
 	(void) (f && l);
 	if (line == NULL)
 		return (NULL);
-	obj = malloc(sizeof(t_parser_obj));
-	*obj = (t_parser_obj){0};
+	obj = ft_calloc(1, sizeof(t_parser_obj));
 	obj->fields = ft_split((char *) line, ' ');
 	while (obj->fields[obj->fields_count] != NULL)
 		obj->fields_count++;

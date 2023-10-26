@@ -6,7 +6,7 @@
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 15:04:39 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/25 15:56:48 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/10/26 18:25:06 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	assign_parser_to_objs(t_scene_parser *parser)
 */
 int	print_parser_errors(t_scene_parser *parser)
 {
+	parser->err_flag = 0;
 	ft_lst_func_apply(&parser->objs, iter_print_errors);
 	return (parser->err_flag);
 }
@@ -59,7 +60,7 @@ static void	*iter_print_errors(void *content, size_t i, int f, int l)
 
 void	populate_scene(t_scene_parser *parser)
 {
-	parser->scene = malloc(sizeof(t_scene));
+	parser->scene = ft_calloc(1, sizeof(t_scene));
 	parser->scene->geometries = ft_calloc(
 			parser->geometry_count + 1, sizeof(t_geom_obj));
 	parser->scene->lights = ft_calloc(

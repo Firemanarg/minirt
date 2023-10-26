@@ -128,6 +128,7 @@ void			populate_scene(t_scene_parser *parser);
 // parser_utils.c
 t_obj_type		get_type_by_str(char *str);
 void			free_parser_obj(void *obj);
+void			clean_parser_obj(void *obj);
 
 // validations.c
 int				is_valid_color(t_vec3 *color);

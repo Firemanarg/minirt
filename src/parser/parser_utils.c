@@ -6,7 +6,7 @@
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 02:30:33 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/22 15:19:20 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/10/26 18:28:46 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,27 @@ void	free_parser_obj(void *obj)
 	aux = (t_parser_obj *) obj;
 	if (aux == NULL)
 		return ;
-	ft_clear_arr((void **) aux->fields, NULL);
+	ft_clear_arr((void **) aux->fields, free);
+	if (aux->obj != NULL)
+	{
+		if (aux->type == CAMERA)
+			clean_camera((t_camera *) aux->obj);
+		else if (aux->type == SPHERE || aux->type == CYLINDER
+			|| aux->type == PLANE)
+			clean_geometry((t_geom_obj *) aux->obj);
+		free(aux->obj);
+	}
+	free(aux);
+}
+
+void	clean_parser_obj(void *obj)
+{
+	t_parser_obj	*aux;
+
+	aux = (t_parser_obj *) obj;
+	if (aux == NULL)
+		return ;
+	ft_clear_arr((void **) aux->fields, free);
 	if (aux->obj != NULL)
 		free(aux->obj);
 	free(aux);
