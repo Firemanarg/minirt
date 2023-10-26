@@ -37,7 +37,8 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	else
-		printf("[Parsing]: Successfully parsed file\n");
+		print_msg("Parsing", "Successfully parsed file", TXT_COLOR_GREEN);
+		// printf("[Parsing]: Successfully parsed file\n");
 	// init(&args, argv[1]);
 	// err = render_image(args.scene, &args.mlx_data);
 	// if (err != OK)
