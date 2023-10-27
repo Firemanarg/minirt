@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 02:30:33 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/27 04:05:39 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/26 18:28:46 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,12 @@ t_obj_type	get_type_by_str(char *str)
 		return (AMBIENT_LIGHT);
 	else if (ft_strcmp(str, "C") == 0)
 		return (CAMERA);
-	else if (ft_strcmp(str, "L") == 0 || ft_strcmp(str, "l") == 0)
+	else if (ft_strcmp(str, "L") == 0)
 		return (LIGHT);
 	else if (ft_strcmp(str, "sp") == 0)
 		return (SPHERE);
 	else if (ft_strcmp(str, "cy") == 0)
 		return (CYLINDER);
-	else if (ft_strcmp(str, "co") == 0)
-		return (CONE);
 	else if (ft_strcmp(str, "pl") == 0)
 		return (PLANE);
 	else
@@ -45,7 +43,7 @@ void	free_parser_obj(void *obj)
 		if (aux->type == CAMERA)
 			clean_camera((t_camera *) aux->obj);
 		else if (aux->type == SPHERE || aux->type == CYLINDER
-			|| aux->type == PLANE || aux->type == CONE)
+			|| aux->type == PLANE)
 			clean_geometry((t_geom_obj *) aux->obj);
 		free(aux->obj);
 	}

@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 14:34:32 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/15 07:29:48 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/27 03:35:45 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,26 +64,11 @@ void	cylinder_normal_at(t_geom_obj *cyl, t_vec3 *obj_point,
 		set_vec3(obj_point->x, 0.0, obj_point->z, obj_normal);
 }
 
-void	cylinder_map_uv(t_geom_obj *cyl, t_vec3 *p, double *u, double *v)
-{
-	if (p->y > cyl->minimum + EPSILON && p->y < cyl->maximum - EPSILON)
-	{
-		*u = 1 - (atan2(p->x, p->z) * 0.5 * M_1_PI + 0.5);
-		*v = fmod(p->y, (M_PI * 2)) * 0.5 * M_1_PI;
-	}
-	else
-	{
-		*u = fmod(p->x, (M_PI * 2)) * 0.5 * M_1_PI;
-		*v = fmod(p->z, (M_PI * 2)) * 0.5 * M_1_PI;
-	}
-}
-
 t_err	set_cylinder(t_geom_obj *cyl, t_matrix *transform, t_material *material)
 {
 	cyl->type = CYLINDER;
 	cyl->intersects = (t_isect_func)cylinder_intersect;
 	cyl->normal_at = cylinder_normal_at;
-	cyl->map_uv = NULL;
 	cyl->minimum = -1.0 / 0.0;
 	cyl->maximum = 1.0 / 0.0;
 	cyl->is_closed = FALSE;

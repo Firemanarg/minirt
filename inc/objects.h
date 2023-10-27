@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:44:47 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/27 10:53:37 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/27 03:35:46 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@
 # include "error.h"
 # include "varray.h"
 
-# define AMBIENT 0.1
-# define DIFFUSE 0.8
-# define SPECULAR 0.3
-# define SHININESS 100
+# define AMBIENT 0.2
+# define DIFFUSE 0.9
 
 typedef t_vec3				t_color;
 typedef struct s_geom_obj	t_geom_obj;
@@ -39,8 +37,6 @@ typedef struct s_material
 {
 	double		ambient;
 	double		diffuse;
-	double		specular;
-	double		shininess;
 	t_color		color;
 }	t_material;
 
@@ -53,8 +49,7 @@ typedef enum e_obj_type
 	LIGHT,
 	SPHERE,
 	CYLINDER,
-	PLANE,
-	CONE
+	PLANE
 }	t_obj_type;
 
 typedef struct s_checkers
@@ -76,8 +71,6 @@ struct s_geom_obj
 	t_material		material;
 	t_isect_func	intersects;
 	t_normal_func	normal_at;
-	t_uv_func		map_uv;
-	t_checkers		checkers;
 	double			diameter;
 	double			height;
 	double			minimum;
@@ -116,13 +109,11 @@ typedef struct s_camera
 	int				vsize;
 }	t_camera;
 
-typedef t_geom_obj			t_sphere;
+typedef t_geom_obj			t_sphere; // CHECK
 
-typedef t_geom_obj			t_cylinder;
+typedef t_geom_obj			t_cylinder; // CHECK
 
-typedef t_geom_obj			t_cone;
-
-typedef t_geom_obj			t_plane;
+typedef t_geom_obj			t_plane; // CHECK
 
 typedef struct s_base_obj
 {
@@ -140,16 +131,6 @@ typedef struct s_scene
 	t_point_light	*lights;
 }	t_scene;
 
-typedef struct s_cone_eq_params
-{
-	double	a;
-	double	b;
-	double	c;
-	double	sqrt_disc;
-	double	t1;
-	double	t2;
-}	t_cone_eq_params;
-
 // caps.c
 void	set_object_limits(t_geom_obj *cyl, double minimum,
 			double maximum, t_bool closed);
@@ -165,26 +146,19 @@ char	*get_obj_name(t_obj_type type);
 t_color	color(double red, double green, double blue);
 void	set_color(double red, double green, double blue, t_color *c);
 
-// cone.c
-void	cone_normal_at(t_geom_obj *c, t_vec3 *obj_point, t_vec3 *obj_normal);
-t_err	set_cone(t_geom_obj *cone, t_matrix *transform, t_material *material);
-void	cone_map_uv(t_geom_obj *cone, t_vec3 *p, double *u, double *v);
-
 // cylinder.c
 void	cylinder_normal_at(t_geom_obj *cyl, t_vec3 *obj_point,
 			t_vec3 *obj_normal);
 t_err	set_cylinder(t_geom_obj *cyl, t_matrix *transform,
 			t_material *material);
-void	cylinder_map_uv(t_geom_obj *cyl, t_vec3 *p, double *u, double *v);
 
 // light.c
 void	set_point_light(t_vec3 *pos, t_color *color, t_point_light *light);
 
 // material.c
-void	set_material_shininess(t_material *material, double shininess);
 void	set_material_color(t_material *material, double r, double g, double b);
 void	set_material_coefficients(t_material *material, double ambient,
-			double diffuse, double specular);
+			double diffuse);
 
 //object.c
 t_err	set_object(t_geom_obj *object, t_matrix *transform,
@@ -198,14 +172,12 @@ void	free_obj(t_geom_obj *obj);
 void	plane_normal_at(t_geom_obj *p, t_vec3 *object_point,
 			t_vec3 *object_normal);
 t_err	set_plane(t_geom_obj *plane, t_matrix *transform, t_material *material);
-void	plane_map_uv(t_geom_obj *plane, t_vec3 *p, double *u, double *v);
 
 // sphere.c
 void	sphere_normal_at(t_geom_obj *sph, t_vec3 *object_point,
 			t_vec3 *object_normal);
 t_err	set_sphere(t_geom_obj *sph, t_matrix *transform,
 			t_material *material);
-void	sphere_map_uv(t_geom_obj *sph, t_vec3 *p, double *u, double *v);
 
 // scene.c
 t_scene	*new_scene(int light_count, int geometries_count);

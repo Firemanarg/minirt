@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:42:10 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/27 04:01:03 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/27 03:36:44 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,7 @@ static void	apply_transforms(t_cylinder *cylinder)
 	cylinder->is_closed = TRUE;
 	cylinder->intersects = (t_isect_func) cylinder_intersect;
 	cylinder->normal_at = cylinder_normal_at;
-	cylinder->map_uv = NULL;
 	divide(&cylinder->material.color, 255.0, &cylinder->material.color);
 	cylinder->material.diffuse = DIFFUSE;
-	cylinder->material.specular = SPECULAR;
 	cylinder->material.ambient = AMBIENT;
-	cylinder->material.shininess = SHININESS;
 }

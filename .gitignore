@@ -57,3 +57,6 @@ lib/
 .*/
 *.json
 .gdb_history
+.vscode/*
+.cache/*
+README.md

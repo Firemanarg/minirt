@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:32:58 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/15 07:30:04 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/27 03:27:31 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,6 @@ typedef struct s_precomp
 
 // caps.c
 t_err	intersect_cylinder_caps(t_geom_obj *cylinder, t_ray *ray, t_varray *xs);
-t_err	intersect_cone_caps(t_geom_obj *cone, t_ray *ray, t_varray *xs);
-
-// cone.c
-t_err	cone_intersect(t_geom_obj *cone, t_ray *ray, t_varray *xs);
 
 // cylinder.c
 t_err	cylinder_intersect(t_geom_obj *cylinder, t_ray *ray, t_varray *xs);
@@ -79,9 +75,5 @@ void	prepare_computations(t_isect *i, t_ray *r, t_precomp *comps);
 void	set_camera(int hsize, int vsize, double fov, t_camera *camera);
 t_err	set_camera_transform(t_matrix *transform, t_camera *camera);
 void	free_camera(t_camera *camera);
-
-// pattern.c
-void	uv_checkers_at(t_checkers *checkers, double u, double v, t_color *c);
-void	pattern_at(t_geom_obj *obj, t_vec3 *point, t_color *c);
 
 #endif

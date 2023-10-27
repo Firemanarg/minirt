@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 08:53:15 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/27 04:05:35 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 06:45:28 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,9 +137,6 @@ int				parse_sphere(t_parser_obj *obj);
 
 // parse_cylinder.c
 int				parse_cylinder(t_parser_obj *obj);
-
-// parse_cone.c
-int				parse_cone(t_parser_obj *obj);
 
 // parse_plane.c
 int				parse_plane(t_parser_obj *obj);
