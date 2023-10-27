@@ -142,7 +142,7 @@ ${NAME}: $(LFTX) $(FTLST) ${OBJ_FILES}
 	${CC} ${CFLAGS} ${OBJ_FILES} ${LIBFLAGS} $(LFTX) $(FTLST) -o $@
 
 ${OBJ_FILES}: ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c ${INC_FILES} | ${OBJ_SUBDIRS}
-	${CC} ${CFLAGS} -I${INC_DIR} -I$(LIBS_INC) -c $< -o $@
+	${CC} ${CFLAGS} -I${INC_DIR} $(LIBS_INC) -c $< -o $@
 
 $(LFTX): $(LFTX_DIR)
 	make -C $(LFTX_DIR)

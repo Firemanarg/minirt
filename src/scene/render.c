@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 12:33:27 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/12 15:07:24 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/27 03:11:15 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ t_err	render_image(t_scene *world, t_mlx_data *mlx_data)
 		args.x = 0;
 		while (args.x < world->camera.hsize)
 		{
-			print_progress(
-				args.y * world->camera.hsize + (args.x + 1), 0, "Rendering");
 			ray_for_pixel(&world->camera, args.x, args.y, &args.ray);
 			color_at(world, &args.ray, args.xs, &args.color);
 			ft_pixel_put(mlx_data, args.x, args.y, &args.color);
 			++(args.x);
 		}
+		print_progress(
+				args.y * world->camera.hsize + (args.x + 1), 0, "Rendering");
 		++(args.y);
 	}
 	free_array(args.xs);
