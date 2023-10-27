@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:44:47 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/15 18:57:17 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/27 04:04:37 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ typedef struct s_camera
 typedef t_geom_obj			t_sphere;
 
 typedef t_geom_obj			t_cylinder;
+
+typedef t_geom_obj			t_cone;
 
 typedef t_geom_obj			t_plane;
 

@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:41:48 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/15 21:37:21 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/27 04:01:56 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,5 @@ static void	apply_transforms(t_sphere *sphere)
 	sphere->material.diffuse = DIFFUSE;
 	sphere->material.specular = SPECULAR;
 	sphere->material.ambient = AMBIENT;
+	sphere->material.shininess = SHININESS;
 }

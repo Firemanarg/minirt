@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 15:04:39 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/26 22:48:39 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/10/27 04:05:38 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static void	*add_obj_to_scene(void *content, size_t i, int f, int l)
 		parser->light_index += 1;
 	}
 	else if (obj->type == SPHERE || obj->type == CYLINDER
-		|| obj->type == PLANE)
+		|| obj->type == PLANE || obj->type == CONE)
 	{
 		scene->geometries[parser->geometry_index] = *((t_geom_obj *) obj->obj);
 		parser->geometry_index += 1;

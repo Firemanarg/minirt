@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_cylinder.c                                   :+:      :+:    :+:   */
+/*   parse_cone.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -16,15 +16,15 @@
 static t_err	lex_checker(t_parser_obj *obj);
 static void		cast_fields(t_parser_obj *obj);
 static t_err	validate_fields(t_parser_obj *obj);
-static void		apply_transforms(t_cylinder *cylinder);
+static void		apply_transforms(t_cone *cone);
 
-int	parse_cylinder(t_parser_obj *obj)
+int	parse_cone(t_parser_obj *obj)
 {
-	t_cylinder	*cylinder;
+	t_cone	*cone;
 
-	cylinder = ft_calloc(1, sizeof(t_cylinder));
-	obj->obj = cylinder;
-	cylinder->type = CYLINDER;
+	cone = ft_calloc(1, sizeof(t_cone));
+	obj->obj = cone;
+	cone->type = CONE;
 	obj->parser->geometry_count += 1;
 	obj->status = OK;
 	if (lex_checker(obj) != OK)
@@ -32,8 +32,8 @@ int	parse_cylinder(t_parser_obj *obj)
 	cast_fields(obj);
 	if (validate_fields(obj) != OK)
 		return (1);
-	apply_transforms(cylinder);
-	print_msg("Parsing", "Parsed cylinder", TXT_COLOR_CYAN);
+	apply_transforms(cone);
+	print_msg("Parsing", "Parsed cone", TXT_COLOR_CYAN);
 	return (0);
 }
 
@@ -53,60 +53,60 @@ static t_err	lex_checker(t_parser_obj *obj)
 
 static void	cast_fields(t_parser_obj *obj)
 {
-	t_cylinder	*cylinder;
-	t_err		err;
+	t_cone	*cone;
+	t_err	err;
 
-	cylinder = (t_cylinder *) obj->obj;
-	err = str_to_vec3(obj->fields[1], &cylinder->pos);
-	err |= str_to_vec3(obj->fields[2], &cylinder->dir);
-	cylinder->diameter = ft_atod(obj->fields[3]);
-	cylinder->height = ft_atod(obj->fields[4]);
-	err |= str_to_vec3(obj->fields[5], &cylinder->material.color);
+	cone = (t_cone *) obj->obj;
+	err = str_to_vec3(obj->fields[1], &cone->pos);
+	err |= str_to_vec3(obj->fields[2], &cone->dir);
+	cone->diameter = ft_atod(obj->fields[3]);
+	cone->height = ft_atod(obj->fields[4]);
+	err |= str_to_vec3(obj->fields[5], &cone->material.color);
 	if (err != OK)
 		obj->status = INVALID_VEC3;
 }
 
 static t_err	validate_fields(t_parser_obj *obj)
 {
-	t_cylinder	*cylinder;
+	t_cone	*cone;
 
-	cylinder = (t_cylinder *) obj->obj;
-	if (!is_valid_direction(&cylinder->dir))
+	cone = (t_cone *) obj->obj;
+	if (!is_valid_direction(&cone->dir))
 		obj->status = INVALID_DIRECTION;
-	else if (cylinder->diameter <= 0)
+	else if (cone->diameter <= 0)
 		obj->status = INVALID_DIAMETER;
-	else if (cylinder->height <= 0)
+	else if (cone->height <= 0)
 		obj->status = INVALID_HEIGHT;
-	else if (!is_valid_color(&cylinder->material.color))
+	else if (!is_valid_color(&cone->material.color))
 		obj->status = INVALID_COLOR;
 	return (obj->status);
 }
 
-static void	apply_transforms(t_cylinder *cylinder)
+static void	apply_transforms(t_cone *cone)
 {
 	t_matrix_op	ops[4];
 	t_vec3		scale_v;
 	double		radius;
 
-	radius = cylinder->diameter / 2.0;
+	radius = cone->diameter / 2.0;
 	set_vec3(radius, 1.0, radius, &scale_v);
-	cylinder->transform = matrix_new_identity(4);
+	cone->transform = matrix_new_identity(4);
 	ops[0] = (t_matrix_op){.op = SCALE, .params = scale_v};
-	ops[1] = (t_matrix_op){.op = ROTATE_VEC, .params = cylinder->dir};
-	ops[2] = (t_matrix_op){.op = TRANSLATE, .params = cylinder->pos};
+	ops[1] = (t_matrix_op){.op = ROTATE_VEC, .params = cone->dir};
+	ops[2] = (t_matrix_op){.op = TRANSLATE, .params = cone->pos};
 	ops[3] = (t_matrix_op){.op = NOP};
-	cylinder->transform = matrix_apply(cylinder->transform, ops);
-	cylinder->inv_transform = matrix_inverse(cylinder->transform);
-	cylinder->t_inv_transform = matrix_transpose(cylinder->inv_transform);
-	cylinder->minimum = -cylinder->height / 2.0;
-	cylinder->maximum = cylinder->height / 2.0;
-	cylinder->is_closed = TRUE;
-	cylinder->intersects = (t_isect_func) cylinder_intersect;
-	cylinder->normal_at = cylinder_normal_at;
-	cylinder->map_uv = NULL;
-	divide(&cylinder->material.color, 255.0, &cylinder->material.color);
-	cylinder->material.diffuse = DIFFUSE;
-	cylinder->material.specular = SPECULAR;
-	cylinder->material.ambient = AMBIENT;
-	cylinder->material.shininess = SHININESS;
+	cone->transform = matrix_apply(cone->transform, ops);
+	cone->inv_transform = matrix_inverse(cone->transform);
+	cone->t_inv_transform = matrix_transpose(cone->inv_transform);
+	cone->minimum = -cone->height / 2.0;
+	cone->maximum = cone->height / 2.0;
+	cone->is_closed = TRUE;
+	cone->intersects = (t_isect_func) cone_intersect;
+	cone->normal_at = cone_normal_at;
+	cone->map_uv = NULL;
+	divide(&cone->material.color, 255.0, &cone->material.color);
+	cone->material.diffuse = DIFFUSE;
+	cone->material.specular = SPECULAR;
+	cone->material.ambient = AMBIENT;
+	cone->material.shininess = SHININESS;
 }
