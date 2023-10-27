@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:44:47 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/27 04:04:37 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/27 10:53:37 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 # include "error.h"
 # include "varray.h"
 
-# define AMBIENT 0.2
-# define DIFFUSE 0.9
-# define SPECULAR 0.0
-# define SHININESS 200
+# define AMBIENT 0.1
+# define DIFFUSE 0.8
+# define SPECULAR 0.3
+# define SHININESS 100
 
 typedef t_vec3				t_color;
 typedef struct s_geom_obj	t_geom_obj;
