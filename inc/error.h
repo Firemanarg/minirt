@@ -13,11 +13,54 @@
 #ifndef ERROR_H
 # define ERROR_H
 
+# include <stdio.h>
+# include "libft_x.h"
+
+# define TXT_COLOR_RED "\033[0;31m"
+# define TXT_COLOR_GREEN "\033[0;32m"
+# define TXT_COLOR_YELLOW "\033[0;33m"
+# define TXT_COLOR_BLUE "\033[0;34m"
+# define TXT_COLOR_MAGENTA "\033[0;35m"
+# define TXT_COLOR_CYAN "\033[0;36m"
+# define TXT_COLOR_RESET "\033[0m"
+
+# define TERM_HIDE_CURSOR "\033[?25l"
+# define TERM_SHOW_CURSOR "\033[?25h"
+
+# define PROGRESS_BAR_SIZE 12
+
 typedef enum e_err
 {
-	OK,
+	OK = 0,
 	ERR_ALLOC,
-	INVALID_VEC3
+	INVALID_VEC3,
+	INVALID_ARG,
+	INVALID_TYPE,
+	INVALID_ARG_COUNT,
+	INVALID_RATIO,
+	INVALID_COLOR,
+	ERR_PARSING_FILE,
+	ERR_WRONG_USAGE,
+	TOO_MANY_AMBIENT_LIGHTS,
+	TOO_MANY_CAMERAS,
+	TOO_MANY_LIGHTS,
+	MISSING_AMBIENT_LIGHT,
+	MISSING_CAMERA,
+	MISSING_LIGHT,
+	INVALID_DIAMETER,
+	INVALID_FOV,
+	INVALID_HEIGHT,
+	INVALID_DIRECTION,
+	ERR_RENDERING
 }	t_err;
+
+// error.c
+void	print_error(char *context, t_err err, int line);
+void	print_msg(char *context, char *msg, char *color);
+int		baracapy(void);
+void	minirt_title(void);
+
+// progress_bar.c
+void	print_progress(int progress, int total, char *context);
 
 #endif

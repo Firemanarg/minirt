@@ -6,16 +6,16 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:34:32 by marvin            #+#    #+#             */
-/*   Updated: 2023/09/18 02:00:34 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:26:25 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <matrix.h>
+#include "matrix.h"
 
 double	matrix_determinant(t_matrix *m)
 {
-	int			col;
-	double		det;
+	int		col;
+	double	det;
 
 	det = 0;
 	if (m->rows == 2 && m->cols == 2)

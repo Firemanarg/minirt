@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:17:40 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/16 21:39:09 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 20:57:47 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,13 @@
 # include "error.h"
 # include "libft_x.h"
 
-# define EPSILON 0.00001
+# define EPSILON 1e-8
+
+typedef enum e_bool
+{
+	FALSE,
+	TRUE
+}	t_bool;
 
 typedef union u_vec3
 {
@@ -53,12 +59,14 @@ void	hadamard(t_vec3 *a, t_vec3 *b, t_vec3 *c);
 void	negate(t_vec3 *a, t_vec3 *minus_a);
 double	length(t_vec3 *t);
 void	normalize(t_vec3 *t, t_vec3 *norm_t);
+t_bool	equal(t_vec3 *a, t_vec3 *b);
 
 // vec3_mul_div.c
 void	multiply(t_vec3 *a, double s, t_vec3 *b);
 void	divide(t_vec3 *a, double s, t_vec3 *b);
 
 // double_ops.c
-double	dbl_abs(double a, double b);
+double	dbl_abs(double a);
+double	dbl_equal(double a, double b);
 
 #endif

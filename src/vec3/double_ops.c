@@ -6,15 +6,20 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 01:53:28 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/03 05:31:44 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:54:36 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include "vec3.h"
 
-double	dbl_abs(double a, double b)
+double	dbl_abs(double a)
 {
-	if (a > b)
-		return (a - b);
-	return (b - a);
+	if (a >= 0.0)
+		return (a);
+	return (-a);
+}
+
+double	dbl_equal(double a, double b)
+{
+	return (dbl_abs(a - b) < EPSILON);
 }

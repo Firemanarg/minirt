@@ -31,13 +31,14 @@ LFT_SRCFLS	= ft_isalpha.c	ft_isdigit.c	ft_isalnum.c	ft_isascii.c	\
 			ft_substr.c		ft_strjoin.c	ft_strtrim.c	ft_itoa.c		\
 			ft_strmapi.c	ft_putchar_fd.c	ft_putstr_fd.c	ft_putendl_fd.c	\
 			ft_putnbr_fd.c	ft_striteri.c	ft_split.c		ft_strndup.c	\
-			ft_strcmp.c			ft_is_whitespace.c		ft_clear_strarr.c	\
+			ft_free_ret.c													\
+			ft_strcmp.c			ft_is_whitespace.c		ft_clear_arr.c		\
 			ft_lstnew.c			ft_lstadd_front.c		ft_lstsize.c		\
 			ft_lstlast.c		ft_lstadd_back.c		ft_lstdelone.c		\
 			ft_lstclear.c		ft_lstiter.c			ft_lstmap.c			\
 			get_next_line.c		ft_lstget.c									\
 			ft_str_isalpha.c	ft_str_isdigit.c	ft_str_isalnum.c		\
-			ft_str_isascii.c	ft_str_isprint.c
+			ft_str_isascii.c	ft_str_isprint.c	ft_str_isdouble.c
 FTP_SRCFLS	= ft_printf.c		utils/put_width_chr.c						\
 			utils/b_appchr.c	utils/e_appchr.c	utils/ft_ltoa.c			\
 			utils/nbr2hex.c		utils/print_chr.c	utils/print_hex.c		\

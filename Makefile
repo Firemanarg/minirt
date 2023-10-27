@@ -1,17 +1,5 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/09/26 17:29:19 by lsilva-q          #+#    #+#              #
-#    Updated: 2023/09/26 17:29:19 by lsilva-q         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 CC				:= cc
-CFLAGS			:= -Wall -Wextra -Werror -g -fms-extensions
+CFLAGS			:= -Wall -Wextra -Werror -g
 RM				:= rm -rf
 
 # Libraries
@@ -19,6 +7,10 @@ MLX_DIR			:= lib/minilibx-linux
 LIBFLAGS		:= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
 LFTX_DIR		:= ./libft_x
 LFTX			:= $(LFTX_DIR)/libft_x.a
+FTLST_DIR		:= ./ft_list
+FTLST			:= $(FTLST_DIR)/ft_list.a
+
+LIBS_INC		:= -I$(MLX_DIR) -I$(LFTX_DIR) -I$(FTLST_DIR)
 
 # Mandatory
 MANDATORY_DIR	:= .
@@ -47,32 +39,58 @@ SRC_FILES		+= ${addprefix ${SRC_DIR}/graphics/,\
 				mlx_utils.c\
 				window.c}
 
-# Matrix files
-SRC_FILES		+= ${addprefix ${SRC_DIR}/matrix/,\
-				matrix_apply.c\
-				matrix_determinant.c\
-				matrix_inverse.c\
-				matrix_multiply.c\
-				matrix_print.c\
-				matrix_scaling.c\
-				matrix_translation.c\
-				matrix_cofactor.c\
-				matrix_free.c\
-				matrix_minor.c\
-				matrix_new.c\
-				matrix_rotation.c\
-				matrix_submatrix.c\
-				matrix_transpose.c}
+# Matrix operation files
+SRC_FILES += ${addprefix ${SRC_DIR}/matrix/, \
+				matrix_apply.c \
+				matrix_determinant.c \
+				matrix_inverse.c \
+				matrix_multiply.c \
+				matrix_print.c \
+				matrix_rotate_translate.c \
+				matrix_scaling.c \
+				matrix_translation.c \
+				matrix_cofactor.c \
+				matrix_free.c \
+				matrix_minor.c \
+				matrix_new.c \
+				matrix_rotation.c \
+				matrix_submatrix.c \
+				matrix_transpose.c \
+				matrix_vec3_multiply.c}
 
-# Objects files
-SRC_FILES		+= ${addprefix ${SRC_DIR}/objects/,\
-				color.c\
+# Object definition files
+SRC_FILES += ${addprefix ${SRC_DIR}/objects/, \
+				caps.c \
+				scene.c \
+				obj_utils.c \
+				clean_obj.c \
+				color.c \
+				cone.c \
+				cylinder.c \
+				light.c \
+				object.c \
+				plane.c \
 				sphere.c}
 
 # Projection files
 SRC_FILES		+= ${addprefix ${SRC_DIR}/projection/,\
 				hit.c\
 				ray.c}
+
+# Scene composition files
+SRC_FILES		+= ${addprefix ${SRC_DIR}/scene/,\
+				camera.c \
+				render.c \
+				scene.c \
+				view.c}
+
+# Shading, color and lighting operation files
+SRC_FILES		+= ${addprefix ${SRC_DIR}/shading/, \
+				lighting.c \
+				material.c \
+				pattern.c \
+				reflect.c \
+				shadow.c}
 
 # Varray files
 SRC_FILES		+= ${addprefix ${SRC_DIR}/varray/,\
@@ -89,6 +107,23 @@ SRC_FILES		+= ${addprefix ${SRC_DIR}/vec3/,\
 				vec3_mul_div.c\
 				vec3_products.c}
 
+# Parser files
+SRC_FILES		+= ${addprefix ${SRC_DIR}/parser/,\
+				parse_ambient_light.c\
+				parse_camera.c\
+				parse_cylinder.c\
+				parse_light.c\
+				parse_plane.c\
+				parse_sphere.c\
+				parser_1.c\
+				parser_2.c\
+				validations.c\
+				parser_utils.c}
+
+SRC_FILES		+= ${addprefix ${SRC_DIR}/error/,\
+				error.c \
+				progress_bar.c}
+
 BUILD_DIR		:= ${MANDATORY_DIR}/build
 
 # Object files
@@ -103,22 +138,27 @@ all: ${NAME}
 ${OBJ_SUBDIRS}:
 	mkdir -p $@
 
-${NAME}: $(LFTX) ${OBJ_FILES}
-	${CC} ${CFLAGS} ${OBJ_FILES} ${LIBFLAGS} $(LFTX) -o $@
+${NAME}: $(LFTX) $(FTLST) ${OBJ_FILES}
+	${CC} ${CFLAGS} ${OBJ_FILES} ${LIBFLAGS} $(LFTX) $(FTLST) -o $@
 
 ${OBJ_FILES}: ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c ${INC_FILES} | ${OBJ_SUBDIRS}
-	${CC} ${CFLAGS} -I${INC_DIR} -I${MLX_DIR} -I$(LFTX_DIR) -c $< -o $@
+	${CC} ${CFLAGS} -I${INC_DIR} -I$(LIBS_INC) -c $< -o $@
 
 $(LFTX): $(LFTX_DIR)
 	make -C $(LFTX_DIR)
 
+$(FTLST): $(FTLST_DIR)
+	make -C $(FTLST_DIR)
+
 clean:
 	${RM} ${OBJ_DIR}
 	make -C $(LFTX_DIR) clean
+	make -C $(FTLST_DIR) clean
 
 fclean: clean
 	${RM} ${NAME}
 	make -C $(LFTX_DIR) fclean
+	make -C $(FTLST_DIR) fclean
 
 re: fclean all
 

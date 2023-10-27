@@ -6,11 +6,11 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 05:48:50 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/16 21:36:48 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:25:21 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <vec3.h>
+#include "vec3.h"
 
 void	multiply(t_vec3 *a, double s, t_vec3 *b)
 {

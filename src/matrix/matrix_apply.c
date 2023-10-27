@@ -6,13 +6,11 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 02:33:46 by gmachado          #+#    #+#             */
-/*   Updated: 2023/09/18 15:02:32 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/15 19:23:10 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
-#include <vec3.h>
-#include <matrix.h>
+#include "matrix.h"
 
 static t_matrix	*get_operation_matrix(t_matrix *m, t_matrix_op *operation)
 {
@@ -26,6 +24,8 @@ static t_matrix	*get_operation_matrix(t_matrix *m, t_matrix_op *operation)
 		return (matrix_rotate_y(operation->param));
 	if (operation->op == ROTATE_Z)
 		return (matrix_rotate_z(operation->param));
+	if (operation->op == ROTATE_VEC)
+		return (matrix_rotate_to_vec(&operation->params));
 	if (operation->op == TRANSLATE)
 		return (matrix_translation(&operation->params));
 	if (operation->op == SCALE)
