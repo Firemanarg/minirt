@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   parser_1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:42 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/15 06:52:17 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/27 13:40:37 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,26 +140,3 @@ static void	check_objs_count(t_scene_parser *parser)
 		parser->err_flag = 1;
 	}
 }
-
-// static void	*print_fields(void *p_obj, size_t, int, int)
-// {
-// 	t_parser_obj	*obj;
-// 	char			**iter;
-
-// 	obj = (t_parser_obj *) p_obj;
-// 	if (obj == NULL)
-// 		return (NULL);
-// 	ft_printf("\ntype: %d\n", obj->type);
-// 	ft_printf("fields_count: %d\n", obj->fields_count);
-// 	ft_printf("fields: (");
-// 	iter = obj->fields;
-// 	while (*iter != NULL)
-// 	{
-// 		ft_printf("\"%s\"", *iter);
-// 		iter++;
-// 		if (*iter != NULL)
-// 			ft_printf(", ");
-// 	}
-// 	ft_printf(")\n");
-// 	return (p_obj);
-// }

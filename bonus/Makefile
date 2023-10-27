@@ -6,11 +6,13 @@ RM				:= rm -rf
 MANDATORY_DIR	:= ..
 
 # Libraries
-MLX_DIR			:= ${MANDATORY_DIR}/lib/minilibx-linux
-LIBFLAGS		:= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
-LFTX_DIR		:= ${MANDATORY_DIR}/libft_x
+LIB_DIR			:= ${MANDATORY_DIR}/lib
+MLX_DIR			:= ${LIB_DIR}/minilibx-linux
+MLX				:= ${MLX_DIR}/libmlx.a
+LIBFLAGS		:= -L${MLX_DIR} -lmlx -lXext -lX11 -lm -lz
+LFTX_DIR		:= ${LIB_DIR}/libft_x
 LFTX			:= ${LFTX_DIR}/libft_x.a
-FTLST_DIR		:= ${MANDATORY_DIR}/ft_list
+FTLST_DIR		:= ${LIB_DIR}/ft_list
 FTLST			:= ${FTLST_DIR}/ft_list.a
 
 LIBS_INC		:= -I${MLX_DIR} -I${LFTX_DIR} -I${FTLST_DIR}
@@ -48,34 +50,33 @@ SRC_FILES		+= ${addprefix ${SRC_DIR}/graphics/, \
 # Matrix operation files
 SRC_FILES		+= ${addprefix ${SRC_DIR}/matrix/, \
 				matrix_apply_bonus.c \
-				matrix_determinant_bonus.c \
-				matrix_inverse_bonus.c \
-				matrix_multiply_bonus.c \
-				matrix_print_bonus.c \
-				matrix_rotate_translate_bonus.c \
-				matrix_scaling_bonus.c \
-				matrix_translation_bonus.c \
 				matrix_cofactor_bonus.c \
+				matrix_determinant_bonus.c \
 				matrix_free_bonus.c \
+				matrix_inverse_bonus.c \
 				matrix_minor_bonus.c \
+				matrix_multiply_bonus.c \
 				matrix_new_bonus.c \
+				matrix_rotate_translate_bonus.c \
 				matrix_rotation_bonus.c \
+				matrix_scaling_bonus.c \
 				matrix_submatrix_bonus.c \
+				matrix_translation_bonus.c \
 				matrix_transpose_bonus.c \
 				matrix_vec3_multiply_bonus.c}
 
 # Object definition files
 SRC_FILES		+= ${addprefix ${SRC_DIR}/objects/, \
 				caps_bonus.c \
-				scene_bonus.c \
-				obj_utils_bonus.c \
 				clean_obj_bonus.c \
 				color_bonus.c \
 				cone_bonus.c \
 				cylinder_bonus.c \
 				light_bonus.c \
+				obj_utils_bonus.c \
 				object_bonus.c \
 				plane_bonus.c \
+				scene_bonus.c \
 				sphere_bonus.c}
 
 # Projection files
@@ -106,8 +107,8 @@ SRC_FILES		+= ${addprefix ${SRC_DIR}/varray/,\
 # Vec3 files
 SRC_FILES		+= ${addprefix ${SRC_DIR}/vec3/,\
 				double_ops_bonus.c \
-				vec3_bonus.c \
 				vec3_add_sub_bonus.c \
+				vec3_bonus.c \
 				vec3_misc_ops_bonus.c \
 				vec3_mul_div_bonus.c \
 				vec3_products_bonus.c}
@@ -123,8 +124,8 @@ SRC_FILES		+= ${addprefix ${SRC_DIR}/parser/,\
 				parse_sphere_bonus.c \
 				parser_1_bonus.c \
 				parser_2_bonus.c \
-				validations_bonus.c \
-				parser_utils_bonus.c}
+				parser_utils_bonus.c \
+				validations_bonus.c}
 
 SRC_FILES		+= ${addprefix ${SRC_DIR}/error/,\
 				error_bonus.c \
@@ -142,7 +143,7 @@ all: ${NAME}
 ${OBJ_SUBDIRS}:
 	mkdir -p $@
 
-${NAME}: ${LFTX} ${FTLST} ${OBJ_FILES}
+${NAME}: ${LFTX} ${FTLST} ${MLX} ${OBJ_FILES}
 	${CC} ${CFLAGS} ${OBJ_FILES} ${LIBFLAGS} ${LFTX} ${FTLST} -o $@
 
 ${OBJ_FILES}: ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c ${INC_FILES} | ${OBJ_SUBDIRS}
@@ -154,10 +155,14 @@ ${LFTX}: ${LFTX_DIR}
 ${FTLST}: ${FTLST_DIR}
 	make -C  ${FTLST_DIR}
 
+${MLX}: ${MLX_DIR}
+	make -C ${MLX_DIR}
+
 clean:
 	${RM} ${OBJ_DIR}
 	make -C ${LFTX_DIR} clean
 	make -C  ${FTLST_DIR} clean
+	make -C ${MLX_DIR} clean
 
 fclean: clean
 	${RM} ${NAME}

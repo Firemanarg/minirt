@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:47:26 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/27 11:33:51 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/27 14:19:42 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ typedef enum e_err
 }	t_err;
 
 // error.c
-void	print_error(char *context, t_err err, int line);
-void	print_msg(char *context, char *msg, char *color);
 int		baracapy(void);
 void	minirt_title(void);
+void	print_error(char *context, t_err err, int line);
+void	print_msg(char *context, char *msg, char *color);
 
 // progress_bar.c
 void	print_progress(int progress, int total, char *context);

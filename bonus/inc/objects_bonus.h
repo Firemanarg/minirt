@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:44:47 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/27 13:21:05 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/27 14:23:53 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,11 +152,9 @@ void	set_object_limits(t_geom_obj *cyl, double minimum,
 			double maximum, t_bool closed);
 
 // clean_obj.c
-void	clean_geometry(t_geom_obj *obj);
 void	clean_camera(t_camera *obj);
-
-// obj_utils.c
-char	*get_obj_name(t_obj_type type);
+void	clean_geometry(t_geom_obj *obj);
+void	clean_obj(t_base_obj *obj);
 
 // color.c
 t_color	color(double red, double green, double blue);
@@ -176,35 +174,35 @@ t_err	set_cylinder(t_geom_obj *cyl, t_matrix *transform,
 void	set_point_light(t_vec3 *pos, t_color *color, t_point_light *light);
 
 // material.c
-void	set_material_shininess(t_material *material, double shininess);
-void	set_material_color(t_material *material, double r, double g, double b);
 void	set_material_coefficients(t_material *material, double ambient,
 			double diffuse, double specular);
+void	set_material_color(t_material *material, double r, double g, double b);
+void	set_material_shininess(t_material *material, double shininess);
+
+// obj_utils.c
+char	*get_obj_name(t_obj_type type);
 
 //object.c
+void	free_obj(t_geom_obj *obj);
+void	obj_normal_at(t_geom_obj *obj, t_vec3 *world_point,
+			t_vec3 *world_normal);
 t_err	set_object(t_geom_obj *object, t_matrix *transform,
 			t_material *material);
 t_err	set_object_transform(t_geom_obj *object, t_matrix *transform);
-void	obj_normal_at(t_geom_obj *obj, t_vec3 *world_point,
-			t_vec3 *world_normal);
-void	free_obj(t_geom_obj *obj);
 
 // plane.c
 void	plane_normal_at(t_geom_obj *p, t_vec3 *object_point,
 			t_vec3 *object_normal);
 t_err	set_plane(t_geom_obj *plane, t_matrix *transform, t_material *material);
 
+// scene.c
+void	*free_scene(t_scene *scene);
+t_scene	*new_scene(int light_count, int geometries_count);
+
 // sphere.c
-void	sphere_normal_at(t_geom_obj *sph, t_vec3 *object_point,
-			t_vec3 *object_normal);
 t_err	set_sphere(t_geom_obj *sph, t_matrix *transform,
 			t_material *material);
-
-// scene.c
-t_scene	*new_scene(int light_count, int geometries_count);
-void	*free_scene(t_scene *scene);
-
-// clean_obj.c
-void	clean_obj(t_base_obj *obj);
+void	sphere_normal_at(t_geom_obj *sph, t_vec3 *object_point,
+			t_vec3 *object_normal);
 
 #endif

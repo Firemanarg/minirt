@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 08:53:15 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/27 11:37:15 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/27 14:25:24 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,45 +103,45 @@ typedef struct s_line_parser
 	char	*endl_ptr;
 }	t_line_parser;
 
-// parser_1.c
-t_scene			*parse_file(char *file_name);
-
-// parser_2.c
-void			assign_parser_to_objs(t_scene_parser *parser);
-int				print_parser_errors(t_scene_parser *parser);
-void			populate_scene(t_scene_parser *parser);
-
-// parser_utils.c
-t_obj_type		get_type_by_str(char *str);
-void			free_parser_obj(void *obj);
-void			clean_parser_obj(void *obj);
-
-// validations.c
-int				is_valid_color(t_vec3 *color);
-int				is_valid_ratio(double ratio);
-int				is_valid_fov(double fov);
-int				is_valid_direction(t_vec3 *dir);
-int				is_str_vec3(char *str);
-
 // parse_ambient_light.c
 int				parse_ambient_light(t_parser_obj *obj);
 
 // parse_camera.c
 int				parse_camera(t_parser_obj *obj);
 
-// parse_light.c
-int				parse_light(t_parser_obj *obj);
-
-// parse_sphere.c
-int				parse_sphere(t_parser_obj *obj);
+// parse_cone.c
+int				parse_cone(t_parser_obj *obj);
 
 // parse_cylinder.c
 int				parse_cylinder(t_parser_obj *obj);
 
-// parse_cone.c
-int				parse_cone(t_parser_obj *obj);
+// parse_light.c
+int				parse_light(t_parser_obj *obj);
 
 // parse_plane.c
 int				parse_plane(t_parser_obj *obj);
+
+// parse_sphere.c
+int				parse_sphere(t_parser_obj *obj);
+
+// parser_1.c
+t_scene			*parse_file(char *file_name);
+
+// parser_2.c
+void			assign_parser_to_objs(t_scene_parser *parser);
+void			populate_scene(t_scene_parser *parser);
+int				print_parser_errors(t_scene_parser *parser);
+
+// parser_utils.c
+void			clean_parser_obj(void *obj);
+void			free_parser_obj(void *obj);
+t_obj_type		get_type_by_str(char *str);
+
+// validations.c
+int				is_str_vec3(char *str);
+int				is_valid_color(t_vec3 *color);
+int				is_valid_direction(t_vec3 *dir);
+int				is_valid_fov(double fov);
+int				is_valid_ratio(double ratio);
 
 #endif
