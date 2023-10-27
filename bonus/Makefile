@@ -94,7 +94,6 @@ SRC_FILES		+= ${addprefix ${SRC_DIR}/scene/,\
 SRC_FILES		+= ${addprefix ${SRC_DIR}/shading/, \
 				lighting_bonus.c \
 				material_bonus.c \
-				pattern_bonus.c \
 				reflect_bonus.c \
 				shadow_bonus.c}
 

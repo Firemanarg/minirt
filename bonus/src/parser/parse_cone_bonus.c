@@ -103,7 +103,6 @@ static void	apply_transforms(t_cone *cone)
 	cone->is_closed = TRUE;
 	cone->intersects = (t_isect_func) cone_intersect;
 	cone->normal_at = cone_normal_at;
-	cone->map_uv = NULL;
 	divide(&cone->material.color, 255.0, &cone->material.color);
 	cone->material.diffuse = DIFFUSE;
 	cone->material.specular = SPECULAR;

@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 02:55:34 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/27 11:48:07 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/27 13:22:52 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_err	shade_hit(t_scene *w, t_precomp *comps, t_color *color, t_varray *xs)
 
 	obj = comps->obj;
 	m = &obj->material;
-	pattern_at(obj, &comps->point, &partial_color);
+	partial_color = comps->obj->material.color;
 	hadamard(&partial_color, &w->ambient_light.color,
 		color);
 	multiply(color, comps->obj->material.ambient, color);
@@ -71,7 +71,7 @@ t_err	shade_hit(t_scene *w, t_precomp *comps, t_color *color, t_varray *xs)
 		err = is_shadowed(w, cur_light, comps, xs);
 		if (err != OK)
 			return (err);
-		pattern_at(obj, &comps->point, &partial_color);
+		partial_color = comps->obj->material.color;
 		lighting(comps, m, cur_light++, &partial_color);
 		add(color, &partial_color, color);
 	}

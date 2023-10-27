@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:32:58 by gmachado          #+#    #+#             */
-/*   Updated: 2023/10/27 11:37:25 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/27 13:19:15 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,5 @@ void	prepare_computations(t_isect *i, t_ray *r, t_precomp *comps);
 void	set_camera(int hsize, int vsize, double fov, t_camera *camera);
 t_err	set_camera_transform(t_matrix *transform, t_camera *camera);
 void	free_camera(t_camera *camera);
-
-// pattern.c
-void	uv_checkers_at(t_checkers *checkers, double u, double v, t_color *c);
-void	pattern_at(t_geom_obj *obj, t_vec3 *point, t_color *c);
 
 #endif

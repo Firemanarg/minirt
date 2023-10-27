@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:41:48 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/27 11:47:27 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/27 13:21:35 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ static void	apply_transforms(t_sphere *sphere)
 	sphere->material.color.b = sphere->material.color.b / 255.0;
 	sphere->intersects = (t_isect_func)sphere_intersect;
 	sphere->normal_at = sphere_normal_at;
-	sphere->map_uv = NULL;
 	sphere->material.diffuse = DIFFUSE;
 	sphere->material.specular = SPECULAR;
 	sphere->material.ambient = AMBIENT;

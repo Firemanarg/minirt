@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:42:21 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/27 11:47:23 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/27 13:21:37 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ static void	apply_transforms(t_plane *plane)
 	plane->t_inv_transform = matrix_transpose(plane->inv_transform);
 	plane->intersects = (t_isect_func)plane_intersect;
 	plane->normal_at = plane_normal_at;
-	plane->map_uv = NULL;
 	divide(&plane->material.color, 255.0, &plane->material.color);
 	plane->material.diffuse = DIFFUSE;
 	plane->material.specular = SPECULAR;
