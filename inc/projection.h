@@ -73,7 +73,6 @@ t_isect	*hit(t_varray *r);
 
 // scene.c
 t_err	intersect_world(t_scene *w, t_ray *r, t_varray *xs);
-void	free_world(t_scene *w);
 void	prepare_computations(t_isect *i, t_ray *r, t_precomp *comps);
 
 // camera.c

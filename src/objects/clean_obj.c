@@ -13,24 +13,10 @@
 #include "objects.h"
 
 /**
- * @brief Clears the memory allocated for an object. If the object is a
- * geometry, it also clears the memory allocated for its matrixes.
+ * @brief Frees the memory allocated for a geometry object.
  *
- * @param obj The object to be cleared.
+ * @param obj The geometry object to be freed.
 */
-void	clean_obj(t_base_obj *obj)
-{
-	if (obj == NULL)
-		return ;
-	if (obj->c.type == CAMERA || obj->g.type == SPHERE
-		|| obj->g.type == CYLINDER || obj->g.type == PLANE)
-	{
-		matrix_free(((t_geom_obj *) obj)->transform);
-		matrix_free(((t_geom_obj *) obj)->inv_transform);
-		matrix_free(((t_geom_obj *) obj)->t_inv_transform);
-	}
-}
-
 void	clean_geometry(t_geom_obj *obj)
 {
 	if (obj == NULL)
@@ -40,6 +26,11 @@ void	clean_geometry(t_geom_obj *obj)
 	matrix_free(obj->t_inv_transform);
 }
 
+/**
+ * @brief Frees the memory allocated for a camera object.
+ *
+ * @param obj The camera object to be freed.
+*/
 void	clean_camera(t_camera *obj)
 {
 	if (obj == NULL)

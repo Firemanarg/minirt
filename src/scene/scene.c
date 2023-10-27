@@ -33,21 +33,6 @@ t_err	intersect_world(t_scene *w, t_ray *r, t_varray *xs)
 	return (OK);
 }
 
-void	free_world(t_scene *w)
-{
-	t_geom_obj	*tmp;
-
-	tmp = w->geometries;
-	while (tmp->type > NONE)
-	{
-		free_obj(tmp);
-		++tmp;
-	}
-	free(w->geometries);
-	free(w->lights);
-	free_camera(&w->camera);
-}
-
 void	prepare_computations(t_isect *i, t_ray *r, t_precomp *comps)
 {
 	comps->t = i->t;

@@ -14,8 +14,8 @@
 
 double	matrix_determinant(t_matrix *m)
 {
-	int			col;
-	double		det;
+	int		col;
+	double	det;
 
 	det = 0;
 	if (m->rows == 2 && m->cols == 2)

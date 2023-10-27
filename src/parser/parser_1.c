@@ -12,8 +12,6 @@
 
 #include "parser.h"
 
-// ----------------------------- NEW PARSER ------------------------------------
-
 static void	get_file_as_strlist(int fd, t_ftlist *list);
 static void	*get_parser_obj(void *line, size_t index, int f, int l);
 static void	*parse_obj(void *content, size_t i, int f, int l);

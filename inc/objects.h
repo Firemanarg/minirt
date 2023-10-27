@@ -159,9 +159,6 @@ void	clean_camera(t_camera *obj);
 // obj_utils.c
 char	*get_obj_name(t_obj_type type);
 
-// cleanup.c
-void	free_obj(t_geom_obj *obj);
-
 // color.c
 t_color	color(double red, double green, double blue);
 void	set_color(double red, double green, double blue, t_color *c);
@@ -193,6 +190,7 @@ t_err	set_object(t_geom_obj *object, t_matrix *transform,
 t_err	set_object_transform(t_geom_obj *object, t_matrix *transform);
 void	obj_normal_at(t_geom_obj *obj, t_vec3 *world_point,
 			t_vec3 *world_normal);
+void	free_obj(t_geom_obj *obj);
 
 // plane.c
 void	plane_normal_at(t_geom_obj *p, t_vec3 *object_point,
