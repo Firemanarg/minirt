@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "shading.h"
-#include "graphics.h"
 
 void	get_transformed_ray_origin(t_camera *camera, t_ray *ray)
 {
@@ -38,29 +37,29 @@ void	ray_for_pixel(t_camera *camera, int p_x, int p_y, t_ray *ray)
 
 t_err	render_image(t_scene *world, t_mlx_data *mlx_data)
 {
-	int			x;
-	int			y;
-	t_color		color;
-	t_ray		ray;
-	t_varray	*xs;
+	t_render_args	args;
 
-	xs = new_array(INITIAL_ARRAY_SIZE);
-	if (!xs)
+	args = (t_render_args){0};
+	print_msg("Rendering", "Rendering image", TXT_COLOR_MAGENTA);
+	args.xs = new_array(INITIAL_ARRAY_SIZE);
+	if (!args.xs)
 		return (ERR_ALLOC);
-	get_transformed_ray_origin(&world->camera, &ray);
-	y = 0;
-	while (y < world->camera.vsize)
+	get_transformed_ray_origin(&world->camera, &args.ray);
+	print_progress(0, world->camera.vsize * world->camera.hsize, "Rendering");
+	while (args.y < world->camera.vsize)
 	{
-		x = 0;
-		while (x < world->camera.hsize)
+		args.x = 0;
+		while (args.x < world->camera.hsize)
 		{
-			ray_for_pixel(&world->camera, x, y, &ray);
-			color_at(world, &ray, xs, &color);
-			ft_pixel_put(mlx_data, x, y, &color);
-			++x;
+			print_progress(
+				args.y * world->camera.hsize + (args.x + 1), 0, "Rendering");
+			ray_for_pixel(&world->camera, args.x, args.y, &args.ray);
+			color_at(world, &args.ray, args.xs, &args.color);
+			ft_pixel_put(mlx_data, args.x, args.y, &args.color);
+			++(args.x);
 		}
-		++y;
+		++(args.y);
 	}
-	free_array(xs);
+	free_array(args.xs);
 	return (OK);
 }

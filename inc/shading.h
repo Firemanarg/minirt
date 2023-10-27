@@ -16,6 +16,15 @@
 # include "projection.h"
 # include "graphics.h"
 
+typedef struct s_render_args
+{
+	int			x;
+	int			y;
+	t_color		color;
+	t_ray		ray;
+	t_varray	*xs;
+}	t_render_args;
+
 // lighting.c
 void		lighting(t_precomp *p, t_material *m, t_point_light *l,
 				t_color *color);

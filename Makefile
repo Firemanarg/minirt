@@ -109,7 +109,6 @@ SRC_FILES		+= ${addprefix ${SRC_DIR}/vec3/,\
 
 # Parser files
 SRC_FILES		+= ${addprefix ${SRC_DIR}/parser/,\
-				get_scene_parser_args.c\
 				parse_ambient_light.c\
 				parse_camera.c\
 				parse_cylinder.c\
@@ -122,7 +121,8 @@ SRC_FILES		+= ${addprefix ${SRC_DIR}/parser/,\
 				parser_utils.c}
 
 SRC_FILES		+= ${addprefix ${SRC_DIR}/error/,\
-				error.c}
+				error.c \
+				progress_bar.c}
 
 BUILD_DIR		:= ${MANDATORY_DIR}/build
 

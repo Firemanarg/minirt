@@ -6,7 +6,7 @@
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 18:14:39 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/26 19:06:48 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/10/26 22:45:43 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,49 @@ static char	*get_err_msg(t_err err)
 	};
 
 	return (err_msg[err]);
+}
+
+int	baracapy(void)
+{
+	ft_putstr_fd(TXT_COLOR_YELLOW, 1);
+	ft_putstr_fd("\n", 1);
+	ft_putstr_fd("                   ⣤⣄⢘⣒⣀⣀⣀⣀   \n", 1);
+	ft_putstr_fd("                   ⣽⣿⣛⠛⢛⣿⣿⡿⠟⠂ \n", 1);
+	ft_putstr_fd("           ⣀⣀⣀⣀⡀ ⣤⣾⣿⣿⣿⣿⣿⣿⣿⣷⣿⡆ \n", 1);
+	ft_putstr_fd("      ⣀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠁ \n", 1);
+	ft_putstr_fd("   ⢀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇      \n", 1);
+	ft_putstr_fd("  ⣠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇      \n", 1);
+	ft_putstr_fd("  ⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠜       \n", 1);
+	ft_putstr_fd("   ⢿⣿⣿⣿⣿⠿⠿⣿⣿⡿⢿⣿⣿⠈⣿⣿⣿⡏⣠⡴       \n", 1);
+	ft_putstr_fd("  ⣠⣿⣿⣿⡿⢁⣴⣶⣄  ⠉⠉⠉ ⢻⣿⡿⢰⣿⡇       \n", 1);
+	ft_putstr_fd("  ⢿⣿⠟⠋ ⠈⠛⣿⣿      ⠸⣿⡇⢸⣿⡇       \n", 1);
+	ft_putstr_fd("  ⠘⣿⣄    ⠘⣿⣄      ⠘⣿⣄⠘⣿⣄      \n", 1);
+	ft_putstr_fd(TXT_COLOR_BLUE, 1);
+	ft_putstr_fd("  ____             ____             _ \n", 1);
+	ft_putstr_fd(" |  _ \\           |  _ \\           | |\n", 1);
+	ft_putstr_fd(" | |_) |_   _  ___| |_) |_   _  ___| |\n", 1);
+	ft_putstr_fd(" |  _ <| | | |/ _ \\  _ <| | | |/ _ \\ |\n", 1);
+	ft_putstr_fd(" | |_) | |_| |  __/ |_) | |_| |  __/_|\n", 1);
+	ft_putstr_fd(" |____/ \\__, |\\___|____/ \\__, |\\___(_)\n", 1);
+	ft_putstr_fd("         __/ |            __/ |       \n", 1);
+	ft_putstr_fd("        |___/            |___/        \n", 1);
+	ft_putstr_fd("\n", 1);
+	ft_putstr_fd(TXT_COLOR_RESET, 1);
+	return (0);
+}
+
+void	minirt_title(void)
+{
+	ft_putstr_fd(TXT_COLOR_BLUE, 1);
+	ft_putchar_fd('\n', 1);
+	ft_putstr_fd("            _       _ _____ _______ \n", 1);
+	ft_putstr_fd("           (_)     (_)  __ \\__   __|\n", 1);
+	ft_putstr_fd("  _ __ ___  _ _ __  _| |__) | | |\n", 1);
+	ft_putstr_fd(" | '_ ` _ \\| | '_ \\| |  _  /  | |\n", 1);
+	ft_putstr_fd(" | | | | | | | | | | | | \\ \\  | |\n", 1);
+	ft_putstr_fd(" |_| |_| |_|_|_| |_|_|_|  \\_\\ |_|\n", 1);
+	ft_putstr_fd(TXT_COLOR_CYAN, 1);
+	ft_putstr_fd("             by gmachado & lsilva-q\n", 1);
+	ft_putchar_fd('\n', 1);
+	ft_putstr_fd(TXT_COLOR_RESET, 1);
 }
