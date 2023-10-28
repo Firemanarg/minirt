@@ -165,7 +165,6 @@ clean:
 
 fclean: clean
 	${RM} ${NAME}
-	make -C ${LFTX_DIR} fclean
 	make -C ${FTLST_DIR} fclean
 	make -C ${BONUS_DIR} fclean
 
