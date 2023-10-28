@@ -56,7 +56,7 @@ t_err	render_image(t_scene *world, t_mlx_data *mlx_data)
 			ft_pixel_put(mlx_data, args.x, args.y, &args.color);
 			++(args.x);
 		}
-		print_progress(args.y, 0, "Rendering");
+		print_progress(args.y + 1, 0, "Rendering");
 		++(args.y);
 	}
 	free_array(args.xs);
