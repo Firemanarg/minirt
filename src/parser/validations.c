@@ -41,7 +41,7 @@ int	is_valid_direction(t_vec3 *dir)
 		return (0);
 	else if (dir->z < -1 || dir->z > 1)
 		return (0);
-	else if (!dbl_equal(length(dir), 1.0))
+	else if (!(dbl_abs(length(dir) - 1.0) < 1e-7))
 		return (0);
 	return (1);
 }
