@@ -1,5 +1,5 @@
 CC				:= cc
-CFLAGS			:= -Wall -Wextra -Werror -g
+CFLAGS			:= -Wall -Wextra -Werror -O3
 RM				:= rm -rf
 
 # Mandatory
