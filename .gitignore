@@ -53,7 +53,8 @@ dkms.conf
 
 # Custom
 build/
-lib/
 .*/
 *.json
 .gdb_history
+.vscode/*
+.cache/*

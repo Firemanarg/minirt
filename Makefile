@@ -1,20 +1,26 @@
 CC				:= cc
-CFLAGS			:= -Wall -Wextra -Werror -g
+CFLAGS			:= -Wall -Wextra -Werror -O3
 RM				:= rm -rf
 
 # Libraries
-MLX_DIR			:= lib/minilibx-linux
-LIBFLAGS		:= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
-LFTX_DIR		:= ./libft_x
-LFTX			:= $(LFTX_DIR)/libft_x.a
-FTLST_DIR		:= ./ft_list
-FTLST			:= $(FTLST_DIR)/ft_list.a
+LIB_DIR			:= lib
+MLX_DIR			:= /usr/local/include
+LIBFLAGS		:= -L${MLX_DIR} -lmlx -lXext -lX11 -lm -lz
+LFTX_DIR		:= ${LIB_DIR}/libft_x
+LFTX			:= ${LFTX_DIR}/libft_x.a
+FTLST_DIR		:= ${LIB_DIR}/ft_list
+FTLST			:= ${FTLST_DIR}/ft_list.a
 
-LIBS_INC		:= -I$(MLX_DIR) -I$(LFTX_DIR) -I$(FTLST_DIR)
+LIBS_INC		:= -I${MLX_DIR} -I${LFTX_DIR} -I${FTLST_DIR}
 
 # Mandatory
 MANDATORY_DIR	:= .
-NAME			:= ${MANDATORY_DIR}/build/minirt
+
+BUILD_DIR		:= ${MANDATORY_DIR}/build
+NAME			:= ${BUILD_DIR}/minirt
+
+# Bonus
+BONUS_DIR		:= bonus
 
 # Header files
 INC_DIR			:= ${MANDATORY_DIR}/inc
@@ -42,34 +48,31 @@ SRC_FILES		+= ${addprefix ${SRC_DIR}/graphics/,\
 # Matrix operation files
 SRC_FILES += ${addprefix ${SRC_DIR}/matrix/, \
 				matrix_apply.c \
-				matrix_determinant.c \
-				matrix_inverse.c \
-				matrix_multiply.c \
-				matrix_print.c \
-				matrix_rotate_translate.c \
-				matrix_scaling.c \
-				matrix_translation.c \
 				matrix_cofactor.c \
+				matrix_determinant.c \
 				matrix_free.c \
-				matrix_minor.c \
+				matrix_inverse.c \
 				matrix_new.c \
+				matrix_minor.c \
+				matrix_multiply.c \
 				matrix_rotation.c \
+				matrix_scaling.c \
 				matrix_submatrix.c \
+				matrix_translation.c \
 				matrix_transpose.c \
 				matrix_vec3_multiply.c}
 
 # Object definition files
 SRC_FILES += ${addprefix ${SRC_DIR}/objects/, \
 				caps.c \
-				scene.c \
-				obj_utils.c \
 				clean_obj.c \
 				color.c \
-				cone.c \
 				cylinder.c \
 				light.c \
+				obj_utils.c \
 				object.c \
 				plane.c \
+				scene.c \
 				sphere.c}
 
 # Projection files
@@ -80,16 +83,14 @@ SRC_FILES		+= ${addprefix ${SRC_DIR}/projection/,\
 # Scene composition files
 SRC_FILES		+= ${addprefix ${SRC_DIR}/scene/,\
 				camera.c \
-				render.c \
 				scene.c \
+				render.c \
 				view.c}
 
 # Shading, color and lighting operation files
 SRC_FILES		+= ${addprefix ${SRC_DIR}/shading/, \
 				lighting.c \
 				material.c \
-				pattern.c \
-				reflect.c \
 				shadow.c}
 
 # Varray files
@@ -117,14 +118,12 @@ SRC_FILES		+= ${addprefix ${SRC_DIR}/parser/,\
 				parse_sphere.c\
 				parser_1.c\
 				parser_2.c\
-				validations.c\
-				parser_utils.c}
+				parser_utils.c \
+				validations.c}
 
 SRC_FILES		+= ${addprefix ${SRC_DIR}/error/,\
 				error.c \
 				progress_bar.c}
-
-BUILD_DIR		:= ${MANDATORY_DIR}/build
 
 # Object files
 OBJ_DIR			= ${BUILD_DIR}/obj
@@ -138,28 +137,32 @@ all: ${NAME}
 ${OBJ_SUBDIRS}:
 	mkdir -p $@
 
-${NAME}: $(LFTX) $(FTLST) ${OBJ_FILES}
-	${CC} ${CFLAGS} ${OBJ_FILES} ${LIBFLAGS} $(LFTX) $(FTLST) -o $@
+${NAME}: ${LFTX} ${FTLST} ${OBJ_FILES}
+	${CC} ${CFLAGS} ${OBJ_FILES} ${LIBFLAGS} ${LFTX} ${FTLST} -o $@
 
 ${OBJ_FILES}: ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c ${INC_FILES} | ${OBJ_SUBDIRS}
-	${CC} ${CFLAGS} -I${INC_DIR} -I$(LIBS_INC) -c $< -o $@
+	${CC} ${CFLAGS} -I${INC_DIR} ${LIBS_INC} -c $< -o $@
 
-$(LFTX): $(LFTX_DIR)
-	make -C $(LFTX_DIR)
+${LFTX}: ${LFTX_DIR}
+	make -C ${LFTX_DIR}
 
-$(FTLST): $(FTLST_DIR)
-	make -C $(FTLST_DIR)
+${FTLST}: ${FTLST_DIR}
+	make -C ${FTLST_DIR}
+
+bonus:
+	make -C ${BONUS_DIR}
 
 clean:
 	${RM} ${OBJ_DIR}
-	make -C $(LFTX_DIR) clean
-	make -C $(FTLST_DIR) clean
+	make -C ${LFTX_DIR} clean
+	make -C ${FTLST_DIR} clean
+	make -C ${BONUS_DIR} clean
 
 fclean: clean
 	${RM} ${NAME}
-	make -C $(LFTX_DIR) fclean
-	make -C $(FTLST_DIR) fclean
+	make -C ${FTLST_DIR} fclean
+	make -C ${BONUS_DIR} fclean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re
