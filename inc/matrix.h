@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 12:33:50 by marvin            #+#    #+#             */
-/*   Updated: 2023/10/27 13:56:11 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/27 21:46:28 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ t_matrix	*matrix_multiply(t_matrix *m, t_matrix *b);
 t_matrix	*matrix_new(int rows, int cols);
 t_matrix	*matrix_new_identity(int size);
 void		matrix_point_multiply(t_matrix *matrix, t_vec3 *v, t_vec3 *result);
-t_matrix	*matrix_rotate_translate(t_vec3 *v1, t_vec3 *v2, t_vec3 *tr);
 t_matrix	*matrix_rotate_to_vec(t_vec3 *to);
 t_matrix	*matrix_rotate_x(double rad);
 t_matrix	*matrix_rotate_y(double rad);

@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 12:33:50 by marvin            #+#    #+#             */
-/*   Updated: 2023/10/27 14:21:27 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/27 21:46:55 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ t_matrix	*matrix_submatrix(t_matrix *m, int row, int col);
 t_matrix	*matrix_translation(t_vec3 *v);
 t_matrix	*matrix_transpose(t_matrix *m);
 t_matrix	*matrix_rotate_to_vec(t_vec3 *to);
-t_matrix	*matrix_rotate_translate(t_vec3 *v1, t_vec3 *v2, t_vec3 *tr);
 t_matrix	*matrix_rotate_x(double rad);
 t_matrix	*matrix_rotate_y(double rad);
 t_matrix	*matrix_rotate_z(double rad);

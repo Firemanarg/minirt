@@ -57,7 +57,6 @@ SRC_FILES		+= ${addprefix ${SRC_DIR}/matrix/, \
 				matrix_minor_bonus.c \
 				matrix_multiply_bonus.c \
 				matrix_new_bonus.c \
-				matrix_rotate_translate_bonus.c \
 				matrix_rotation_bonus.c \
 				matrix_scaling_bonus.c \
 				matrix_submatrix_bonus.c \

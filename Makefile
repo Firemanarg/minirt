@@ -56,7 +56,6 @@ SRC_FILES += ${addprefix ${SRC_DIR}/matrix/, \
 				matrix_new.c \
 				matrix_minor.c \
 				matrix_multiply.c \
-				matrix_rotate_translate.c \
 				matrix_rotation.c \
 				matrix_scaling.c \
 				matrix_submatrix.c \
