@@ -7,8 +7,7 @@ MANDATORY_DIR	:= ..
 
 # Libraries
 LIB_DIR			:= ${MANDATORY_DIR}/lib
-MLX_DIR			:= ${LIB_DIR}/minilibx-linux
-MLX				:= ${MLX_DIR}/libmlx.a
+MLX_DIR			:= /usr/local/include
 LIBFLAGS		:= -L${MLX_DIR} -lmlx -lXext -lX11 -lm -lz
 LFTX_DIR		:= ${LIB_DIR}/libft_x
 LFTX			:= ${LFTX_DIR}/libft_x.a
@@ -142,7 +141,7 @@ all: ${NAME}
 ${OBJ_SUBDIRS}:
 	mkdir -p $@
 
-${NAME}: ${LFTX} ${FTLST} ${MLX} ${OBJ_FILES}
+${NAME}: ${LFTX} ${FTLST} ${OBJ_FILES}
 	${CC} ${CFLAGS} ${OBJ_FILES} ${LIBFLAGS} ${LFTX} ${FTLST} -o $@
 
 ${OBJ_FILES}: ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c ${INC_FILES} | ${OBJ_SUBDIRS}
@@ -154,14 +153,10 @@ ${LFTX}: ${LFTX_DIR}
 ${FTLST}: ${FTLST_DIR}
 	make -C  ${FTLST_DIR}
 
-${MLX}: ${MLX_DIR}
-	make -C ${MLX_DIR}
-
 clean:
 	${RM} ${OBJ_DIR}
 	make -C ${LFTX_DIR} clean
 	make -C  ${FTLST_DIR} clean
-	make -C ${MLX_DIR} clean
 
 fclean: clean
 	${RM} ${NAME}
