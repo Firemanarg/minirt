@@ -26,6 +26,7 @@ int	create_window(t_args *args)
 
 int	on_destroy(t_args *data)
 {
+	baracapy();
 	mlx_loop_end(data->mlx);
 	mlx_clear_window(data->mlx, data->mlx_win);
 	mlx_destroy_image(data->mlx, data->mlx_data.img);
