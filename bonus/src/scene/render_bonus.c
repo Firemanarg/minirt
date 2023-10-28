@@ -45,7 +45,7 @@ t_err	render_image(t_scene *world, t_mlx_data *mlx_data)
 	if (!args.xs)
 		return (ERR_ALLOC);
 	get_transformed_ray_origin(&world->camera, &args.ray);
-	print_progress(0, world->camera.vsize * world->camera.hsize, "Rendering");
+	print_progress(0, world->camera.vsize, "Rendering");
 	while (args.y < world->camera.vsize)
 	{
 		args.x = 0;
@@ -56,8 +56,7 @@ t_err	render_image(t_scene *world, t_mlx_data *mlx_data)
 			ft_pixel_put(mlx_data, args.x, args.y, &args.color);
 			++(args.x);
 		}
-		print_progress(
-			args.y * world->camera.hsize + (args.x + 1), 0, "Rendering");
+		print_progress(args.y, 0, "Rendering");
 		++(args.y);
 	}
 	free_array(args.xs);
