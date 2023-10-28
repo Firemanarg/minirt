@@ -58,4 +58,3 @@ build/
 .gdb_history
 .vscode/*
 .cache/*
-README.md
