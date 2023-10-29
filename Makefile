@@ -26,6 +26,7 @@ BONUS_DIR		:= bonus
 INC_DIR			:= ${MANDATORY_DIR}/inc
 INC_FILES		= ${addprefix ${INC_DIR}/,\
 				error.h\
+				get_next_line.h \
 				graphics.h\
 				matrix.h\
 				minirt.h\
@@ -110,6 +111,8 @@ SRC_FILES		+= ${addprefix ${SRC_DIR}/vec3/,\
 
 # Parser files
 SRC_FILES		+= ${addprefix ${SRC_DIR}/parser/,\
+				get_next_line.c \
+				get_next_line_utils.c \
 				parse_ambient_light.c\
 				parse_camera.c\
 				parse_cylinder.c\

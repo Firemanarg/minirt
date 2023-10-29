@@ -27,6 +27,7 @@ NAME			:= ${BUILD_DIR}/minirt_bonus
 INC_DIR			:= ${BONUS_DIR}/inc
 INC_FILES		= ${addprefix ${INC_DIR}/,\
 				error_bonus.h \
+				get_next_line_bonus.h \
 				graphics_bonus.h \
 				matrix_bonus.h \
 				minirt_bonus.h \
@@ -113,6 +114,8 @@ SRC_FILES		+= ${addprefix ${SRC_DIR}/vec3/,\
 
 # Parser files
 SRC_FILES		+= ${addprefix ${SRC_DIR}/parser/,\
+				get_next_line_bonus.c \
+				get_next_line_utils_bonus.c \
 				parse_ambient_light_bonus.c \
 				parse_camera_bonus.c \
 				parse_cone_bonus.c \

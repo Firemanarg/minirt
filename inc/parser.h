@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 08:53:15 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/27 13:52:03 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/29 02:28:59 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "error.h"
 # include "libft_x.h"
 # include "ft_list.h"
+# include "get_next_line.h"
 
 # define MAX_RATIO 1.0
 # define MIN_RATIO 0.0
