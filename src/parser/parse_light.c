@@ -58,6 +58,7 @@ static void	cast_fields(t_parser_obj *obj)
 	err = str_to_vec3(obj->fields[1], &light->pos);
 	light->ratio = ft_atod(obj->fields[2]);
 	err |= str_to_vec3(obj->fields[3], &light->color);
+	set_color(255, 255, 255, &light->color);
 	if (err != OK)
 		obj->status = INVALID_VEC3;
 }

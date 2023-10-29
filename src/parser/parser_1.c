@@ -122,9 +122,12 @@ static void	check_objs_count(t_scene_parser *parser)
 			print_error("Parsing", TOO_MANY_CAMERAS, 0);
 		parser->err_flag = 1;
 	}
-	if (parser->light_count < 1)
+	if (parser->light_count != 1)
 	{
-		print_error("Parsing", MISSING_LIGHT, 0);
+		if (parser->light_count == 0)
+			print_error("Parsing", MISSING_LIGHT, 0);
+		else if (parser->light_count > 1)
+			print_error("Parsing", TOO_MANY_LIGHTS, 0);
 		parser->err_flag = 1;
 	}
 }
