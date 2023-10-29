@@ -1,7 +1,7 @@
 # miniRT
 <p align="center">
-  <img src="https://github.com/Firemanarg/minirt/assets/35619327/4ec0a5b8-60c3-4164-8a62-eee1f4ec9399" alt="miniRT Logo">
-  <img src="https://github.com/Firemanarg/minirt/assets/35619327/4c2da511-3c69-4814-80d1-e1e473551e71" alt="miniRT Title">
+  <img src="https://github.com/Firemanarg/minirt/assets/35619327/0b80e4bd-4301-4541-b1d8-e669af93f010" alt="miniRT Logo">
+  <img src="https://github.com/Firemanarg/minirt/assets/35619327/f785397b-9a6e-42c4-9269-39fa68025615" alt="miniRT Title">
   <br>
   MiniRT is a graphic project from 42School curriculum.<br>It consists in an implementation of a basic render engine<br>using the raytracing protocol.
 </p>
