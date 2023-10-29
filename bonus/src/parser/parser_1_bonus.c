@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:42 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/10/27 11:47:31 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/10/29 02:27:46 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,29 +47,17 @@ t_scene	*parse_file(char *file_name)
 
 static void	get_file_as_strlist(int fd, t_ftlist *list)
 {
-	char			buff[PARSER_BUFFER_SIZE + 1];
-	t_line_parser	lp;
+	char	*line;
+	char	*trimmed;
 
-	ft_bzero(buff, PARSER_BUFFER_SIZE + 1);
-	lp.aux = (char *) buff;
-	while (read(fd, lp.aux, PARSER_BUFFER_SIZE - (lp.aux - (char *) buff)) > 0)
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
-		lp.iter = buff;
-		lp.endl_ptr = ft_strchr(lp.iter, '\n');
-		while (lp.endl_ptr != NULL)
-		{
-			lp.line = ft_strndup(lp.iter, lp.endl_ptr - lp.iter);
-			ft_lst_push_back(list, lp.line);
-			lp.iter = lp.endl_ptr + 1;
-			lp.endl_ptr = ft_strchr(lp.iter, '\n');
-		}
-		lp.aux = ft_strrchr(lp.iter, '\0');
-		ft_strlcpy(buff, lp.iter, lp.aux - lp.iter + 1);
+		trimmed = ft_strtrim(line, "\n");
+		ft_lst_push_back(list, trimmed);
+		free(line);
+		line = get_next_line(fd);
 	}
-	if (buff[0] == '\0')
-		return ;
-	lp.line = ft_strdup(buff);
-	ft_lst_push_back(list, lp.line);
 }
 
 static void	*get_parser_obj(void *line, size_t index, int f, int l)
