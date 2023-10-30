@@ -15,6 +15,16 @@
 - [Usage](#usage)
 
 ## About the Project
+<table>
+  <tr>
+    <tc>
+      <img width=400 src="https://github.com/Firemanarg/minirt/assets/35619327/c8075061-1cb9-4af5-b963-56618b0c90bf">
+    </tc>
+    <tc>
+      <img width=400 src="https://github.com/Firemanarg/minirt/assets/35619327/5b1b6ad1-1ca2-47db-90ac-802229618c28">
+    </tc>
+  </tr>
+</table>
 
 ## Getting Started
 
