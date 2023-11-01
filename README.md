@@ -10,6 +10,7 @@
 - [Table of Contents](#table-of-contents)
 - [About the Project](#about-the-project)
   - [Introduction](#introduction)
+    - [Supported Objects](#supported-objects)
   - [Preview](#preview)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
@@ -26,6 +27,16 @@ Ray tracing is a technique used to generate realistic images by simulating light
   <br>
   <a href="https://developer.nvidia.com/discover/ray-tracing">Ray Tracing basics</a>
 </p>
+To render images, the program requires a scene file containing all the objects in a scene. The program reads and parses the file into abstract data structures. It then iterates through each pixel, projecting a ray (with the camera as the origin of the ray) and calculates the pixel's color by checking if it is influenced by light. After calculating the colors of all pixels, the image is generated. This process may take longer when there are numerous objects in the scene.<br>
+
+#### Supported Objects
+- <b>Camera:</b> Definitions of the view for the render;
+- <b>Ambient Light:</b> Basic light to define the darkest level of shadows;
+- <b>Light:</b> Point light in 3d space;
+- <b>Sphere:</b> 3d sphere in 3d space;
+- <b>Cylinder:</b> 3d cylinder in 3d space;
+- <b>Plane:</b> Infinite plane in 3d space, rendered by both sides (top and bottom);
+- <b>Cone (bonus only):</b> 3d cone in 3d space.
 
 ### Preview
 <table>
